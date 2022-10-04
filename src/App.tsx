@@ -1,6 +1,6 @@
 import "./index.scss";
 import {Route, Routes} from "react-router-dom";
-import {MainPage} from "@/pages/mainPage/mainPage";
+import {MainPage} from "@/pages/MainPage/MainPage";
 import {Header} from "@/components/Header/Header"
 
 export const App = () => {
