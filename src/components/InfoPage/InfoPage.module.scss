@@ -1,0 +1,47 @@
+.wrapper {
+    display: flex;
+    margin-top: 60px;
+}
+
+.block {
+    width: 48%;
+    margin-right: 30px;
+    display: flex;
+    background-color: #431b93;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+
+    img {
+        clip-path: circle(84% at 100% 50%);
+    }
+
+    .blockContext {
+        padding: 20px;
+
+        h2 {
+            font-size: 36px;
+            line-height: 40px;
+        }
+
+        p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+
+        button {
+            background-color: #26890C;
+            border-radius: 3px;
+            padding: 15px 0;
+            width: 220px;
+            border: none;
+            outline: none;
+            font-weight: 700;
+            color: white;
+            font-size: 18px;
+        }
+
+    }
+}
