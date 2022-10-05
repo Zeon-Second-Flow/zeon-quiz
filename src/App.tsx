@@ -4,11 +4,13 @@ import { AppRoutes } from './routes';
 import { SignUp } from './components/Auth/SignUp';
 
 export const App = () => {
-  return (
-    <>
-      <Header />
-      <AppRoutes />
-      <SignUp />
-    </>
-  );
+
+    return (
+        <>
+            <Header />
+            <SignUp />
+            <AppRoutes />
+        </>
+    );
+
 };

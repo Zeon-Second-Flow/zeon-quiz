@@ -3,5 +3,6 @@ export const routePath = {
     SEARCH: "search-page",
     RULES: "rules",
     AUTH: "auth",
+    CREATE_TEST:"create-test",
     PAGE_NOT_FOUND: "*",
 };
