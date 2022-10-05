@@ -1,7 +1,8 @@
 export const routePath = {
     HOME: "/",
     SEARCH: "search-page",
-    ENTER_PAGE: "enter",
+    ENTER_PAGE: "enter-page",
+    NAME_PAGE: "name-page",
     RULES: "rules",
     AUTH: "auth",
     CREATE_TEST:"create-test",
