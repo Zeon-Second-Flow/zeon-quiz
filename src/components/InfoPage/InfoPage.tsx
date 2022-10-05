@@ -99,6 +99,11 @@ export const InfoPage = () => {
           </div>
         </div>
       </div>
+      <div className="container">
+        <div className={styles.rulesBanner}>
+          <a href="/rules">Learn more about the rules</a>
+        </div>
+      </div>
     </div>
   );
 };
