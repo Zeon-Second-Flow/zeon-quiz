@@ -1,15 +1,14 @@
-import "./index.scss";
-import {Route, Routes} from "react-router-dom";
-import {MainPage} from "@/pages/mainPage/mainPage";
-import {Header} from "@/components/Header/Header"
+import './index.scss';
+import { Header } from '@/components/Header/Header';
+import { AppRoutes } from './routes';
+import { SignUp } from './components/Auth/SignUp';
 
 export const App = () => {
-    return (
-        <>
-            <Header/>
-            <Routes>
-                <Route path={"/"} element={<MainPage/>}/>
-            </Routes>
-        </>
-    )
+  return (
+    <>
+      <Header />
+      <AppRoutes />
+      <SignUp />
+    </>
+  );
 };
