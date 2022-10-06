@@ -1,6 +1,6 @@
 import { useLoginUserMutation } from '@/store/auth/signupSlice';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';

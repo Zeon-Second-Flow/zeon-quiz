@@ -8,7 +8,7 @@ export const App = () => {
   return (
     <>
       <Header />
-      <SignUp />
+      {/* <SignUp /> */}
       {/* <Login /> */}
       {/* <AppRoutes /> */}
     </>
