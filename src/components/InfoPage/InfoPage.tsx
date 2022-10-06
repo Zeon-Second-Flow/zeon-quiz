@@ -1,3 +1,4 @@
+// import { MouseEvent } from "react";
 import styles from "./InfoPage.module.scss";
 
 
@@ -114,5 +115,7 @@ export const InfoPage = () => {
                 </div>
             </div>
         </div>
+      
     );
 };
+

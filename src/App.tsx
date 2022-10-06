@@ -7,9 +7,9 @@ import {Footer} from "@/components/Footer/Footer";
 export const App = () => {
     return (
         <>
-            <Header/>
-            <AppRoutes/>
-            <Footer/>
+            <Header />
+            <AppRoutes />
+            <Footer />
         </>
     );
 };
