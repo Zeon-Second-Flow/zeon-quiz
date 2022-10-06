@@ -3,6 +3,7 @@ import styles from "./Header.module.scss";
 import {Link} from "react-router-dom";
 import {Search} from "@/components/Search/Search";
 import {ReactComponent as Logo} from "@/assets/logo.svg";
+import {ReactComponent as BurgerMenu} from "@/assets/burger-menu.svg";
 
 
 export const Header = () => {
@@ -26,6 +27,7 @@ export const Header = () => {
                             </li>
                         </ul>
                     </nav>
+                    <BurgerMenu className={styles.burger} />
                     <Link to={"/"}>
                         <div className={styles.logo}>
                             <Logo/>

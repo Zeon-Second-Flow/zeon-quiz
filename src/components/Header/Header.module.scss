@@ -21,4 +21,20 @@
     .menuItem {
         list-style: none;
     }
+
+    .burger {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        .navbar {
+            display: none;
+        }
+
+        .burger {
+            display: block;
+        }
+    }
 }

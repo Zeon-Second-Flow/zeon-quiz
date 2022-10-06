@@ -1,5 +1,4 @@
 import React from "react";
-// @ts-ignore
 import styles from "./Footer.module.scss";
 import {Link} from "react-router-dom";
 import {ReactComponent as Instagram} from "@/assets/instagram.svg";
@@ -19,41 +18,14 @@ export const Footer = () => {
             <div className="container">
                 <div className={styles.wrapper}>
                     <div className={styles.logo}>
-
-
                         <div className={styles.footerInner}>
                             <Link to={"/"}>
                                 <div className={styles.logo}>
                                     <Logo/>
                                 </div>
                             </Link>
-                            {/*<div className={styles.footerBlock}>*/}
-                            {/*    <h4>Покупателям</h4>*/}
-                            {/*    <Link to="help" onClick={scroll}>*/}
-                            {/*        <p>Как сделать заказ</p>*/}
-                            {/*    </Link>*/}
-                            {/*    <Link to="help" onClick={scroll}>*/}
-                            {/*        <p>Способы оплаты</p>*/}
-                            {/*    </Link>*/}
-                            {/*    <Link to="help" onClick={scroll}>*/}
-                            {/*        <p>Вопросы и ответы</p>*/}
-                            {/*    </Link>*/}
-                            {/*    <Link to="confidential">*/}
-                            {/*        <p>Политика конфиденциальности</p>*/}
-                            {/*    </Link>*/}
-                            {/*</div>*/}
-                            {/*<div className={styles.footerBlock}>*/}
-                            {/*    <h4>Компания</h4>*/}
-
-                            {/*    <Link to="about">*/}
-                            {/*        <p>О нас</p>*/}
-                            {/*    </Link>*/}
-                            {/*    <Link to="contacts">*/}
-                            {/*        <p>Контакты</p>*/}
-                            {/*    </Link>*/}
-                            {/*</div>*/}
                             <div className={styles.footerBlock}>
-                                <h4>Мы в соц сетях</h4>
+                                <h4>We are in social networks</h4>
                                 <a target="_blank" href="vk.com">
                                     <div className={styles.footerInnerBlock}>
                                         <VK className={styles.contactsIcon}/>
@@ -74,7 +46,7 @@ export const Footer = () => {
                                 </a>
                             </div>
                             <div className={styles.footerBlock}>
-                                <h4>Свяжитесь с нами</h4>
+                                <h4>Contacts us</h4>
                                 <div className={styles.footerInnerBlock}>
                                     <EmailIcon className={styles.contactsIcon}/>
                                     <a href="owner@zeon.ltd">owner@zeon.ltd</a>
