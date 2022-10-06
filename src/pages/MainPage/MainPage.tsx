@@ -1,8 +1,8 @@
 
-import { InfoPage } from "@/components/InfoPage/InfoPage";
 import React from "react";
 import styles from "./MainPage.module.scss";
 import {InfoPage} from "@/components/InfoPage/InfoPage";
+
 
 export const MainPage = () => {
     return (
