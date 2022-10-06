@@ -4,6 +4,8 @@ import {routePath} from "./routePaths";
 import {CreateTestsPage} from "@/pages/CreateTestsPage/CreateTestsPage";
 import { EnterPage } from "@/pages/EnterPage/EnterPage";
 import { NamePage } from "@/pages/NamePage/NamePage";
+import { TestPage } from "@/pages/TestPage/TestPage";
+import { YourIn } from "@/pages/YourIn/YourIn";
 
 
 export const publicRoutes = [
@@ -22,6 +24,14 @@ export const publicRoutes = [
     {
         path: routePath.NAME_PAGE, 
         component : NamePage
+    },
+    {
+        path: routePath.TEST, 
+        component : TestPage
+    }, 
+    {
+        path: routePath.IN, 
+        component: YourIn
     }
 ];
 
