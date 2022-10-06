@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import styles from "./InfoPage.module.scss";
 
 
