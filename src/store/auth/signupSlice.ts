@@ -2,6 +2,7 @@ import { IValues } from './../../components/Auth/SignUp';
 import { BASE_URL } from './../../api/api';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { fetchBaseQuery } from '@reduxjs/toolkit/dist/query';
+import { IValue } from '@/components/Login/Login';
 
 export const signupSlice = createApi({
   reducerPath: 'signupSlice',
@@ -17,7 +18,17 @@ export const signupSlice = createApi({
         },
       }),
     }),
+    loginUser: builder.mutation<IValue, object>({
+      query: (data) => ({
+        url: 'account/login/',
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
   }),
 });
 
-export const { useAddUserMutation } = signupSlice;
+export const { useAddUserMutation, useLoginUserMutation } = signupSlice;

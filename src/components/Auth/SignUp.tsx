@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useAddUserMutation } from '@/store/auth/signupSlice';
+import {
+  useAddUserMutation,
+  useLoginUserMutation,
+} from '@/store/auth/signupSlice';
 import styles from './SignUp.module.scss';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,12 +16,9 @@ export interface IValues {
   error?: object;
 }
 
-export interface IErrors {
-  data?: IErrorData;
-}
-
-export interface IErrorData {
-  email: string[];
+interface IData {
+  email: string;
+  password: string;
 }
 
 const SignupSchema = Yup.object().shape({
@@ -34,13 +34,40 @@ const SignupSchema = Yup.object().shape({
 
 export const SignUp = () => {
   const [addUser, { isLoading }] = useAddUserMutation();
+  const [loginUser] = useLoginUserMutation();
   const navigate = useNavigate();
   const [err, setErr] = useState('');
 
+  const login = async (data: IData) => {
+    try {
+      const res = await loginUser({
+        login: data.email,
+        password: data.password,
+      }).unwrap();
+      localStorage.setItem(
+        'token',
+        JSON.stringify({
+          token: res.refresh,
+          access: res.access,
+          email: res.login,
+        })
+      );
+    } catch (error: any) {
+      setErr(error.data.login[0]);
+    }
+  };
   const createUser = async (values: IValues, reset: () => void) => {
     try {
       await addUser(values).unwrap();
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify({
+          email: values.email,
+          group: values.group,
+        })
+      );
       reset();
+      login(values);
       navigate('/');
     } catch (error: any) {
       setErr(error.data.email[0]);
