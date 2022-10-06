@@ -29,7 +29,7 @@ export const Search = () => {
                 </div>
             </div>
             <div className={styles.smallSearch}>
-                {false ? (
+                {show ? (
                     <div >
                         <CloseIcon
                             onClick={() => setShow(false)}
@@ -38,7 +38,7 @@ export const Search = () => {
                     </div>
                 ) : (
                     <div >
-                        <SearchIcon className={styles.searchIcon} />
+                        <SearchIcon onClick={() => setShow(true)} className={styles.searchIcon} />
                     </div>
                 )}
                 {show ? (
