@@ -1,16 +1,15 @@
-import './index.scss';
-import { Header } from '@/components/Header/Header';
-import { AppRoutes } from './routes';
-import { SignUp } from './components/Auth/SignUp';
-import Login from './components/Login/Login';
+import "./index.scss";
+import {Header} from "@/components/Header/Header";
+import {AppRoutes} from "./routes";
+import {Footer} from "@/components/Footer/Footer";
+
 
 export const App = () => {
-  return (
-    <>
-      <Header />
-      {/* <SignUp /> */}
-      {/* <Login /> */}
-      {/* <AppRoutes /> */}
-    </>
-  );
+    return (
+        <>
+            <Header />
+            <AppRoutes />
+            <Footer />
+        </>
+    );
 };
