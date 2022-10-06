@@ -3,7 +3,7 @@ import {privateRoutes, publicRoutes} from "./routes";
 
 
 export const AppRoutes = () => {
-    const user = false;
+    const user = true;
 
     return (
         <Routes>
