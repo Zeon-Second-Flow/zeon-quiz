@@ -1,4 +1,4 @@
-import {MainPage} from "@/pages/MainPage/MainPage";
+import {MainPage} from "@/pages/mainPage/MainPage";
 import {RulesPage} from "@/pages/RulesPage/RulesPage";
 import {routePath} from "./routePaths";
 
