@@ -165,12 +165,12 @@
         }
     }
 
+}
 
-    .blockContextWhite {
-        background-color: white;
-        color: black;
-        box-shadow: 0 2px 10px 0 rgb(0 0 0 / 30%);
-    }
+.blockContextWhite {
+    background-color: white;
+    color: black;
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 30%);
 }
 
 .workInfo {
@@ -238,6 +238,80 @@
             }
         }
     }
+}
+
+.rulesBanner {
+    background-color: #0542b9;
+    margin: 20px auto;
+    padding: 10px 0;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    border-radius: 3px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12),
+        0 1px 4px rgba(0, 0, 0, 0.24);
+
+    a {
+        color: white;
+    }
+}
 
 
+@media screen and (max-width: 870px) {
+    .wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .block {
+        width: 90%;
+
+        .blockContext {
+            width: 50%;
+
+            p {
+                margin: 25px 0;
+            }
+        }
+    }
+
+    .imageWrapper {
+        clip-path: circle(100% at 100% 50%);
+    }
+
+    .workInfo {
+        flex-wrap: wrap;
+
+        .workBlock {
+            margin-bottom: 30px;
+            width: 43%;
+        }
+    }
+}
+
+
+@media screen and (max-width: 576px) {
+    .imageWrapper {
+        display: none;
+    }
+
+    .block {
+        margin-right: 0px;
+        text-align: center;
+        width: 100%;
+
+        .blockContext {
+            width: 100%;
+        }
+    }
+
+    .workInfo .workBlock {
+        margin-bottom: 57px;
+        width: 100%;
+        margin-right: 0px;
+
+        &:last-child {
+            margin-bottom: 10px;
+        }
+    }
 }
