@@ -5,6 +5,7 @@ export const routePath = {
     NAME_PAGE: "name-page",
     RULES: "rules",
     AUTH: "auth",
-    CREATE_TEST:"create-test",
+    LOGIN: "login",
+    CREATE_TEST: "create-test",
     PAGE_NOT_FOUND: "*",
 };
