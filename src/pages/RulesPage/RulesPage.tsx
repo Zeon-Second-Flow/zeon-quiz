@@ -21,8 +21,16 @@ export const RulesPage = () => {
     const transition = {duration: 0.5};
     const transitionImage = {duration: 1};
 
+    //   const isPresent = useIsPresent();
+
     return (
-        <div className={styles.wrapper}>
+        <motion.div
+            initial={{scaleX: 1}}
+            //   animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}
+            //   exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}
+            //   style={{ originX: isPresent ? 0 : 1 }}
+            className={styles.wrapper}
+        >
             <article className={styles.wrapper}>
                 <section className={styles.heading}>
                     <motion.div
@@ -132,6 +140,6 @@ export const RulesPage = () => {
                     </div>
                 </section>
             </article>
-        </div>
+        </motion.div>
     );
 };
