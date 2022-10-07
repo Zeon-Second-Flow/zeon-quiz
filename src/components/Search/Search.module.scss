@@ -120,13 +120,13 @@ input:focus {
 }
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 768px) {
     .searchOutter {
         flex-grow: 0;
     }
 
     .smallSearchOutter {
-        top: 78px;
+        top: 75px;
         position: fixed;
         background-color: #00000097;
         right: 0;
