@@ -61,11 +61,11 @@ export const CreateTestsPage = () => {
                     <button onClick={addQuiz}>Add quiz</button>
                 </div>
             </div>
-            <div className={style.createTestForm}>
+            <div className={style.createTestFormBox}>
                 <div className={style.catBox}>
                     <Cat/>
                 </div>
-                <form action="">
+                <form className={style.createTestForm} action="">
                     <input placeholder={"Start typing your question"} className={style.createTestInputQuestion} type="text"/>
                     <div className={style.counterBox}>
                         <div>
