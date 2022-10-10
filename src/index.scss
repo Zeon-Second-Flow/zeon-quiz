@@ -1,6 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 @import "reset";
 
+:root {
+  --wall: white;
+  --sky: #9384c0;
+  --star: #fffdf9;
+  --cat: #ffffff;
+  --cat-eyes: #393939;
+  --frame: #201c26;
+  --moon: #ffffff;
+  --moon-new: #382c58;
+  --frame-shadow: black;
+  --cloud: #322751;
+  --crater: #f0e4d0;
+}
+
 body {
   margin: 0;
   box-sizing: border-box;

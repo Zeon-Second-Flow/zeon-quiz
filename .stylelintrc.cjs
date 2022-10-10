@@ -10,23 +10,6 @@ module.exports = {
     ],
     customSyntax: "postcss-scss",
     rules: {
-        "indentation": 4, // отступы, вложеноость
-        "max-empty-lines": 3, // максимальное кол-во пустых строк
-        "no-duplicate-at-import-rules": true,
-        "no-invalid-position-at-import-rule": true,
-
-        // пустая строка перед селектором
-        "rule-empty-line-before": [
-            "always", {
-                except: ["first-nested"],
-                ignore: ["after-comment"]
-            },
-        ],
-
-        // паттерн для наименования класса селектора (специально для React css модулей)
-        "selector-class-pattern":  "^[a-z][a-zA-Z0-9]+$",
-
-
         /* Блок */
         // нельзя оставлять пустые селекторы, нужно хотя-бы комментарий внутри оставить
         "block-no-empty": true,
@@ -57,6 +40,5 @@ module.exports = {
         "scss/at-rule-no-unknown": true,
         // any other rules you'd want to change e.g.
         "scss/dollar-variable-pattern": /[a-z][a-zA-Z]+/,
-        "scss/selector-no-redundant-nesting-selector": true,
     }
 };
