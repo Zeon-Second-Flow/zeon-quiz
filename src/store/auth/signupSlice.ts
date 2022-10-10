@@ -3,6 +3,13 @@ import { BASE_URL } from './../../api/api';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { fetchBaseQuery } from '@reduxjs/toolkit/dist/query';
 import { IValue } from '@/components/Login/Login';
+import { IPassword } from '@/components/ChangePassword/ChangePassword';
+
+const token =
+  localStorage.getItem('token') &&
+  JSON.parse(localStorage.getItem('token') || '');
+
+console.log(token);
 
 export const signupSlice = createApi({
   reducerPath: 'signupSlice',
@@ -28,7 +35,22 @@ export const signupSlice = createApi({
         },
       }),
     }),
+    changePassword: builder.mutation<IPassword, object>({
+      query: (data) => ({
+        url: 'account/change_password/',
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          Authorization: 'Bearer ' + token.token,
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
   }),
 });
 
-export const { useAddUserMutation, useLoginUserMutation } = signupSlice;
+export const {
+  useAddUserMutation,
+  useLoginUserMutation,
+  useChangePasswordMutation,
+} = signupSlice;
