@@ -1,0 +1,41 @@
+.header {
+    background: white;
+    padding: 10px 0;
+    border-bottom: 1px solid #9dabd8;
+
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menuItem + .menuItem {
+        margin-left: 30px;
+    }
+
+    .menuItem {
+        list-style: none;
+    }
+
+    .burger {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        .navbar {
+            display: none;
+        }
+
+        .burger {
+            display: block;
+        }
+    }
+}

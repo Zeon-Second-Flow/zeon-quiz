@@ -10,6 +10,20 @@ module.exports = {
     ],
     customSyntax: "postcss-scss",
     rules: {
+
+        "indentation": 4, // отступы, вложеноость
+        "max-empty-lines": 3, // максимальное кол-во пустых строк
+        "no-duplicate-at-import-rules": true,
+        "no-invalid-position-at-import-rule": true,
+
+        // пустая строка перед селектором
+        "rule-empty-line-before": [
+            "always", {
+                except: ["first-nested"],
+                ignore: ["after-comment"]
+            },
+        ],
+
         /* Блок */
         // нельзя оставлять пустые селекторы, нужно хотя-бы комментарий внутри оставить
         "block-no-empty": true,
