@@ -1,4 +1,3 @@
-import { MouseEvent } from "react";
 import styles from "./InfoPage.module.scss";
 
 export const InfoPage = () => {
@@ -111,11 +110,6 @@ export const InfoPage = () => {
           <div className={styles.rulesBanner}>
             <a href="/rules">Learn more about the rules</a>
           </div>
-        </div>
-      </div>
-      <div className="container">
-        <div className={styles.rulesBanner}>
-          <a href="/rules">Learn more about the rules</a>
         </div>
       </div>
     </>

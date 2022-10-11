@@ -41,43 +41,54 @@
             font-weight: 700;
             color: white;
         }
+    }
+}
 
-        .videoHost {
-            background-color: #FF3355;
-            background: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-host.svg) no-repeat center center;
-            background-size: cover;
-        }
+.imageWrapper {
+    width: 45%;
+    clip-path: circle(68% at 100% 50%);
 
-        .videoPlay {
-            background-color: #66BF39;
-            background: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-play.svg) no-repeat center center;
-            background-size: cover;
-        }
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
 
-        .videoWrapper {
-            position: relative;
-            height: 95px;
 
-            &::after {
-                content: " ";
-                clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-                width: 100%;
-                height: 40px;
-                position: absolute;
-                left: 0;
-                bottom: -21px;
-                background-color: white;
-                box-sizing: content-box;
-            }
+.videoHost {
+    background-color: #FF3355;
+    background: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-host.svg) no-repeat center center;
+    background-size: cover;
+}
 
-            video {
-                position: absolute;
-                top: -70%;
-                left: 8%;
-                object-fit: contain;
-                height: 162px;
-            }
-        }
+.videoPlay {
+    background-color: #66BF39;
+    background: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-play.svg) no-repeat center center;
+    background-size: cover;
+}
+
+.videoWrapper {
+    position: relative;
+    height: 95px;
+
+    &::after {
+        content: " ";
+        clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+        width: 100%;
+        height: 40px;
+        position: absolute;
+        left: 0;
+        bottom: -21px;
+        background-color: white;
+        box-sizing: content-box;
+    }
+
+    video {
+        position: absolute;
+        top: -70%;
+        left: 8%;
+        object-fit: contain;
+        height: 162px;
     }
 }
 
@@ -96,76 +107,22 @@
     }
 }
 
+.rulesBanner {
+    background-color: #0542b9;
+    margin: 20px auto;
+    padding: 10px 0;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    border-radius: 3px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12),
+        0 1px 4px rgba(0, 0, 0, 0.24);
 
-@media screen and (max-width: 870px) {
-    .wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .block {
-        width: 90%;
-
-        .blockContext {
-            width: 50%;
-
-            p {
-                margin: 25px 0;
-            }
-        }
-    }
-
-    .imageWrapper {
-        clip-path: circle(100% at 100% 50%);
-    }
-
-    .workInfo {
-        flex-wrap: wrap;
-
-        .workBlock {
-            margin-bottom: 30px;
-            width: 43%;
-        }
+    a {
+        color: white;
     }
 }
 
-
-@media screen and (max-width: 576px) {
-    .imageWrapper {
-        display: none;
-    }
-
-    .block {
-        margin-right: 0px;
-        text-align: center;
-        width: 100%;
-
-        .blockContext {
-            width: 100%;
-        }
-    }
-
-    .workInfo .workBlock {
-        margin-bottom: 57px;
-        width: 100%;
-        margin-right: 0px;
-
-        &:last-child {
-            margin-bottom: 10px;
-        }
-    }
-
-    .imageWrapper {
-        width: 45%;
-        clip-path: circle(80% at 100% 50%);
-
-        img {
-            width: 100%;
-            height: 100%;
-        }
-    }
-
-}
 
 .blockContextWhite {
     background-color: white;
@@ -240,21 +197,6 @@
     }
 }
 
-.rulesBanner {
-    background-color: #0542b9;
-    margin: 20px auto;
-    padding: 10px 0;
-    max-width: 400px;
-    display: flex;
-    justify-content: center;
-    border-radius: 3px;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12),
-        0 1px 4px rgba(0, 0, 0, 0.24);
-
-    a {
-        color: white;
-    }
-}
 
 
 @media screen and (max-width: 870px) {
@@ -264,10 +206,11 @@
     }
 
     .block {
-        width: 90%;
+        width: 95%;
+        margin-right: 0px;
 
         .blockContext {
-            width: 50%;
+            width: 56%;
 
             p {
                 margin: 25px 0;
@@ -276,7 +219,7 @@
     }
 
     .imageWrapper {
-        clip-path: circle(100% at 100% 50%);
+        clip-path: circle(80% at 100% 50%);
     }
 
     .workInfo {

@@ -1,9 +1,37 @@
 import { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useAddUserMutation } from '@/store/auth/signupSlice';
-import styles from './SignUp.module.scss';
-import { useNavigate } from 'react-router-dom';
+import {
+  useAddUserMutation,
+  useLoginUserMutation,
+} from '@/store/auth/signupSlice';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { FormInput } from '@/UI/FormInput';
+
+const signupInputData = [
+  {
+    name: 'email',
+    type: 'email',
+    placeholder: 'example@example.com',
+  },
+  {
+    name: 'group',
+    type: 'text',
+    placeholder: 'Group',
+  },
+
+  {
+    name: 'password',
+    type: 'password',
+    placeholder: 'password',
+  },
+
+  {
+    name: 'password_confirm',
+    type: 'password',
+    placeholder: 'password_confirm',
+  },
+];
 
 export interface IValues {
   email: string;
@@ -13,16 +41,16 @@ export interface IValues {
   error?: object;
 }
 
-export interface IErrors {
-  data?: IErrorData;
-}
-
-export interface IErrorData {
-  email: string[];
+interface IData {
+  email: string;
+  password: string;
 }
 
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().min(2, 'Too Short!').required('Required!'),
+  email: Yup.string()
+    .email('Email is not valid')
+    .min(2, 'Too Short!')
+    .required('Required!'),
   group: Yup.string().min(2, 'Too Short!').required('Required!'),
   password: Yup.string()
     .min(4, 'Minimum 4 characters required!')
@@ -34,21 +62,45 @@ const SignupSchema = Yup.object().shape({
 
 export const SignUp = () => {
   const [addUser, { isLoading }] = useAddUserMutation();
+  const [loginUser] = useLoginUserMutation();
   const navigate = useNavigate();
   const [err, setErr] = useState('');
 
-  const createUser = async (values: IValues, reset: () => void) => {
+  const login = async (data: IData) => {
     try {
-      await addUser(values).unwrap();
-      reset();
+      const res = await loginUser({
+        login: data.email,
+        password: data.password,
+      }).unwrap();
+      localStorage.setItem(
+        'token',
+        JSON.stringify({
+          token: res.access,
+          refresh: res.refresh,
+          email: res.login,
+        })
+      );
       navigate('/');
-    } catch (error: any) {
-      setErr(error.data.email[0]);
+    } catch (error: typeof error) {
+      throw new Error(error);
     }
   };
-
-  const resetError = () => {
-    setErr('');
+  const createUser = async (values: IValues) => {
+    try {
+      await addUser(values).unwrap();
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify({
+          email: values.email,
+          group: values.group,
+        })
+      );
+      await login(values);
+    } catch (error: typeof error) {
+      for (let key in error.data) {
+        setErr(error.data[key]);
+      }
+    }
   };
 
   const initialValues = {
@@ -59,85 +111,38 @@ export const SignUp = () => {
   };
 
   return (
-    <div className={styles.signup}>
-      <div className={styles.background}>
-        <div className={styles.shape}></div>
-        <div className={styles.shape}></div>
+    <div className="signup">
+      <div className="background">
+        <div className="shape"></div>
+        <div className="shape"></div>
       </div>
       <div className="container">
         <h1>Sign up</h1>
         <Formik
           initialValues={initialValues}
-          onSubmit={async (values: IValues, { resetForm }) => {
-            await createUser(values, resetForm);
+          onSubmit={(values: IValues) => {
+            createUser(values);
           }}
           validationSchema={SignupSchema}
         >
-          <Form>
-            <Field
-              className={styles.input}
-              id="email"
-              name="email"
-              placeholder="example@example.com"
-              type="email"
-              input_name="email"
-              onInput={() => err && resetError()}
-            />
-            <ErrorMessage
-              name="email"
-              component="p"
-              className={styles.errorMessage}
-            />
-
-            <Field
-              className={styles.input}
-              id="group"
-              name="group"
-              placeholder="group"
-              input_name="group"
-              onInput={() => err && resetError()}
-            />
-            <ErrorMessage
-              name="group"
-              component="p"
-              className={styles.errorMessage}
-            />
-
-            <Field
-              className={styles.input}
-              id="password"
-              name="password"
-              placeholder="password"
-              input_name="password"
-              onInput={() => err && resetError()}
-            />
-            <ErrorMessage
-              name="password"
-              component="p"
-              className={styles.errorMessage}
-            />
-
-            <Field
-              className={styles.input}
-              id="password2"
-              name="password_confirm"
-              placeholder="password"
-              input_name="password_confirm"
-              onInput={() => err && resetError()}
-            />
-            <ErrorMessage
-              name="password_confirm"
-              component="p"
-              className={styles.errorMessage}
-            />
-
-            {err && <p className={styles.rejectMessage}>{err}</p>}
+          <Form className="form">
+            {err && <p className="rejectMessage">{err}</p>}
+            {signupInputData.map((value) => (
+              <FormInput
+                name={value.name}
+                placeholder={value.placeholder}
+                type={value.type}
+              />
+            ))}
             <button
               type="submit"
-              className={isLoading ? styles.buttonLoading : styles.button}
+              className={isLoading ? 'buttonLoading' : 'button'}
             >
               Submit
             </button>
+            <NavLink className="linkTo" to="/login">
+              Already have an account?
+            </NavLink>
           </Form>
         </Formik>
       </div>
