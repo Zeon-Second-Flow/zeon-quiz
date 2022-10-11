@@ -164,11 +164,11 @@ input:focus {
         background-color: #F8F8F8;
         display: grid;
         place-items: center;
-        height: 46px;
+        height: 42px;
         z-index: 5;
         position: fixed;
-        top: 82px;
-        right: 13%;
+        top: 83px;
+        right: 15%;
         cursor: pointer;
     }
 
@@ -176,9 +176,9 @@ input:focus {
         display: none;
     }
 
-
     .dataResultOutter {
         z-index: 50;
+        width: 77%;
         height: 306px;
         position: fixed;
         top: 128px;

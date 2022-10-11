@@ -6,6 +6,7 @@ import {NamePage} from "@/pages/NamePage/NamePage";
 import {SignUp} from "@/components/Auth/SignUp";
 import {MainPage} from "@/pages/mainPage/MainPage";
 import {Login} from "@/components/Login/Login";
+import {SearchPage} from "@/pages/searchPage/SearchPage";
 
 
 export const publicRoutes = [
@@ -32,6 +33,10 @@ export const publicRoutes = [
     {
         path: routePath.LOGIN,
         component: Login,
+    },
+    {
+        path: routePath.SEARCH_PAGE,
+        component: SearchPage,
     }
 ];
 

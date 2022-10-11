@@ -1,19 +1,20 @@
-import { signupSlice } from './auth/signupSlice';
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import {signupSlice} from "./auth/signupSlice";
+import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit";
+import {getTests} from "@/store/search/searchSlice";
+
 
 export const store = configureStore({
-  reducer: {
-    [signupSlice.reducerPath]: signupSlice.reducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(signupSlice.middleware),
+    reducer: {
+        [signupSlice.reducerPath]: signupSlice.reducer,
+        [getTests.reducerPath]: getTests.reducer
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(signupSlice.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
+    RootState,
+    unknown,
+    Action<string>>;
