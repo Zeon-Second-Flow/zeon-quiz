@@ -129,6 +129,7 @@ export const SignUp = () => {
             {err && <p className="rejectMessage">{err}</p>}
             {signupInputData.map((value) => (
               <FormInput
+                key={Math.random()}
                 name={value.name}
                 placeholder={value.placeholder}
                 type={value.type}
