@@ -1,3 +1,4 @@
+
 import {RulesPage} from "@/pages/RulesPage/RulesPage";
 import {routePath} from "./routePaths";
 import {CreateTestsPage} from "@/pages/CreateTestsPage/CreateTestsPage";
@@ -10,7 +11,8 @@ import {SearchPage} from "@/pages/searchPage/SearchPage";
 import {DetailPage} from "@/pages/DetailPage/DetailPage";
 import {ChangePassword} from "@/components/ChangePassword/ChangePassword";
 import {SuccessPage} from "@/pages/SuccessPage/SuccessPage";
-
+import { RestorePassword } from '@/components/RestorePassword/RestorePassword';
+import { RestoreComplete } from '@/components/RestoreComplete/RestoreComplete';
 
 export const publicRoutes = [
     {
@@ -48,6 +50,7 @@ export const publicRoutes = [
 ];
 
 export const privateRoutes = [
+
     ...publicRoutes,
     {
         path: routePath.CREATE_TEST,
@@ -61,4 +64,13 @@ export const privateRoutes = [
         path: routePath.SUCCESS_PAGE,
         component: SuccessPage,
     },
+     {
+    path: routePath.RESTORE_PASSWORD,
+    component: RestorePassword,
+  },
+  {
+    path: routePath.RESTORE_COMPLETE,
+    component: RestoreComplete,
+  },
+
 ];

@@ -65,6 +65,7 @@ export const Login = () => {
         password: "",
     };
 
+
     return (
         <div className="signup">
             <div className="background">
@@ -91,7 +92,6 @@ export const Login = () => {
                                 />
                             ))}
                         </div>
-
                         <button type="submit" className="button">
                             Submit
                         </button>
@@ -104,3 +104,4 @@ export const Login = () => {
         </div>
     );
 };
+
