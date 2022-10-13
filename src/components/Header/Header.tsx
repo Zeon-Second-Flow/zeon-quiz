@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Header.module.scss";
 import {Link} from "react-router-dom";
 import {Search} from "@/components/Search/Search";
-import {ReactComponent as Logo} from "@/assets/logo.svg";
+import Logo from "@/assets/logo.png";
 import {ReactComponent as BurgerMenu} from "@/assets/burger-menu.svg";
 
 
@@ -27,10 +27,10 @@ export const Header = () => {
                             </li>
                         </ul>
                     </nav>
-                    <BurgerMenu className={styles.burger} />
+                    <BurgerMenu className={styles.burger}/>
                     <Link to={"/"}>
                         <div className={styles.logo}>
-                            <Logo/>
+                            <img width={120}  src={Logo} alt="logo"/>
                         </div>
                     </Link>
                     <Search/>
