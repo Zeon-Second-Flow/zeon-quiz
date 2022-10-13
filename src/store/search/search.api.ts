@@ -2,8 +2,11 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {IITem, IQuestions, ServerResponse} from "@/models/models";
 
 
-const token = localStorage.getItem("token") && JSON.parse(localStorage.getItem("token") || "");
+const token =
+    localStorage.getItem("token") &&
+    JSON.parse(localStorage.getItem("token") || "");
 // Define a service using a base URL and expected endpoints
+console.log(token.token);
 
 export const getTests = createApi({
     reducerPath: "tests",
@@ -21,8 +24,7 @@ export const getTests = createApi({
             query: (name) => ({
                 url: `tests?search=${name}`,
                 headers: {
-                    Authorization: `Bearer  + ${token.token}`,
-                    "Content-Type": "application/json"
+                    Authorization: `Bearer + " " + ${token.token}`
                 }
             }),
             // transformResponse: (response: ServerResponse<Test>) => response.results
@@ -31,8 +33,7 @@ export const getTests = createApi({
             query: (name) => ({
                 url: `tests/${name}`,
                 headers: {
-                    Authorization: `Bearer  + ${token.token}`,
-                    "Content-Type": "application/json"
+                    Authorization: `Bearer + " " + ${token.token}`
                 }
             }),
             // transformResponse: (response: ServerResponse<IQuestions>) => {

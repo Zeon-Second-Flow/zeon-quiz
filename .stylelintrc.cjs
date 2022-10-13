@@ -53,6 +53,5 @@ module.exports = {
         "scss/at-rule-no-unknown": true,
         // any other rules you'd want to change e.g.
         "scss/dollar-variable-pattern": /[a-z][a-zA-Z]+/,
-        "scss/selector-no-redundant-nesting-selector": true,
     }
 };

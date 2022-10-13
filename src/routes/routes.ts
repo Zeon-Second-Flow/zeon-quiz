@@ -8,6 +8,8 @@ import {MainPage} from "@/pages/mainPage/MainPage";
 import {Login} from "@/components/Login/Login";
 import {SearchPage} from "@/pages/searchPage/SearchPage";
 import {DetailPage} from "@/pages/DetailPage/DetailPage";
+import {ChangePassword} from "@/components/ChangePassword/ChangePassword";
+import {SuccessPage} from "@/pages/SuccessPage/SuccessPage";
 
 
 export const publicRoutes = [
@@ -42,7 +44,7 @@ export const publicRoutes = [
     {
         path: routePath.DETAIL,
         component: DetailPage,
-    }
+    },
 ];
 
 export const privateRoutes = [
@@ -50,5 +52,13 @@ export const privateRoutes = [
     {
         path: routePath.CREATE_TEST,
         component: CreateTestsPage,
+    },
+    {
+        path: routePath.CHANGE_PASSWORD,
+        component: ChangePassword,
+    },
+    {
+        path: routePath.SUCCESS_PAGE,
+        component: SuccessPage,
     },
 ];
