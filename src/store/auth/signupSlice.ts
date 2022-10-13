@@ -6,14 +6,15 @@ import {IValue} from "@/components/Login/Login";
 import {IPassword} from "@/components/ChangePassword/ChangePassword";
 import { IRestorePassword } from '@/components/RestorePassword/RestorePassword';
 import { IRestoreComplete } from '@/components/RestoreComplete/RestoreComplete';
+import customFetchBase from './customFetchBase';
+
 const token =
     localStorage.getItem("token") &&
     JSON.parse(localStorage.getItem("token") || "");
 
-
 export const signupSlice = createApi({
     reducerPath: "signupSlice",
-    baseQuery: fetchBaseQuery({baseUrl: BASE_URL}),
+    baseQuery: customFetchBase,
     endpoints: (builder) => ({
         addUser: builder.mutation<IValues, object>({
             query: (data) => ({
