@@ -1,19 +1,16 @@
 import { IValues } from './../../components/Auth/SignUp';
-import { BASE_URL } from './../../api/api';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { fetchBaseQuery } from '@reduxjs/toolkit/dist/query';
 import { IValue } from '@/components/Login/Login';
 import { IPassword } from '@/components/ChangePassword/ChangePassword';
+import customFetchBase from './customFetchBase';
 
 const token =
   localStorage.getItem('token') &&
   JSON.parse(localStorage.getItem('token') || '');
 
-console.log(token);
-
 export const signupSlice = createApi({
   reducerPath: 'signupSlice',
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  baseQuery: customFetchBase,
   endpoints: (builder) => ({
     addUser: builder.mutation<IValues, object>({
       query: (data) => ({
