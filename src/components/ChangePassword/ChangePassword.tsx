@@ -48,43 +48,42 @@ export const ChangePassword = () => {
     const [changePassword] = useChangePasswordMutation();
     const [err, setErr] = useState("");
     const navigate = useNavigate();
-  useEffect(() => {
-    const fetchData = async () => {
-      const token =
-        localStorage.getItem('token') &&
-        JSON.parse(localStorage.getItem('token') || '');
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const token =
+    //     localStorage.getItem("token") &&
+    //     JSON.parse(localStorage.getItem("token") || "");
 
-      // console.log({ refresh: token.refresh });
-      const data = await fetch(
-        'https://safe-atoll-40972.herokuapp.com/account/refresh/',
-        {
-          body: JSON.stringify({ refresh: token.refresh }),
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + token.token,
-          },
-        }
-      );
-      const response = await data.json();
-      console.log(
-        localStorage.getItem('token') &&
-          JSON.parse(localStorage.getItem('token') || '')
-      );
+    //         // console.log({ refresh: token.refresh });
+    //         const data = await fetch(
+    //             "https://safe-atoll-40972.herokuapp.com/account/refresh/",
+    //             {
+    //                 body: JSON.stringify({refresh: token.refresh}),
+    //                 method: "POST",
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                     Authorization: "Bearer " + token.token,
+    //                 },
+    //             }
+    //         );
+    //         const response = await data.json();
+    //         console.log(
+    //             localStorage.getItem("token") &&
+    //       JSON.parse(localStorage.getItem("token") || "")
+    //         );
 
-      token.token = response.access;
-      localStorage.setItem('token', JSON.stringify(token));
-      console.log(
-        localStorage.getItem('token') &&
-          JSON.parse(localStorage.getItem('token') || '')
-      );
-      console.log(response);
-    };
-    // fetchData();
-  }, []);
+    //         token.token = response.access;
+    //         localStorage.setItem("token", JSON.stringify(token));
+    //         console.log(
+    //             localStorage.getItem("token") &&
+    //       JSON.parse(localStorage.getItem("token") || "")
+    //         );
+    //         console.log(response);
+    //     };
+    // // fetchData();
+    // }, []);
 
-  const fetchPasswordData = async (values: IPassword) => {
-    console.log('fetch');
+    const fetchPasswordData = async (values: IPassword) => {
         try {
             await changePassword(values).unwrap();
             navigate("/success");
@@ -115,13 +114,13 @@ export const ChangePassword = () => {
                             {err && <p className="rejectMessage">{err}</p>}
                             {changePasswordData.map((value) => (
                                 <FormInput
+                                    key={Math.random()}
                                     name={value.name}
                                     placeholder={value.placeholder}
                                     type={value.type}
                                 />
                             ))}
                         </div>
-
                         <button type="submit" className="button">
               Submit
                         </button>

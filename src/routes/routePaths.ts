@@ -11,5 +11,7 @@ export const routePath = {
     SUCCESS_PAGE: "success",
     PAGE_NOT_FOUND: "*",
     SEARCH_PAGE: "search-page/:value",
-    DETAIL: "detail/:name"
-
+    DETAIL: "detail/:name",
+    RESTORE_PASSWORD: "restore-password",
+    RESTORE_COMPLETE: "restore-complete",
+};

@@ -50,10 +50,10 @@
   },
   "lint-staged": {
     "*.(ts|tsx)": [
-      "eslint --fix --max-warnings=0"
+      "eslint --fix --max-warnings=100"
     ],
     "*.(css|scss|sass)": [
-      "stylelint --fix --max-warnings=0"
+      "stylelint --fix --max-warnings=100"
     ]
   }
 }

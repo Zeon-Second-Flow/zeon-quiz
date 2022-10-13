@@ -86,6 +86,7 @@ export const Login = () => {
                             {err && <p className="rejectMessage">{err}</p>}
                             {loginInputData.map((value) => (
                                 <FormInput
+                                    key={Math.random()}
                                     name={value.name}
                                     placeholder={value.placeholder}
                                     type={value.type}
