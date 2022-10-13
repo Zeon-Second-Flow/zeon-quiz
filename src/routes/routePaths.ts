@@ -8,6 +8,8 @@ export const routePath = {
   LOGIN: 'login',
   CREATE_TEST: 'create-test',
   CHANGE_PASSWORD: 'change-password',
+  RESTORE_PASSWORD: 'restore-password',
+  RESTORE_COMPLETE: 'restore-complete',
   SUCCESS_PAGE: 'success',
   PAGE_NOT_FOUND: '*',
 };

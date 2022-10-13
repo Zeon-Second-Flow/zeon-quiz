@@ -84,6 +84,7 @@ export const Login = () => {
               {err && <p className="rejectMessage">{err}</p>}
               {loginInputData.map((value) => (
                 <FormInput
+                  key={Math.random()}
                   name={value.name}
                   placeholder={value.placeholder}
                   type={value.type}
@@ -94,8 +95,8 @@ export const Login = () => {
             <button type="submit" className="button">
               Submit
             </button>
-            <NavLink className="linkTo" to="/auth">
-              Register
+            <NavLink className="linkTo" to="/restore-password">
+              Forgotten password
             </NavLink>
           </Form>
         </Formik>
