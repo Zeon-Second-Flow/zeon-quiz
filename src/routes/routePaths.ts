@@ -10,4 +10,6 @@ export const routePath = {
   CHANGE_PASSWORD: 'change-password',
   SUCCESS_PAGE: 'success',
   PAGE_NOT_FOUND: '*',
+  QUESTION_PRELOAD: "question-preload", 
+  GAME: "game"
 };

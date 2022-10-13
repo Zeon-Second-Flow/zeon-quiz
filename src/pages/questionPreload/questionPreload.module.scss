@@ -1,0 +1,51 @@
+.wrapper {
+    background-color: rgb(70, 23, 143);
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    max-height: 100%;
+}
+
+.preloadBlock {
+    position: relative;
+    display: flex;
+    align-items: center;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+
+    .imageWrapper {
+        position: absolute;
+        top: 10%;
+        width: 300px;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .context {
+        font-size: 35px;
+        color: white;
+        text-align: center;
+        align-self: center;
+    }
+}
+
+
+.scrollbarWrapper {
+    width: 100%;
+    height: 35px;
+    border: transparent;
+    margin-top: 1rem;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+
+    .scrollbar {
+        height: 100%;
+        background-color: white;
+        width: 0%;
+        transition: width 0.9s;
+    }
+}

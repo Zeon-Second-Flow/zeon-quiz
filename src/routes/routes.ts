@@ -8,6 +8,8 @@ import { MainPage } from '@/pages/MainPage/MainPage';
 import { Login } from '@/components/Login/Login';
 import { ChangePassword } from '@/components/ChangePassword/ChangePassword';
 import { SuccessPage } from '@/pages/SuccessPage/SuccessPage';
+import questionPreload from '@/pages/questionPreload/questionPreload';
+import { TestPage } from '@/pages/TestPage/TestPage';
 
 export const publicRoutes = [
   {
@@ -34,6 +36,14 @@ export const publicRoutes = [
     path: routePath.LOGIN,
     component: Login,
   },
+  {
+    path: routePath.QUESTION_PRELOAD, 
+    component: questionPreload,
+  },
+  {
+    path: routePath.GAME, 
+    component: TestPage
+  }
 ];
 
 export const privateRoutes = [
