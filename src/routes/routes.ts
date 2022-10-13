@@ -7,6 +7,7 @@ import {SignUp} from "@/components/Auth/SignUp";
 import {MainPage} from "@/pages/mainPage/MainPage";
 import {Login} from "@/components/Login/Login";
 import {SearchPage} from "@/pages/searchPage/SearchPage";
+import {DetailPage} from "@/pages/DetailPage/DetailPage";
 
 
 export const publicRoutes = [
@@ -37,6 +38,10 @@ export const publicRoutes = [
     {
         path: routePath.SEARCH_PAGE,
         component: SearchPage,
+    },
+    {
+        path: routePath.DETAIL,
+        component: DetailPage,
     }
 ];
 

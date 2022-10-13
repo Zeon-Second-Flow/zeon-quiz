@@ -1,6 +1,7 @@
 import React from "react";
-import {IITem} from "@/components/Search/Search";
 import styles from "./Search.module.scss";
+import {Link} from "react-router-dom";
+import {IITem} from "@/models/models";
 
 
 type Props = {
@@ -16,7 +17,9 @@ export const SearchCard = ({value, clearInput, setShowInput}: Props) => {
     };
     return (
         <span key={value.title} onClick={checkDetails} className={styles.dataItem}>
-            {value.title}
+            <Link to={`/detail/${value.title}`}>
+                {value.title}
+            </Link>
         </span>
     );
 };

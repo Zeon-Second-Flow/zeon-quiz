@@ -1,6 +1,6 @@
 import {signupSlice} from "./auth/signupSlice";
 import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit";
-import {getTests} from "@/store/search/searchSlice";
+import {getTests} from "@/store/search/search.api";
 
 
 export const store = configureStore({

@@ -1,4 +1,4 @@
-import {useLazyGetTestsByNameQuery} from "@/store/search/searchSlice";
+import {useLazyGetTestsByNameQuery} from "@/store/search/search.api";
 import React, {useEffect} from "react";
 import styles from "./SearchPage.module.scss";
 import {useParams} from "react-router-dom";
@@ -12,7 +12,6 @@ export const SearchPage = () => {
             getTestsByName(value);
         }
     }, [value]);
-    console.log(data);
     return (
         <div className={styles.searchPage}>
             {

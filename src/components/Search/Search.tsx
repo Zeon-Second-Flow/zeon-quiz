@@ -1,21 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import styles from "./Search.module.scss";
 import {ReactComponent as CloseIcon} from "@/assets/close.svg";
 import {ReactComponent as SearchIcon} from "@/assets/searchIcon.svg";
 import {SearchCard} from "@/components/Search/SearchCard";
 import {useNavigate} from "react-router-dom";
 import {useDebounce} from "@/hooks";
-import {useGetTestsByNameQuery} from "@/store/search/searchSlice";
+import {useGetTestsByNameQuery} from "@/store/search/search.api";
+import {IITem} from "@/models/models";
 
-
-export interface IITem {
-    title: string;
-    image?: null | string;
-    is_active: boolean;
-    group: string;
-    questions_count: number;
-    test_passed: number;
-}
 
 export const Search = () => {
     const navigate = useNavigate();
@@ -28,16 +20,10 @@ export const Search = () => {
     const {data} = useGetTestsByNameQuery(debounced, {
         skip: debounced.length < 2
     });
-    console.log(data);
-    useEffect(() => {
-        console.log(debounced);
-    }, [debounced]);
-
+    // console.log(data);
     // useEffect(() => {
-    //     if (data) {
-    //         setTests(data);
-    //     }
-    // }, [value]);
+    //     console.log(debounced);
+    // }, [debounced]);
 
     const onBlur = () => {
         setTimeout(() => setShow(false), 200);

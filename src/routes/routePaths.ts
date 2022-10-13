@@ -7,5 +7,6 @@ export const routePath = {
     LOGIN: "login",
     CREATE_TEST: "create-test",
     PAGE_NOT_FOUND: "*",
-    SEARCH_PAGE: "search-page/:value"
+    SEARCH_PAGE: "search-page/:value",
+    DETAIL: "detail/:name"
 };
