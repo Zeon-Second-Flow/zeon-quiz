@@ -11,5 +11,6 @@ export const routePath = {
   SUCCESS_PAGE: 'success',
   PAGE_NOT_FOUND: '*',
   QUESTION_PRELOAD: "question-preload", 
-  GAME: "game"
+  GAME: "game", 
+  LOCALBOARD: "localboard"
 };

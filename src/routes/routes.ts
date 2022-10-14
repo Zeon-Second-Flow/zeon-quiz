@@ -10,6 +10,7 @@ import { ChangePassword } from '@/components/ChangePassword/ChangePassword';
 import { SuccessPage } from '@/pages/SuccessPage/SuccessPage';
 import questionPreload from '@/pages/questionPreload/questionPreload';
 import { TestPage } from '@/pages/TestPage/TestPage';
+import LocalBoard from '@/pages/LocalBoard/LocalBoard';
 
 export const publicRoutes = [
   {
@@ -43,6 +44,10 @@ export const publicRoutes = [
   {
     path: routePath.GAME, 
     component: TestPage
+  }, 
+  {
+    path: routePath.LOCALBOARD, 
+    component: LocalBoard
   }
 ];
 

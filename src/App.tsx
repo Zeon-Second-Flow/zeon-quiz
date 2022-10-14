@@ -6,9 +6,9 @@ import { Footer } from "@/components/Footer/Footer";
 export const App = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <AppRoutes />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
