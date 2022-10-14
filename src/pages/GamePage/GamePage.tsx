@@ -1,6 +1,5 @@
-import io from "socket.io-client";
-
-import {useEffect} from "react";
+// import { useEffect, useState } from "react";
+import {useAppSelector} from "@/hooks";
 
 
 export const GamePage = () => {
@@ -12,39 +11,24 @@ export const GamePage = () => {
     // const [existedRoom, setExistedRoom] = useState();
     // const [typeSocket, setTypeSocket] = useState();
 
-    const socket = io("http://localhost:3333", {
-        transports: ["websocket", "polling"],
-    });
+    const {room, users} = useAppSelector((state) => state.websocket);
+
+    console.log(room, users);
 
     const username =
     localStorage.getItem("token") &&
     JSON.parse(localStorage.getItem("token") || "");
 
-    useEffect(() => {
-        socket.on("connect", () => {
-            socket.emit("username", username.email);
-        });
+    console.log(username);
+    
 
-        socket.on("users", (users) => {
-            setUsers(users);
-        });
+    // console.log(users);
 
-        socket.on("test", (data) => {
-            console.log(data);
-        });
-
-        socket.on("connected", (user) => {
-            setUsers((users) => [...users, user]);
-            setRoom(user.room);
-            setUserId(user.id);
-        });
-
-        socket.on("disconnected", (id) => {
-            setUsers((users) => {
-                return users.filter((user) => user.id !== id);
-            });
-        });
-    }, []);
-
-    return <div>GamePage</div>;
+    return (
+        <div className="container">
+      GamePage
+            <p>{users.length}</p>
+            <p>{room}</p>
+        </div>
+    );
 };

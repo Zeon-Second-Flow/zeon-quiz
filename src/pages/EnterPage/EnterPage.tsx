@@ -1,25 +1,87 @@
-import io from "socket.io-client";
 import React, {useState} from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import styles from "./EnterPage.module.scss";
+import {useAppDispatch, useAppSelector} from "@/hooks";
+import {setSocketRoom, setSocketUsers} from "@/store/websocket/websocket";
 
 
 export const EnterPage = () => {
     const [value, setValue] = useState("");
-    console.log(value);
+    const navigate = useNavigate();
+    const {users} = useAppSelector((state) => state.websocket);
 
-    const user =
-    localStorage.getItem("token") &&
-    JSON.parse(localStorage.getItem("token") || "");
-    
-    console.log(user);
+    console.log(users);
+
+    const dispatch = useAppDispatch();
+    const socket = useAppSelector((state) => state.websocket.socket);
 
     const enterGame = () => {
-        const socket = io("http://localhost:3333", {
-            transports: ["websocket", "polling"],
-        });
+        const user =
+      localStorage.getItem("token") &&
+      JSON.parse(localStorage.getItem("token") || "");
 
         socket.emit("join", [user.email, value]);
+
+        socket.on("users", (users) => {
+            console.log("users: ", users);
+            // setUsers(users);
+            dispatch(setSocketUsers(users));
+        });
+
+        socket.on("test", (data) => {
+            console.log(data);
+        });
+
+        socket.on("connected", (user) => {
+            console.log("connected: ", [...users, user]);
+
+            // setUsers([...users, user]);
+            dispatch(setSocketRoom(user.room));
+            dispatch(setSocketUsers([...users, user]));
+        });
+
+        socket.on("disconnected", (id) => {
+            // setUsers((users) => {
+            //   return users.filter((user) => user.id !== id);
+            // });
+            dispatch(setSocketUsers(users.filter((user) => user.id !== id)));
+        });
+
+        setTimeout(() => {
+            navigate("/game");
+        }, 500);
+    };
+
+    const createGame = () => {
+        const username =
+      localStorage.getItem("token") &&
+      JSON.parse(localStorage.getItem("token") || "");
+
+        socket.emit("username", username.email);
+
+        socket.on("users", (users) => {
+            // setUsers(users);
+            dispatch(setSocketUsers(users));
+        });
+
+        socket.on("test", (data) => {
+            console.log(data);
+        });
+
+        socket.on("connected", (user) => {
+            // setUsers((users) => [...users, user]);
+            console.log(user.room);
+            dispatch(setSocketRoom(user.room));
+            dispatch(setSocketUsers([...users, user]));
+        });
+
+        socket.on("disconnected", (id) => {
+            // setUsers((users) => {
+            //   return users.filter((user) => user.id !== id);
+            // });
+
+            dispatch(setSocketUsers(users.filter((user) => user.id !== id)));
+        });
     };
 
     return (
@@ -46,9 +108,9 @@ export const EnterPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className={styles.extraInfo}>
+                <div className={styles.extraInfo} onClick={createGame}>
                     <NavLink to="/game">
-            Create your own kahoot for free at <span>kahoot.com</span>
+            Create your own room for free at <span>zeon-quiz.com</span>
                     </NavLink>
                     <span>Terms | Privacy</span>
                 </div>
