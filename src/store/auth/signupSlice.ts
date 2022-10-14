@@ -4,13 +4,12 @@ import {createApi} from "@reduxjs/toolkit/query/react";
 import {fetchBaseQuery} from "@reduxjs/toolkit/dist/query";
 import {IValue} from "@/components/Login/Login";
 import {IPassword} from "@/components/ChangePassword/ChangePassword";
-
-
+import { IRestorePassword } from '@/components/RestorePassword/RestorePassword';
+import { IRestoreComplete } from '@/components/RestoreComplete/RestoreComplete';
 const token =
     localStorage.getItem("token") &&
     JSON.parse(localStorage.getItem("token") || "");
 
-console.log(token.token);
 
 export const signupSlice = createApi({
     reducerPath: "signupSlice",
@@ -54,4 +53,35 @@ export const {
     useAddUserMutation,
     useLoginUserMutation,
     useChangePasswordMutation,
+    restorePassword: builder.mutation<IRestorePassword, object>({
+      query: (data) => ({
+        url: '/account/restore_password/',
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          Authorization: 'Bearer ' + token.token,
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
+    restoreComplete: builder.mutation<IRestoreComplete, object>({
+      query: (data) => ({
+        url: '/account/restore_complete/',
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          Authorization: 'Bearer ' + token.token,
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
+  }),
+});
+
+export const {
+  useAddUserMutation,
+  useLoginUserMutation,
+  useChangePasswordMutation,
+  useRestorePasswordMutation,
+  useRestoreCompleteMutation,
 } = signupSlice;
