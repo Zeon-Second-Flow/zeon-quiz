@@ -1,6 +1,6 @@
+import React, {useState} from "react";
 import {useLoginUserMutation} from "@/store/auth/signupSlice";
 import {Form, Formik} from "formik";
-import {useState} from "react";
 import * as Yup from "yup";
 import {NavLink, useNavigate} from "react-router-dom";
 import {FormInput} from "@/UI/FormInput";
@@ -20,10 +20,10 @@ const loginInputData = [
 ];
 
 export interface IValue {
-  login: string;
-  password: string;
-  refresh?: string;
-  access?: string;
+    login: string;
+    password: string;
+    refresh?: string;
+    access?: string;
 }
 
 const SignupSchema = Yup.object().shape({
@@ -65,6 +65,7 @@ export const Login = () => {
         password: "",
     };
 
+
     return (
         <div className="signup">
             <div className="background">
@@ -91,12 +92,11 @@ export const Login = () => {
                                 />
                             ))}
                         </div>
-
                         <button type="submit" className="button">
-              Submit
+                            Submit
                         </button>
                         <NavLink className="linkTo" to="/auth">
-              Register
+                            Register
                         </NavLink>
                     </Form>
                 </Formik>
@@ -104,3 +104,4 @@ export const Login = () => {
         </div>
     );
 };
+

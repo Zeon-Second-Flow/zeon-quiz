@@ -1,5 +1,5 @@
-import {useState} from "react";
-import {Formik, Form,} from "formik";
+import React, {useState} from "react";
+import {Formik, Form} from "formik";
 import * as Yup from "yup";
 import {
     useAddUserMutation,
@@ -35,16 +35,16 @@ const signupInputData = [
 ];
 
 export interface IValues {
-  email: string;
-  group: string;
-  password: string;
-  password_confirm: string;
-  error?: object;
+    email: string;
+    group: string;
+    password: string;
+    password_confirm: string;
+    error?: object;
 }
 
 interface IData {
-  email: string;
-  password: string;
+    email: string;
+    password: string;
 }
 
 const SignupSchema = Yup.object().shape({
@@ -139,10 +139,10 @@ export const SignUp = () => {
                             type="submit"
                             className={isLoading ? "buttonLoading" : "button"}
                         >
-              Submit
+                            Submit
                         </button>
                         <NavLink className="linkTo" to="/login">
-              Already have an account?
+                            Already have an account?
                         </NavLink>
                     </Form>
                 </Formik>
@@ -150,3 +150,4 @@ export const SignUp = () => {
         </div>
     );
 };
+

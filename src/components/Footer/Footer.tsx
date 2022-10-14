@@ -6,7 +6,7 @@ import {ReactComponent as VK} from "@/assets/vk.svg";
 import {ReactComponent as FaceBook} from "@/assets/facebook-f.svg";
 import {ReactComponent as EmailIcon} from "@/assets/emailIcon.svg";
 import {ReactComponent as PhoneIcone} from "@/assets/phoneIcon.svg";
-import {ReactComponent as Logo} from "@/assets/logo.svg";
+import Logo from "@/assets/logo.png";
 
 
 export const Footer = () => {
@@ -21,7 +21,7 @@ export const Footer = () => {
                         <div className={styles.footerInner}>
                             <Link to={"/"}>
                                 <div className={styles.logo}>
-                                    <Logo/>
+                                    <img width={160} src={Logo} alt="logo"/>
                                 </div>
                             </Link>
                             <div className={styles.footerBlock}>

@@ -5,9 +5,9 @@ import {PasswordField} from "./PasswordInput";
 
 
 interface IProps {
-  name: string;
-  placeholder: string;
-  type: string;
+    name: string;
+    placeholder: string;
+    type: string;
 }
 
 export const FormInput = (props: IProps) => {
@@ -20,8 +20,8 @@ export const FormInput = (props: IProps) => {
                 <PasswordConfirmField {...props} />
             )}
             {(props.type === "text" ||
-        props.type === "email" ||
-        props.type === "number") && (
+                props.type === "email" ||
+                props.type === "number") && (
                 <input
                     className={`${styles.input} ${
                         meta.touched && meta.error && styles.invalid
