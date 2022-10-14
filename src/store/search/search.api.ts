@@ -6,7 +6,7 @@ const token =
     localStorage.getItem("token") &&
     JSON.parse(localStorage.getItem("token") || "");
 // Define a service using a base URL and expected endpoints
-console.log(token.token);
+console.log(token?.token);
 
 export const getTests = createApi({
     reducerPath: "tests",
