@@ -4,8 +4,10 @@ import {CreateTestsPage} from "@/pages/CreateTestsPage/CreateTestsPage";
 import {EnterPage} from "@/pages/EnterPage/EnterPage";
 import {NamePage} from "@/pages/NamePage/NamePage";
 import {SignUp} from "@/components/Auth/SignUp";
-import {MainPage} from "@/pages/mainPage/MainPage";
+import {MainPage} from "@/pages/MainPage/MainPage";
 import {Login} from "@/components/Login/Login";
+import {ChangePassword} from "@/components/ChangePassword/ChangePassword";
+import {SuccessPage} from "@/pages/SuccessPage/SuccessPage";
 
 
 export const publicRoutes = [
@@ -32,7 +34,7 @@ export const publicRoutes = [
     {
         path: routePath.LOGIN,
         component: Login,
-    }
+    },
 ];
 
 export const privateRoutes = [
@@ -40,5 +42,13 @@ export const privateRoutes = [
     {
         path: routePath.CREATE_TEST,
         component: CreateTestsPage,
+    },
+    {
+        path: routePath.CHANGE_PASSWORD,
+        component: ChangePassword,
+    },
+    {
+        path: routePath.SUCCESS_PAGE,
+        component: SuccessPage,
     },
 ];

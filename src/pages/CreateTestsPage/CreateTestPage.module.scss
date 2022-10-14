@@ -1,8 +1,8 @@
-input {
-    &:focus {
-        outline: none;
-    }
-}
+//input {
+//    &:focus {
+//        outline: none;
+//    }
+//}
 
 .catBox {
     position: fixed;
@@ -37,7 +37,8 @@ input {
     height: auto;
     width: 100%;
     overflow-x: auto;
-    margin: 3.5rem 0 0;
+    //margin: 3.5rem 0 0;
+    padding-bottom: 215px;
 
     &::-webkit-scrollbar {
         width: 7px;
@@ -52,7 +53,7 @@ input {
 }
 
 .createTestsPage {
-    height: 95vh;
+    height: 92vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -131,7 +132,6 @@ input {
 
 .sliderBarBtnBox {
     width: 100%;
-    padding-top: 30px;
     //background: white;
     height: 108px;
     display: flex;
@@ -142,7 +142,12 @@ input {
     -webkit-box-pack: start;
     justify-content: flex-start;
     min-width: 100%;
+    position: absolute;
+    bottom: 110px;
+    z-index: 150;
+    padding: 30px 20px 0;
 }
+
 
 .sliderBarBtnBox button {
     width: 100%;

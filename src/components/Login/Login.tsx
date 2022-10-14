@@ -1,20 +1,36 @@
 import {useLoginUserMutation} from "@/store/auth/signupSlice";
-import {ErrorMessage, Field, Form, Formik} from "formik";
+import {Form, Formik} from "formik";
 import {useState} from "react";
 import * as Yup from "yup";
-import {useNavigate} from "react-router-dom";
-import styles from "./Login.module.scss";
+import {NavLink, useNavigate} from "react-router-dom";
+import {FormInput} from "@/UI/FormInput";
 
+
+const loginInputData = [
+    {
+        name: "login",
+        type: "email",
+        placeholder: "example@example.com",
+    },
+    {
+        name: "password",
+        type: "password",
+        placeholder: "password",
+    },
+];
 
 export interface IValue {
-    login: string;
-    password: string;
-    refresh?: string;
-    access?: string;
+  login: string;
+  password: string;
+  refresh?: string;
+  access?: string;
 }
 
 const SignupSchema = Yup.object().shape({
-    login: Yup.string().min(2, "Too Short!").required("Required!"),
+    login: Yup.string()
+        .email("Email is not valid")
+        .min(2, "Too Short!")
+        .required("Required!"),
     password: Yup.string()
         .min(4, "Minimum 4 characters required!")
         .required("Required!"),
@@ -25,26 +41,23 @@ export const Login = () => {
     const navigate = useNavigate();
     const [err, setErr] = useState("");
 
-    const signinUser = async (values: IValue, reset: () => void) => {
+    const signinUser = async (values: IValue) => {
         try {
             const data = await loginUser(values).unwrap();
-            reset();
-            navigate("/");
             localStorage.setItem(
                 "token",
                 JSON.stringify({
-                    token: data.refresh,
-                    access: data.access,
+                    refresh: data.refresh,
+                    token: data.access,
                     email: values.login,
                 })
             );
+            navigate("/");
         } catch (error: typeof error) {
-            setErr(error.data.login[0]);
+            for (const key in error.data) {
+                setErr(error.data[key]);
+            }
         }
-    };
-
-    const resetError = () => {
-        setErr("");
     };
 
     const initialValues = {
@@ -53,54 +66,38 @@ export const Login = () => {
     };
 
     return (
-        <div className={styles.signup}>
-            <div className={styles.background}>
-                <div className={styles.shape}></div>
-                <div className={styles.shape}></div>
+        <div className="signup">
+            <div className="background">
+                <div className="shape"></div>
+                <div className="shape"></div>
             </div>
             <div className="container">
                 <h1>Login</h1>
                 <Formik
                     initialValues={initialValues}
-                    onSubmit={async (values: IValue, {resetForm}) => {
-                        await signinUser(values, resetForm);
+                    onSubmit={(values: IValue) => {
+                        signinUser(values);
                     }}
                     validationSchema={SignupSchema}
                 >
-                    <Form>
-                        <Field
-                            className={styles.input}
-                            id="login"
-                            name="login"
-                            placeholder="example@example.com"
-                            type="email"
-                            input_name="email"
-                            onInput={() => err && resetError()}
-                        />
-                        <ErrorMessage
-                            name="login"
-                            component="p"
-                            className={styles.errorMessage}
-                        />
+                    <Form className="form">
+                        <div className="form_inputs-wrapper">
+                            {err && <p className="rejectMessage">{err}</p>}
+                            {loginInputData.map((value) => (
+                                <FormInput
+                                    name={value.name}
+                                    placeholder={value.placeholder}
+                                    type={value.type}
+                                />
+                            ))}
+                        </div>
 
-                        <Field
-                            className={styles.input}
-                            id="password"
-                            name="password"
-                            placeholder="password"
-                            input_name="password"
-                            onInput={() => err && resetError()}
-                        />
-                        <ErrorMessage
-                            name="password"
-                            component="p"
-                            className={styles.errorMessage}
-                        />
-
-                        {err && <p className={styles.rejectMessage}>{err}</p>}
-                        <button type="submit" className={styles.button}>
-                            Submit
+                        <button type="submit" className="button">
+              Submit
                         </button>
+                        <NavLink className="linkTo" to="/auth">
+              Register
+                        </NavLink>
                     </Form>
                 </Formik>
             </div>

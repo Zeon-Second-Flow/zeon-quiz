@@ -3,7 +3,9 @@ import {privateRoutes, publicRoutes} from "./routes";
 
 
 export const AppRoutes = () => {
-    const user = true;
+    const user =
+    localStorage.getItem("token") &&
+    JSON.parse(localStorage.getItem("token") || "");
 
     return (
         <Routes>

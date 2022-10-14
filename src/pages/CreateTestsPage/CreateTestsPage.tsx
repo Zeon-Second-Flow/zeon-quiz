@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import style from "./CreateTestPage.module.scss";
 import {QuizSliderBlock} from "@/components/CreateSliderBlock/QuizSliderBlock";
 import {CustomSelect} from "@/components/CustomSelect/CustomSelect";
@@ -12,9 +12,14 @@ export const CreateTestsPage = () => {
     const [ans2, setAns2] = useState<string>("");
     const [ans3, setAns3] = useState<string>("");
     const [ans4, setAns4] = useState<string>("");
+    const [question, setQuestion] = useState<string>("");
+    const [points, setPoints] = useState<number>(100);
+    const [time, setTime] = useState<number>(20);
+    const [rightAns, setRightAns] = useState("");
     const questionModel = {
         question: "",
-        score: 0,
+        id: Math.random().toString(16).slice(5),
+        score: 100,
         timer: 20,
         answer: {
             A: "",
@@ -22,8 +27,20 @@ export const CreateTestsPage = () => {
             C: "",
             D: "",
             correct_answer: "",
-            question_id: 0
         }
+    };
+    const [quizArr, setQuizArr] = useState([{...questionModel}]);
+    const [currentTest, setCurrenTest] = useState<string>(quizArr[0].id);
+
+    const tes = {
+        question,
+        points,
+        time,
+        ans1,
+        ans2,
+        ans3,
+        ans4,
+        rightAns
     };
     const pointsOption = [
         {value: 80, label: "80 points"},
@@ -41,21 +58,83 @@ export const CreateTestsPage = () => {
         {value: 90, label: "1 minute 30 seconds"},
         {value: 120, label: "2 minute"},
     ];
-    const [quizArr, setQuizArr] = useState([{...questionModel}]);
+
+    useEffect(() => {
+        const  editData = async () => {
+            await setData(currentTest);
+
+            // const currentQuestion = quizArr.find((it) => it.id === currentTest)
+            // const currentQuestionIndex = quizArr.findIndex((it) => it.id === currentTest)
+            // console.log(currentQuestionIndex)
+            // setQuizArr(prev => [...prev.slice(0, currentQuestionIndex), currentQuestion, ...prev.slice(currentQuestionIndex + 1, quizArr.length)])
+        };
+        editData();
+
+    }, [question, ans1, ans2, ans3, ans4, points, time, rightAns]);
 
     const addQuiz = () => {
-        setQuizArr(prevState => [...prevState, questionModel]);
+        const newTest = {...questionModel};
+        newTest.id =Math.random().toString(16).slice(5);
+        setQuizArr(prevState => [...prevState, newTest]);
+        // setTimeout(() => {
+        //     console.log(quizArr[quizArr.length -1].id, "newwwwwwwww")
+        //     setChoosedQuestion(quizArr[quizArr.length -1].id)
+        // }, 100)
     };
 
-    const choosedQuestion = (idx : number) => {
-        return idx;
+    const setChoosedQuestion = (idx : string) => {
+        console.log(idx, "CHANGED");
+        setCurrenTest(idx);
+        const currentQuestion = quizArr.find((it) => it.id === idx);
+        if (currentQuestion) {
+            setAns1( currentQuestion.answer.A);
+            setAns2( currentQuestion.answer.B);
+            setAns3( currentQuestion.answer.C);
+            setAns4( currentQuestion.answer.D);
+            setQuestion(currentQuestion.question);
+            setTime(currentQuestion.timer);
+            setPoints(currentQuestion.score);
+            setRightAns(currentQuestion.answer.correct_answer);
+        }
+        return currentQuestion;
+    };
+
+    const setData = (idx : string) => {
+        const currentQuestion = quizArr.find((it) => it.id === idx);
+        const currentQuestionIndex = quizArr.findIndex((it) => it.id === idx);
+        if (currentQuestion){
+            currentQuestion.answer.A = tes.ans1;
+            currentQuestion.answer.B = tes.ans2;
+            currentQuestion.answer.C = tes.ans3;
+            currentQuestion.answer.D = tes.ans4;
+            currentQuestion.question = tes.question;
+            currentQuestion.timer = tes.time;
+            currentQuestion.score = tes.points;
+            currentQuestion.answer.correct_answer = tes.rightAns;
+            // setQuizArr(prev => [...prev.filter(item => item.id !== currentQuestion.id), currentQuestion])
+
+            // setQuizArr([...startQuiz, currentQuestion, ...endQuiz])
+
+            // console.log(quizArr)
+
+
+            const startQuiz = quizArr.slice(0, currentQuestionIndex);
+            const endQuiZ = quizArr.slice(currentQuestionIndex + 1, quizArr.length);
+
+            console.log(quizArr, "AAAAAAAAAAAAAAAa");
+            console.log([
+                ...startQuiz, currentQuestion, ...endQuiZ
+            ], "EDIT");
+
+            setQuizArr(prev => [...prev.slice(0, currentQuestionIndex), currentQuestion, ...prev.slice(currentQuestionIndex + 1, quizArr.length)]);
+        }
     };
 
     return (
         <section className={style.createTestsPage}>
             <div className={style.creatorSlideBar}>
                 <div className={style.blockSlider}>
-                    {quizArr?.map((it, idx) => {return (<QuizSliderBlock choosedQuestion={choosedQuestion} it={it} idx={idx}/>);})}
+                    {quizArr?.map((it, idx) => {return (<QuizSliderBlock key={idx} choosedQuestion={setChoosedQuestion} it={it} idx={idx}/>);})}
                 </div>
                 <div className={style.sliderBarBtnBox}>
                     <button onClick={addQuiz}>Add quiz</button>
@@ -66,25 +145,33 @@ export const CreateTestsPage = () => {
                     <Cat/>
                 </div>
                 <form className={style.createTestForm} action="">
-                    <input placeholder={"Start typing your question"} className={style.createTestInputQuestion} type="text"/>
+                    <input value={question}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuestion(e.target.value)}
+                        placeholder={"Start typing your question"}
+                        className={style.createTestInputQuestion} type="text"/>
+
                     <div className={style.counterBox}>
                         <div>
                             Points
-                            <CustomSelect onChange={(e:React.FormEvent<HTMLInputElement>) => {console.log(e);}} options={pointsOption}/>
+                            <CustomSelect defaultValue={"100 points"} setState={setPoints}  options={pointsOption}/>
                         </div>
                         <div>
                             Time limit
-                            <CustomSelect onChange={(e:React.FormEvent<HTMLInputElement>) => {console.log(e);}} options={timeOption}/>
+                            <CustomSelect defaultValue={"20 seconds"} setState={setTime} options={timeOption}/>
                         </div>
                     </div>
                     <div className={style.questionBox}>
-                        <AnswerItem svg={triangleSVG} ans={ans1} color={"rgb(226, 27, 60)"} setAns={setAns1}
+                        <AnswerItem rightAns={rightAns} setRightAns={setRightAns} svg={triangleSVG} ans={ans1}
+                            color={"rgb(226, 27, 60)"} setAns={setAns1}
                             placeholder={"Add answer 1"} name={"right_answer"} value={"A"}/>
-                        <AnswerItem svg={rhombusSVG} ans={ans2} color={"rgb(19, 104, 206)"} setAns={setAns2}
+                        <AnswerItem rightAns={rightAns} setRightAns={setRightAns} svg={rhombusSVG} ans={ans2}
+                            color={"rgb(19, 104, 206)"} setAns={setAns2}
                             placeholder={"Add answer 2"} name={"right_answer"} value={"B"}/>
-                        <AnswerItem svg={circleSVG} ans={ans3} color={"rgb(216, 158, 0)"} setAns={setAns3}
+                        <AnswerItem rightAns={rightAns} setRightAns={setRightAns} svg={circleSVG} ans={ans3}
+                            color={"rgb(216, 158, 0)"} setAns={setAns3}
                             placeholder={"Add answer 3"} name={"right_answer"} value={"C"}/>
-                        <AnswerItem svg={squareSVG} ans={ans4} color={"rgb(38, 137, 12)"} setAns={setAns4}
+                        <AnswerItem rightAns={rightAns} setRightAns={setRightAns} svg={squareSVG} ans={ans4}
+                            color={"rgb(38, 137, 12)"} setAns={setAns4}
                             placeholder={"Add answer 4"} name={"right_answer"} value={"D"}/>
                     </div>
                 </form>

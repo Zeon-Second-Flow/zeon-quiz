@@ -2,9 +2,9 @@ import React from "react";
 import style from "@/pages/CreateTestsPage/CreateTestPage.module.scss";
 
 
-interface IsliderBlockItem {
-    it: {
+interface IItem {
         question: string;
+        id: string;
         score: number;
         timer: number;
         answer: {
@@ -13,17 +13,21 @@ interface IsliderBlockItem {
             C: string;
             D: string;
             correct_answer: string;
-            question_id: number;
         };
-    };
+}
+
+interface IsliderBlockItem {
+    it: IItem;
     idx: number;
-    choosedQuestion: (idx: number) => number;
+    choosedQuestion: (idx: string) => IItem | undefined;
 }
 
 export const QuizSliderBlock = ({it, idx, choosedQuestion}:IsliderBlockItem) => {
 
+    console.log(it, "it");
+
     return (
-        <div onClick={() => choosedQuestion(idx)} className={style.sliderBlockItem}>
+        <div onClick={() => choosedQuestion(it.id)} className={style.sliderBlockItem}>
             <h3 className={style.sliderBlockTitle}>{idx +1} Quiz</h3>
             <div  className={style.blockContentBox}>
                 <h3 className={style.itemTitle}>{it.question || "Question"}</h3>

@@ -7,5 +7,7 @@ export const routePath = {
     AUTH: "auth",
     LOGIN: "login",
     CREATE_TEST: "create-test",
+    CHANGE_PASSWORD: "change-password",
+    SUCCESS_PAGE: "success",
     PAGE_NOT_FOUND: "*",
 };

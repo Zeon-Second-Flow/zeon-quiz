@@ -9,14 +9,17 @@ interface IOption {
 
 interface Ioptions {
     options: IOption[];
-    onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+    setState: (e:number) => void;
+    defaultValue: string;
 }
 
-export const CustomSelect = ({options}:Ioptions) => {
+export const CustomSelect = ({options, setState, defaultValue}:Ioptions) => {
+
     return (
         <div>
             <Select
-                onChange={(e) => {console.log(e);}}
+                defaultInputValue={defaultValue}
+                onChange={(e: SingleValue<IOption>) => {setState(e.value);}}
                 options={options}
             />
         </div>
