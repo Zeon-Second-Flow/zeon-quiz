@@ -76,7 +76,6 @@ export const {
         },
       }),
     }),
-  }),
 });
 
 export const {

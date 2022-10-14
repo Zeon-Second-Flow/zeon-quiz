@@ -12,4 +12,3 @@ export const routePath = {
     PAGE_NOT_FOUND: "*",
     SEARCH_PAGE: "search-page/:value",
     DETAIL: "detail/:name"
-

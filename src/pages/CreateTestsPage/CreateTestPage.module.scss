@@ -1,0 +1,268 @@
+//input {
+//    &:focus {
+//        outline: none;
+//    }
+//}
+
+.catBox {
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    left: 0;
+}
+
+.creatorSlideBar {
+    position: fixed;
+    left: 0;
+    z-index: 101;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    bottom: unset;
+    width: 265px;
+    height: 100%;
+    //background: rgb(255, 255, 255);
+    box-shadow: rgb(0 0 0 / 15%) 0 2px 4px 0;
+    padding-top: 0;
+}
+
+.blockSlider {
+    display: block;
+    position: relative;
+    z-index: 4;
+    max-height: 100%;
+    height: auto;
+    width: 100%;
+    overflow-x: auto;
+    //margin: 3.5rem 0 0;
+    padding-bottom: 215px;
+
+    &::-webkit-scrollbar {
+        width: 7px;
+        background: #bbb;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        width: 7px;
+        background: white;
+        border-radius: 12px;
+    }
+}
+
+.createTestsPage {
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+.sliderBlockItem {
+    width: 215px;
+    height: 140px;
+    //background: white;
+    text-align: start;
+    padding: 12px 10px 12px 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 24px;
+    color: rgb(110, 110, 110);
+}
+
+.sliderBlockTitle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 24px;
+    color: rgb(110, 110, 110);
+    margin: 0;
+}
+
+.blockContentBox {
+    height: 93px;
+    background-color: rgb(242, 242, 242);
+    border-radius: 0.25rem;
+    position: relative;
+    z-index: 1;
+    box-shadow: transparent 0 0 0 3px;
+    margin: 0;
+}
+
+.itemTitle {
+    margin: 0.2rem 0;
+    color: rgb(110, 110, 110);
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1.33;
+    letter-spacing: 0.2px;
+    max-height: 1rem;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.itemCounter {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 5px;
+}
+
+.itemAnswers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    width: 100%;
+    height: 17px;
+    align-items: center;
+    justify-content: center;
+    padding-top: 12px;
+}
+
+.itemAnswers div {
+    position: relative;
+    width: calc(40% - 0.125rem);
+    height: 7px;
+    margin-bottom: 3px;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 0.125rem;
+}
+
+.sliderBarBtnBox {
+    width: 100%;
+    //background: white;
+    height: 108px;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    min-width: 100%;
+    position: absolute;
+    bottom: 110px;
+    z-index: 150;
+    padding: 30px 20px 0;
+}
+
+
+.sliderBarBtnBox button {
+    width: 100%;
+    margin: 0px;
+    border: 0px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: bottom;
+    box-shadow: rgb(0 0 0 / 25%) 0px -4px inset;
+    background: rgb(19, 104, 206);
+    color: rgb(255, 255, 255);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    min-width: 42px;
+    min-height: 42px;
+    padding: 0px 16px 4px;
+    position: relative;
+    font-family: Montserrat, "Noto Sans Arabic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.createTestFormBox {
+    height: 100%;
+    padding-left: 265px;
+
+    .createTestForm {
+        height: 100%;
+        padding: 0 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+}
+
+.createTestInputQuestion {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    color: rgb(51, 51, 51);
+    caret-color: rgb(51, 51, 51);
+    font-size: clamp(1rem, 3.2vmin, 3rem);
+    text-align: center;
+    padding: clamp(0.5rem, 1.2vmin, 1rem) 2rem;
+    overflow: auto;
+    min-height: calc(clamp(1rem, 3.2vmin, 3rem) * 1);
+    max-height: calc(clamp(1rem, 3.2vmin, 3rem) * 4 + clamp(0.5rem, 1.2vmin, 1rem) * 2);
+    border: none;
+    height: auto;
+    background: rgb(255, 255, 255);
+    border-radius: 0.25rem;
+    box-shadow: rgb(0 0 0 / 15%) 0px -4px 0px 0px inset;
+}
+
+.counterBox {
+    padding: 30px 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.questionBox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.questionInputBox {
+    display: flex;
+    width: calc(50% - 3rem);
+    padding: clamp(8px, 1.2vmin, 16px);;
+    background: white;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgb(0 0 0 / 15%) 0px -0.25rem 0px 0px inset;
+}
+
+.questionSvgBox {
+    flex: 0 0 auto;
+    border-radius: 4px;
+    height: calc(100% - 1rem);
+    margin: 0px 0.25rem 0.25rem;
+    padding: 0px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    transition: box-shadow 0.2s ease 0s, background 0.2s ease 0s, opacity 0.2s ease 0s;
+
+    & svg {
+        width: 40px ;
+    }
+}
+
+.questionInputText {
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0.3125rem;
+    color: white;
+    font-size: 1rem;
+    box-sizing: border-box;
+    overflow: visible;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    display: flex;
+    flex: 1 0 auto;
+    transition: box-shadow 0.2s ease 0s, background 0.2s ease 0s, opacity 0.2s ease 0s;
+    border-radius: 4px;
+    min-height: 2.25rem;
+    max-width: 100%;
+    background-color: rgb(255, 255, 255);
+    fill: rgb(255, 255, 255);
+    border: none;
+    line-height: 1.25;
+    height: 86px;
+    word-break: break-word;
+}

@@ -94,7 +94,6 @@ export const ChangePassword = () => {
             }
         }
     };
-
     return (
         <div className="signup">
             <div className="background">
