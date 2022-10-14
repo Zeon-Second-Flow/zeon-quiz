@@ -9,6 +9,10 @@ import {Login} from "@/components/Login/Login";
 import {ChangePassword} from "@/components/ChangePassword/ChangePassword";
 import {SuccessPage} from "@/pages/SuccessPage/SuccessPage";
 import {GamePage} from "@/pages/GamePage/GamePage";
+import {SearchPage} from "@/pages/searchPage/SearchPage";
+import {DetailPage} from "@/pages/DetailPage/DetailPage";
+import {RestorePassword} from "@/components/RestorePassword/RestorePassword";
+import {RestoreComplete} from "@/components/RestoreComplete/RestoreComplete";
 
 
 export const publicRoutes = [
@@ -25,10 +29,6 @@ export const publicRoutes = [
         component: EnterPage,
     },
     {
-        path: routePath.GAME,
-        component: GamePage,
-    },
-    {
         path: routePath.NAME_PAGE,
         component: NamePage,
     },
@@ -40,6 +40,17 @@ export const publicRoutes = [
         path: routePath.LOGIN,
         component: Login,
     },
+    {
+        path: routePath.SEARCH_PAGE,
+        component: SearchPage,
+    },
+    {
+        path: routePath.DETAIL,
+        component: DetailPage,
+    }, {
+        path: routePath.GAME,
+        component: GamePage
+    }
 ];
 
 export const privateRoutes = [
@@ -56,4 +67,14 @@ export const privateRoutes = [
         path: routePath.SUCCESS_PAGE,
         component: SuccessPage,
     },
+    {
+        path: routePath.RESTORE_PASSWORD,
+        component: RestorePassword,
+    },
+    {
+        path: routePath.RESTORE_COMPLETE,
+        component: RestoreComplete,
+    },
 ];
+    
+

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-@import 'reset';
-@import 'globalStyles';
+@import './src/reset';
+@import './src/globalStyles';
 
 :root {
     --wall: white;
@@ -16,8 +16,6 @@
     --crater: #f0e4d0;
 }
 
-
-
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -27,7 +25,7 @@
 body {
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
@@ -50,5 +48,4 @@ a {
     flex-direction: column;
     justify-content: space-between;
     min-height: 100vh;
-    gap: 1em;
 }
