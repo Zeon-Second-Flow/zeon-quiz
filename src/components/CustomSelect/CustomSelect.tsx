@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import Select from "react-select";
 
 
@@ -19,7 +19,9 @@ export const CustomSelect = ({options, setState, defaultValue}:Ioptions) => {
         <div>
             <Select
                 defaultInputValue={defaultValue}
-                onChange={(e: SingleValue<IOption>) => {setState(e.value);}}
+                onChange={(option: IOption | null) => {
+                    setState(option!.value);
+                }}
                 options={options}
             />
         </div>
