@@ -11,7 +11,7 @@ const initialState = {
 };
 
 const websocketSlice = createSlice({
-    name: "counter",
+    name: "websocket",
     initialState,
     reducers: {
         setSocketRoom(state, payload) {
@@ -19,11 +19,15 @@ const websocketSlice = createSlice({
         },
         setSocketUsers(state, payload) {
             state.users = payload.payload;
-        }
+        },
+        resetWebsocket(state) {
+            state.socket.emit("leave");
+            state.room = 0;
+            state.users = [];
+        },
     },
 });
 
-export const {setSocketRoom, setSocketUsers} = websocketSlice.actions;
-/* eslint-disable import/prefer-default-export */
-export const {reducer} =  websocketSlice;
-
+export const {setSocketRoom, setSocketUsers, resetWebsocket} =
+  websocketSlice.actions;
+export const {reducer} = websocketSlice;

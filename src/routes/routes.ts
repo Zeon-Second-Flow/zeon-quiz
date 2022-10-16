@@ -29,10 +29,6 @@ export const publicRoutes = [
         component: EnterPage,
     },
     {
-        path: routePath.NAME_PAGE,
-        component: NamePage,
-    },
-    {
         path: routePath.AUTH,
         component: SignUp,
     },

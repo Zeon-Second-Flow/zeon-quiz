@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-@import './src/reset';
-@import './src/globalStyles';
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import "./src/reset";
+@import "./src/globalStyles";
 
 :root {
     --wall: white;
+    --wall-dark: #e1e1e1;
     --sky: #9384c0;
     --star: #fffdf9;
     --cat: #ffffff;
