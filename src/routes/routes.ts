@@ -14,6 +14,9 @@ import {DetailPage} from "@/pages/DetailPage/DetailPage";
 import {RestorePassword} from "@/components/RestorePassword/RestorePassword";
 import {RestoreComplete} from "@/components/RestoreComplete/RestoreComplete";
 import {Profile} from "@/pages/ProfilePage/Profile";
+import questionPreload from '@/pages/questionPreload/questionPreload';
+import { TestPage } from '@/pages/TestPage/TestPage';
+import LocalBoard from '@/pages/LocalBoard/LocalBoard';
 
 
 export const publicRoutes = [
@@ -47,7 +50,15 @@ export const publicRoutes = [
     }, {
         path: routePath.GAME,
         component: GamePage
-    }
+    },
+      {
+    path: routePath.QUESTION_PRELOAD, 
+    component: questionPreload,
+  },
+  {
+    path: routePath.LOCALBOARD, 
+    component: LocalBoard
+  }
 ];
 
 export const privateRoutes = [
