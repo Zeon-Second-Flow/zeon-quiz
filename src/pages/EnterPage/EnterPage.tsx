@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import styles from "./EnterPage.module.scss";
 import {useAppDispatch, useAppSelector} from "@/hooks";
 import {setSocketRoom, setSocketUsers} from "@/store/websocket/websocket";
+import logo from "@/assets/logo.png";
 
 
 export const EnterPage = () => {
@@ -93,7 +94,9 @@ export const EnterPage = () => {
                 <div className={styles.circle}></div>
                 <div className={styles.enterBlockWrapper}>
                     <div className={styles.enterBlock}>
-                        <div className={styles.title}></div>
+                        <div className={styles.title}>
+                            <img src={logo} alt="Logo" />
+                        </div>
                         <div className={styles.form}>
                             <input
                                 className={styles.input}
