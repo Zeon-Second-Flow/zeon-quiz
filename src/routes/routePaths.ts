@@ -12,5 +12,11 @@ export const routePath = {
   PAGE_NOT_FOUND: '*',
   QUESTION_PRELOAD: "question-preload", 
   GAME: "game", 
-  LOCALBOARD: "localboard"
+  LOCALBOARD: "localboard",
+  SEARCH_PAGE: "search-page/:value",
+  DETAIL: "detail/:name",
+  RESTORE_PASSWORD: "restore-password",
+  RESTORE_COMPLETE: "restore-complete",
+  YOUR_IN: "in"
 };
+    

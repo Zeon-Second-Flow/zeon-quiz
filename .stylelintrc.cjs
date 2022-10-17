@@ -10,6 +10,7 @@ module.exports = {
     ],
     customSyntax: "postcss-scss",
     rules: {
+
         "indentation": 4, // отступы, вложеноость
         "max-empty-lines": 3, // максимальное кол-во пустых строк
         "no-duplicate-at-import-rules": true,
