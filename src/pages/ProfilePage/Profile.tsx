@@ -26,19 +26,19 @@ export const Profile = () => {
                         <h3> Login: {user.login}</h3>
                     </div>
                     <div className={styles.user_Logo}>
-                        <div><b>Group:</b><p>{user.group}</p></div>
-                        <div><b>Overall rating:</b><p>{user.overall_rating}</p></div>
-                        <div><b>Group rating:</b><p>{user.group_rating}</p></div>
-                        <div>Overall score:<p>{user.overall_score}</p></div>
-                        <div><b>Passed tests:</b><p>{user.passed_tests}</p></div>
+                        <div><b>Group: </b><p>{user.group}</p></div>
+                        <div><b>Overall rating: </b><p>{user.overall_rating}</p></div>
+                        <div><b>Group rating: </b><p>{user.group_rating}</p></div>
+                        <div>Overall score: <p>{user.overall_score}</p></div>
+                        <div><b>Passed tests: </b><p>{user.passed_tests}</p></div>
                     </div>
                     <div>
                         {user.tests.map((test) => (
-                            <div>
-                                <p>{test.title}</p>
-                                <p>{test.group}</p>
-                                <p>{test.score}</p>
-                                <p>{test.rating}</p>
+                            <div className={styles.user_Logo}>
+                                <div><b>Title: </b><p>{test.title}</p></div>
+                                <div><b>Group: </b> <p>{test.group}</p></div>
+                                <div> <b>Score: </b><p>{test.score}</p></div>
+                                <div><b>Rate: </b><p>{test.rating}</p></div>
                             </div>
                         ))}
                     </div>

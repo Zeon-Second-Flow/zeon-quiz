@@ -13,6 +13,10 @@ import {SearchPage} from "@/pages/searchPage/SearchPage";
 import {DetailPage} from "@/pages/DetailPage/DetailPage";
 import {RestorePassword} from "@/components/RestorePassword/RestorePassword";
 import {RestoreComplete} from "@/components/RestoreComplete/RestoreComplete";
+import questionPreload from "@/pages/questionPreload/questionPreload";
+import { TestPage } from "@/pages/TestPage/TestPage";
+import LocalBoard from "@/pages/LocalBoard/LocalBoard";
+import { YourIn } from "@/pages/YourIn/YourIn";
 import {Profile} from "@/pages/ProfilePage/Profile";
 import questionPreload from '@/pages/questionPreload/questionPreload';
 import { TestPage } from '@/pages/TestPage/TestPage';
@@ -55,9 +59,17 @@ export const publicRoutes = [
     path: routePath.QUESTION_PRELOAD, 
     component: questionPreload,
   },
+  {   path: routePath.QUESTION_PRELOAD, 
+      component: questionPreload,
+      
+    },
   {
     path: routePath.LOCALBOARD, 
     component: LocalBoard
+  },
+  {
+    path: routePath.YOUR_IN, 
+    component: YourIn
   }
 ];
 
