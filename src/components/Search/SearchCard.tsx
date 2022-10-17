@@ -1,17 +1,25 @@
 import React from "react";
-// import {useNavigate} from "react-router-dom";
 import styles from "./Search.module.scss";
+import {Link} from "react-router-dom";
+import {IITem} from "@/models/models";
 
 
-export const SearchCard = () => {
-    // function checkDetails() {
-    //     navigate(`/coupon/${value.id}`);
-    //     clearInput();
-    //     setShowInput(false);
-    // }
+type Props = {
+    value: IITem;
+    clearInput: () => void;
+    setShowInput: (value: boolean) => void;
+};
+
+export const SearchCard = ({value, clearInput, setShowInput}: Props) => {
+    const checkDetails = () => {
+        clearInput();
+        setShowInput(false);
+    };
     return (
-        <span className={styles.dataItem}>
-
+        <span key={value.title} onClick={checkDetails} className={styles.dataItem}>
+            <Link to={`/detail/${value.title}`}>
+                {value.title}
+            </Link>
         </span>
     );
 };
