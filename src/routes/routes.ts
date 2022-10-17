@@ -13,6 +13,7 @@ import {SearchPage} from "@/pages/searchPage/SearchPage";
 import {DetailPage} from "@/pages/DetailPage/DetailPage";
 import {RestorePassword} from "@/components/RestorePassword/RestorePassword";
 import {RestoreComplete} from "@/components/RestoreComplete/RestoreComplete";
+import {Profile} from "@/pages/ProfilePage/Profile";
 import questionPreload from '@/pages/questionPreload/questionPreload';
 import { TestPage } from '@/pages/TestPage/TestPage';
 import LocalBoard from '@/pages/LocalBoard/LocalBoard';
@@ -81,6 +82,10 @@ export const privateRoutes = [
     {
         path: routePath.RESTORE_COMPLETE,
         component: RestoreComplete,
+    },
+    {
+        path: routePath.PROFILE_PAGE,
+        component: Profile,
     },
 ];
     
