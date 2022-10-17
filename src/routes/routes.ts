@@ -6,10 +6,11 @@ import {NamePage} from "@/pages/NamePage/NamePage";
 import {SignUp} from "@/components/Auth/SignUp";
 import {MainPage} from "@/pages/MainPage/MainPage";
 import {Login} from "@/components/Login/Login";
-import {SearchPage} from "@/pages/searchPage/SearchPage";
-import {DetailPage} from "@/pages/DetailPage/DetailPage";
 import {ChangePassword} from "@/components/ChangePassword/ChangePassword";
 import {SuccessPage} from "@/pages/SuccessPage/SuccessPage";
+import {GamePage} from "@/pages/GamePage/GamePage";
+import {SearchPage} from "@/pages/searchPage/SearchPage";
+import {DetailPage} from "@/pages/DetailPage/DetailPage";
 import {RestorePassword} from "@/components/RestorePassword/RestorePassword";
 import {RestoreComplete} from "@/components/RestoreComplete/RestoreComplete";
 
@@ -28,10 +29,6 @@ export const publicRoutes = [
         component: EnterPage,
     },
     {
-        path: routePath.NAME_PAGE,
-        component: NamePage,
-    },
-    {
         path: routePath.AUTH,
         component: SignUp,
     },
@@ -46,11 +43,13 @@ export const publicRoutes = [
     {
         path: routePath.DETAIL,
         component: DetailPage,
-    },
+    }, {
+        path: routePath.GAME,
+        component: GamePage
+    }
 ];
 
 export const privateRoutes = [
-
     ...publicRoutes,
     {
         path: routePath.CREATE_TEST,
@@ -72,5 +71,6 @@ export const privateRoutes = [
         path: routePath.RESTORE_COMPLETE,
         component: RestoreComplete,
     },
-
 ];
+    
+

@@ -7,8 +7,9 @@
 .room {
     position: relative;
     height: 100vh;
+    width: 100%;
     overflow: hidden;
-    background-color: var(--wall);
+    background-color: var(--wall-dark);
     background-image: repeating-linear-gradient(
         to right, #aaa, #aaa 3vh, #bbb 3vh, #bbb 6vh
     );

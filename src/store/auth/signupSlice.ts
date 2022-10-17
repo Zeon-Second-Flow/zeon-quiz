@@ -54,8 +54,7 @@ export const signupSlice = createApi({
                 body: JSON.stringify(data),
                 headers: {
                     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-                    // Authorization: "Bearer " + token.token,
-                    Authorization: "Bearer " + String(localStorage.getItem("token")),
+                    Authorization: "Bearer " + token.token,
                     "Content-Type": "application/json",
                 },
             }),

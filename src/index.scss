@@ -1,19 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-@import './src/reset';
-@import './src/globalStyles';
-
-body {
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 16px;
-    font-weight: normal;
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import "./src/reset";
+@import "./src/globalStyles";
 
 :root {
     --wall: white;
+    --wall-dark: #e1e1e1;
     --sky: #9384c0;
     --star: #fffdf9;
     --cat: #ffffff;
@@ -35,7 +26,7 @@ body {
 body {
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
@@ -50,6 +41,7 @@ body {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 .wrapper {

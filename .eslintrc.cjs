@@ -31,9 +31,9 @@ module.exports = {
         "no-const-assign": "error", // ошибка при изменении const
         // "no-unused-vars": ["warn", {vars: "local", args: "none"}], // неиспользуемые переменные
         "react/jsx-uses-vars": "error", // "no-unused-vars" распознает переменные, использующиеся только в JSX как no used
-        "@typescript-eslint/no-explicit-any": "warn", // запрет на any
+        // "@typescript-eslint/no-explicit-any": "warn", // запрет на any
         "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": ["warn", {vars: "local", args: "none"}],
+        // "@typescript-eslint/no-unused-vars": ["warn", {vars: "local", args: "none"}],
 
         /* literals */
         "prefer-regex-literals": "warn", // использовать регекс литерал вместо конструктора RegExp
