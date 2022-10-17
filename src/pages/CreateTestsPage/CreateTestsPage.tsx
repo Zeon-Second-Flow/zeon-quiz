@@ -4,7 +4,9 @@ import {QuizSliderBlock} from "@/components/CreateSliderBlock/QuizSliderBlock";
 import {CustomSelect} from "@/components/CustomSelect/CustomSelect";
 import {Cat} from "@/components/Cat/Cat";
 import {AnswerItem} from "@/components/AnswerItem/AnswerItem";
-import {circleSVG, squareSVG, triangleSVG, rhombusSVG} from "@/components/SVG/svg";
+import {circleSVG, squareSVG, triangleSVG, rhombusSVG, deleteIcon} from "@/components/SVG/svg";
+import {CreateTestPreviewComponent} from "@/components/CreateTestPreviewComponent/CreateTestPreviewComponent";
+import {useCreateTestMutation} from "@/store/slice/CreateTestSlice";
 
 
 export const CreateTestsPage = () => {
@@ -16,12 +18,18 @@ export const CreateTestsPage = () => {
     const [points, setPoints] = useState<number>(100);
     const [time, setTime] = useState<number>(20);
     const [rightAns, setRightAns] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [img, setImg] = useState(Object);
+    const [toggleForm, setToggleForm] = useState(true);
+    const [createTest] = useCreateTestMutation();
+
     const questionModel = {
         question: "",
         id: Math.random().toString(16).slice(5),
         score: 100,
         timer: 20,
-        answer: {
+        answers: {
             A: "",
             B: "",
             C: "",
@@ -32,6 +40,7 @@ export const CreateTestsPage = () => {
     const [quizArr, setQuizArr] = useState([{...questionModel}]);
     const [currentTest, setCurrenTest] = useState<string>(quizArr[0].id);
 
+    // console.log(quizArr)
     const tes = {
         question,
         points,
@@ -62,39 +71,29 @@ export const CreateTestsPage = () => {
     useEffect(() => {
         const  editData = async () => {
             await setData(currentTest);
-
-            // const currentQuestion = quizArr.find((it) => it.id === currentTest)
-            // const currentQuestionIndex = quizArr.findIndex((it) => it.id === currentTest)
-            // console.log(currentQuestionIndex)
-            // setQuizArr(prev => [...prev.slice(0, currentQuestionIndex), currentQuestion, ...prev.slice(currentQuestionIndex + 1, quizArr.length)])
         };
         editData();
 
-    }, [question, ans1, ans2, ans3, ans4, points, time, rightAns]);
+    }, [question, points, ans4, ans3, time, quizArr.length, currentTest, rightAns]);
 
     const addQuiz = () => {
         const newTest = {...questionModel};
         newTest.id =Math.random().toString(16).slice(5);
         setQuizArr(prevState => [...prevState, newTest]);
-        // setTimeout(() => {
-        //     console.log(quizArr[quizArr.length -1].id, "newwwwwwwww")
-        //     setChoosedQuestion(quizArr[quizArr.length -1].id)
-        // }, 100)
     };
 
     const setChoosedQuestion = (idx : string) => {
-        console.log(idx, "CHANGED");
         setCurrenTest(idx);
         const currentQuestion = quizArr.find((it) => it.id === idx);
         if (currentQuestion) {
-            setAns1( currentQuestion.answer.A);
-            setAns2( currentQuestion.answer.B);
-            setAns3( currentQuestion.answer.C);
-            setAns4( currentQuestion.answer.D);
+            setAns1( currentQuestion.answers.A);
+            setAns2( currentQuestion.answers.B);
+            setAns3( currentQuestion.answers.C);
+            setAns4( currentQuestion.answers.D);
             setQuestion(currentQuestion.question);
             setTime(currentQuestion.timer);
             setPoints(currentQuestion.score);
-            setRightAns(currentQuestion.answer.correct_answer);
+            setRightAns(currentQuestion.answers.correct_answer);
         }
         return currentQuestion;
     };
@@ -103,79 +102,121 @@ export const CreateTestsPage = () => {
         const currentQuestion = quizArr.find((it) => it.id === idx);
         const currentQuestionIndex = quizArr.findIndex((it) => it.id === idx);
         if (currentQuestion){
-            currentQuestion.answer.A = tes.ans1;
-            currentQuestion.answer.B = tes.ans2;
-            currentQuestion.answer.C = tes.ans3;
-            currentQuestion.answer.D = tes.ans4;
+            currentQuestion.answers.A = tes.ans1;
+            currentQuestion.answers.B = tes.ans2;
+            currentQuestion.answers.C = tes.ans3;
+            currentQuestion.answers.D = tes.ans4;
             currentQuestion.question = tes.question;
             currentQuestion.timer = tes.time;
             currentQuestion.score = tes.points;
-            currentQuestion.answer.correct_answer = tes.rightAns;
-            // setQuizArr(prev => [...prev.filter(item => item.id !== currentQuestion.id), currentQuestion])
+            currentQuestion.answers.correct_answer = tes.rightAns;
 
-            // setQuizArr([...startQuiz, currentQuestion, ...endQuiz])
-
-            // console.log(quizArr)
-
-
-            const startQuiz = quizArr.slice(0, currentQuestionIndex);
-            const endQuiZ = quizArr.slice(currentQuestionIndex + 1, quizArr.length);
-
-            console.log(quizArr, "AAAAAAAAAAAAAAAa");
-            console.log([
-                ...startQuiz, currentQuestion, ...endQuiZ
-            ], "EDIT");
 
             setQuizArr(prev => [...prev.slice(0, currentQuestionIndex), currentQuestion, ...prev.slice(currentQuestionIndex + 1, quizArr.length)]);
         }
     };
 
-    return (
-        <section className={style.createTestsPage}>
-            <div className={style.creatorSlideBar}>
-                <div className={style.blockSlider}>
-                    {quizArr?.map((it, idx) => {return (<QuizSliderBlock key={idx} choosedQuestion={setChoosedQuestion} it={it} idx={idx}/>);})}
-                </div>
-                <div className={style.sliderBarBtnBox}>
-                    <button onClick={addQuiz}>Add quiz</button>
-                </div>
-            </div>
-            <div className={style.createTestFormBox}>
-                <div className={style.catBox}>
-                    <Cat/>
-                </div>
-                <form className={style.createTestForm} action="">
-                    <input value={question}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuestion(e.target.value)}
-                        placeholder={"Start typing your question"}
-                        className={style.createTestInputQuestion} type="text"/>
+    const quizDelete = (id: string) => {
+        if (quizArr.length !== 1) {
+            setQuizArr(quizArr.filter((it, idx) => it.id !== id ));
+            setCurrenTest(quizArr[0].id);
+        }
+    };
 
-                    <div className={style.counterBox}>
-                        <div>
-                            Points
-                            <CustomSelect defaultValue={"100 points"} setState={setPoints}  options={pointsOption}/>
-                        </div>
-                        <div>
-                            Time limit
-                            <CustomSelect defaultValue={"20 seconds"} setState={setTime} options={timeOption}/>
-                        </div>
+    const data = {
+        title: title,
+        // image: img,
+        description: description,
+        questions: quizArr
+    };
+    // console.log(img)
+    const postTest = async () => {
+
+        console.log(data);
+
+        try {
+            await createTest(data);
+            // @ts-ignore
+        } catch (error: void) {
+            for (const key in error.data) {
+                console.log(error.data[key]);
+            }
+            console.log(error);
+        }
+
+
+    };
+
+    return (
+        <>
+            {toggleForm &&
+            <CreateTestPreviewComponent title={title} setTitle={setTitle}
+                setDescription={setDescription}
+                img={img} setImg={setImg}
+                setToggleForm={setToggleForm}
+            />
+            }
+            <section className={style.createTestsPage}>
+                <div className={style.creatorSlideBar}>
+                    <div className={style.blockSlider}>
+                        {quizArr?.map((it, idx) => {return (<QuizSliderBlock quizDelete={quizDelete}
+                            deleteIcon={deleteIcon} key={idx}
+                            choosedQuestion={setChoosedQuestion}
+                            it={it} idx={idx}/>);})}
                     </div>
-                    <div className={style.questionBox}>
-                        <AnswerItem rightAns={rightAns} setRightAns={setRightAns} svg={triangleSVG} ans={ans1}
-                            color={"rgb(226, 27, 60)"} setAns={setAns1}
-                            placeholder={"Add answer 1"} name={"right_answer"} value={"A"}/>
-                        <AnswerItem rightAns={rightAns} setRightAns={setRightAns} svg={rhombusSVG} ans={ans2}
-                            color={"rgb(19, 104, 206)"} setAns={setAns2}
-                            placeholder={"Add answer 2"} name={"right_answer"} value={"B"}/>
-                        <AnswerItem rightAns={rightAns} setRightAns={setRightAns} svg={circleSVG} ans={ans3}
-                            color={"rgb(216, 158, 0)"} setAns={setAns3}
-                            placeholder={"Add answer 3"} name={"right_answer"} value={"C"}/>
-                        <AnswerItem rightAns={rightAns} setRightAns={setRightAns} svg={squareSVG} ans={ans4}
-                            color={"rgb(38, 137, 12)"} setAns={setAns4}
-                            placeholder={"Add answer 4"} name={"right_answer"} value={"D"}/>
+                    <div className={style.sliderBarBtnBox}>
+                        <button onClick={addQuiz}>Add quiz</button>
                     </div>
-                </form>
-            </div>
-        </section>
+                </div>
+                <div className={style.createTestFormBox}>
+                    <div className={style.catBox}>
+                        <Cat/>
+                    </div>
+
+                    <form className={style.createTestForm} action="">
+                        <button type={"button"} onClick={postTest} disabled={!(!!quizArr[0].question &&
+                            !!quizArr[0].answers.A && !!quizArr[0].answers.B &&
+                            !!quizArr[0].answers.C && !!quizArr[0].answers.D) }
+                        style={!!quizArr[0].question && !!quizArr[0].answers.A && !!quizArr[0].answers.B &&
+                                !!quizArr[0].answers.C && !!quizArr[0].answers.D ? {} : {background: "gray"}}
+                        className={style.finishBtn}>
+                            Done
+                        </button>
+                        <div className={style.questionInpBox}>
+                            <input value={question}
+                                maxLength={100}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuestion(e.target.value)}
+                                placeholder={"Start typing your question"}
+                                className={style.createTestInputQuestion} type="text"/>
+                            <p style={question.length === 0 ? {color: "white"} : {}} >{100 - question.length}</p>
+                        </div>
+                        <div className={style.counterBox}>
+                            <div>
+                                Points
+                                <CustomSelect setState={setPoints}  options={pointsOption}/>
+                            </div>
+                            <div>
+                                Time limit
+                                <CustomSelect setState={setTime} options={timeOption}/>
+                            </div>
+                        </div>
+                        <div className={style.questionBox}>
+                            <AnswerItem key={66} rightAns={rightAns} setRightAns={setRightAns} svg={triangleSVG} ans={ans1}
+                                color={"rgb(226, 27, 60)"} setAns={setAns1}
+                                placeholder={"Add answer 1"} name={"right_answer"} value={"A"}/>
+                            <AnswerItem key={77} rightAns={rightAns} setRightAns={setRightAns} svg={rhombusSVG} ans={ans2}
+                                color={"rgb(19, 104, 206)"} setAns={setAns2}
+                                placeholder={"Add answer 2"} name={"right_answer"} value={"B"}/>
+                            <AnswerItem key={88} rightAns={rightAns} setRightAns={setRightAns} svg={circleSVG} ans={ans3}
+                                color={"rgb(216, 158, 0)"} setAns={setAns3}
+                                placeholder={"Add answer 3"} name={"right_answer"} value={"C"}/>
+                            <AnswerItem key={99} rightAns={rightAns} setRightAns={setRightAns} svg={squareSVG} ans={ans4}
+                                color={"rgb(38, 137, 12)"} setAns={setAns4}
+                                placeholder={"Add answer 4"} name={"right_answer"} value={"D"}/>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </>
     );
 };
