@@ -49,6 +49,7 @@ export const ChangePassword = () => {
     const [err, setErr] = useState("");
     const navigate = useNavigate();
 
+
     const fetchPasswordData = async (values: IPassword) => {
         try {
             await changePassword(values).unwrap();

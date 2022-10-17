@@ -26,7 +26,7 @@ export const routePath = {
     SEARCH: "search-page",
     ENTER_PAGE: "enter-page",
     GAME: "game", 
-    LOCALBOARD: "localboard"
+    LOCALBOARD: "localboard",
     RULES: "rules",
     AUTH: "auth",
     LOGIN: "login",
@@ -37,8 +37,9 @@ export const routePath = {
     DETAIL: "detail/:name",
     RESTORE_PASSWORD: "restore-password",
     RESTORE_COMPLETE: "restore-complete",
-    PAGE_NOT_FOUND: "*",
-    NAME_PAGE: 'name-page',
-     QUESTION_PRELOAD: "question-preload", 
+    PROFILE_PAGE: "profile-page",
+    PAGE_NOT_FOUND: "*",    
+    NAME_PAGE: "name-page",
+    QUESTION_PRELOAD: "question-preload", 
 };
 >>>>>>> 3111167d97bd608042201be78ba567ccac9205ad
