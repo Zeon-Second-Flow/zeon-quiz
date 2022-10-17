@@ -6,16 +6,23 @@ import {NamePage} from "@/pages/NamePage/NamePage";
 import {SignUp} from "@/components/Auth/SignUp";
 import {MainPage} from "@/pages/MainPage/MainPage";
 import {Login} from "@/components/Login/Login";
-import {SearchPage} from "@/pages/searchPage/SearchPage";
-import {DetailPage} from "@/pages/DetailPage/DetailPage";
 import {ChangePassword} from "@/components/ChangePassword/ChangePassword";
 import {SuccessPage} from "@/pages/SuccessPage/SuccessPage";
+import {GamePage} from "@/pages/GamePage/GamePage";
+import {SearchPage} from "@/pages/searchPage/SearchPage";
+import {DetailPage} from "@/pages/DetailPage/DetailPage";
 import {RestorePassword} from "@/components/RestorePassword/RestorePassword";
 import {RestoreComplete} from "@/components/RestoreComplete/RestoreComplete";
+<<<<<<< HEAD
 import questionPreload from "@/pages/questionPreload/questionPreload";
 import { TestPage } from "@/pages/TestPage/TestPage";
 import LocalBoard from "@/pages/LocalBoard/LocalBoard";
 import { YourIn } from "@/pages/YourIn/YourIn";
+=======
+import questionPreload from '@/pages/questionPreload/questionPreload';
+import { TestPage } from '@/pages/TestPage/TestPage';
+import LocalBoard from '@/pages/LocalBoard/LocalBoard';
+>>>>>>> 3111167d97bd608042201be78ba567ccac9205ad
 
 
 export const publicRoutes = [
@@ -32,10 +39,6 @@ export const publicRoutes = [
         component: EnterPage,
     },
     {
-        path: routePath.NAME_PAGE,
-        component: NamePage,
-    },
-    {
         path: routePath.AUTH,
         component: SignUp,
     },
@@ -50,15 +53,21 @@ export const publicRoutes = [
     {
         path: routePath.DETAIL,
         component: DetailPage,
+<<<<<<< HEAD
+=======
+    }, {
+        path: routePath.GAME,
+        component: GamePage
+    },
+      {
+    path: routePath.QUESTION_PRELOAD, 
+    component: questionPreload,
+>>>>>>> 3111167d97bd608042201be78ba567ccac9205ad
   },
   {   path: routePath.QUESTION_PRELOAD, 
       component: questionPreload,
       
     },
-  {
-    path: routePath.GAME, 
-    component: TestPage
-  }, 
   {
     path: routePath.LOCALBOARD, 
     component: LocalBoard
@@ -70,7 +79,6 @@ export const publicRoutes = [
 ];
 
 export const privateRoutes = [
-
     ...publicRoutes,
     {
         path: routePath.CREATE_TEST,
@@ -92,5 +100,6 @@ export const privateRoutes = [
         path: routePath.RESTORE_COMPLETE,
         component: RestoreComplete,
     },
-
 ];
+    
+
