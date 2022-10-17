@@ -13,5 +13,6 @@ export const routePath = {
     DETAIL: "detail/:name",
     RESTORE_PASSWORD: "restore-password",
     RESTORE_COMPLETE: "restore-complete",
+    PROFILE_PAGE: "profile-page",
     PAGE_NOT_FOUND: "*",    
 };

@@ -52,7 +52,7 @@ export const customFetchBase: BaseQueryFn<
                         };
 
                         if (typeof args !== "string"){
-                            result = await baseQuery({...args, headers}, api, extraOptions);
+                            return result = await baseQuery({...args, headers}, api, extraOptions);
                         }
                     }
                     result = refreshResult;
