@@ -7,12 +7,12 @@ import {useLocation} from "react-router-dom";
 
 export const App = () => {
     const {pathname} = useLocation();
-    console.log(pathname);
+    // console.log(pathname);
     return (
         <div className="wrapper">
             <Header />
             <AppRoutes />
-            <Footer />
+            {/*<Footer />*/}
             {pathname !== "/create-test" && <Footer />}
         </div>
     );

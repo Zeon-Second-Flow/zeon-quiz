@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {Search} from "@/components/Search/Search";
 import Logo from "@/assets/logo.png";
 import {ReactComponent as BurgerMenu} from "@/assets/burger-menu.svg";
+import {ReactComponent as User} from "@/assets/user.svg";
 
 
 export const Header = () => {
@@ -30,10 +31,13 @@ export const Header = () => {
                     <BurgerMenu className={styles.burger}/>
                     <Link to={"/"}>
                         <div className={styles.logo}>
-                            <img width={120}  src={Logo} alt="logo"/>
+                            <img width={120} src={Logo} alt="logo"/>
                         </div>
                     </Link>
                     <Search/>
+                    <Link to={"/auth"}>
+                        <User/>
+                    </Link>
                 </div>
             </div>
         </div>
