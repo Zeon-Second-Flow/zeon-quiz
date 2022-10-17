@@ -17,14 +17,15 @@ interface IProps {
 
 export const AnswerItem = ({ans, color, setAns, placeholder, name, value, svg, setRightAns, rightAns}: IProps) => {
     return (
-        <div style={!!ans ? {background: color} : {}} className={style.questionInputBox}>
+        <div style={!!ans ? {background: color} : {color: "white"}} className={style.questionInputBox}>
             <div style={{background: color}} className={style.questionSvgBox}>
                 {svg}
             </div>
-            <input value={ans} style={!!ans ? {background: color} : {}}
+            <input maxLength={100} value={ans} style={!!ans ? {background: color} : {color: "black"}}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAns(e.target.value)}
                 placeholder={placeholder} className={style.questionInputText} type="text"/>
             <CustomRadioButton rightAns={rightAns} setRightAns={setRightAns} value={value} name={name}/>
+            <p>{100 - ans.length}</p>
         </div>
     );
 };

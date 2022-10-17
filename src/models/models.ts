@@ -35,3 +35,20 @@ export interface IAnswer {
     D: string;
 }
 
+export interface IQuiz {
+    "title": string;
+    "questions": [
+        {
+            "question": string;
+            "score": number;
+            "timer": number;
+            "answers": {
+                "A": string;
+                "B": string;
+                "C": string;
+                "D": string;
+                "correct_answer": string;
+            };
+        }
+    ];
+}
