@@ -12,7 +12,6 @@ export const App = () => {
         <div className="wrapper">
             <Header />
             <AppRoutes />
-            {/*<Footer />*/}
             {pathname !== "/create-test" && <Footer />}
         </div>
     );

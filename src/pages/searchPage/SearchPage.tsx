@@ -28,8 +28,8 @@ export const SearchPage = () => {
 
     return (
         <div className={styles.searchPage}>
-            <div className="container">
-                <h3 className={styles.heading}>Tests</h3>
+            <div className={styles.seachContainer}>
+                <h3 className={styles.heading}>Result: </h3>
                 <div className={styles.wrapper}>
                     {searchItem}
                 </div>

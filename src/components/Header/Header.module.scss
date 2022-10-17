@@ -25,6 +25,7 @@
 
     .burger {
         display: none;
+        cursor: pointer;
     }
 }
 
@@ -36,6 +37,10 @@
 
         .burger {
             display: block;
+        }
+
+        .userLogo {
+            display: none;
         }
     }
 }

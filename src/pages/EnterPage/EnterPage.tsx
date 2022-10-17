@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import {NavLink, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import styles from "./EnterPage.module.scss";
 import {useAppDispatch, useAppSelector} from "@/hooks";
 import {setSocketRoom, setSocketUsers} from "@/store/websocket/websocket";
 
 
 export const EnterPage = () => {
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState();
     const navigate = useNavigate();
     const {users} = useAppSelector((state) => state.websocket);
 
@@ -24,7 +24,6 @@ export const EnterPage = () => {
 
         socket.on("users", (users) => {
             console.log("users: ", users);
-            // setUsers(users);
             dispatch(setSocketUsers(users));
         });
 
@@ -34,8 +33,6 @@ export const EnterPage = () => {
 
         socket.on("connected", (user) => {
             console.log("connected: ", [...users, user]);
-
-            // setUsers([...users, user]);
             dispatch(setSocketRoom(user.room));
             dispatch(setSocketUsers([...users, user]));
         });
@@ -47,9 +44,7 @@ export const EnterPage = () => {
             dispatch(setSocketUsers(users.filter((user) => user.id !== id)));
         });
 
-        setTimeout(() => {
-            navigate("/game");
-        }, 500);
+        navigateToGame();
     };
 
     const createGame = () => {
@@ -57,10 +52,10 @@ export const EnterPage = () => {
       localStorage.getItem("token") &&
       JSON.parse(localStorage.getItem("token") || "");
 
-        socket.emit("username", username.email);
+        socket.emit("username", [username.email]);
 
         socket.on("users", (users) => {
-            // setUsers(users);
+            console.log("users: ", users);
             dispatch(setSocketUsers(users));
         });
 
@@ -69,8 +64,7 @@ export const EnterPage = () => {
         });
 
         socket.on("connected", (user) => {
-            // setUsers((users) => [...users, user]);
-            console.log(user.room);
+            console.log("connected: ", [...users, user]);
             dispatch(setSocketRoom(user.room));
             dispatch(setSocketUsers([...users, user]));
         });
@@ -82,6 +76,14 @@ export const EnterPage = () => {
 
             dispatch(setSocketUsers(users.filter((user) => user.id !== id)));
         });
+
+        navigateToGame();
+    };
+
+    const navigateToGame = () => {
+        setTimeout(() => {
+            navigate("/game");
+        }, 500);
     };
 
     return (
@@ -109,9 +111,9 @@ export const EnterPage = () => {
                     </div>
                 </div>
                 <div className={styles.extraInfo} onClick={createGame}>
-                    <NavLink to="/game">
+                    <p>
             Create your own room for free at <span>zeon-quiz.com</span>
-                    </NavLink>
+                    </p>
                     <span>Terms | Privacy</span>
                 </div>
             </div>
