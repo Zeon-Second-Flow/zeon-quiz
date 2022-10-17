@@ -1,7 +1,7 @@
 import {useRestorePasswordMutation} from "@/store/auth/signupSlice";
 import {FormInput} from "@/UI/FormInput";
 import {Form, Formik} from "formik";
-import {useState} from "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import * as Yup from "yup";
 
@@ -38,7 +38,7 @@ export const RestorePassword = () => {
         try {
             await restorePassword(values).unwrap();
             navigate("/restore-complete", {state: {title: values.login}});
-        } catch (error: typeof error) {
+        } catch (error: any) {
             for (const key in error.data) {
                 setErr(error.data[key]);
             }

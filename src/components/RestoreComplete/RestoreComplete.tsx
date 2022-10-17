@@ -1,4 +1,7 @@
-import {useRestoreCompleteMutation} from "@/store/auth/signupSlice";
+import {
+    useRestoreCompleteMutation,
+    useRestorePasswordMutation,
+} from "@/store/auth/signupSlice";
 import {FormInput} from "@/UI/FormInput";
 import {Form, Formik} from "formik";
 import React, {useState} from "react";

@@ -7,9 +7,9 @@ import * as Yup from "yup";
 
 
 export interface IPassword {
-  old_password: string;
-  new_password: string;
-  password_confirm: string;
+    old_password: string;
+    new_password: string;
+    password_confirm: string;
 }
 
 const PasswordSchema = Yup.object().shape({
@@ -48,40 +48,7 @@ export const ChangePassword = () => {
     const [changePassword] = useChangePasswordMutation();
     const [err, setErr] = useState("");
     const navigate = useNavigate();
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const token =
-    //     localStorage.getItem("token") &&
-    //     JSON.parse(localStorage.getItem("token") || "");
 
-    //         // console.log({ refresh: token.refresh });
-    //         const data = await fetch(
-    //             "https://safe-atoll-40972.herokuapp.com/account/refresh/",
-    //             {
-    //                 body: JSON.stringify({refresh: token.refresh}),
-    //                 method: "POST",
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                     Authorization: "Bearer " + token.token,
-    //                 },
-    //             }
-    //         );
-    //         const response = await data.json();
-    //         console.log(
-    //             localStorage.getItem("token") &&
-    //       JSON.parse(localStorage.getItem("token") || "")
-    //         );
-
-    //         token.token = response.access;
-    //         localStorage.setItem("token", JSON.stringify(token));
-    //         console.log(
-    //             localStorage.getItem("token") &&
-    //       JSON.parse(localStorage.getItem("token") || "")
-    //         );
-    //         console.log(response);
-    //     };
-    // // fetchData();
-    // }, []);
 
     const fetchPasswordData = async (values: IPassword) => {
         try {
@@ -97,8 +64,8 @@ export const ChangePassword = () => {
     return (
         <div className="signup">
             <div className="background">
-                <div className="shape"></div>
-                <div className="shape"></div>
+                <div className="shape"> </div>
+                <div className="shape"> </div>
             </div>
             <div className="container">
                 <h1>Change password</h1>
@@ -122,7 +89,7 @@ export const ChangePassword = () => {
                             ))}
                         </div>
                         <button type="submit" className="button">
-              Submit
+                            Submit
                         </button>
                     </Form>
                 </Formik>

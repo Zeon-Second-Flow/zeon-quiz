@@ -74,36 +74,6 @@ export const signupSlice = createApi({
     }),
 });
 
-// export const {
-//     useAddUserMutation,
-//     useLoginUserMutation,
-//     useChangePasswordMutation,
-//     restorePassword:
-    
-// builder.mutation<IRestorePassword, object>({
-//   query: (data) => ({
-//     url: '/account/restore_password/',
-//     method: 'POST',
-//     body: JSON.stringify(data),
-//     headers: {
-//       Authorization: 'Bearer ' + token.token,
-//       'Content-Type': 'application/json',
-//     },
-//   }),
-// }),
-// restoreComplete: builder.mutation<IRestoreComplete, object>({
-//   query: (data) => ({
-//     url: '/account/restore_complete/',
-//     method: 'POST',
-//     body: JSON.stringify(data),
-//     headers: {
-//       Authorization: 'Bearer ' + token.token,
-//       'Content-Type': 'application/json',
-//     },
-//   }),
-// }),
-//   }),
-// });
 
 export const {
     useAddUserMutation,
@@ -112,3 +82,4 @@ export const {
     useRestorePasswordMutation,
     useRestoreCompleteMutation,
 } = signupSlice;
+
