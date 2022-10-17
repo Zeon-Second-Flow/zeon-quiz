@@ -173,7 +173,7 @@ export const CreateTestsPage = () => {
                         <Cat/>
                     </div>
 
-                    <form className={style.createTestForm} action="">
+                    <form  className={style.createTestForm} action="">
                         <button type={"button"} onClick={postTest} disabled={!(!!quizArr[0].question &&
                             !!quizArr[0].answers.A && !!quizArr[0].answers.B &&
                             !!quizArr[0].answers.C && !!quizArr[0].answers.D) }
