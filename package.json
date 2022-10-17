@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^1.8.5",
     "async-mutex": "^0.4.0",
     "axios": "^0.27.2",
+    "esbuild-darwin-64": "^0.15.11",
     "esbuild": "^0.15.11",
     "formik": "^2.2.9",
     "framer-motion": "^7.3.5",

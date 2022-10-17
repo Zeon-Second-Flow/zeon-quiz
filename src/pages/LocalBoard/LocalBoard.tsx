@@ -1,68 +1,11 @@
-import { useGetTestsQuery, useGetWaterQuery } from "@/store/test/testSlice";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { IProps } from "@/models/models";
+import { useGetTestsQuery } from "@/store/test/testSlice";
 import styles from "./LocalBoard.module.scss";
 
-interface Props {
-  test: string;
-}
-
-export interface ITest {
-  id: number;
-  question: string;
-  image: string;
-  score: number;
-  timer: number;
-  test: string;
-  correct_answer: string;
-  answers: Answer[];
-}
-
-export interface Answer {
-  A: string;
-  B: string;
-  C: string;
-  D: string;
-}
 export default function LocalBoard() {
-  //   const { data, isLoading, isSuccess, isError, error } = useGetWaterQuery(test);
-  const data = [
-    {
-      id: 1,
-      question: "What is longest river?",
-      image: "/media/torrent-white-water-force-nature-river.jpg",
-      score: 100,
-      timer: 20,
-      test: "water",
-      correct_answer: "A",
-      answers: [
-        {
-          A: "Amazon River",
-          B: "Nile",
-          C: "Yellow River",
-          D: "Congo River",
-        },
-      ],
-    },
-    {
-      id: 2,
-      question: "What is deepest lake in the world?",
-      image: "/media/torrent-white-water-force-nature-river_KL4Gs8I.jpg",
-      score: 120,
-      timer: 20,
-      test: "water",
-      correct_answer: "B",
-      answers: [
-        {
-          A: "Great Slave Lake",
-          B: "Ysyk-köl",
-          C: "Baikal",
-          D: "Lake Nyasa",
-        },
-      ],
-    },
-  ];
-
+  const user = JSON.parse(localStorage.getItem("currentUser") || "");
+  console.log(user.email);
+  //should change when they enter game do, have to save their names in local storage or state(context)
   return (
     <div className={styles.wrapper}>
       <div className={styles.board}>
@@ -74,16 +17,8 @@ export default function LocalBoard() {
         </div>
         <div className={styles.boardInner}>
           <div className={styles.boardInfo}>
-            <p>username</p>
-            <p>score</p>
-          </div>
-          <div className={styles.boardInfo}>
-            <p>username</p>
-            <p>score</p>
-          </div>
-          <div className={styles.boardInfo}>
-            <p>username</p>
-            <p>score</p>
+            <p>{user.email}</p>
+            <p>5000</p>
           </div>
         </div>
       </div>
