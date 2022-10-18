@@ -14,6 +14,10 @@ $font-family: 'Inter', sans-serif;
             align-items: center;
         }
 
+        .pageBtn {
+            cursor: pointer;
+        }
+
         .testItem {
             display: flex;
             flex-direction: column;

@@ -52,7 +52,10 @@ export const customFetchBase: BaseQueryFn<string | FetchArgs,
                         }
                     }
                     result = refreshResult;
-                } finally {}
+                } finally {
+                    release();
+                    await mutex.waitForUnlock();
+                }
             }
         }
         return result;

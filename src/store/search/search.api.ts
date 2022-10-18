@@ -26,7 +26,7 @@ export const getTests = createApi({
                 }
             }),
         }),
-        getQuestions: builder.query<IQuestions[], string>({
+        getQuestions: builder.query<IQuestions, string>({
             query: (name) => ({
                 url: `tests/${name}`,
                 headers: {

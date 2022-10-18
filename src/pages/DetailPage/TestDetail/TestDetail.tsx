@@ -23,7 +23,7 @@ export const TestDetail = ({item}: IProps) => {
                 <h3 className={styles.title}>{item.title}</h3>
                 <div className={styles.subtitle}>
                     <p>{item.group} •</p>
-                    <p>{item.test_passed} players </p>
+                    <p>{item.test_passed} test passed</p>
                 </div>
                 <button className={styles.btn}>
                     Start test
