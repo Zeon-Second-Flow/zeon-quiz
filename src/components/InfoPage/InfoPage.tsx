@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import styles from "./InfoPage.module.scss";
 
 
+
 export const InfoPage = () => {
     const navigate = useNavigate();
     const playVideo = (e: any) => {

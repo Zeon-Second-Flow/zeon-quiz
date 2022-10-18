@@ -15,7 +15,7 @@ import {RestorePassword} from "@/components/RestorePassword/RestorePassword";
 import {RestoreComplete} from "@/components/RestoreComplete/RestoreComplete";
 import questionPreload from "@/pages/questionPreload/questionPreload";
 // import { TestPage } from "@/pages/TestPage/TestPage";
-import LocalBoard from "@/pages/LocalBoard/LocalBoard";
+import {LocalBoard} from "@/pages/LocalBoard/LocalBoard";
 import {YourIn} from "@/pages/YourIn/YourIn";
 import {Profile} from "@/pages/ProfilePage/Profile";
 import {ErrorPage} from "@/pages/ErrorPage/Error";
@@ -58,12 +58,11 @@ export const publicRoutes = [
     {
         path: routePath.PRIVATE_PAGE,
         component: PrivatePage,
-    }
+    },
 ];
 
 export const privateRoutes = [
     ...publicRoutes,
-   
     {
         path: routePath.CHANGE_PASSWORD,
         component: ChangePassword,
@@ -85,8 +84,8 @@ export const privateRoutes = [
         component: LocalBoard,
     },
     {
-        path: routePath.YOUR_IN, 
-        component: YourIn
+        path: routePath.YOUR_IN,
+        component: YourIn,
     },
     {
         path: routePath.ENTER_PAGE,

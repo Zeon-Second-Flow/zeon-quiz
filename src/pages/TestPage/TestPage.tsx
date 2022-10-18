@@ -1,4 +1,4 @@
-import {IProps, ITest} from "@/models/models";
+import {IProps} from "@/models/models";
 import {useGetTestsQuery} from "@/store/test/testSlice";
 import {useEffect, useState} from "react";
 import styles from "./TestPage.module.scss";
@@ -6,7 +6,7 @@ import styles from "./TestPage.module.scss";
 
 export const TestPage = ({test}: IProps) => {
     const {data, isLoading, isSuccess, isError, error} =
-    useGetTestsQuery("water");
+        useGetTestsQuery("water");
     const user = JSON.parse(localStorage.getItem("currentUser") || ""); //temporarily
     const [counter, setCounter] = useState(0);
     const [currInfo, setCurrInfo] = useState({});
@@ -45,6 +45,7 @@ export const TestPage = ({test}: IProps) => {
             setTimer(data[counter].timer);
         }
     };
+
     return (
         <>
             {isLoading && <div className="container">Loading</div>}
@@ -85,8 +86,8 @@ export const TestPage = ({test}: IProps) => {
                                     <div
                                         className={
                                             currInfo.answers &&
-                      currInfo.answers[0][correctAnswer] ===
-                        currInfo.answers[0].A
+                                            currInfo.answers[0][correctAnswer] ===
+                                            currInfo.answers[0].A
                                                 ? styles.correct
                                                 : styles.wrong
                                         }
@@ -103,7 +104,7 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-5bc273c9-8959-479b-bd17-a2bb639c3874">
-                        Icon
+                                                Icon
                                             </title>
                                             <path
                                                 fill={"red"}
@@ -127,7 +128,7 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-5bc273c9-8959-479b-bd17-a2bb639c3874">
-                        Icon
+                                                Icon
                                             </title>
                                             <path
                                                 fill={"red"}
@@ -144,8 +145,8 @@ export const TestPage = ({test}: IProps) => {
                                     <div
                                         className={
                                             currInfo.answers &&
-                      currInfo.answers[0][correctAnswer] ===
-                        currInfo.answers[0].B
+                                            currInfo.answers[0][correctAnswer] ===
+                                            currInfo.answers[0].B
                                                 ? styles.correct
                                                 : styles.wrong
                                         }
@@ -162,7 +163,7 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-266eb77b-6d5e-4633-b897-d990f5aae265">
-                        Icon
+                                                Icon
                                             </title>
                                             <path
                                                 fill={"white"}
@@ -186,7 +187,7 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-266eb77b-6d5e-4633-b897-d990f5aae265">
-                        Icon
+                                                Icon
                                             </title>
                                             <path
                                                 fill={"white"}
@@ -205,8 +206,8 @@ export const TestPage = ({test}: IProps) => {
                                     <div
                                         className={
                                             currInfo.answers &&
-                      currInfo.answers[0][correctAnswer] ===
-                        currInfo.answers[0].C
+                                            currInfo.answers[0][correctAnswer] ===
+                                            currInfo.answers[0].C
                                                 ? styles.correct
                                                 : styles.wrong
                                         }
@@ -223,11 +224,11 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-c7a7cdec-990a-4057-b6a6-2c5c0ed26fc8">
-                        Icon
+                                                Icon
                                             </title>
                                             <path
-                                                d="M16,27 C9.92486775,27 5,22.0751322 5,16 C5,9.92486775 9.92486775,5 
-                        16,5 C22.0751322,5 27,9.92486775 27,16 C27,22.0751322 22.0751322,27 16,27 Z"
+                                                d="M16,27 C9.92486775,27 5,22.0751322 5,16 C5,9.92486775 9.92486775,5
+                                                16,5 C22.0751322,5 27,9.92486775 27,16 C27,22.0751322 22.0751322,27 16,27 Z"
                                                 style={{fill: "inherit"}}
                                             />
                                         </svg>
@@ -247,11 +248,11 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-c7a7cdec-990a-4057-b6a6-2c5c0ed26fc8">
-                        Icon
+                                                Icon
                                             </title>
                                             <path
-                                                d="M16,27 C9.92486775,27 5,22.0751322 5,16 C5,9.92486775 9.92486775,5 
-                        16,5 C22.0751322,5 27,9.92486775 27,16 C27,22.0751322 22.0751322,27 16,27 Z"
+                                                d="M16,27 C9.92486775,27 5,22.0751322 5,16 C5,9.92486775 9.92486775,5
+                                                16,5 C22.0751322,5 27,9.92486775 27,16 C27,22.0751322 22.0751322,27 16,27 Z"
                                                 style={{fill: "inherit"}}
                                             />
                                         </svg>
@@ -264,8 +265,8 @@ export const TestPage = ({test}: IProps) => {
                                     <div
                                         className={
                                             currInfo.answers &&
-                      currInfo.answers[0][correctAnswer] ===
-                        currInfo.answers[0].D
+                                            currInfo.answers[0][correctAnswer] ===
+                                            currInfo.answers[0].D
                                                 ? styles.correct
                                                 : styles.wrong
                                         }
@@ -282,7 +283,7 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-a9903db8-2e98-4d5a-8468-10401b86c28c">
-                        Icon
+                                                Icon
                                             </title>
                                             <path
                                                 d="M7,7 L25,7 L25,25 L7,25 L7,7 Z"
@@ -305,7 +306,7 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-a9903db8-2e98-4d5a-8468-10401b86c28c">
-                        Icon
+                                                Icon
                                             </title>
                                             <path
                                                 d="M7,7 L25,7 L25,25 L7,25 L7,7 Z"

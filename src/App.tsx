@@ -3,7 +3,7 @@ import {Header} from "@/components/Header/Header";
 import {AppRoutes} from "./routes";
 import {Footer} from "@/components/Footer/Footer";
 import {useLocation} from "react-router-dom";
-import ScrollToTop from "./components/ScrollToTop";
+import {ScrollToTop} from "./components/ScrollToTop";
 
 
 export const App = () => {

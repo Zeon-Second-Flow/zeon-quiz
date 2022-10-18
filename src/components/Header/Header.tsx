@@ -1,17 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./Header.module.scss";
 import {Link} from "react-router-dom";
 import {Search} from "@/components/Search/Search";
 import Logo from "@/assets/logo.png";
 import {ReactComponent as BurgerMenu} from "@/assets/burger-menu.svg";
+import {ReactComponent as User} from "@/assets/user.svg";
+import {Burger} from "@/components/Burger/Burger";
 
 
 export const Header = () => {
+    const [open, setOpen] = useState(false);
     return (
         <div className={styles.header}>
             <div className="container">
                 <div className={styles.wrapper}>
-
                     <nav className={styles.navbar}>
                         <ul className={styles.menu}>
                             <li className={styles.menuItem}>
@@ -27,13 +29,17 @@ export const Header = () => {
                             </li>
                         </ul>
                     </nav>
-                    <BurgerMenu className={styles.burger}/>
+                    <BurgerMenu className={styles.burger} onClick={() => setOpen(true)}/>
+                    {open ? <Burger setOpen={setOpen}/> : ""}
                     <Link to={"/"}>
                         <div className={styles.logo}>
-                            <img width={120}  src={Logo} alt="logo"/>
+                            <img width={120} src={Logo} alt="logo"/>
                         </div>
                     </Link>
                     <Search/>
+                    <Link className={styles.userLogo} to={"/auth"}>
+                        <User />
+                    </Link>
                 </div>
             </div>
         </div>

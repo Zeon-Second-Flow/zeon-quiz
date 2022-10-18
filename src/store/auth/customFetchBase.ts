@@ -12,14 +12,11 @@ const baseUrl = BASE_URL;
 const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({baseUrl});
 
-export const customFetchBase: BaseQueryFn<
-    string | FetchArgs,
+export const customFetchBase: BaseQueryFn<string | FetchArgs,
     unknown,
-    FetchBaseQueryError
-    > = async (args, api, extraOptions) => {
+    FetchBaseQueryError> = async (args, api, extraOptions) => {
         await mutex.waitForUnlock();
         let result = await baseQuery(args, api, extraOptions);
-
         if (result.error?.status === 401) {
             if (!mutex.isLocked()) {
                 const release = await mutex.acquire();
@@ -50,18 +47,13 @@ export const customFetchBase: BaseQueryFn<
                             Authorization: "Bearer " + String(access),
                             "Content-Type": "application/json"
                         };
-
-                        if (typeof args !== "string"){
+                        if (typeof args !== "string") {
                             return result = await baseQuery({...args, headers}, api, extraOptions);
                         }
                     }
                     result = refreshResult;
-                } finally {
-                    release();
-                    await mutex.waitForUnlock();
-                }
+                } finally {}
             }
         }
-
         return result;
     };

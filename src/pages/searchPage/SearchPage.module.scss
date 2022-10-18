@@ -6,10 +6,21 @@ $font-family: 'Inter', sans-serif;
     justify-content: center;
     align-items: center;
     gap: 50px;
+    padding: 100px 0;
+
+    .seachContainer {
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 10px;
+        margin: 0 auto;
+    }
+
+    .heading {
+        margin-bottom: 20px;
+    }
 
     .wrapper {
         display: flex;
-        justify-content: center;
         align-items: center;
         gap: 16px;
 
@@ -55,7 +66,6 @@ $font-family: 'Inter', sans-serif;
                 }
             }
         }
-
 
         .poster {
             width: 100%;
