@@ -117,10 +117,10 @@ export const Search = () => {
                     </div>
                 ) : null}
             </div>
-            {data && data?.results?.length != 0 && show && (
+            {data?.results?.length != 0 && show && (
                 <div className={styles.dataResultOutter}>
                     <div className={styles.dataResult}>
-                        {data.results && data?.results.map((item: IITem, index: number) => (
+                        {data?.results.map((item: IITem, index: number) => (
                             <SearchCard
                                 value={item}
                                 key={index}

@@ -3,10 +3,11 @@ import React, {useEffect} from "react";
 import styles from "./SearchPage.module.scss";
 import {useParams} from "react-router-dom";
 import TestImage from "@/assets/test-image.png";
+import {SearchLoader} from "@/components/Loader/SearchLoader";
 
 
 export const SearchPage = () => {
-    const [getTestsByName, {data}] = useLazyGetTestsByNameQuery();
+    const [getTestsByName, {data, isLoading}] = useLazyGetTestsByNameQuery();
     const {value} = useParams();
     useEffect(() => {
         if (value) {
@@ -31,7 +32,9 @@ export const SearchPage = () => {
             <div className={styles.seachContainer}>
                 <h3 className={styles.heading}>Result: </h3>
                 <div className={styles.wrapper}>
-                    {searchItem}
+                    {
+                        isLoading ? <SearchLoader/> : searchItem
+                    }
                 </div>
             </div>
         </div>

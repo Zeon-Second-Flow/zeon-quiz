@@ -2,7 +2,6 @@ import {RulesPage} from "@/pages/RulesPage/RulesPage";
 import {routePath} from "./routePaths";
 import {CreateTestsPage} from "@/pages/CreateTestsPage/CreateTestsPage";
 import {EnterPage} from "@/pages/EnterPage/EnterPage";
-import {NamePage} from "@/pages/NamePage/NamePage";
 import {SignUp} from "@/components/Auth/SignUp";
 import {MainPage} from "@/pages/MainPage/MainPage";
 import {Login} from "@/components/Login/Login";
@@ -13,6 +12,11 @@ import {SearchPage} from "@/pages/searchPage/SearchPage";
 import {DetailPage} from "@/pages/DetailPage/DetailPage";
 import {RestorePassword} from "@/components/RestorePassword/RestorePassword";
 import {RestoreComplete} from "@/components/RestoreComplete/RestoreComplete";
+import {questionPreload} from "@/pages/questionPreload/questionPreload";
+// import {TestPage} from "@/pages/TestPage/TestPage";
+import {LocalBoard} from "@/pages/LocalBoard/LocalBoard";
+import {YourIn} from "@/pages/YourIn/YourIn";
+import {Profile} from "@/pages/ProfilePage/Profile";
 
 
 export const publicRoutes = [
@@ -46,6 +50,23 @@ export const publicRoutes = [
     }, {
         path: routePath.GAME,
         component: GamePage
+    },
+    {
+        path: routePath.QUESTION_PRELOAD,
+        component: questionPreload,
+    },
+    {
+        path: routePath.QUESTION_PRELOAD,
+        component: questionPreload,
+
+    },
+    {
+        path: routePath.LOCALBOARD,
+        component: LocalBoard
+    },
+    {
+        path: routePath.YOUR_IN,
+        component: YourIn
     }
 ];
 
@@ -70,6 +91,10 @@ export const privateRoutes = [
     {
         path: routePath.RESTORE_COMPLETE,
         component: RestoreComplete,
+    },
+    {
+        path: routePath.PROFILE_PAGE,
+        component: Profile,
     },
 ];
     

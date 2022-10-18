@@ -1,4 +1,4 @@
-import {IValues} from "@/components/Auth/SignUp";
+import {IValues} from "./../../components/Auth/SignUp";
 import {createApi} from "@reduxjs/toolkit/query/react";
 import {IValue} from "@/components/Login/Login";
 import {IPassword} from "@/components/ChangePassword/ChangePassword";
@@ -82,3 +82,4 @@ export const {
     useRestorePasswordMutation,
     useRestoreCompleteMutation,
 } = signupSlice;
+

@@ -47,16 +47,12 @@ export const customFetchBase: BaseQueryFn<string | FetchArgs,
                             Authorization: "Bearer " + String(access),
                             "Content-Type": "application/json"
                         };
-
                         if (typeof args !== "string") {
                             return result = await baseQuery({...args, headers}, api, extraOptions);
                         }
                     }
                     result = refreshResult;
-                } finally {
-                    release();
-                    await mutex.waitForUnlock();
-                }
+                } finally {}
             }
         }
         return result;

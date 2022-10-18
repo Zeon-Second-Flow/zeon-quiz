@@ -10,15 +10,14 @@ interface IOption {
 interface Ioptions {
     options: IOption[];
     setState: (e:number) => void;
-    defaultValue: string;
 }
 
-export const CustomSelect = ({options, setState, defaultValue}:Ioptions) => {
+export const CustomSelect = ({options, setState}:Ioptions) => {
 
     return (
         <div>
             <Select
-                defaultInputValue={defaultValue}
+                defaultValue={options[2]}
                 onChange={(option: IOption | null) => {
                     setState(option!.value);
                 }}

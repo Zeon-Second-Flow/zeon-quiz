@@ -1,0 +1,307 @@
+.wrapper {
+    background-color: rgb(242, 242, 242);
+    color: black;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.question {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+    border-radius: 2px;
+    padding: 16px 0 32px 0;
+    background-color: white;
+    font-size: 30px;
+    font-weight: bolder;
+    width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.buttonWrapper button {
+    background-color: rgb(18, 96, 190);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px -2px inset;
+    min-height: 39px;
+    width: 75px;
+    margin-top: 2px;
+    padding-bottom: 2px;
+    color: white;
+    font-weight: bolder;
+    outline: none;
+    border: none;
+}
+
+.middle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .timer {
+        background-color: rgb(134, 76, 191);
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        color: white;
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .imageWrapper {
+        max-height: 100%;
+        max-width: 60%;
+    }
+
+    img {
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+    }
+
+    .points {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: black;
+        font-weight: bolder;
+        font-size: 21px;
+    }
+}
+
+
+.answerBlock {
+    display: flex;
+    color: white;
+
+    svg {
+        width: 45px;
+        margin-right: 15px;
+        margin-left: 5px;
+    }
+
+    div {
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+    }
+
+    .block {
+        width: 50%;
+    }
+
+    .answerBlockRed {
+        background-color: rgb(208, 25, 55);
+        display: flex;
+    }
+
+    .answerBlockBlue {
+        background-color: rgb(18, 96, 190);
+    }
+
+    .answerBlockYellow {
+        background-color: rgb(199, 146, 0);
+    }
+
+    .answerBlockGreen {
+        background-color: rgb(35, 126, 11);
+    }
+
+    .correct {
+        position: relative;
+        width: 90%;
+        height: 80%;
+        display: flex;
+    }
+
+    .correct::before {
+        position: absolute;
+        right: 6px;
+        top: 47%;
+        height: 32%;
+        width: 5px;
+        background-color: white;
+        content: "";
+        transform: translateX(10px) rotate(-45deg);
+        transform-origin: left bottom;
+    }
+
+    .correct::after {
+        position: absolute;
+        right: -7%;
+        bottom: 17px;
+        height: 5px;
+        width: 9%;
+        background-color: white;
+        content: "";
+        transform: translateX(10px) rotate(-45deg);
+        transform-origin: left bottom;
+    }
+
+    .wrong {
+        height: 80%;
+        width: 90%;
+        position: relative;
+        opacity: 0.3;
+
+        svg {
+            fill-opacity: 0.3;
+        }
+
+        &::after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 97%;
+            right: 0%;
+            content: "\d7";
+            font-size: 60px;
+            color: #FFF;
+            line-height: 80px;
+            text-align: center;
+        }
+    }
+}
+
+// .wrapper {
+//     position: relative;
+//     background-color: rgb(70, 23, 143);
+//     overflow: hidden;
+//     width: 100%;
+//     height: 100vh;
+//     max-height: 100%;
+// }
+
+// .board {
+//     color: white;
+//     height: 50%;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+
+//     .boardTitle {
+//         width: 100%;
+//         background-color: white;
+//         color: black;
+//         padding: 8px;
+//         text-align: center;
+
+//         h3 {
+//             font-size: 28px;
+//             margin: 0;
+//         }
+
+//     }
+
+//     .boardInner {
+//         display: flex;
+//         flex-direction: column;
+//         width: 100%;
+//         align-items: center;
+//     }
+
+//     .boardInfo {
+//         display: flex;
+//         width: 65%;
+//         margin: 0 auto 30px;
+//         align-items: center;
+//         justify-content: space-between;
+//         padding: 10px;
+//         border-bottom: 1px solid rgb(105, 105, 105);
+
+//         p {
+//             font-weight: 700;
+//         }
+
+//         &:hover {
+//             background-color: white;
+//             color: black;
+//             border-radius: 3px;
+//             cursor: pointer;
+//         }
+//     }
+
+//     .buttonWrapper {
+//         display: flex;
+//         justify-content: flex-end;
+//         padding-right: 20px;
+
+//         button {
+//             background-color: rgb(18, 96, 190);
+//             box-shadow: rgba(0, 0, 0, 0.25) 0px -2px inset;
+//             min-height: 39px;
+//             width: 75px;
+//             margin-top: 2px;
+//             padding-bottom: 2px;
+//             color: white;
+//             font-weight: bolder;
+//             outline: none;
+//             border: none;
+//             cursor: pointer;
+//         }
+//     }
+// }
+
+@media screen and (max-width: 768px) {
+    .top {
+        padding-top: 50px;
+        margin-bottom: 60px;
+    }
+
+    .middle {
+        margin-bottom: 30px;
+    }
+
+    .answerBlock {
+        flex-direction: column;
+
+        .block {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .board .boardInfo {
+        width: 85%;
+    }
+
+    .top {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 40px;
+        padding-top: 30px;
+
+        .buttonWrapper {
+            margin-top: 5px;
+        }
+
+        .question {
+            width: 250px;
+        }
+    }
+
+    .middle {
+        flex-direction: column;
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        .imageWrapper {
+            max-width: 80%;
+        }
+    }
+}
