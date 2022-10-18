@@ -47,6 +47,7 @@ export const Login = () => {
             localStorage.setItem(
                 "token",
                 JSON.stringify({
+                    isStaff: data.is_staff,
                     refresh: data.refresh,
                     token: data.access,
                     email: values.login,

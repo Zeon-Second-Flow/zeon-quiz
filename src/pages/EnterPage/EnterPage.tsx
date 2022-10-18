@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import styles from "./EnterPage.module.scss";
-import {useAppDispatch, useAppSelector} from "@/hooks";
+import {useAppDispatch, useAppSelector, useAuth} from "@/hooks";
 import {setSocketRoom, setSocketUsers} from "@/store/websocket/websocket";
 import logo from "@/assets/logo.png";
 
@@ -10,8 +10,7 @@ export const EnterPage = () => {
     const [value, setValue] = useState();
     const navigate = useNavigate();
     const {users} = useAppSelector((state) => state.websocket);
-
-    console.log(users);
+    const {isStaff} = useAuth();
 
     const dispatch = useAppDispatch();
     const socket = useAppSelector((state) => state.websocket.socket);
@@ -113,12 +112,14 @@ export const EnterPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className={styles.extraInfo} onClick={createGame}>
-                    <p>
-            Create your own room for free at <span>zeon-quiz.com</span>
-                    </p>
-                    <span>Terms | Privacy</span>
-                </div>
+                {isStaff && (
+                    <div className={styles.extraInfo} onClick={createGame}>
+                        <p>
+              Create your own room for free at <span>zeon-quiz.com</span>
+                        </p>
+                    </div>
+                )}
+                <span>Terms | Privacy</span>
             </div>
         </div>
     );

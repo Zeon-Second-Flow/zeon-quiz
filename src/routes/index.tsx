@@ -1,21 +1,25 @@
+import {useAuth} from "@/hooks";
 import {Route, Routes} from "react-router-dom";
-import {privateRoutes, publicRoutes} from "./routes";
+import {privateRoutes, publicRoutes, stuffRoutes} from "./routes";
 
 
 export const AppRoutes = () => {
-    const user =
-    localStorage.getItem("token") &&
-    JSON.parse(localStorage.getItem("token") || "");
+    const {user, isStaff} = useAuth();
+    console.log(user, isStaff);
 
     return (
         <Routes>
-            {user
-                ? privateRoutes.map((obj) => (
+            {isStaff
+                ? stuffRoutes.map((obj) => (
                     <Route path={obj.path} element={<obj.component />} key={obj.path} />
                 ))
-                : publicRoutes.map((obj) => (
-                    <Route path={obj.path} element={<obj.component />} key={obj.path} />
-                ))}
+                : user
+                    ? privateRoutes.map((obj) => (
+                        <Route path={obj.path} element={<obj.component />} key={obj.path} />
+                    ))
+                    : publicRoutes.map((obj) => (
+                        <Route path={obj.path} element={<obj.component />} key={obj.path} />
+                    ))}
         </Routes>
     );
 };

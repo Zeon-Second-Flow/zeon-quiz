@@ -35,6 +35,28 @@ export interface IAnswer {
     D: string;
 }
 
+export interface IProps {
+  test: string;
+}
+
+export interface ITest {
+  id: number;
+  question: string;
+  image: string;
+  score: number;
+  timer: number;
+  test: string;
+  correct_answer: string;
+  answers: Answer[];
+}
+
+export interface Answer {
+  A: string;
+  B: string;
+  C: string;
+  D: string;
+}
+
 export interface IQuiz {
     "title": string;
     "questions": [
@@ -52,3 +74,4 @@ export interface IQuiz {
         }
     ];
 }
+

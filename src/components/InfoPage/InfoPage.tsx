@@ -1,3 +1,4 @@
+import {useAuth} from "@/hooks";
 import {useNavigate} from "react-router-dom";
 import styles from "./InfoPage.module.scss";
 
@@ -11,6 +12,19 @@ export const InfoPage = () => {
         e.currentTarget.pause();
         e.target.currentTime = 0;
     };
+
+    const {user, isStaff} = useAuth();
+
+    const playGame = () => {
+        if (user) navigate("/enter-page");
+        else navigate("/login");
+    };
+
+    const createGame = () => {
+        if (isStaff) navigate("/create-test");
+        else navigate("/private");
+    };
+
     return (
         <>
             <div className="container">
@@ -22,9 +36,7 @@ export const InfoPage = () => {
                 Kahoot! delivers engaging learning to billions. Make sure you
                 register before you play!
                             </p>
-                            <button onClick={() => navigate("/enter-page")}>
-                Let's play!
-                            </button>
+                            <button onClick={playGame}>Let's play!</button>
                         </div>
                         <div className={styles.imageWrapper}>
                             <img
@@ -41,9 +53,7 @@ export const InfoPage = () => {
                 Recap company strategy, identify opportunities, and align on
                 team goals during your next planning session with Kahoot! 360.
                             </p>
-                            <button onClick={() => navigate("/enter-page")}>
-                Create a game!
-                            </button>
+                            <button onClick={createGame}>Create a game!</button>
                         </div>
                         <div className={styles.imageWrapper}>
                             <img
@@ -115,9 +125,7 @@ export const InfoPage = () => {
                 </div>
                 <div className="container">
                     <div className={styles.rulesBanner}>
-                        <p onClick={() => navigate("/rules")}>
-              Learn more about the rules
-                        </p>
+                        <p onClick={() => navigate("/rules")}>Learn more about the rules</p>
                     </div>
                 </div>
             </div>

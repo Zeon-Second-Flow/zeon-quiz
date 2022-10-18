@@ -72,7 +72,7 @@ export const RestoreComplete = () => {
         try {
             await restoreComplete(values).unwrap();
             navigate("/success");
-        } catch (error: any) {
+        } catch (error: typeof error) {
             for (const key in error.data) {
                 setErr(error.data[key]);
             }
