@@ -72,7 +72,7 @@ export const Login = () => {
                 <div className="shape"></div>
                 <div className="shape"></div>
             </div>
-            <div className="container">
+            <div className="container">             
                 <h1>Login</h1>
                 <Formik
                     initialValues={initialValues}
@@ -81,7 +81,7 @@ export const Login = () => {
                     }}
                     validationSchema={SignupSchema}
                 >
-                    <Form className="form">
+                    <Form className="form" style={{top: "44%"}}>
                         <div className="form_inputs-wrapper">
                             {err && <p className="rejectMessage">{err}</p>}
                             {loginInputData.map((value, idx) => (
@@ -96,9 +96,11 @@ export const Login = () => {
                         <button type="submit" className="button">
                             Submit
                         </button>
-                        <NavLink className="linkTo" to="/auth">
-                            Register
-                        </NavLink>
+                        <div className="linkTo">
+                            <p>Forgotten password?</p>
+                            <NavLink to="/restore-password"><span>Restore password</span>
+                            </NavLink> 
+                        </div> 
                     </Form>
                 </Formik>
             </div>

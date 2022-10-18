@@ -58,7 +58,6 @@ export const publicRoutes = [
     {
         path: routePath.QUESTION_PRELOAD,
         component: questionPreload,
-
     },
     {
         path: routePath.LOCALBOARD,
@@ -67,18 +66,6 @@ export const publicRoutes = [
     {
         path: routePath.YOUR_IN,
         component: YourIn
-    }
-];
-
-export const privateRoutes = [
-    ...publicRoutes,
-    {
-        path: routePath.CREATE_TEST,
-        component: CreateTestsPage,
-    },
-    {
-        path: routePath.CHANGE_PASSWORD,
-        component: ChangePassword,
     },
     {
         path: routePath.SUCCESS_PAGE,
@@ -91,6 +78,18 @@ export const privateRoutes = [
     {
         path: routePath.RESTORE_COMPLETE,
         component: RestoreComplete,
+    },
+];
+
+export const privateRoutes = [
+    ...publicRoutes,
+    {
+        path: routePath.CREATE_TEST,
+        component: CreateTestsPage,
+    },
+    {
+        path: routePath.CHANGE_PASSWORD,
+        component: ChangePassword,
     },
     {
         path: routePath.PROFILE_PAGE,
