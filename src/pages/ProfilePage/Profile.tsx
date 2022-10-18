@@ -10,9 +10,6 @@ export const Profile = () => {
     JSON.parse(localStorage.getItem("token") || "");
     const [getUser, {data}] = useLazyGetUserQuery();
 
-    console.log(data);
-    
-
     useEffect(() => {
         getUser(token.email);
     }, []);
