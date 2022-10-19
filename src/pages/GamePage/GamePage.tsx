@@ -4,6 +4,7 @@ import {resetWebsocket, setSocketUsers} from "@/store/websocket/websocket";
 
 import userLogo from "@/assets/game/account.png";
 import styles from "./GamePage.module.scss";
+import {useLocation, useNavigate} from "react-router-dom";
 
 
 interface IMessage {
@@ -20,6 +21,9 @@ export const GamePage = () => {
     //   const [room, setRoom] = useState();
     //   const [existedRoom, setExistedRoom] = useState();
     //   const [typeSocket, setTypeSocket] = useState();
+    const navigate = useNavigate();
+    const {search} = useLocation();
+
 
     const {room, users} = useAppSelector((state) => state.websocket);
     console.log(users);
@@ -61,6 +65,11 @@ export const GamePage = () => {
             socket.emit("send", message);
             setMessage("");
         }
+    };
+
+    const startGame = () => {
+        const test = search.slice(1, search.length);
+        navigate(`/game?${test}`);
     };
 
     return (
@@ -105,7 +114,7 @@ export const GamePage = () => {
         ))} */}
 
                     {users.length > 1 ? (
-                        <button className={styles.start}>Start</button>
+                        <button className={styles.start} onClick={startGame}>Start</button>
                     ) : (
                         <button className={styles.startDisabled}>Start</button>
                     )}

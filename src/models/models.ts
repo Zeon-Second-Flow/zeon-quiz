@@ -53,21 +53,31 @@ export interface IProps {
 }
 
 export interface ITest {
-    id: number;
-    question: string;
+    title: string; 
+    description: string;
     image: string;
-    score: number;
-    timer: number;
-    test: string;
-    correct_answer: string;
-    answers: Answer[];
+    is_active: boolean;
+    group: string;
 }
 
-export interface Answer {
-    A: string;
-    B: string;
-    C: string;
-    D: string;
+export interface Questions {
+  id: number;
+  question: string;
+  image: string;
+  score: number;
+  timer: number;
+  test: string;
+  correct_answer: string;
+  answers: IAnswerWrapper;
+}
+
+export interface IResponse {
+    test: ITest; 
+    questions: Questions[];
+}
+
+export interface IAnswerWrapper {
+    0: {[key: string]: string};
 }
 
 export interface IQuiz {

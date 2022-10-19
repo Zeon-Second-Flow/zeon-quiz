@@ -10,10 +10,10 @@ export const App = () => {
     const {pathname} = useLocation();
     return (
         <div className="wrapper">
-            <ScrollToTop/>
-            <Header />
+            <ScrollToTop />
+            {pathname !== "/game" && <Header />}
             <AppRoutes />
-            {pathname !== "/create-test" && <Footer />}
+            {pathname !== "/create-test" && pathname !== "/game" && <Footer />}
         </div>
     );
 };

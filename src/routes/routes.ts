@@ -2,7 +2,6 @@ import {RulesPage} from "@/pages/RulesPage/RulesPage";
 import {routePath} from "./routePaths";
 import {CreateTestsPage} from "@/pages/CreateTestsPage/CreateTestsPage";
 import {EnterPage} from "@/pages/EnterPage/EnterPage";
-// import {NamePage} from "@/pages/NamePage/NamePage";
 import {SignUp} from "@/components/Auth/SignUp";
 import {MainPage} from "@/pages/MainPage/MainPage";
 import {Login} from "@/components/Login/Login";
@@ -14,12 +13,13 @@ import {DetailPage} from "@/pages/DetailPage/DetailPage";
 import {RestorePassword} from "@/components/RestorePassword/RestorePassword";
 import {RestoreComplete} from "@/components/RestoreComplete/RestoreComplete";
 import {questionPreload} from "@/pages/questionPreload/questionPreload";
-// import { TestPage } from "@/pages/TestPage/TestPage";
 import {LocalBoard} from "@/pages/LocalBoard/LocalBoard";
 import {YourIn} from "@/pages/YourIn/YourIn";
 import {Profile} from "@/pages/ProfilePage/Profile";
 import {ErrorPage} from "@/pages/ErrorPage/Error";
 import {PrivatePage} from "@/pages/PrivatePage/PrivatePage";
+import {TestPage} from "@/pages/TestPage/TestPage";
+import {TestsPage} from "@/pages/TestsPage/TestsPage";
 
 
 export const publicRoutes = [
@@ -49,9 +49,12 @@ export const publicRoutes = [
     },
     {
         path: routePath.GAME,
+        component: TestPage
+    },
+    {
+        path: routePath.ROOM,
         component: GamePage,
     },
-
     {
         path: routePath.PRIVATE_PAGE,
         component: PrivatePage,
@@ -123,5 +126,9 @@ export const stuffRoutes = [
     {
         path: routePath.DETAIL,
         component: DetailPage,
+    },
+    {
+        path: routePath.TESTS,
+        component: TestsPage,
     },
 ];

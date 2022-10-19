@@ -3,7 +3,6 @@ import {customFetchBase} from "@/store/auth/customFetchBase";
 import {IQuiz} from "@/models/models";
 
 
-
 export const createTestSlice = createApi({
     reducerPath: "createTest",
     baseQuery: customFetchBase,
@@ -16,13 +15,11 @@ export const createTestSlice = createApi({
                 headers: {
                     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
                     // Authorization: "Bearer " + token.token,
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
             }),
         }),
-    })
+    }),
 });
 
-export const {
-    useCreateTestMutation
-} = createTestSlice;
+export const {useCreateTestMutation} = createTestSlice;

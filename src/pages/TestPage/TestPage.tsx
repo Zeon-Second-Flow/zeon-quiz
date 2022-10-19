@@ -1,31 +1,56 @@
-import {IProps} from "@/models/models";
+import {Questions} from "@/models/models";
 import {useGetTestsQuery} from "@/store/test/testSlice";
 import {useEffect, useState} from "react";
 import styles from "./TestPage.module.scss";
+import logo from "@/assets/logo.png";
+import first from "@/assets/podium/1.svg";
+import second from "@/assets/podium/2.svg";
+import third from "@/assets/podium/3.svg";
+import ReactConfetti from "react-confetti";
+import {useLocation, useNavigate} from "react-router-dom";
 
 
-export const TestPage = ({test}: IProps) => {
-    const {data, isLoading, isSuccess, isError, error} =
-        useGetTestsQuery("water");
-    const user = JSON.parse(localStorage.getItem("currentUser") || ""); //temporarily
+export const TestPage = () => {
+    const {search} = useLocation();
+    const test = search.slice(1, search.length);
+
+    const {data, isLoading, isSuccess, isError, error} = useGetTestsQuery(test);
     const [counter, setCounter] = useState(0);
-    const [currInfo, setCurrInfo] = useState({});
+    const [currInfo, setCurrInfo] = useState<Questions>();
     const [timer, setTimer] = useState(0);
     const [board, setBoard] = useState(false);
-    const [correctAnswer, setCorrectAnswer] = useState("");
+    const [correctAnswer, setCorrectAnswer] = useState<string>("");
+    const [preload, setPreload] = useState(true);
+    const [seconds, setSeconds] = useState(0);
+    const [results, setResults] = useState(false);
+    const navigate = useNavigate();
+
+    const length = data ? data.questions.length - 1 : 0;
+
+    useEffect(() => {
+        if (preload) {
+            const interval = setInterval(() => {
+                if (seconds <= 100) {
+                    setSeconds((prev) => prev + 20);
+                }
+            }, 1000);
+            return () => clearInterval(interval);
+        }
+    }, [preload]);
 
     useEffect(() => {
         if (data && isSuccess) {
-            setCurrInfo(data[counter]);
-            setTimer(data[counter].timer);
-            setCorrectAnswer(data[counter].correct_answer);
+            setCurrInfo(data.questions[counter]);
+            setTimer(data.questions[counter].timer + 4);
+            setCorrectAnswer(data.questions[counter].correct_answer);
         }
     }, [isSuccess]);
 
     useEffect(() => {
         if (data && isSuccess) {
-            setCurrInfo(data[counter]);
-            setCorrectAnswer(data[counter].correct_answer);
+            setCurrInfo(data.questions[counter]);
+            setCorrectAnswer(data.questions[counter].correct_answer);
+            setTimer(data.questions[counter].timer + 6);
         }
     }, [counter]);
 
@@ -38,40 +63,66 @@ export const TestPage = ({test}: IProps) => {
         return () => clearInterval(interval);
     }, [timer]);
 
-    const dropVal = () => {
+    const dropVal =() => {
         setBoard(false);
         setCounter(counter + 1);
-        if (data) {
-            setTimer(data[counter].timer);
+        setPreload(true);
+    };
+
+    const afterPreload = () => {
+        if (preload) {
+            setPreload(false);
+            setSeconds(0);
         }
     };
 
+    useEffect(() => {
+        if (preload) {
+            setTimeout(afterPreload, 6000);
+        }
+    }, [preload]);
+
     return (
         <>
-            {isLoading && <div className="container">Loading</div>}
+            {isLoading && (
+                <div className={styles.loaderWrapper}>
+                    <div className={styles.loader}></div>
+                </div>
+            )}
             {isSuccess && currInfo && (
                 <div className={styles.wrapper}>
-                    <div className="container">
-                        <div className={styles.top}>
-                            <div></div>
-                            <div className={styles.question}>
-                                <p>{currInfo?.question}</p>
-                            </div>
-                            <div className={styles.buttonWrapper}>
-                                {timer === 0 ? (
-                                    <button onClick={() => setBoard(true)}>Next</button>
-                                ) : (
-                                    <button onClick={() => setBoard(true)}>Skip</button>
-                                )}
-                            </div>
+                    <div className={styles.top}>
+                        <div className={styles.question}>
+                            <p>{currInfo.question}</p>
                         </div>
+                        <div className={styles.buttonWrapper}>
+                            {timer === 0 ? (
+                                <button onClick={() => setBoard(true)}>Next</button>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        setBoard(true);
+                                    }}
+                                >
+                  Skip
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                    <div className="container">
                         <div className={styles.middle}>
                             <div className={styles.timer}>{timer}</div>
                             <div className={styles.imageWrapper}>
-                                <img
-                                    src="https://assets-cdn.kahoot.it/player/v2/assets/0_7.67d1bcb8.gif"
-                                    alt="the image"
-                                />
+                                {/* can work if you make a real server,otherwise image is being deleted every day */}
+                                {/* {data.test.image ? (
+                  <img
+                    src={
+                      "https://safe-atoll-40972.herokuapp.com" + data.test.image
+                    }
+                    alt="the image"
+                  />
+                ) : ( */}
+                                <img src={logo} alt="default image" />
                             </div>
                             <div className={styles.points}>
                                 <span>0</span>
@@ -86,8 +137,8 @@ export const TestPage = ({test}: IProps) => {
                                     <div
                                         className={
                                             currInfo.answers &&
-                                            currInfo.answers[0][correctAnswer] ===
-                                            currInfo.answers[0].A
+                      currInfo.answers[0][correctAnswer] ===
+                        currInfo.answers[0].A
                                                 ? styles.correct
                                                 : styles.wrong
                                         }
@@ -104,7 +155,7 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-5bc273c9-8959-479b-bd17-a2bb639c3874">
-                                                Icon
+                        Icon
                                             </title>
                                             <path
                                                 fill={"red"}
@@ -128,7 +179,7 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-5bc273c9-8959-479b-bd17-a2bb639c3874">
-                                                Icon
+                        Icon
                                             </title>
                                             <path
                                                 fill={"red"}
@@ -145,8 +196,8 @@ export const TestPage = ({test}: IProps) => {
                                     <div
                                         className={
                                             currInfo.answers &&
-                                            currInfo.answers[0][correctAnswer] ===
-                                            currInfo.answers[0].B
+                      currInfo.answers[0][correctAnswer] ===
+                        currInfo.answers[0].B
                                                 ? styles.correct
                                                 : styles.wrong
                                         }
@@ -163,7 +214,7 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-266eb77b-6d5e-4633-b897-d990f5aae265">
-                                                Icon
+                        Icon
                                             </title>
                                             <path
                                                 fill={"white"}
@@ -187,7 +238,7 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-266eb77b-6d5e-4633-b897-d990f5aae265">
-                                                Icon
+                        Icon
                                             </title>
                                             <path
                                                 fill={"white"}
@@ -206,8 +257,8 @@ export const TestPage = ({test}: IProps) => {
                                     <div
                                         className={
                                             currInfo.answers &&
-                                            currInfo.answers[0][correctAnswer] ===
-                                            currInfo.answers[0].C
+                      currInfo.answers[0][correctAnswer] ===
+                        currInfo.answers[0].C
                                                 ? styles.correct
                                                 : styles.wrong
                                         }
@@ -224,11 +275,11 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-c7a7cdec-990a-4057-b6a6-2c5c0ed26fc8">
-                                                Icon
+                        Icon
                                             </title>
                                             <path
-                                                d="M16,27 C9.92486775,27 5,22.0751322 5,16 C5,9.92486775 9.92486775,5
-                                                16,5 C22.0751322,5 27,9.92486775 27,16 C27,22.0751322 22.0751322,27 16,27 Z"
+                                                d="M16,27 C9.92486775,27 5,22.0751322 5,16 C5,9.92486775 9.92486775,5 16,5 C22.0751322,5 27,9.92486775 27,16 
+                        C27,22.0751322 22.0751322,27 16,27 Z"
                                                 style={{fill: "inherit"}}
                                             />
                                         </svg>
@@ -248,11 +299,11 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-c7a7cdec-990a-4057-b6a6-2c5c0ed26fc8">
-                                                Icon
+                        Icon
                                             </title>
                                             <path
-                                                d="M16,27 C9.92486775,27 5,22.0751322 5,16 C5,9.92486775 9.92486775,5
-                                                16,5 C22.0751322,5 27,9.92486775 27,16 C27,22.0751322 22.0751322,27 16,27 Z"
+                                                d="M16,27 C9.92486775,27 5,22.0751322 5,16 C5,9.92486775 9.92486775,5 16,5 C22.0751322,5 27,9.92486775
+                         27,16 C27,22.0751322 22.0751322,27 16,27 Z"
                                                 style={{fill: "inherit"}}
                                             />
                                         </svg>
@@ -265,8 +316,8 @@ export const TestPage = ({test}: IProps) => {
                                     <div
                                         className={
                                             currInfo.answers &&
-                                            currInfo.answers[0][correctAnswer] ===
-                                            currInfo.answers[0].D
+                      currInfo.answers[0][correctAnswer] ===
+                        currInfo.answers[0].D
                                                 ? styles.correct
                                                 : styles.wrong
                                         }
@@ -283,7 +334,7 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-a9903db8-2e98-4d5a-8468-10401b86c28c">
-                                                Icon
+                        Icon
                                             </title>
                                             <path
                                                 d="M7,7 L25,7 L25,25 L7,25 L7,7 Z"
@@ -306,7 +357,7 @@ export const TestPage = ({test}: IProps) => {
                                             style={{paintOrder: "stroke"}}
                                         >
                                             <title id="label-a9903db8-2e98-4d5a-8468-10401b86c28c">
-                                                Icon
+                        Icon
                                             </title>
                                             <path
                                                 d="M7,7 L25,7 L25,25 L7,25 L7,7 Z"
@@ -321,20 +372,95 @@ export const TestPage = ({test}: IProps) => {
                     </div>
                 </div>
             )}
-            {isError && <div>error</div>}
-            {board && (
-                <div className={styles.wrapper}>
-                    <div className={styles.board}>
-                        <div className={styles.boardTitle}>
-                            <h3>Scoreboard</h3>
-                        </div>
-                        <div className={styles.buttonWrapper}>
+            {isError && (
+                <div className={styles.loaderWrapper}>
+                    <div className={styles.error}>
+            Sorry, there is an error! Try again later!
+                    </div>
+                </div>
+            )}
+            <div className={board ? styles.wrapperDisplay : styles.wrappers}>
+                <div className={styles.board}>
+                    <div className={styles.boardTitle}>
+                        <h3>Scoreboard</h3>
+                    </div>
+                    <div className={styles.buttonWrapper}>
+                        {counter === length ? (
+                            <button onClick={() => setResults(true)}>End</button>
+                        ) : (
                             <button onClick={dropVal}>Next</button>
+                        )}
+                    </div>
+                    <div className={styles.boardInner}>
+                        <div className={styles.boardInfo}>
+                            <p>Makhabat</p>
+                            <p>5000</p>
                         </div>
-                        <div className={styles.boardInner}>
-                            <div className={styles.boardInfo}>
-                                <p>{user.email}</p>
-                                <p>5000</p>
+                    </div>
+                </div>
+            </div>
+            <div className={preload ? styles.wrapperDisplay : styles.wrappers}>
+                <div className="container">
+                    <div className={styles.preloadBlock}>
+                        <div className={styles.imageWrapper}>
+                            <img src={logo} alt="the logo" />
+                        </div>
+                        <div className={styles.context}>
+                            <p>Question:</p>
+                            <p>{currInfo?.question}</p>
+                        </div>
+                    </div>
+                    <div className={styles.scrollbarWrapper}>
+                        <div
+                            style={{width: `${seconds}%`}}
+                            className={styles.scrollbar}
+                        ></div>
+                    </div>
+                </div>
+            </div>
+            {results && (
+                <div className={results ? styles.wrapperDisplay : styles.wrappers}>
+                    <ReactConfetti />
+                    <div className={styles.titleWrapper}>
+                        <h2 className={styles.podiumTitle}>{data?.test.title}</h2>
+                    </div>
+                    <div className={styles.homeBtn}>
+                        <button onClick={() => navigate("/")}>Home</button>
+                    </div>
+                    <div className="container">
+                        <div className={styles.podiums}>
+                            <div className={styles.podium}>
+                                <div className={styles.userWrapper}>
+                                    <p className={styles.user}>user</p>
+                                </div>
+                                <div className={`${styles.block}  ${styles.placeTwo}`}>
+                                    <div className={styles.placeWrapper}>
+                                        <img src={first} alt="the first place" />
+                                    </div>
+                                    <p>score</p>
+                                </div>
+                            </div>
+                            <div className={styles.podium}>
+                                <div className={styles.userWrapper}>
+                                    <p className={styles.user}>user</p>
+                                </div>
+                                <div className={`${styles.block}  ${styles.placeOne}`}>
+                                    <div className={styles.placeWrapper}>
+                                        <img src={second} alt="the second place" />
+                                    </div>
+                                    <p>score</p>
+                                </div>
+                            </div>
+                            <div className={styles.podium}>
+                                <div className={styles.userWrapper}>
+                                    <p className={styles.user}>user</p>
+                                </div>
+                                <div className={`${styles.block}  ${styles.placeThree}`}>
+                                    <div className={styles.placeWrapper}>
+                                        <img src={third} alt="the third place" />
+                                    </div>
+                                    <p>score</p>
+                                </div>
                             </div>
                         </div>
                     </div>

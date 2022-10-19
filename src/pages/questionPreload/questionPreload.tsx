@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import styles from "./questionPreload.module.scss";
+// import styles from "./questionPreload.module.scss";
 import logo from "@/assets/logo.png";
 import {useNavigate} from "react-router-dom";
 

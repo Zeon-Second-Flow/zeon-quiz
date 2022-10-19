@@ -10,9 +10,11 @@ export const routePath = {
     CHANGE_PASSWORD: "change-password",
     SUCCESS_PAGE: "success",
     QUESTION_PRELOAD: "question-preload", 
+    ROOM: "room",
     GAME: "game", 
     LOCALBOARD: "localboard",
     SEARCH_PAGE: "search-page/:value",
+    TESTS: "tests",
     DETAIL: "detail/:name",
     RESTORE_PASSWORD: "restore-password",
     RESTORE_COMPLETE: "restore-complete",
@@ -21,3 +23,4 @@ export const routePath = {
     PRIVATE_PAGE: "private",
     PAGE_NOT_FOUND: "*",
 }; 
+

@@ -4,8 +4,8 @@ import {customFetchBase} from "@/store/auth/customFetchBase";
 
 
 const token =
-    localStorage.getItem("token") &&
-    JSON.parse(localStorage.getItem("token") || "");
+  localStorage.getItem("token") &&
+  JSON.parse(localStorage.getItem("token") || "");
 
 export const getTests = createApi({
     reducerPath: "tests",
@@ -16,19 +16,32 @@ export const getTests = createApi({
             query: (name) => ({
                 url: `tests/?search=${name}`,
                 headers: {
-                    Authorization: `Bearer ${token?.token}`
-                }
+                    Authorization: `Bearer ${token?.token}`,
+                },
+            }),
+        }),
+        getAllTests: builder.query<ServerResponse<IITem>, never>({
+            query: () => ({
+                url: "tests",
+                headers: {
+                    Authorization: `Bearer ${token?.token}`,
+                },
             }),
         }),
         getQuestions: builder.query<IQuestions, string>({
             query: (name) => ({
                 url: `tests/${name}`,
                 headers: {
-                    Authorization: `Bearer ${token?.token}`
-                }
+                    Authorization: `Bearer ${token?.token}`,
+                },
             }),
         }),
     }),
 });
 
-export const {useGetTestsByNameQuery, useLazyGetTestsByNameQuery, useGetQuestionsQuery,} = getTests;
+export const {
+    useGetTestsByNameQuery,
+    useGetAllTestsQuery,
+    useLazyGetTestsByNameQuery,
+    useGetQuestionsQuery,
+} = getTests;

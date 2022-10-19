@@ -9,12 +9,11 @@ import logo from "@/assets/logo.png";
 export const EnterPage = () => {
     const [value, setValue] = useState();
     const navigate = useNavigate();
-    const {users} = useAppSelector((state) => state.websocket);
+    const {users, socket} = useAppSelector((state) => state.websocket);
     const {isStaff} = useAuth();
     const [error, setError] = useState("");
 
     const dispatch = useAppDispatch();
-    const socket = useAppSelector((state) => state.websocket.socket);
 
     const enterGame = () => {
         setError("");
@@ -26,10 +25,6 @@ export const EnterPage = () => {
 
         socket.on("users", (users) => {
             dispatch(setSocketUsers(users));
-        });
-
-        socket.on("test", (data) => {
-            console.log(data);
         });
 
         socket.on("connected", (user) => {
@@ -45,39 +40,6 @@ export const EnterPage = () => {
         socket.on("error", (error) => {
             setError(error);
         });
-    };
-
-    const createGame = () => {
-        const username =
-      localStorage.getItem("token") &&
-      JSON.parse(localStorage.getItem("token") || "");
-
-        socket.emit("username", [username.email]);
-
-        socket.on("users", (users) => {
-            dispatch(setSocketUsers(users));
-        });
-
-        socket.on("test", (data) => {
-            console.log(data);
-        });
-
-        socket.on("connected", (user) => {
-            dispatch(setSocketRoom(user.room));
-            dispatch(setSocketUsers([...users, user]));
-        });
-
-        socket.on("disconnected", (id) => {
-            dispatch(setSocketUsers(users.filter((user) => user.id !== id)));
-        });
-
-        createRoom();
-    };
-
-    const createRoom = () => {
-        setTimeout(() => {
-            navigate("/game");
-        }, 500);
     };
 
     const navigateToGame = () => {
@@ -115,7 +77,7 @@ export const EnterPage = () => {
                     </div>
                 </div>
                 {isStaff && (
-                    <div className={styles.extraInfo} onClick={createGame}>
+                    <div className={styles.extraInfo} onClick={() => navigate("/tests")}>
                         <p>
               Create your own room for free at <span>zeon-quiz.com</span>
                         </p>

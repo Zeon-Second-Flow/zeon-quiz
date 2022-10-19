@@ -37,7 +37,7 @@ export const TestDetail = ({item}: IProps) => {
 
     const createRoom = () => {
         setTimeout(() => {
-            navigate(`/game?${item?.title}`);
+            navigate(`/room?${item?.title}`);
         }, 1000);
     };
 

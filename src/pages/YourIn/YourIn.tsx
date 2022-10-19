@@ -5,11 +5,11 @@ import styles from "./YourIn.module.scss";
 
 
 export const YourIn = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const {users} = useAppSelector((state) => state.websocket);
-    const {user} = useAuth();
+    // const {user} = useAuth();
 
-    console.log(users, user);
+    console.log(users);
   
 
     useEffect(() => {}, []);
