@@ -21,7 +21,9 @@ const websocketSlice = createSlice({
             state.users = payload.payload;
         },
         resetWebsocket(state) {
-            state.socket.emit("leave");
+            // state.socket.emit("leave");
+            state.socket.disconnect();
+            state.socket.connect();
             state.room = 0;
             state.users = [];
         },

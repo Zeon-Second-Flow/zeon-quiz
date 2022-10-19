@@ -119,7 +119,6 @@ export const EnterPage = () => {
                         </p>
                     </div>
                 )}
-                <span>Terms | Privacy</span>
             </div>
         </div>
     );
