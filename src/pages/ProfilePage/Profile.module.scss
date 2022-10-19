@@ -1,0 +1,101 @@
+.login{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+
+    & h3{
+        color: white;
+    }
+
+    & .logo_block{
+        padding-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    & .logo{
+        width: 100px;        
+          fill: #ffffff
+    }
+
+    & .user_Logo{
+      display:flex;
+   justify-content: center;
+   align-items: center;
+   gap:20px;
+
+   & b{
+    font-weight: 700;
+   }
+
+   div {
+    display: inline-block;
+    position: relative;
+    color: white;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+    padding-bottom: 6px;
+    width: 8.5rem;
+    height: 8.5rem;
+    padding: 30px;
+    border: 0.125rem solid rgb(70, 23, 143);
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 4px;
+        bottom: 0;
+        left: 0;
+        background-color: #0087ca;
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+    }
+
+    &:hover:after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+
+    &:hover{
+        font-size: 1.3rem;
+    }
+}    
+    }
+}
+
+.profile{
+    padding: 55px 0;
+        background: linear-gradient(
+          to right,
+          #6f7280,
+          #2a2c3c,
+          #181827,
+          #833ab4,
+          #fd1d1d,
+          #fcb045
+        );
+        background-size: 400% 400%;
+        animation: body 10s infinite ease-in-out;
+      }
+      
+      @keyframes body {
+        0% {
+          background-position: 0 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0 50%;
+        }
+      }
+      
+
+
+

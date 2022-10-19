@@ -17,4 +17,3 @@ export const routePath = {
   RESTORE_COMPLETE: "restore-complete",
   YOUR_IN: "in"
 };
-
