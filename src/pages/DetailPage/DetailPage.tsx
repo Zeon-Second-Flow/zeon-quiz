@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {useGetQuestionsQuery, useGetTestsByNameQuery} from "@/store/search/search.api";
+import {useGetQuestionsQuery} from "@/store/search/search.api";
 import styles from "./DetailPage.module.scss";
 import {MyLoader} from "@/components/Loader/MyLoader";
 import {Questions} from "@/pages/DetailPage/Questions/Questions";
 import {TestDetail} from "@/pages/DetailPage/TestDetail/TestDetail";
-import {IQuestions, IQuestionsData} from "@/models/models";
-import {set} from "husky";
+import {IQuestionsData} from "@/models/models";
+import {Pagination} from "@/pages/DetailPage/Pagination/Pagination";
 
 
 export const DetailPage = () => {
     const {name} = useParams();
     const {data, isLoading} = useGetQuestionsQuery(name ?? "");
-    const {data: result, isLoading: loading} = useGetTestsByNameQuery(name ?? "");
 
     const limit = 4;
     const totalCount = data?.questions.length ?? 0;
@@ -32,48 +31,33 @@ export const DetailPage = () => {
     for (let i = 0; i < totalPages; i++) {
         arr.push(i + 1);
     }
-    // const count: [] = [];
-    // for (let i = 0; i < totalCount; i++) {
-    //     count.push(i);
-    // }
-    // // console.log(count);
-    // const countQuestions = count.map(item => (item));
-    // console.log(countQuestions);
+
     const onChangePage = (item: number) => {
         setCurrectPage(item);
     };
-
-    // console.log(data.questions);
-
-
+    const testDetail = data?.test;
     return (
         <div className={styles.detailPage}>
             <div className="container">
-                {isLoading && loading ? <MyLoader/> : (<div className={styles.wrapper}>
-                    {
-                        result?.results?.map((item, i) => <TestDetail key={i} item={item}/>)
-                    }
-                    <div className={styles.questions}>
-                        <h3>Questions </h3>
-                        {
-                            questions?.map((item, i: number) => {
-                                // console.log(result?.results.indexOf(item.score));
-                                return <Questions
-                                    key={item.id} item={item} index={i}/>;
-                            }
-                            )
-                        }
-                        <div>
+                {isLoading ? <MyLoader/> : (<div className={styles.wrapper}>
+                    <TestDetail item={testDetail}/>
+                    <div className={styles.questionsWrapper}>
+                        <div className={styles.questions}>
+                            <h3>Questions </h3>
                             {
-                                arr.map((item: number) => (
-                                    <div key={item} className={styles.pageBtn} onClick={() => onChangePage(item)}>
-                                        {item}
-                                    </div>
-                                ))
+                                questions?.map((item, i: number) => {
+                                    // console.log(result?.results.indexOf(item.score));
+                                    const index = data?.questions?.findIndex((it) => it.id === item.id) || 0;
+                                    return <Questions
+                                        key={item.id} item={item} index={index}/>;
+                                }
+                                )
                             }
                         </div>
+                        <div className={styles.paginationDetail}>
+                            <Pagination setPage={onChangePage} page={currentPage} countItems={totalPages}/>
+                        </div>
                     </div>
-
                 </div>)}
             </div>
         </div>

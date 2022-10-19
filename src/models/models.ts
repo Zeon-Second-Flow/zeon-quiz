@@ -16,7 +16,7 @@ export interface IITem {
 
 export interface IQuestions {
     questions: IQuestionsData[];
-    test: ITest;
+    test: ITest | undefined;
 }
 
 export interface ITest {
@@ -24,7 +24,9 @@ export interface ITest {
     group: string;
     image: string;
     is_active: boolean;
+    questions_count: number;
     title: string;
+    test_passed: number;
 }
 
 export interface IQuestionsData {
