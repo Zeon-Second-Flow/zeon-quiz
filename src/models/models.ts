@@ -40,6 +40,14 @@ export interface IProps {
 }
 
 export interface ITest {
+    title: string; 
+    description: string,
+    image: string,
+    is_active: boolean,
+    group: string
+}
+
+export interface Questions {
   id: number;
   question: string;
   image: string;
@@ -47,14 +55,16 @@ export interface ITest {
   timer: number;
   test: string;
   correct_answer: string;
-  answers: Answer[];
+  answers: IAnswerWrapper;
 }
 
-export interface Answer {
-  A: string;
-  B: string;
-  C: string;
-  D: string;
+export interface IResponse {
+    test: ITest, 
+    questions: Questions[]
+}
+
+export interface IAnswerWrapper {
+    0: {[key: string]: string}
 }
 
 export interface IQuiz {

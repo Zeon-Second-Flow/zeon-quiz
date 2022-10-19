@@ -1,4 +1,4 @@
-import { ITest } from '@/models/models';
+import { IResponse } from '@/models/models';
 import { createApi} from '@reduxjs/toolkit/query/react'
 import { customFetchBase } from '../auth/customFetchBase';
 const token =
@@ -9,7 +9,7 @@ export const testApi = createApi({
   reducerPath: 'testApi',
     baseQuery: customFetchBase,
     endpoints: (builder) => ({
-    getTests: builder.query<ITest[], string>({
+    getTests: builder.query<IResponse, string>({
         query: (test: string) => ({
             url: `tests/${test}`, 
             method: "GET",

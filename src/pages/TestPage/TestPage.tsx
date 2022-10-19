@@ -1,30 +1,50 @@
-import { IProps, ITest } from "@/models/models";
+import { IProps, IResponse, Questions } from "@/models/models";
 import { useGetTestsQuery } from "@/store/test/testSlice";
 import { useEffect, useState } from "react";
 import styles from "./TestPage.module.scss";
+import logo from "@/assets/logo.png";
+import first from "@/assets/podium/1.svg";
+import second from "@/assets/podium/2.svg";
+import third from "@/assets/podium/3.svg";
 
 export const TestPage = ({ test }: IProps) => {
   const { data, isLoading, isSuccess, isError, error } =
-    useGetTestsQuery("water");
-  const user = JSON.parse(localStorage.getItem("currentUser") || ""); //temporarily
+    useGetTestsQuery("tech");
   const [counter, setCounter] = useState(0);
-  const [currInfo, setCurrInfo] = useState({});
+  const [currInfo, setCurrInfo] = useState<Questions>();
   const [timer, setTimer] = useState(0);
   const [board, setBoard] = useState(false);
-  const [correctAnswer, setCorrectAnswer] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState<string>("");
+  const [preload, setPreload] = useState(true);
+  const [seconds, setSeconds] = useState(0);
+  const [results, setResults] = useState(false);
+
+  let length = data ? data.questions.length - 1 : 0;
+
+  useEffect(() => {
+    if (preload) {
+      const interval = setInterval(() => {
+        if (seconds <= 100) {
+          setSeconds((prev) => prev + 20);
+        }
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [preload]);
 
   useEffect(() => {
     if (data && isSuccess) {
-      setCurrInfo(data[counter]);
-      setTimer(data[counter].timer);
-      setCorrectAnswer(data[counter].correct_answer);
+      setCurrInfo(data.questions[counter]);
+      setTimer(data.questions[counter].timer + 4);
+      setCorrectAnswer(data.questions[counter].correct_answer);
     }
   }, [isSuccess]);
 
   useEffect(() => {
     if (data && isSuccess) {
-      setCurrInfo(data[counter]);
-      setCorrectAnswer(data[counter].correct_answer);
+      setCurrInfo(data.questions[counter]);
+      setCorrectAnswer(data.questions[counter].correct_answer);
+      setTimer(data.questions[counter].timer + 6);
     }
   }, [counter]);
 
@@ -40,36 +60,63 @@ export const TestPage = ({ test }: IProps) => {
   function dropVal() {
     setBoard(false);
     setCounter(counter + 1);
-    if (data) {
-      setTimer(data[counter].timer);
+    setPreload(true);
+  }
+
+  function afterPreload() {
+    if (preload) {
+      setPreload(false);
+      setSeconds(0);
     }
   }
+
+  useEffect(() => {
+    if (preload) {
+      setTimeout(afterPreload, 6000);
+    }
+  }, [preload]);
+
   return (
     <>
-      {isLoading && <div className="container">Loading</div>}
+      {isLoading && (
+        <div className={styles.loaderWrapper}>
+          <div className={styles.loader}></div>
+        </div>
+      )}
       {isSuccess && currInfo && (
         <div className={styles.wrapper}>
-          <div className="container">
-            <div className={styles.top}>
-              <div></div>
-              <div className={styles.question}>
-                <p>{currInfo?.question}</p>
-              </div>
-              <div className={styles.buttonWrapper}>
-                {timer === 0 ? (
-                  <button onClick={() => setBoard(true)}>Next</button>
-                ) : (
-                  <button onClick={() => setBoard(true)}>Skip</button>
-                )}
-              </div>
+          <div className={styles.top}>
+            <div className={styles.question}>
+              <p>{currInfo.question}</p>
             </div>
+            <div className={styles.buttonWrapper}>
+              {timer === 0 ? (
+                <button onClick={() => setBoard(true)}>Next</button>
+              ) : (
+                <button
+                  onClick={() => {
+                    setBoard(true);
+                  }}
+                >
+                  Skip
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="container">
             <div className={styles.middle}>
               <div className={styles.timer}>{timer}</div>
               <div className={styles.imageWrapper}>
-                <img
-                  src="https://assets-cdn.kahoot.it/player/v2/assets/0_7.67d1bcb8.gif"
-                  alt="the image"
-                />
+                {/* can work if you make a real server,otherwise image is being deleted every day */}
+                {/* {data.test.image ? (
+                  <img
+                    src={
+                      "https://safe-atoll-40972.herokuapp.com" + data.test.image
+                    }
+                    alt="the image"
+                  />
+                ) : ( */}
+                <img src={logo} alt="default image" />
               </div>
               <div className={styles.points}>
                 <span>0</span>
@@ -317,20 +364,85 @@ export const TestPage = ({ test }: IProps) => {
           </div>
         </div>
       )}
-      {isError && <div>error</div>}
-      {board && (
-        <div className={styles.wrapper}>
-          <div className={styles.board}>
-            <div className={styles.boardTitle}>
-              <h3>Scoreboard</h3>
-            </div>
-            <div className={styles.buttonWrapper}>
+      {isError && (
+        <div className={styles.loaderWrapper}>
+          <div className={styles.error}>
+            Sorry, there is an error! Try again later!
+          </div>
+        </div>
+      )}
+      <div className={board ? styles.wrapperDisplay : styles.wrappers}>
+        <div className={styles.board}>
+          <div className={styles.boardTitle}>
+            <h3>Scoreboard</h3>
+          </div>
+          <div className={styles.buttonWrapper}>
+            {counter === length ? (
+              <button onClick={() => setResults(true)}>End</button>
+            ) : (
               <button onClick={dropVal}>Next</button>
+            )}
+          </div>
+          <div className={styles.boardInner}>
+            <div className={styles.boardInfo}>
+              <p>Makhabat</p>
+              <p>5000</p>
             </div>
-            <div className={styles.boardInner}>
-              <div className={styles.boardInfo}>
-                <p>{user.email}</p>
-                <p>5000</p>
+          </div>
+        </div>
+      </div>
+      <div className={preload ? styles.wrapperDisplay : styles.wrappers}>
+        <div className="container">
+          <div className={styles.preloadBlock}>
+            <div className={styles.imageWrapper}>
+              <img src={logo} alt="the logo" />
+            </div>
+            <div className={styles.context}>
+              <p>Question:</p>
+              <p>{currInfo?.question}</p>
+            </div>
+          </div>
+          <div className={styles.scrollbarWrapper}>
+            <div
+              style={{ width: seconds + "%" }}
+              className={styles.scrollbar}
+            ></div>
+          </div>
+        </div>
+      </div>
+      {results && (
+        <div className={results ? styles.wrapperDisplay : styles.wrappers}>
+          <div className={styles.titleWrapper}>
+            <h2 className={styles.podiumTitle}>{data?.test.title}</h2>
+          </div>
+          <div className="container">
+            <div className={styles.podiums}>
+              <div className={styles.podium}>
+                <p className={styles.user}>user</p>
+                <div className={`${styles.block}  ${styles.placeTwo}`}>
+                  <div className={styles.placeWrapper}>
+                    <img src={first} alt="the first place" />
+                  </div>
+                  <p>score</p>
+                </div>
+              </div>
+              <div className={styles.podium}>
+                <p className={styles.user}>user</p>
+                <div className={`${styles.block}  ${styles.placeOne}`}>
+                  <div className={styles.placeWrapper}>
+                    <img src={second} alt="the second place" />
+                  </div>
+                  <p>score</p>
+                </div>
+              </div>
+              <div className={styles.podium}>
+                <p className={styles.user}>user</p>
+                <div className={`${styles.block}  ${styles.placeThree}`}>
+                  <div className={styles.placeWrapper}>
+                    <img src={third} alt="the third place" />
+                  </div>
+                  <p>score</p>
+                </div>
               </div>
             </div>
           </div>
