@@ -71,7 +71,7 @@ export const GamePage = () => {
                 <div className={styles.body}>
                     <div className={styles.user}>
                         <img src={userLogo} alt="User" />
-                        {users.length - 1}
+                        {users.length}
                     </div>
 
                     <div className="box-room">
@@ -104,7 +104,11 @@ export const GamePage = () => {
           </div>
         ))} */}
 
-                    <button className={styles.start}>Start</button>
+                    {users.length > 1 ? (
+                        <button className={styles.start}>Start</button>
+                    ) : (
+                        <button className={styles.startDisabled}>Start</button>
+                    )}
                 </div>
 
                 {/* {users.length <= 1 ? (

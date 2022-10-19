@@ -130,3 +130,26 @@
     background-color: rgb(204, 204, 204);
     color: rgb(0, 0, 0);
 }
+
+.startDisabled {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    line-height: normal;
+    min-height: 2.5rem;
+    height: 4vmin;
+    font-size: 1.67vmin;
+    margin: 1em auto 0 auto;
+    min-width: 100px;
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    padding: 0px 1rem 0.25rem;
+    box-shadow: rgb(0 0 0 / 15%) 0px -0.25rem 0px 0px inset, rgb(0 0 0 / 15%) 0px 2px 4px;
+    font-size: 1.2rem;
+
+    background-color: rgb(95, 95, 95);
+    color: rgb(0, 0, 0);
+}

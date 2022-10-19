@@ -16,6 +16,12 @@ export const Header = () => {
         <div className={styles.header}>
             <div className="container">
                 <div className={styles.wrapper}>
+                    <BurgerMenu className={styles.burger} onClick={() => setOpen(true)} />
+                    <Link to={"/"}>
+                        <div className={styles.logo}>
+                            <img width={120} src={Logo} alt="logo" />
+                        </div>
+                    </Link>
                     <nav className={styles.navbar}>
                         <ul className={styles.menu}>
                             <li className={styles.menuItem}>
@@ -25,14 +31,8 @@ export const Header = () => {
                             <li className={styles.menuItem}>Groups</li>
                         </ul>
                     </nav>
-                    <BurgerMenu className={styles.burger} onClick={() => setOpen(true)} />
                     {open ? <Burger setOpen={setOpen} /> : ""}
-                    <Link to={"/"}>
-                        <div className={styles.logo}>
-                            <img width={120} src={Logo} alt="logo" />
-                        </div>
-                    </Link>
-                    <Search />
+                    {user && <Search />}
                     <Link
                         className={styles.userLogo}
                         to={user ? "/profile-page" : "/auth"}

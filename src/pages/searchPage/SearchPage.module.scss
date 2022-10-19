@@ -17,11 +17,13 @@ $font-family: 'Inter', sans-serif;
 
     .heading {
         margin-bottom: 20px;
+        text-align: center;
     }
 
     .wrapper {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 16px;
 
         .item {

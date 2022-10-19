@@ -10,17 +10,11 @@ const token =
 export const getTests = createApi({
     reducerPath: "tests",
     baseQuery: customFetchBase,
-    // prepareHeaders: (headers) => {
-    //     const {token} = JSON.parse(localStorage.getItem("token"))
-    //         ? JSON.parse(localStorage.getItem("token"))
-    //         : null;
-    //     if (token) headers.set("Authorization", Bearer ${token});
-    //     return headers;
-    // },
+
     endpoints: (builder) => ({
         getTestsByName: builder.query<ServerResponse<IITem>, string>({
             query: (name) => ({
-                url: `tests?search=${name}`,
+                url: `tests/?search=${name}`,
                 headers: {
                     Authorization: `Bearer ${token?.token}`
                 }

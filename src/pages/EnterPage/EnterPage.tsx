@@ -71,10 +71,10 @@ export const EnterPage = () => {
             dispatch(setSocketUsers(users.filter((user) => user.id !== id)));
         });
 
-        createGane();
+        createRoom();
     };
 
-    const createGane = () => {
+    const createRoom = () => {
         setTimeout(() => {
             navigate("/game");
         }, 500);

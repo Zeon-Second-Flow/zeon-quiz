@@ -46,7 +46,6 @@ export const DetailPage = () => {
                             <h3>Questions </h3>
                             {
                                 questions?.map((item, i: number) => {
-                                    // console.log(result?.results.indexOf(item.score));
                                     const index = data?.questions?.findIndex((it) => it.id === item.id) || 0;
                                     return <Questions
                                         key={item.id} item={item} index={index}/>;
