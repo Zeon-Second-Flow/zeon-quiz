@@ -49,21 +49,6 @@ export const publicRoutes = [
         path: routePath.GAME,
         component: TestPage
     },
-<<<<<<< HEAD
-=======
-      {
-    path: routePath.QUESTION_PRELOAD, 
-    component: questionPreload,
-  },
-  {   path: routePath.QUESTION_PRELOAD, 
-      component: questionPreload,
-      
-    },
-  {
-    path: routePath.LOCALBOARD, 
-    component: LocalBoard
-  },
->>>>>>> 8f267ce71d3fecffeae1e7c0ba4cd7b83acd37ef
   {
     path: routePath.YOUR_IN, 
     component: YourIn
@@ -92,10 +77,10 @@ export const privateRoutes = [
         path: routePath.RESTORE_COMPLETE,
         component: RestoreComplete,
     },
-    {
-        path: routePath.PROFILE_PAGE,
-        component: Profile,
-    },
+    // {
+    //     path: routePath.PROFILE_PAGE,
+    //     component: Profile,
+    // },
 ];
     
 

@@ -446,12 +446,47 @@
 }
 
 .user {
-    color: white;
     font-size: 30px;
     text-align: center;
+    color: #fff;
+    padding-top: 30px;
+    font-family: 'Coiny', cursive;
+    text-align: center;
+    font-size: 70px;
+    animation: bounce .4s ease infinite alternate;
+
+    @keyframes bounce {
+        0% {
+            text-shadow:
+                0 5px 0 #ccc,
+                0 2px 3px rgba(0, 0, 0, 1);
+        }
+
+        100% {
+            transform: translateY(-20px);
+            text-shadow: 0 50px 0 #black,
+                0 0px 20px rgba(0, 0, 0, .8);
+        }
+    }
 }
 
+.homeBtn {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 20px 0 0;
 
+    button {
+        width: 100px;
+        padding: 10px;
+        font-size: 20px;
+        background-color: rgb(18, 96, 190);
+        box-shadow: rgba(0, 0, 0, 0.25) 0px -2px inset;
+        color: white;
+        outline: none;
+        border: none;
+        cursor: pointer;
+    }
+}
 
 @media screen and (max-width: 768px) {
 
@@ -517,5 +552,13 @@
         .imageWrapper {
             max-width: 80%;
         }
+    }
+
+    .user {
+        font-size: 50px;
+    }
+
+    .placeWrapper img {
+        width: 70px;
     }
 }

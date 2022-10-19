@@ -6,6 +6,8 @@ import logo from "@/assets/logo.png";
 import first from "@/assets/podium/1.svg";
 import second from "@/assets/podium/2.svg";
 import third from "@/assets/podium/3.svg";
+import ReactConfetti from "react-confetti";
+import { useNavigate } from "react-router-dom";
 
 export const TestPage = ({ test }: IProps) => {
   const { data, isLoading, isSuccess, isError, error } =
@@ -18,6 +20,7 @@ export const TestPage = ({ test }: IProps) => {
   const [preload, setPreload] = useState(true);
   const [seconds, setSeconds] = useState(0);
   const [results, setResults] = useState(false);
+  const navigate = useNavigate();
 
   let length = data ? data.questions.length - 1 : 0;
 
@@ -412,13 +415,19 @@ export const TestPage = ({ test }: IProps) => {
       </div>
       {results && (
         <div className={results ? styles.wrapperDisplay : styles.wrappers}>
+          <ReactConfetti />
           <div className={styles.titleWrapper}>
             <h2 className={styles.podiumTitle}>{data?.test.title}</h2>
+          </div>
+          <div className={styles.homeBtn}>
+            <button onClick={() => navigate("/")}>Home</button>
           </div>
           <div className="container">
             <div className={styles.podiums}>
               <div className={styles.podium}>
-                <p className={styles.user}>user</p>
+                <div className={styles.userWrapper}>
+                  <p className={styles.user}>user</p>
+                </div>
                 <div className={`${styles.block}  ${styles.placeTwo}`}>
                   <div className={styles.placeWrapper}>
                     <img src={first} alt="the first place" />
@@ -427,7 +436,9 @@ export const TestPage = ({ test }: IProps) => {
                 </div>
               </div>
               <div className={styles.podium}>
-                <p className={styles.user}>user</p>
+                <div className={styles.userWrapper}>
+                  <p className={styles.user}>user</p>
+                </div>
                 <div className={`${styles.block}  ${styles.placeOne}`}>
                   <div className={styles.placeWrapper}>
                     <img src={second} alt="the second place" />
@@ -436,7 +447,9 @@ export const TestPage = ({ test }: IProps) => {
                 </div>
               </div>
               <div className={styles.podium}>
-                <p className={styles.user}>user</p>
+                <div className={styles.userWrapper}>
+                  <p className={styles.user}>user</p>
+                </div>
                 <div className={`${styles.block}  ${styles.placeThree}`}>
                   <div className={styles.placeWrapper}>
                     <img src={third} alt="the third place" />
