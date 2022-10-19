@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 
     background: rgb(70, 23, 143);
     height: 100%;
@@ -10,6 +11,16 @@
 
     flex-grow: 1;
     color: white;
+}
+
+.waiting {
+    padding: 1em 2em;
+    background-color: rgb(204, 204, 204);
+    color: black;
+    border: 1px solid black;
+    margin-top: 1em;
+    display: block;
+    text-align: center;
 }
 
 .circle {
@@ -50,8 +61,58 @@
     }
 }
 
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.usersList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.user {
+    color: rgb(255, 255, 255);
+    fill: rgb(255, 255, 255);
+    margin: 1vmin 1.5vmin;
+    padding: 4vmin 3vmin;
+    line-height: 0.225vmin;
+    text-align: center;
+    box-sizing: border-box;
+    display: inline-flex;
+    flex: 0 1 auto;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.4vmin;
+
+    .small {
+        font-size: 3.5vmin;
+        -webkit-box-align: center;
+        align-items: center;
+        font-weight: 600;
+        border-radius: 0.125rem 0px;
+        padding: 0px;
+        border: none;
+        background: transparent;
+        color: inherit;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        cursor: pointer;
+        position: relative;
+    }
+}
+
 .start {
     display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
     line-height: normal;
     min-height: 2.5rem;
     height: 4vmin;

@@ -1,8 +1,18 @@
-import React from "react";
+import {useAppSelector, useAuth} from "@/hooks";
+import React, {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 import styles from "./YourIn.module.scss";
 
 
 export const YourIn = () => {
+    const navigate = useNavigate();
+    const {users} = useAppSelector((state) => state.websocket);
+    const {user} = useAuth();
+
+    console.log(users, user);
+  
+
+    useEffect(() => {}, []);
     return (
         <div className={styles.wrapper}>
             <div className="container">
@@ -11,8 +21,8 @@ export const YourIn = () => {
                 <div className={styles.enterBlockWrapper}>
                     <div className={styles.enterBlock}>
                         <div className={styles.info}>
-                            <h2>Your're in!</h2>
-                            <p>See your nickname on screen?</p>
+                            <h2>You are in!</h2>
+                            <p>Wait till admin will start the quiz!</p>
                         </div>
                     </div>
                 </div>

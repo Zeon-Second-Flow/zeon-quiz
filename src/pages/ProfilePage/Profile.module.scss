@@ -43,19 +43,8 @@
 .profile {
     padding: 55px 0;
     background: linear-gradient(
-        to right,
-    
-    
-              
-    
-    
-         1a5f62,
-    #007        
-    #2d2dc5,
-         833ab4,
-    #fd1        
-    #fcb045
-           ;
+        to right, #2d2dc5, #fcb045
+    );
     background-size: 400% 400%;
     animation: body 10s infinite ease-in-out;
 }

@@ -22,6 +22,7 @@ export const GamePage = () => {
     //   const [typeSocket, setTypeSocket] = useState();
 
     const {room, users} = useAppSelector((state) => state.websocket);
+    console.log(users);
     const dispatch = useAppDispatch();
     const socket = useAppSelector((state) => state.websocket.socket);
     const username =
@@ -50,7 +51,6 @@ export const GamePage = () => {
         });
 
         return () => {
-    
             dispatch(resetWebsocket());
         };
     }, []);
@@ -68,32 +68,56 @@ export const GamePage = () => {
             <div className={styles.square}></div>
             <div className={styles.circle}></div>
             <div className="container">
-                <div className={styles.user}>
-                    <img src={userLogo} alt="User" />
-                    {users.length}
-                </div>
-                <p>{room}</p>
-                <form onSubmit={submit} id="form">
-                    <div className="input-group">
-                        {/* <input
+                <div className={styles.body}>
+                    <div className={styles.user}>
+                        <img src={userLogo} alt="User" />
+                        {users.length - 1}
+                    </div>
+
+                    <div className="box-room">
+                        <div className="wave -one"></div>
+                        <div className="wave -two"></div>
+                        <div className="wave -three"></div>
+                        <div className="title-room">Room code: </div>
+                        <div className="title-code">{room}</div>
+                    </div>
+
+                    {/* <form onSubmit={submit} id="form">
+          <div className="input-group">
+           <input
                         type="text"
                         className="form-control"
                         onChange={(e) => setMessage(e.currentTarget.value)}
                         value={message}
                         id="text"
-                        /> */}
-                        <button id="submit" type="submit" className={styles.start}>
+                        /> 
+            <button id="submit" type="submit" className={styles.start}>
               Ready
-                        </button>
-                    </div>
-                </form>
-                {/* {messages.map(({ text, user }, index) => (
+            </button>
+          </div>
+        </form> */}
+
+                    {/* {messages.map(({ text, user }, index) => (
           <div key={index} className="row mb-2">
             <div className="col-md-2">{user}</div>
             <div className="col-md-2">{text}</div>
           </div>
         ))} */}
-                <button className={styles.start}>Start</button>
+
+                    <button className={styles.start}>Start</button>
+                </div>
+
+                {/* {users.length <= 1 ? (
+          <span className={styles.waiting}>Waiting for players…</span>
+        ) : ( */}
+                <ul className={styles.usersList}>
+                    {users.map((item) => (
+                        <li className={styles.user}>
+                            <small>{item.name}</small>
+                        </li>
+                    ))}
+                </ul>
+                {/* )} */}
             </div>
         </div>
     );

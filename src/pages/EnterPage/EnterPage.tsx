@@ -11,11 +11,13 @@ export const EnterPage = () => {
     const navigate = useNavigate();
     const {users} = useAppSelector((state) => state.websocket);
     const {isStaff} = useAuth();
+    const [error, setError] = useState("");
 
     const dispatch = useAppDispatch();
     const socket = useAppSelector((state) => state.websocket.socket);
 
     const enterGame = () => {
+        setError("");
         const user =
       localStorage.getItem("token") &&
       JSON.parse(localStorage.getItem("token") || "");
@@ -23,7 +25,6 @@ export const EnterPage = () => {
         socket.emit("join", [user.email, value]);
 
         socket.on("users", (users) => {
-            console.log("users: ", users);
             dispatch(setSocketUsers(users));
         });
 
@@ -32,19 +33,18 @@ export const EnterPage = () => {
         });
 
         socket.on("connected", (user) => {
-            console.log("connected: ", [...users, user]);
             dispatch(setSocketRoom(user.room));
             dispatch(setSocketUsers([...users, user]));
+            navigateToGame();
         });
 
         socket.on("disconnected", (id) => {
-            // setUsers((users) => {
-            //   return users.filter((user) => user.id !== id);
-            // });
             dispatch(setSocketUsers(users.filter((user) => user.id !== id)));
         });
 
-        navigateToGame();
+        socket.on("error", (error) => {
+            setError(error);
+        });
     };
 
     const createGame = () => {
@@ -55,7 +55,6 @@ export const EnterPage = () => {
         socket.emit("username", [username.email]);
 
         socket.on("users", (users) => {
-            console.log("users: ", users);
             dispatch(setSocketUsers(users));
         });
 
@@ -64,25 +63,26 @@ export const EnterPage = () => {
         });
 
         socket.on("connected", (user) => {
-            console.log("connected: ", [...users, user]);
             dispatch(setSocketRoom(user.room));
             dispatch(setSocketUsers([...users, user]));
         });
 
         socket.on("disconnected", (id) => {
-            // setUsers((users) => {
-            //   return users.filter((user) => user.id !== id);
-            // });
-
             dispatch(setSocketUsers(users.filter((user) => user.id !== id)));
         });
 
-        navigateToGame();
+        createGane();
+    };
+
+    const createGane = () => {
+        setTimeout(() => {
+            navigate("/game");
+        }, 500);
     };
 
     const navigateToGame = () => {
         setTimeout(() => {
-            navigate("/game");
+            navigate("/in");
         }, 500);
     };
 
@@ -110,6 +110,8 @@ export const EnterPage = () => {
                                 </button>
                             </div>
                         </div>
+
+                        <span className={styles.error}> {error}</span>
                     </div>
                 </div>
                 {isStaff && (
