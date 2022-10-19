@@ -5,7 +5,6 @@ import {privateRoutes, publicRoutes, stuffRoutes} from "./routes";
 
 export const AppRoutes = () => {
     const {user, isStaff} = useAuth();
-    console.log(user, isStaff);
 
     return (
         <Routes>

@@ -1,6 +1,7 @@
 .signup {
-    font-family: 'Ubuntu', sans-serif;
-    height: 565px;
+    font-family: "Ubuntu", sans-serif;
+    height: 600px;
+    position: relative;
 
     & h1 {
         text-align: center;
@@ -49,7 +50,7 @@
         background-color: rgba(255, 255, 255, 0.13);
         position: absolute;
         transform: translate(-50%, -50%);
-        top: 65%;
+        top: 50%;
         left: 50%;
         border-radius: 20px;
         backdrop-filter: blur(10px);
@@ -136,7 +137,7 @@
     font-size: 14px;
     font-weight: 300;
     position: relative;
-    border: 1.7px solid;   
+    border: 1.7px solid;
 }
 
 select {

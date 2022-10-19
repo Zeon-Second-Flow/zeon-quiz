@@ -46,29 +46,15 @@ export const publicRoutes = [
     {
         path: routePath.DETAIL,
         component: DetailPage,
-    }, {
+    },
+    {
         path: routePath.GAME,
-        component: GamePage
+        component: GamePage,
     },
-    {
-        path: routePath.QUESTION_PRELOAD,
-        component: questionPreload,
-    },
-    {
-        path: routePath.QUESTION_PRELOAD,
-        component: questionPreload,
-    },
-    {
-        path: routePath.LOCALBOARD,
-        component: LocalBoard
-    },
-    {
-        path: routePath.YOUR_IN,
-        component: YourIn
-    },
+
     {
         path: routePath.PRIVATE_PAGE,
-        component: PrivatePage
+        component: PrivatePage,
     },
     {
         path: routePath.PAGE_NOT_FOUND,
