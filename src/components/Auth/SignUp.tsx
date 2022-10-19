@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Formik, Form} from "formik";
 import * as Yup from "yup";
 import {
     useAddUserMutation,
+    useLazyGetGroupQuery,
     useLoginUserMutation,
 } from "@/store/auth/signupSlice";
 import {NavLink, useNavigate} from "react-router-dom";
@@ -17,8 +18,7 @@ const signupInputData = [
     },
     {
         name: "group",
-        type: "text",
-        placeholder: "Group",
+        type: "select",
     },
 
     {
@@ -61,11 +61,14 @@ const SignupSchema = Yup.object().shape({
         .required("Required!"),
 });
 
+
+
 export const SignUp = () => {
     const [addUser, {isLoading}] = useAddUserMutation();
     const [loginUser] = useLoginUserMutation();
     const navigate = useNavigate();
     const [err, setErr] = useState("");
+    
 
     const login = async (data: IData) => {
         try {
@@ -104,9 +107,10 @@ export const SignUp = () => {
         }
     };
 
+    
     const initialValues = {
         email: "",
-        group: "",
+        group: "zeon",
         password: "",
         password_confirm: "",
     };
@@ -128,8 +132,9 @@ export const SignUp = () => {
                     <Form className="form">
                         <h1>Sign up</h1>
                         {err && <p className="rejectMessage">{err}</p>}
-                        {signupInputData.map((value) => (
+                        {signupInputData.map((value, idx) => (
                             <FormInput
+                                key={idx}
                                 name={value.name}
                                 placeholder={value.placeholder}
                                 type={value.type}
@@ -139,11 +144,13 @@ export const SignUp = () => {
                             type="submit"
                             className={isLoading ? "buttonLoading" : "button"}
                         >
-              Submit
-                        </button>
-                        <NavLink className="linkTo" to="/login">
-              Already have an account?
-                        </NavLink>
+                            Submit
+                        </button> 
+                        <div className="linkTo" >
+                            <p>Already have an account?</p>
+                            <NavLink to="/login"><span> Login</span>
+                            </NavLink> 
+                        </div> 
                     </Form>
                 </Formik>
             </div>

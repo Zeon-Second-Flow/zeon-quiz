@@ -5,7 +5,7 @@ import {ReactComponent as PasswordShowIcon} from "@/assets/auth/eye-open.svg";
 import styles from "./FormInput.module.scss";
 
 
-interface IProps {
+ interface IProps {
   name: string;
   placeholder: string;
   type: string;

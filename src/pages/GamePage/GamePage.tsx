@@ -50,7 +50,7 @@ export const GamePage = () => {
         });
 
         return () => {
-            
+    
             dispatch(resetWebsocket());
         };
     }, []);
@@ -76,12 +76,12 @@ export const GamePage = () => {
                 <form onSubmit={submit} id="form">
                     <div className="input-group">
                         {/* <input
-              type="text"
-              className="form-control"
-              onChange={(e) => setMessage(e.currentTarget.value)}
-              value={message}
-              id="text"
-            /> */}
+                        type="text"
+                        className="form-control"
+                        onChange={(e) => setMessage(e.currentTarget.value)}
+                        value={message}
+                        id="text"
+                        /> */}
                         <button id="submit" type="submit" className={styles.start}>
               Ready
                         </button>

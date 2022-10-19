@@ -53,8 +53,6 @@ export const signupSlice = createApi({
                 method: "POST",
                 body: JSON.stringify(data),
                 headers: {
-                    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-                    Authorization: "Bearer " + token.token,
                     "Content-Type": "application/json",
                 },
             }),
@@ -65,12 +63,16 @@ export const signupSlice = createApi({
                 method: "POST",
                 body: JSON.stringify(data),
                 headers: {
-                    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-                    Authorization: "Bearer " + token.token,
                     "Content-Type": "application/json",
                 },
             }),
         }),
+        getGroup: builder.query<any, string>({
+            query: () => ({
+                url: "/group/",
+            }),
+        }),
+      
     }),
 });
 
@@ -81,5 +83,6 @@ export const {
     useChangePasswordMutation,
     useRestorePasswordMutation,
     useRestoreCompleteMutation,
+    useLazyGetGroupQuery
 } = signupSlice;
 

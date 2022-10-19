@@ -40,32 +40,63 @@ export const publicRoutes = [
         component: Login,
     },
     {
-        path: routePath.RESTORE_PASSWORD,
-        component: RestorePassword,
+        path: routePath.SEARCH_PAGE,
+        component: SearchPage,
     },
     {
-        path: routePath.RESTORE_COMPLETE,
-        component: RestoreComplete,
+        path: routePath.DETAIL,
+        component: DetailPage,
+    }, {
+        path: routePath.GAME,
+        component: GamePage
     },
     {
-        path: routePath.SUCCESS_PAGE,
-        component: SuccessPage,
+        path: routePath.QUESTION_PRELOAD,
+        component: questionPreload,
+    },
+    {
+        path: routePath.QUESTION_PRELOAD,
+        component: questionPreload,
+    },
+    {
+        path: routePath.LOCALBOARD,
+        component: LocalBoard
+    },
+    {
+        path: routePath.YOUR_IN,
+        component: YourIn
+    },
+    {
+        path: routePath.PRIVATE_PAGE,
+        component: PrivatePage
     },
     {
         path: routePath.PAGE_NOT_FOUND,
         component: ErrorPage,
-    },
-    {
-        path: routePath.PRIVATE_PAGE,
-        component: PrivatePage,
     },
 ];
 
 export const privateRoutes = [
     ...publicRoutes,
     {
+        path: routePath.CREATE_TEST,
+        component: CreateTestsPage,
+    },
+    {
         path: routePath.CHANGE_PASSWORD,
         component: ChangePassword,
+    },
+    {
+        path: routePath.SUCCESS_PAGE,
+        component: SuccessPage,
+    },
+    {
+        path: routePath.RESTORE_PASSWORD,
+        component: RestorePassword,
+    },
+    {
+        path: routePath.RESTORE_COMPLETE,
+        component: RestoreComplete,
     },
     {
         path: routePath.PROFILE_PAGE,

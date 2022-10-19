@@ -73,9 +73,8 @@ export const RestorePassword = () => {
                                 />
                             ))}
                         </div>
-
                         <button type="submit" className="button">
-              Submit
+                                Submit
                         </button>
                     </Form>
                 </Formik>

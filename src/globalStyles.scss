@@ -1,15 +1,15 @@
 .signup {
-    height: 550px;
+    font-family: 'Ubuntu', sans-serif;
+    height: 565px;
 
     & h1 {
         text-align: center;
+        color: #333;
     }
 
     & .rejectMessage {
         color: red;
     }
-
-    
 
     .background {
         height: 520px;
@@ -109,8 +109,47 @@
 
     .linkTo {
         display: flex;
+        gap: 5px;
         justify-content: center;
-        align-items: center;
+    }
+
+    .linkTo span {
+        color: #1845ad;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+
+    .form_block {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
     }
 }
 
+.select_group {
+    padding: 10px;
+    border-radius: 3px;
+    width: 100%;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.07);
+    margin-top: 30px;
+    font-size: 14px;
+    font-weight: 300;
+    position: relative;
+    border: 1.7px solid;   
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 5px;
+    border: 1px solid #dfdfdf;
+    border-radius: 2px;
+    margin-right: 2rem;
+    padding: 1rem;
+    padding-right: 2rem;
+}
