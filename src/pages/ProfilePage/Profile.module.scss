@@ -1,130 +1,141 @@
 .login {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  gap: 40px;
+  padding: 0 15px;
+  font-family: "Ubuntu", sans-serif;
+
+  & h3 {
+    color: white;
+  }
+
+  & .logo_block {
+    width: 100%;
+    margin: 0 auto;
+    &_info {
+      height: 200px;
+      background-color: rgba(255, 255, 255, 0.13);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: start;
+      gap: 15px;
+      text-decoration: underline;
+      font-size: 20px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+  }
+
+  & .logo {
+    width: 20px;
+    fill: #ffffff;
+    margin: 0 10px;
+  }
+
+  & .user_Logo {
     display: flex;
-    flex-direction: column;
-    text-align: center;
-    font-family: "Inter", sans-serif;
-    gap: 40px;
-    padding: 0 15px;
+    flex-wrap: wrap;
+    gap: 20px;
 
-    & h3 {
-        color: white;
+    & b {
+      font-weight: 700;
     }
-
-    & .logo_block {
-        padding-bottom: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    & .logo {
-        width: 100px;
-        fill: #ffffff;
-    }
-
-    & .user_Logo {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-
-        & b {
-            font-weight: 700;
-        }
-    }
+  }
 }
 
 .info {
-    display: flex;
-    gap: 40px;
-    justify-content: center;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
 }
 
 .profile {
-    padding: 55px 0;
-    background: linear-gradient(
-        to right, #2d2dc5, #fcb045
-    );
-    background-size: 400% 400%;
-    animation: body 10s infinite ease-in-out;
+  padding: 55px 0;
+  background: linear-gradient(to right, #2d2dc5, #fcb045);
+  background-size: 400% 400%;
+  animation: body 10s infinite ease-in-out;
 }
 
 @keyframes body {
-    0% {
-        background-position: 0 50%;
-    }
+  0% {
+    background-position: 0 50%;
+  }
 
-    50% {
-        background-position: 100% 50%;
-    }
+  50% {
+    background-position: 100% 50%;
+  }
 
-    100% {
-        background-position: 0 50%;
-    }
+  100% {
+    background-position: 0 50%;
+  }
 }
 
 .card {
-    color: white;
-    display: grid;
-    place-items: center;
-    position: relative;
-    height: 350px;
-    width: 300px;
-    background: #333;
-    border-radius: 8px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
+  color: white;
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 370px;
+  width: 325px;
+  background: #333;
+  border-radius: 8px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .card::before {
-    content: "";
-    width: 250px;
-    height: 450px;
-    left: 10px;
-    top: -70px;
-    position: absolute;
-    background: linear-gradient(#00e5ff, #b400fb);
-    animation: animate 5s linear infinite;
+  content: "";
+  width: 235px;
+  height: 513px;
+  left: 10px;
+  top: -70px;
+  position: absolute;
+  background: linear-gradient(#00e5ff, #b400fb);
+  animation: animate 5s linear infinite;
 }
 
 @keyframes animate {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
 
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .card::after {
-    content: "";
-    position: absolute;
-    background: #333;
-    inset: 3px;
-    border-radius: 8px;
+  content: "";
+  position: absolute;
+  background: #333;
+  inset: 3px;
+  border-radius: 8px;
 }
 
 .card .content {
-    z-index: 1;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  & div {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 
-    & div {
-        display: flex;
-        gap: 10px;
-
-        & b, p {
-            font-size: 20px;
-        }
+    & b,
+    p {
+      font-size: 20px;
     }
+  }
 
-    & h4 {
-        text-align: center;
-        font-weight: 700;
-        text-rendering: optimizeLegibility;
-        font-size: 1.375rem;
-        margin-bottom: 0.75rem;
-    }
+  & h4 {
+    text-align: center;
+    font-weight: 700;
+    text-rendering: optimizeLegibility;
+    font-size: 1.375rem;
+    margin-bottom: 0.75rem;
+  }
 }
