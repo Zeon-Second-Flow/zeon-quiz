@@ -37,10 +37,11 @@ export const profileSlice = createApi({
         getUser: builder.query<IUser, string>({
             query: (login) => ({
                 url: `/account/users/${login}`,
-                // headers: {
-                //     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-                //     Authorization: "Bearer " + token.token,
-                // },
+                headers: {
+                    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                    Authorization: "Bearer " + token.token,
+                    "Content-Type": "application/json"
+                },
             }),
         }),
     })

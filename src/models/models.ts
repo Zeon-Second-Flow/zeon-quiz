@@ -98,3 +98,16 @@ export interface IQuiz {
     ];
 }
 
+export interface IGroup {
+    count:    number;
+    next:     null;
+    previous: null;
+    results:  Result[];
+}
+
+export interface Result {
+    name:  string;
+    users: number;
+    score: number | null;
+    tests: number;
+}

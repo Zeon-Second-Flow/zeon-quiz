@@ -72,7 +72,17 @@ export const signupSlice = createApi({
                 url: "/group/",
             }),
         }),
-      
+        logoutUser: builder.mutation<any, object>({
+            query: () => ({
+                url: "/account/logout/",
+                method: "POST",
+                headers: {
+                    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                    Authorization: "Bearer " + token.token,
+                    "Content-Type": "application/json"
+                },
+        })
+    }),
     }),
 });
 
@@ -83,6 +93,7 @@ export const {
     useChangePasswordMutation,
     useRestorePasswordMutation,
     useRestoreCompleteMutation,
-    useLazyGetGroupQuery
+    useLazyGetGroupQuery,
+    useLogoutUserMutation
 } = signupSlice;
 
