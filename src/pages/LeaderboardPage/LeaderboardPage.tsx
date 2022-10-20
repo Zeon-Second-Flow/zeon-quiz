@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import "./Leaderboard.scss";
 import axios from "axios";
+import {Link} from "react-router-dom";
+import {LeaderboardLoader} from "@/pages/LeaderboardPage/leaderboardLoader";
 
 
 interface IUsers {
@@ -19,10 +21,12 @@ interface IUsers {
 export const LeaderboardPage = () => {
     const [users, setUsers] = useState<IUsers[]>([]);
     const [sortBy, setSortBy] = useState("Points");
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         axios("https://safe-atoll-40972.herokuapp.com/account/users/?limit=10")
-            .then(({data}) => setUsers(data.results));
-
+            .then(({data}) => setUsers(data.results))
+            .then(() => {setIsLoading(false);});
     }, []);
 
 
@@ -52,20 +56,21 @@ export const LeaderboardPage = () => {
                 </div>
                 <ul className="toplist">
                     {
-                        users.map((it, idx) => {
-                            return (
-                                <li key={it.login} data-rank={idx + 1}>
-                                    <div className="thumb">
-                                        <span className="img" data-name={it.login}> </span>
-                                        <span className="name">{it.login} <span>Group: {it.group}</span> </span>
-                                        <span className="stat"><b>{sortBy === "Points" ?
-                                            it.overall_score : it.passed_tests}</b>{sortBy === "Points"
-                                            ? "points" : "games"}</span>
-                                    </div>
+                        isLoading? <LeaderboardLoader/> :
+                            users.map((it, idx) => {
+                                return (
+                                    <li key={it.login} data-rank={idx + 1}>
+                                        <div className="thumb">
+                                            <span className="img" data-name={it.login}> </span>
+                                            <span className="name"><Link to={`/profile-page/${it.login}`}>{it.login}</Link><span>Group: {it.group}</span> </span>
+                                            <span className="stat"><b>{sortBy === "Points" ?
+                                                it.overall_score : it.passed_tests}</b>{sortBy === "Points"
+                                                ? "points" : "games"}</span>
+                                        </div>
 
-                                </li>
-                            );
-                        })
+                                    </li>
+                                );
+                            })
                     }
                 </ul>
             </div>

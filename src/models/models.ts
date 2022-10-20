@@ -14,9 +14,22 @@ export interface IITem {
     test_passed: number;
 }
 
-
-
 export interface IQuestions {
+    questions: IQuestionsData[];
+    test: ITest | undefined;
+}
+
+export interface ITest {
+    description: string;
+    group: string;
+    image: string;
+    is_active: boolean;
+    questions_count: number;
+    title: string;
+    test_passed: number;
+}
+
+export interface IQuestionsData {
     id: number;
     question: string;
     image: string;
@@ -36,10 +49,18 @@ export interface IAnswer {
 }
 
 export interface IProps {
-  test: string;
+    test: string;
 }
 
 export interface ITest {
+    title: string; 
+    description: string;
+    image: string;
+    is_active: boolean;
+    group: string;
+}
+
+export interface Questions {
   id: number;
   question: string;
   image: string;
@@ -47,14 +68,16 @@ export interface ITest {
   timer: number;
   test: string;
   correct_answer: string;
-  answers: Answer[];
+  answers: IAnswerWrapper;
 }
 
-export interface Answer {
-  A: string;
-  B: string;
-  C: string;
-  D: string;
+export interface IResponse {
+    test: ITest; 
+    questions: Questions[];
+}
+
+export interface IAnswerWrapper {
+    0: {[key: string]: string};
 }
 
 export interface IQuiz {
@@ -74,7 +97,24 @@ export interface IQuiz {
         }
     ];
 }
+
 export interface IPhotoData {
     title: string;
     dataImage: File;
 }
+
+
+export interface IGroup {
+    count:    number;
+    next:     null;
+    previous: null;
+    results:  Result[];
+}
+
+export interface Result {
+    name:  string;
+    users: number;
+    score: number | null;
+    tests: number;
+}
+

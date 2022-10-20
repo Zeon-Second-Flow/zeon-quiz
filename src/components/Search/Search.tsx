@@ -20,10 +20,6 @@ export const Search = () => {
     const {data} = useGetTestsByNameQuery(debounced, {
         skip: debounced.length < 2
     });
-    // console.log(data);
-    // useEffect(() => {
-    //     console.log(debounced);
-    // }, [debounced]);
 
     const onBlur = () => {
         setTimeout(() => setShow(false), 200);
@@ -121,7 +117,7 @@ export const Search = () => {
                     </div>
                 ) : null}
             </div>
-            {data?.results.length != 0 && show && (
+            {data?.results?.length != 0 && show && (
                 <div className={styles.dataResultOutter}>
                     <div className={styles.dataResult}>
                         {data?.results.map((item: IITem, index: number) => (

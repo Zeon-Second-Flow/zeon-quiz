@@ -1,0 +1,76 @@
+.blockOutter {
+    background-color: #E5E5E5;
+    position: relative;
+    background-color: rgb(70, 23, 143);
+    overflow: hidden;
+    width: 100%;
+    max-height: 100%;
+    color: white;
+
+    .circle {
+        position: fixed;
+        pointer-events: none;
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+        opacity: 0.1;
+        min-width: 75vmin;
+        min-height: 75vmin;
+        bottom: -15vmin;
+        right: -15vmin;
+    }
+
+    .square {
+        position: fixed;
+        pointer-events: none;
+        transform: rotate(45deg);
+        background-color: rgb(0, 0, 0);
+        opacity: 0.1;
+        min-width: 75vmin;
+        min-height: 75vmin;
+        top: -15vmin;
+        left: -15vmin;
+    }
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 175px 0;
+
+    h4 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        margin: 0 0 12px 0;
+    }
+
+    span {
+        font-weight: 700;
+        font-size: 45px;
+        margin: 0 0 18px 0;
+    }
+
+    p {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        color: white;
+        margin: 0 0 48px 0;
+    }
+
+    button {
+        border: none;
+        outline: none;
+        width: 300px;
+        height: 56px;
+        background: #4B5FA5;
+        border-radius: 12px;
+        border: 1px solid white;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+}

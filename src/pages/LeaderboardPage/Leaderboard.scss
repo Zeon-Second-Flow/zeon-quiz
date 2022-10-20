@@ -1,6 +1,6 @@
 .leaderboardsBox {
     padding: 60px 30px  ;
-    background: lightgray;
+    background: rgb(79, 145, 241);
     min-height: 90vh;
 }
 
@@ -85,7 +85,7 @@
     font-weight: bold;
     color: rgba(255, 255, 255, 0.5);
     font-size: 12px;
-    cursor: pointer;
+
     transition: .25s;
 }
 
@@ -129,8 +129,8 @@
     font-weight: bold;
     margin-bottom: 7px;
     color: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
     transition: .25s;
+    cursor: pointer;
 }
 
 #leaderboards .options .sort .tabContents .tab > label:before {
@@ -170,7 +170,6 @@
     margin-bottom: 14px;
     box-shadow: 0 4px #C2C2C2;
     position: relative;
-    cursor: pointer;
 }
 
 #leaderboards .toplist li .thumb {
@@ -193,6 +192,7 @@
 #leaderboards .toplist li .thumb .name {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 #leaderboards .toplist li .thumb .img {
@@ -274,4 +274,50 @@
 .name {
     display: flex;
     flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+    .leaderboardsBox {
+        padding: 10px 30px 60px;
+    }
+
+    #leaderboards {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #leaderboards .options {
+        width: 100%;
+    }
+
+    #leaderboards .toplist {
+        width: 100%;
+    }
+
+    #leaderboards .toplist li .thumb .img {
+        display: none;
+    }
+}
+@media screen and (max-width: 420px) {
+    #leaderboards .toplist li .thumb .name {
+        display: inline-block;
+        width: 100px;
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+    }
+
+    #leaderboards .toplist li .thumb .stat b {
+        font-size: 15px;
+    }
+}
+@media screen and (max-width: 360px) {
+    #leaderboards .toplist li .thumb .name {
+        width: 75px;
+        font-size: 13px;
+    }
+
+    #leaderboards .toplist li .thumb .stat b {
+        font-size: 12px;
+    }
 }

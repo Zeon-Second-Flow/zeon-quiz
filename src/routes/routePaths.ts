@@ -12,15 +12,18 @@ export const routePath = {
     PAGE_NOT_FOUND: "*",
     QUESTION_PRELOAD: "question-preload",
     GAME: "game",
+    ROOM: "room",
     LOCALBOARD: "localboard",
     SEARCH_PAGE: "search-page/:value",
+    TESTS: "tests",
     DETAIL: "detail/:name",
     RESTORE_PASSWORD: "restore-password",
     RESTORE_COMPLETE: "restore-complete",
     YOUR_IN: "in",
     LEADERBOARD: "leaderboard",
     GROUP_PAGE: "group-page",
-    PROFILE_PAGE: "profile-page"
-};
-    
+    PROFILE_PAGE: "profile-page/:name",
+    PRIVATE_PAGE: "private",
+}; 
+
 

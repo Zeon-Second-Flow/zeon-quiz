@@ -6,8 +6,6 @@ import {store} from "./store/store";
 import {BrowserRouter} from "react-router-dom";
 
 
-window.store = store;
-
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <BrowserRouter>
         <Provider store={store}>

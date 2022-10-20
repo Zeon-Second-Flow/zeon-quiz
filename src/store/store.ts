@@ -2,9 +2,10 @@ import {signupSlice} from "./auth/signupSlice";
 import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit";
 import {reducer as websocket} from "./websocket/websocket";
 import {getTests} from "@/store/search/search.api";
-import { testApi } from './test/testSlice';
+import {testApi} from "./test/testSlice";
 import {profileSlice} from "./profile/profile.api";
 import {createTestSlice} from "@/store/slice/CreateTestSlice";
+
 
 export const store = configureStore({
     reducer: {

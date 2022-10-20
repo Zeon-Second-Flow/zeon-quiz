@@ -30,9 +30,8 @@
             font-size: 13px;
         }
 
-
         button {
-            background-color: #26890C;
+            background-color: #26890c;
             border-radius: 3px;
             padding: 10px 0;
             width: 160px;
@@ -54,16 +53,17 @@
     }
 }
 
-
 .videoHost {
-    background-color: #FF3355;
-    background: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-host.svg) no-repeat center center;
+    background-color: #ff3355;
+    background: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-host.svg)
+    no-repeat center center;
     background-size: cover;
 }
 
 .videoPlay {
-    background-color: #66BF39;
-    background: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-play.svg) no-repeat center center;
+    background-color: #66bf39;
+    background: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-play.svg)
+    no-repeat center center;
     background-size: cover;
 }
 
@@ -102,8 +102,9 @@
     border-radius: 3px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
-    a {
+    p {
         color: white;
+        cursor: pointer;
     }
 }
 
@@ -115,14 +116,12 @@
     display: flex;
     justify-content: center;
     border-radius: 3px;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12),
-        0 1px 4px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 
     a {
         color: white;
     }
 }
-
 
 .blockContextWhite {
     background-color: white;
@@ -153,20 +152,23 @@
         }
 
         .videoCreate {
-            background-color: #A2D1F2;
-            background-image: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-create.svg) no-repeat center center;
+            background-color: #a2d1f2;
+            background-image: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-create.svg)
+        no-repeat center center;
             background-size: cover;
         }
 
         .videoHost {
-            background-color: #FF3355;
-            background: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-host.svg) no-repeat center center;
+            background-color: #ff3355;
+            background: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-host.svg)
+        no-repeat center center;
             background-size: cover;
         }
 
         .videoPlay {
-            background-color: #66BF39;
-            background: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-play.svg) no-repeat center center;
+            background-color: #66bf39;
+            background: url(https://kahoot.com/wp-content/themes/kahoot2017/assets/img//background-images/bg-play.svg)
+        no-repeat center center;
             background-size: cover;
         }
 
@@ -196,8 +198,6 @@
         }
     }
 }
-
-
 
 @media screen and (max-width: 870px) {
     .wrapper {
@@ -231,7 +231,6 @@
         }
     }
 }
-
 
 @media screen and (max-width: 576px) {
     .imageWrapper {

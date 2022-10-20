@@ -20,10 +20,10 @@ const loginInputData = [
 ];
 
 export interface IValue {
-    login: string;
-    password: string;
-    refresh?: string;
-    access?: string;
+  login: string;
+  password: string;
+  refresh?: string;
+  access?: string;
 }
 
 const SignupSchema = Yup.object().shape({
@@ -37,7 +37,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 export const Login = () => {
-    const [loginUser] = useLoginUserMutation();
+    const [loginUser, {isLoading}] = useLoginUserMutation();
     const navigate = useNavigate();
     const [err, setErr] = useState("");
 
@@ -47,6 +47,7 @@ export const Login = () => {
             localStorage.setItem(
                 "token",
                 JSON.stringify({
+                    isStaff: data.is_staff,
                     refresh: data.refresh,
                     token: data.access,
                     email: values.login,
@@ -65,7 +66,6 @@ export const Login = () => {
         password: "",
     };
 
-
     return (
         <div className="signup">
             <div className="background">
@@ -81,7 +81,7 @@ export const Login = () => {
                     }}
                     validationSchema={SignupSchema}
                 >
-                    <Form className="form">
+                    <Form className="form" style={{top: "44%"}}>
                         <div className="form_inputs-wrapper">
                             {err && <p className="rejectMessage">{err}</p>}
                             {loginInputData.map((value, idx) => (
@@ -93,16 +93,21 @@ export const Login = () => {
                                 />
                             ))}
                         </div>
-                        <button type="submit" className="button">
-                            Submit
+                        <button
+                            type="submit"
+                            className={isLoading ? "buttonLoading" : "button"}
+                        >
+              Submit
                         </button>
-                        <NavLink className="linkTo" to="/auth">
-                            Register
-                        </NavLink>
+                        <div className="linkTo">
+                            <p>Forgotten password?</p>
+                            <NavLink to="/restore-password">
+                                <span>Restore password</span>
+                            </NavLink>
+                        </div>
                     </Form>
                 </Formik>
             </div>
         </div>
     );
 };
-

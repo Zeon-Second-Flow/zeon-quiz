@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./Leaderboard.scss";
+import {LeaderboardLoader} from "@/pages/LeaderboardPage/leaderboardLoader";
 
 
 interface IGroups {
@@ -14,10 +15,14 @@ interface IGroups {
 
 export const GroupLeaderboardPage = () => {
     const [groups, setGroups] = useState<IGroups[]>([]);
-    const [sortBy, setSortBy] = useState<string | number>("");
+    const [sortBy, setSortBy] = useState<string | number>("score");
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         axios("https://safe-atoll-40972.herokuapp.com/group/?limit=10")
-            .then(({data}) => setGroups(data.results));
+            .then(({data}) => {
+                setGroups(data.results);
+            })
+            .then(() => {setIsLoading(false);});
 
     }, []);
 
@@ -48,18 +53,20 @@ export const GroupLeaderboardPage = () => {
                 </div>
                 <ul className="toplist">
                     {
-                        groups.map((it, idx) => {
-                            return (
-                                <li key={it.name} data-rank={idx + 1}>
-                                    <div className="thumb">
-                                        <span className="img" data-name={it.name}> </span>
-                                        <span className="name">{it.name} </span>
-                                        <span className="stat"><b>{it[sortBy]}</b> {sortBy} </span>
-                                    </div>
+                        isLoading ? <LeaderboardLoader/> :
+                            groups.map((it, idx) => {
+                                return (
 
-                                </li>
-                            );
-                        })
+                                    <li key={it.name} data-rank={idx + 1}>
+                                        <div className="thumb">
+                                            <span className="img" data-name={it.name}> </span>
+                                            <span className="name">{it.name} </span>
+                                            <span className="stat"><b>{it[sortBy]}</b> {sortBy} </span>
+                                        </div>
+
+                                    </li>
+                                );
+                            })
                     }
                 </ul>
             </div>

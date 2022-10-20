@@ -32,3 +32,13 @@ export const useDebounce = (value: string, delay = 300): string => {
 
     return debounced;
 };
+
+export const useAuth = () => {
+    const user =
+    localStorage.getItem("token") &&
+    JSON.parse(localStorage.getItem("token") || "");
+
+    const isStaff = user?.isStaff;
+
+    return {user, isStaff};
+};

@@ -3,9 +3,11 @@ import {customFetchBase} from "@/store/auth/customFetchBase";
 import {IPhotoData, IQuiz} from "@/models/models";
 
 
+
 const token =
     localStorage.getItem("token") &&
     JSON.parse(localStorage.getItem("token") || "");
+
 
 export const createTestSlice = createApi({
     reducerPath: "createTest",
@@ -33,14 +35,15 @@ export const createTestSlice = createApi({
                     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
                     Authorization: "Bearer " + token.token,
                     "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
-
                 },
             }),
         }),
-    })
+    }),
 });
+
 
 export const {
     useCreateTestMutation,
     useSentImgMutation
 } = createTestSlice;
+
