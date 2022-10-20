@@ -72,18 +72,17 @@ export const signupSlice = createApi({
                 url: "/group/",
             }),
         }),
-        // logoutUser: builder.mutation<any, object>({
-        //     query: (data) => ({
-        //         url: "/account/logout/",
-        //         method: "POST",
-        //         body: JSON.stringify(data),
-        //         headers: {
-        //             // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-        //             Authorization: "Bearer " + token.token,
-        //             "Content-Type": "application/json"
-        //         },
-        // })
-    // }),
+        logoutUser: builder.mutation<any, object>({
+            query: () => ({
+                url: "/account/logout/",
+                method: "POST",
+                headers: {
+                    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                    Authorization: "Bearer " + token.token,
+                    "Content-Type": "application/json"
+                },
+        })
+    }),
     }),
 });
 
@@ -95,6 +94,6 @@ export const {
     useRestorePasswordMutation,
     useRestoreCompleteMutation,
     useLazyGetGroupQuery,
-    // useLogoutUserMutation
+    useLogoutUserMutation
 } = signupSlice;
 

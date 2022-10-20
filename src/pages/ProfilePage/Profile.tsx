@@ -6,6 +6,7 @@ import { ReactComponent as ChangePasswordLogo } from "@/assets/key-solid.svg";
 import { ReactComponent as LogoutLogo } from "@/assets/logout.svg";
 import { MyLoader } from "@/components/Loader/MyLoader";
 import { NavLink } from "react-router-dom";
+import { useLogoutUserMutation } from "@/store/auth/signupSlice";
 
 export const Profile = () => {
   const token =
@@ -14,6 +15,8 @@ export const Profile = () => {
 
   const [getUser, { data, isLoading }] = useLazyGetUserQuery();
 
+  const [logoutUser] = useLogoutUserMutation();
+
   useEffect(() => {
     getUser(token.email);
   }, []);
@@ -21,6 +24,10 @@ export const Profile = () => {
   if (isLoading) {
     return <MyLoader />;
   }
+
+  const fetchLogoutUser = () => {
+    logoutUser(token.refresh);
+  };
 
   return (
     <div className={styles.profile}>
@@ -38,10 +45,12 @@ export const Profile = () => {
                     <ChangePasswordLogo className={styles.logo} />
                     <span>Change password</span>
                   </NavLink>
-                  <NavLink to="/logout">
-                    <LogoutLogo className={styles.logo} />
-                    <span>Logout</span>
-                  </NavLink>
+                  <div>
+                    <NavLink to="/logout">
+                      <LogoutLogo className={styles.logo} />
+                      <span onClick={fetchLogoutUser}>Logout</span>
+                    </NavLink>
+                  </div>
                 </div>
               </div>
               <div className={styles.info}>
