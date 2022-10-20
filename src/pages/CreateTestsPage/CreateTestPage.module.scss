@@ -313,11 +313,127 @@
     transition: box-shadow 0.2s ease 0s, background 0.2s ease 0s, opacity 0.2s ease 0s;
     border-radius: 4px;
     min-height: 2.25rem;
-    max-width: 100%;
+    max-width: 80%;
     background-color: rgb(255, 255, 255);
     fill: rgb(255, 255, 255);
     border: none;
     line-height: 1.25;
     height: 86px;
     word-break: break-word;
+}
+@media (max-width: 1050px) {
+    .questionInputText {
+        max-width: 70%  ;
+    }
+}
+@media (max-width: 997px) {
+    .creatorSlideBar {
+        position: absolute;
+        //left: 0;
+        //right: 0;
+        bottom: 0;
+        height: 9.5rem;
+        width: 100%;
+    }
+
+    .questionInpBox {
+        margin-top: 20px;
+    }
+
+    .blockSlider {
+        display: flex;
+        width: auto;
+        overflow-y: hidden;
+        overflow-x: auto;
+        padding-right: 220px;
+        padding-bottom: 170px;
+
+        &::-webkit-scrollbar {
+            height: 7px;
+            background: #bbb;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            width: 7px;
+            background: white;
+            border-radius: 12px;
+        }
+    }
+
+    .creatorSlideBar {
+        overflow-x: auto;
+        flex-direction: row;
+        z-index: 10;
+    }
+
+    .sliderBarBtnBox {
+        bottom: 0;
+        right: 10px;
+        width: 200px;
+        min-width: 200px;
+    }
+
+    .createTestFormBox {
+        padding-left: 0;
+        padding-bottom: 160px;
+    }
+
+    .questionBox {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .questionSvgBox {
+        height: 70px;
+    }
+
+    .questionInputText {
+        max-width: 100%  ;
+    }
+
+    .catBox {
+        top: 50px;
+    }
+
+    .sliderBlockItem {
+        min-width: 240px;
+    }
+}
+@media (max-width: 780px) {
+    .questionInputText {
+        max-width: 70%  ;
+    }
+
+    .questionSvgBox {
+        width: 30px;
+    }
+}
+@media (max-width: 540px) {
+    .questionSvgBox {
+        display: none;
+    }
+
+    .finishBtn {
+        top: 58px;
+        z-index: 30;
+    }
+
+    .createTestFormBox .createTestForm {
+        padding: 0 0 150px 0;
+        display: block;
+        margin-bottom: 30px;
+        height: 500px;
+        overflow: auto;
+    }
+
+    .questionBox {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .questionInputBox {
+        width: 80%;
+    }
 }

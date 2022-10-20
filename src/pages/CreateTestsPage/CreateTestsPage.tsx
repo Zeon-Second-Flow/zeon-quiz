@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import style from "./CreateTestPage.module.scss";
 import {QuizSliderBlock} from "@/components/CreateSliderBlock/QuizSliderBlock";
 import {CustomSelect} from "@/components/CustomSelect/CustomSelect";
@@ -6,7 +6,8 @@ import {Cat} from "@/components/Cat/Cat";
 import {AnswerItem} from "@/components/AnswerItem/AnswerItem";
 import {circleSVG, squareSVG, triangleSVG, rhombusSVG, deleteIcon} from "@/components/SVG/svg";
 import {CreateTestPreviewComponent} from "@/components/CreateTestPreviewComponent/CreateTestPreviewComponent";
-import {useCreateTestMutation} from "@/store/slice/CreateTestSlice";
+import {useCreateTestMutation, useSentImgMutation} from "@/store/slice/CreateTestSlice";
+import axios from "axios";
 
 
 export const CreateTestsPage = () => {
@@ -21,9 +22,12 @@ export const CreateTestsPage = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [img, setImg] = useState(Object);
-    const [toggleForm, setToggleForm] = useState(true);
+    const [toggleForm, setToggleForm] = useState(false);
     const [createTest] = useCreateTestMutation();
-
+    const [sentPhoto] = useSentImgMutation();
+    const inpImgRef = useRef<HTMLInputElement | any>(null);
+    const [data, setDate]= useState<object >({});
+    const [respons, setRespons] = useState("");
     const questionModel = {
         question: "",
         id: Math.random().toString(16).slice(5),
@@ -39,8 +43,8 @@ export const CreateTestsPage = () => {
     };
     const [quizArr, setQuizArr] = useState([{...questionModel}]);
     const [currentTest, setCurrenTest] = useState<string>(quizArr[0].id);
-
-    // console.log(quizArr)
+    const [testError, setTestError] = useState<null | any>(null);
+    const dataImg = new FormData();
     const tes = {
         question,
         points,
@@ -51,6 +55,7 @@ export const CreateTestsPage = () => {
         ans4,
         rightAns
     };
+
     const pointsOption = [
         {value: 80, label: "80 points"},
         {value: 90, label: "90 points"},
@@ -58,6 +63,7 @@ export const CreateTestsPage = () => {
         {value: 110, label: "110 points"},
         {value: 120, label: "120 points"}
     ];
+
     const timeOption = [
         {value: 5, label: "5 seconds"},
         {value: 10, label: "10 seconds"},
@@ -73,6 +79,12 @@ export const CreateTestsPage = () => {
             await setData(currentTest);
         };
         editData();
+        setDate({
+            title: title,
+            // image: img,
+            description: description,
+            questions: quizArr
+        });
 
     }, [question, points, ans4, ans3, time, quizArr.length, currentTest, rightAns]);
 
@@ -123,34 +135,48 @@ export const CreateTestsPage = () => {
         }
     };
 
-    const data = {
-        title: title,
-        // image: img,
-        description: description,
-        questions: quizArr
-    };
-    // console.log(img)
+
     const postTest = async () => {
-
-        console.log(data);
-
+        const dataImg = new FormData();
+        dataImg.append("image", img, img.name );
+        console.log(dataImg.get("image"));
+        console.log(dataImg);
+        const token =
+            localStorage.getItem("token") &&
+            JSON.parse(localStorage.getItem("token") || "");
         try {
-            await createTest(data);
-            // @ts-ignore
-        } catch (error: void) {
-            for (const key in error.data) {
-                console.log(error.data[key]);
+            const response =  await createTest(data).unwrap();
+            console.log(response);
+            if (!!response){
+                try {
+                    console.log(response);
+                    // const resp = await sentPhoto({dataImg, response}).unwrap()
+                    const resp = axios.patch(`https://safe-atoll-40972.herokuapp.com/tests/${response}/`, img, {
+                        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                        Authorization: "Bearer " + token.token,
+                        "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>"
+                    }).then(data => console.log(data, "reeeeeeeeeeeeeeeeeeee"));
+                    // console.log(resp, )
+                }
+                catch (err: typeof err) {
+                    console.log(err, "aaaaaaaaaaaaaaaaaaaaaaa");
+                }
             }
-            console.log(error);
+        } catch (error: typeof error) {
+            setToggleForm(true);
+            for (const key in error.data) {
+                setTestError(...error.data.title);
+            }
         }
-
-
     };
 
     return (
         <>
             {toggleForm &&
-            <CreateTestPreviewComponent title={title} setTitle={setTitle}
+            <CreateTestPreviewComponent
+                description={description}
+                testError={testError}
+                inpImgRef={inpImgRef} title={title} setTitle={setTitle}
                 setDescription={setDescription}
                 img={img} setImg={setImg}
                 setToggleForm={setToggleForm}
@@ -165,7 +191,7 @@ export const CreateTestsPage = () => {
                             it={it} idx={idx}/>);})}
                     </div>
                     <div className={style.sliderBarBtnBox}>
-                        <button onClick={addQuiz}>Add quiz</button>
+                        <button onClick={addQuiz}>Add question</button>
                     </div>
                 </div>
                 <div className={style.createTestFormBox}>
@@ -176,9 +202,11 @@ export const CreateTestsPage = () => {
                     <form  className={style.createTestForm} action="">
                         <button type={"button"} onClick={postTest} disabled={!(!!quizArr[0].question &&
                             !!quizArr[0].answers.A && !!quizArr[0].answers.B &&
-                            !!quizArr[0].answers.C && !!quizArr[0].answers.D) }
+                            !!quizArr[0].answers.C && !!quizArr[0].answers.D) &&
+                            !!quizArr[0].answers.correct_answer }
                         style={!!quizArr[0].question && !!quizArr[0].answers.A && !!quizArr[0].answers.B &&
-                                !!quizArr[0].answers.C && !!quizArr[0].answers.D ? {} : {background: "gray"}}
+                               !!quizArr[0].answers.C && !!quizArr[0].answers.D &&
+                               !!quizArr[0].answers.correct_answer ? {} : {background: "gray"}}
                         className={style.finishBtn}>
                             Done
                         </button>

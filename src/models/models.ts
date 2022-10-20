@@ -74,4 +74,7 @@ export interface IQuiz {
         }
     ];
 }
-
+export interface IPhotoData {
+    title: string;
+    dataImage: File;
+}

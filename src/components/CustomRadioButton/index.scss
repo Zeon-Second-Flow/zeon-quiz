@@ -84,3 +84,9 @@ $font-active-content: "\f00c";
         }
     }
 }
+@media (max-width: 780px) {
+    .product-color li label {
+        width: 30px;
+        height: 30px;
+    }
+}
