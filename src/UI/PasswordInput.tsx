@@ -1,11 +1,11 @@
 import {useField} from "formik";
 import {useState} from "react";
-import {ReactComponent as PasswordIcon} from "@/assets/auth/eye-close.svg";
-import {ReactComponent as PasswordShowIcon} from "@/assets/auth/eye-open.svg";
+import PasswordIcon from "@/assets/auth/eye-close.svg";
+import PasswordShowIcon from "@/assets/auth/eye-open.svg";
 import styles from "./FormInput.module.scss";
 
 
- interface IProps {
+interface IProps {
   name: string;
   placeholder: string;
   type: string;
@@ -29,14 +29,26 @@ export const PasswordField = (props: IProps) => {
             />
 
             {isShowPassword && props.name === "password" ? (
-                <PasswordShowIcon
+            // <PasswordShowIcon
+            //   onClick={() => setIsShowPassword(!isShowPassword)}
+            //   className={styles.showPassword}
+            // />
+                <img
+                    src={PasswordShowIcon}
                     onClick={() => setIsShowPassword(!isShowPassword)}
                     className={styles.showPassword}
+                    alt=""
                 />
             ) : (
-                <PasswordIcon
+            // <PasswordIcon
+            //   className={styles.hidePassword}
+            //   onClick={() => setIsShowPassword(!isShowPassword)}
+            // />
+                <img
+                    src={PasswordIcon}
                     className={styles.hidePassword}
                     onClick={() => setIsShowPassword(!isShowPassword)}
+                    alt=""
                 />
             )}
         </div>

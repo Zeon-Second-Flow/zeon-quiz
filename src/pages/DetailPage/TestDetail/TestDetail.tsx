@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "@/pages/DetailPage/DetailPage.module.scss";
 import TestImage from "@/assets/test-image.png";
 import {ITest} from "@/models/models";

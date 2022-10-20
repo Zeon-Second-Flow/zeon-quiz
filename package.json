@@ -7,6 +7,7 @@
     "test": "echo check",
     "start": "vite --open",
     "build": "tsc && vite build",
+    "builda": "vite build",
     "preview": "vite preview",
     "lint-ts": "eslint . --ext .ts,.tsx",
     "lint-ts-fix": "eslint . --ext .ts,.tsx --fix",

@@ -1,6 +1,5 @@
-import React from "react";
 import style from "@/pages/CreateTestsPage/CreateTestPage.module.scss";
-import {CustomRadioButton} from "../CustomRadioButton/CustomRadioButton.js";
+import {CustomRadioButton} from "../CustomRadioButton/CustomRadioButton";
 
 
 interface IProps {

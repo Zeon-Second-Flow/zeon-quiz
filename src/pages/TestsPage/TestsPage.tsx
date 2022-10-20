@@ -1,5 +1,4 @@
 import {useGetAllTestsQuery} from "@/store/search/search.api";
-import React from "react";
 import styles from "./TestsPage.module.scss";
 import {Link, useParams} from "react-router-dom";
 import TestImage from "@/assets/test-image.png";

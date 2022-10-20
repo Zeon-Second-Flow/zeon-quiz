@@ -1,9 +1,9 @@
 import {IUser, useLazyGetUserQuery} from "@/store/profile/profile.api";
 import {useEffect} from "react";
 import styles from "./Profile.module.scss";
-import {ReactComponent as UserLogo} from "@/assets/userLogo.svg";
-import {ReactComponent as ChangePasswordLogo} from "@/assets/key-solid.svg";
-import {ReactComponent as LogoutLogo} from "@/assets/logout.svg";
+import UserLogo from "@/assets/userLogo.svg";
+import ChangePasswordLogo from "@/assets/key-solid.svg";
+import LogoutLogo from "@/assets/logout.svg";
 import {MyLoader} from "@/components/Loader/MyLoader";
 import {NavLink, useParams, useNavigate} from "react-router-dom";
 import {useLogoutUserMutation} from "@/store/auth/signupSlice";
@@ -43,24 +43,33 @@ export const Profile = () => {
                 {data &&
           data.map((user: IUser) => (
               <div className={styles.login}>
-                  {name === token.email && <div className={styles.logo_block}>
-                      <div className={styles.logo_block_info}>
-                          <h3>
-                              <UserLogo className={styles.logo} />
-                              {user.login}
-                          </h3>
-                          <NavLink to="/change-password">
-                              <ChangePasswordLogo className={styles.logo} />
-                              <span>Change password</span>
-                          </NavLink>
-                          <div>
-                              <NavLink to="/logout">
-                                  <LogoutLogo className={styles.logo} />
-                                  <span onClick={fetchLogoutUser}>Logout</span>
+                  {name === token.email && (
+                      <div className={styles.logo_block}>
+                          <div className={styles.logo_block_info}>
+                              <h3>
+                                  {/* <UserLogo className={styles.logo} /> */}
+                                  <img className={styles.logo} src={UserLogo} alt="" />
+                                  {user.login}
+                              </h3>
+                              <NavLink to="/change-password">
+                                  {/* <ChangePasswordLogo className={styles.logo} /> */}
+                                  <img
+                                      src={ChangePasswordLogo}
+                                      className={styles.logo}
+                                      alt=""
+                                  />
+                                  <span>Change password</span>
                               </NavLink>
+                              <div>
+                                  <NavLink to="/logout">
+                                      {/* <LogoutLogo className={styles.logo} /> */}
+                                      <img src={LogoutLogo} className={styles.logo} alt="" />
+                                      <span onClick={fetchLogoutUser}>Logout</span>
+                                  </NavLink>
+                              </div>
                           </div>
                       </div>
-                  </div>}
+                  )}
                   <div className={styles.info}>
                       <div className={styles.card}>
                           <div className={styles.content}>

@@ -1,10 +1,9 @@
-import React from "react";
 
 
 export const DetailCard = () => {
     return (
         <div>
-
+            a
         </div>
     );
 };

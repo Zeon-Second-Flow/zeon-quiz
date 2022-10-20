@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./RulesPage.module.scss";
 
 import createImg from "@/assets/rules/create.png";

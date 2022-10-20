@@ -1,7 +1,6 @@
-import React from "react";
 import {Link} from "react-router-dom";
-import {ReactComponent as User} from "@/assets/user.svg";
-import {ReactComponent as Close} from "@/assets/close.svg";
+import User from "@/assets/user.svg";
+import Close from "@/assets/close.svg";
 import styles from "./Burger.module.scss";
 import Logo from "@/assets/logo.png";
 import {useAuth} from "@/hooks";
@@ -37,12 +36,20 @@ export const Burger = ({setOpen}: IProps) => {
                         </li>
                     </ul>
                 </nav>
-                <Close className={styles.closeIcon} width={24} onClick={close} />
+                {/* <Close className={styles.closeIcon} width={24} onClick={close} /> */}
+                <img
+                    src={Close}
+                    alt="User"
+                    className={styles.closeIcon}
+                    width={24}
+                    onClick={close}
+                />
                 <Link
                     to={user ? `/profile-page/${user.email}` : "/auth"}
                     onClick={close}
                 >
-                    <User />
+                    <img src={User} alt="User" />
+                    {/* <User /> */}
                 </Link>
             </div>
         </div>

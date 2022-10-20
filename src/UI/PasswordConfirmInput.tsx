@@ -1,8 +1,8 @@
 import {useField} from "formik";
 import {useState} from "react";
 import styles from "./FormInput.module.scss";
-import {ReactComponent as PasswordIcon} from "@/assets/auth/eye-close.svg";
-import {ReactComponent as PasswordShowIcon} from "@/assets/auth/eye-open.svg";
+import PasswordIcon from "@/assets/auth/eye-close.svg";
+import PasswordShowIcon from "@/assets/auth/eye-open.svg";
 
 
 interface IProps {
@@ -28,14 +28,26 @@ export const PasswordConfirmField = (props: IProps) => {
                 autoComplete="off"
             />
             {isEyeOpen && props.name === "password_confirm" ? (
-                <PasswordShowIcon
+            // <PasswordShowIcon
+            //   onClick={() => setIsEyeOpen(!isEyeOpen)}
+            //   className={styles.showPassword}
+            // />
+                <img
+                    src={PasswordShowIcon}
                     onClick={() => setIsEyeOpen(!isEyeOpen)}
                     className={styles.showPassword}
+                    alt=""
                 />
             ) : (
-                <PasswordIcon
+            // <PasswordIcon
+            //   className={styles.hidePassword}
+            //   onClick={() => setIsEyeOpen(!isEyeOpen)}
+            // />
+                <img
+                    src={PasswordIcon}
                     className={styles.hidePassword}
                     onClick={() => setIsEyeOpen(!isEyeOpen)}
+                    alt=""
                 />
             )}
         </div>

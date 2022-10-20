@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import styles from "./Header.module.scss";
 import {Link} from "react-router-dom";
 import {Search} from "@/components/Search/Search";
 import Logo from "@/assets/logo.png";
-import {ReactComponent as BurgerMenu} from "@/assets/burger-menu.svg";
-import {ReactComponent as User} from "@/assets/user.svg";
+import BurgerMenu from "@/assets/BurgermMenu.svg";
+import User from "@/assets/user.svg";
 import {Burger} from "@/components/Burger/Burger";
 import {useAuth} from "@/hooks";
 
@@ -17,7 +17,13 @@ export const Header = () => {
         <div className={styles.header}>
             <div className="container">
                 <div className={styles.wrapper}>
-                    <BurgerMenu className={styles.burger} onClick={() => setOpen(true)} />
+                    {/* <BurgerMenu className={styles.burger} onClick={() => setOpen(true)} /> */}
+                    <img
+                        className={styles.burger}
+                        onClick={() => setOpen(true)}
+                        src={BurgerMenu}
+                        alt="Icon"
+                    />
                     <Link to={"/"}>
                         <div className={styles.logo}>
                             <img width={120} src={Logo} alt="logo" />
@@ -42,7 +48,8 @@ export const Header = () => {
                         className={styles.userLogo}
                         to={user ? `/profile-page/${user.email}` : "/auth"}
                     >
-                        <User />
+                        {/* <User /> */}
+                        <img src={User} alt="Icon" />
                     </Link>
                 </div>
             </div>

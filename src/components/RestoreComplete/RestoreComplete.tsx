@@ -4,7 +4,7 @@ import {
 } from "@/store/auth/signupSlice";
 import {FormInput} from "@/UI/FormInput";
 import {Form, Formik} from "formik";
-import React, {useState} from "react";
+import {useState} from "react";
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import * as Yup from "yup";
 

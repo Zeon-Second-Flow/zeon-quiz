@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import {useState, useEffect, useRef} from "react";
 import style from "./CreateTestPage.module.scss";
 import {QuizSliderBlock} from "@/components/CreateSliderBlock/QuizSliderBlock";
 import {CustomSelect} from "@/components/CustomSelect/CustomSelect";

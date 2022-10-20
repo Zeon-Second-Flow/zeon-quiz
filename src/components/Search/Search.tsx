@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import styles from "./Search.module.scss";
-import {ReactComponent as CloseIcon} from "@/assets/close.svg";
-import {ReactComponent as SearchIcon} from "@/assets/searchIcon.svg";
+import CloseIcon from "@/assets/close.svg";
+import SearchIcon from "@/assets/searchIcon.svg";
 import {SearchCard} from "@/components/Search/SearchCard";
 import {useNavigate} from "react-router-dom";
 import {useDebounce} from "@/hooks";
@@ -18,7 +18,7 @@ export const Search = () => {
     const [searchValue, setSearchValue] = useState("");
 
     const {data} = useGetTestsByNameQuery(debounced, {
-        skip: debounced.length < 2
+        skip: debounced.length < 2,
     });
 
     const onBlur = () => {
@@ -78,9 +78,15 @@ export const Search = () => {
                         type="text"
                     />
                     <div className={styles.searchIcon}>
-                        <SearchIcon
+                        {/* <SearchIcon
+              className={styles.searchIcon}
+              onClick={handleNavigate}
+            /> */}
+                        <img
+                            src={SearchIcon}
                             className={styles.searchIcon}
                             onClick={handleNavigate}
+                            alt="Icon"
                         />
                     </div>
                 </div>
@@ -88,15 +94,16 @@ export const Search = () => {
             <div className={styles.smallSearch}>
                 {showInput ? (
                     <div onClick={closeInput}>
-                        <CloseIcon
-                            // onClick={() => data?.results = }
-                            className={styles.searchIcon}
-                        />
+                        {/* <CloseIcon
+              // onClick={() => data?.results = }
+              className={styles.searchIcon}
+            /> */}
+                        <img src={CloseIcon} className={styles.searchIcon} alt="Icon" />
                     </div>
                 ) : (
                     <div onClick={openInput}>
-                        <SearchIcon
-                            className={styles.searchIcon}/>
+                        {/* <SearchIcon className={styles.searchIcon} /> */}
+                        <img src={SearchIcon} className={styles.searchIcon} alt="Icon" />
                     </div>
                 )}
                 {showInput ? (
@@ -111,7 +118,8 @@ export const Search = () => {
                                 type="text"
                             />
                             <div className={styles.smallSearchIcon}>
-                                <SearchIcon onClick={handleNavigate}/>
+                                {/* <SearchIcon onClick={handleNavigate} /> */}
+                                <img src={SearchIcon} onClick={handleNavigate} alt="Icon" />
                             </div>
                         </div>
                     </div>

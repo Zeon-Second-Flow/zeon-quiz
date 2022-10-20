@@ -1,5 +1,5 @@
 import {useLazyGetTestsByNameQuery} from "@/store/search/search.api";
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 import styles from "./SearchPage.module.scss";
 import {Link, useParams} from "react-router-dom";
 import TestImage from "@/assets/test-image.png";

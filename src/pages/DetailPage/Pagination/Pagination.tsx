@@ -1,8 +1,7 @@
-import React from "react";
 import ReactPaginate from "react-paginate";
 import styles from "@/pages/DetailPage/DetailPage.module.scss";
-import {ReactComponent as Right} from "@/assets/arrow-right.svg";
-import {ReactComponent as Left} from "@/assets/arrow-left.svg";
+import Right from "@/assets/arrow-right.svg";
+import Left from "@/assets/arrow-left.svg";
 
 
 type handleClickType = {
@@ -25,13 +24,15 @@ export const Pagination = ({setPage, page, countItems}: IProps) => {
         <div className={styles.pagination}>
             <ReactPaginate
                 breakLabel="..."
-                nextLabel={<Right />}
+                // nextLabel={<Right />}
+                nextLabel={<img src={Right} />}
                 previousLinkClassName={styles.prev}
                 nextLinkClassName={styles.next}
                 onPageChange={handlePageClick}
                 activeClassName={styles.active}
                 disabledClassName={styles.disabled}
-                previousLabel={<Left />}
+                // previousLabel={<Left />}
+                previousLabel={<img src={Left} />}
                 pageCount={countItems}
                 pageRangeDisplayed={1}
             />
