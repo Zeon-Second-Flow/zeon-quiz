@@ -175,10 +175,10 @@ export const TestPage = () => {
                 ) : ( */}
                                     <img src={logo} alt="default image" />
                                 </div>
-                                <div className={styles.points}>
+                                {/* <div className={styles.points}>
                                     <span>0</span>
                                     <h3>Answers</h3>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     )}

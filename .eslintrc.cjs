@@ -18,7 +18,6 @@ module.exports = {
         "@types/assets/index.d.ts"
     ],
     rules: {
-        "max-len": ["warn", 150], // максимальная длина строки
         "max-statements-per-line": ["warn", {max: 1}], // ограничение на кол-во выражений в 1 строке
         "semi": ["error", "always"],
         "no-multiple-empty-lines": "off",

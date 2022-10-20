@@ -98,6 +98,12 @@ export interface IQuiz {
     ];
 }
 
+export interface IPhotoData {
+    title: string;
+    dataImage: File;
+}
+
+
 export interface IGroup {
     count:    number;
     next:     null;
@@ -111,3 +117,4 @@ export interface Result {
     score: number | null;
     tests: number;
 }
+

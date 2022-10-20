@@ -30,15 +30,18 @@ export const Burger = ({setOpen}: IProps) => {
                             <Link to={"/rules"}>Rules</Link>
                         </li>
                         <li className={styles.menuItem} onClick={close}>
-              Leaderboards
+                            <Link to={"/leaderboard"}>Leaderboards</Link>
                         </li>
                         <li className={styles.menuItem} onClick={close}>
-              Groups
+                            <Link to={"/group-page"}>Groups</Link>
                         </li>
                     </ul>
                 </nav>
                 <Close className={styles.closeIcon} width={24} onClick={close} />
-                <Link to={user ? "/profile-page" : "/auth"} onClick={close}>
+                <Link
+                    to={user ? `/profile-page/${user.email}` : "/auth"}
+                    onClick={close}
+                >
                     <User />
                 </Link>
             </div>

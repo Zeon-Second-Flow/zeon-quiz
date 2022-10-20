@@ -10,21 +10,31 @@ interface IProps {
     setDescription: (e: string) => void;
     title: string;
     setToggleForm: (e: boolean) => void;
+    inpImgRef : any;
+    testError: any;
+    description: string;
 }
 
 
-export const CreateTestPreviewComponent = ({setTitle, setDescription, img, setImg, title, setToggleForm}: IProps) => {
+export const CreateTestPreviewComponent = ({testError,
+    description,
+    setTitle,
+    inpImgRef,
+    setDescription,
+    img,
+    setImg,
+    title,
+    setToggleForm}: IProps) => {
 
     const [err, setErr] = useState(false);
     const handleClick = () => {
-        if (title.length <= 5) {
+        if (title.length <= 2) {
             setErr(true);
         } else (
             setToggleForm(false)
         );
     };
 
-    console.log(img);
     return (
         <div className={style.previewBox}>
             <div className={style.previewContentBox}>
@@ -33,6 +43,7 @@ export const CreateTestPreviewComponent = ({setTitle, setDescription, img, setIm
                 </h3>
                 <p>Title:</p>
                 <div className={style.previewTitleInp}>
+                    <span>{testError}</span>
                     <input style={err ? {border: "1px solid red"} : {}} maxLength={100} onChange={(e) => setTitle(e.target.value)}
                         required={true} placeholder="Name of quiz" type="text"/>
                     <span style={title.length === 0 ? {color: "white"} : {}}>{100 - title.length}</span>
@@ -42,11 +53,10 @@ export const CreateTestPreviewComponent = ({setTitle, setDescription, img, setIm
 
                 <input onChange={e => {
                     setImg(e.target.files?.[0]);
-
-                }} className={style.customFileInput} type="file"/>
+                }} className={style.customFileInput} ref={inpImgRef} type="file"/>
 
                 <p>Description:</p>
-                <textarea onChange={(e) => setDescription(e.target.value)}
+                <textarea value={description} onChange={(e) => setDescription(e.target.value)}
                     className={style.previewDescInp}>
                 </textarea>
 

@@ -34,7 +34,7 @@ export const profileSlice = createApi({
     reducerPath: "userProfile",
     baseQuery: customFetchBase,
     endpoints: (builder) => ({
-        getUser: builder.query<IUser, string>({
+        getUser: builder.query<IUser, string | undefined>({
             query: (login) => ({
                 url: `/account/users/${login}`,
                 headers: {

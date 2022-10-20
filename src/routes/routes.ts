@@ -12,14 +12,17 @@ import {SearchPage} from "@/pages/searchPage/SearchPage";
 import {DetailPage} from "@/pages/DetailPage/DetailPage";
 import {RestorePassword} from "@/components/RestorePassword/RestorePassword";
 import {RestoreComplete} from "@/components/RestoreComplete/RestoreComplete";
-import {questionPreload} from "@/pages/questionPreload/questionPreload";
-import {LocalBoard} from "@/pages/LocalBoard/LocalBoard";
 import {YourIn} from "@/pages/YourIn/YourIn";
 import {Profile} from "@/pages/ProfilePage/Profile";
+import {LeaderboardPage} from "@/pages/LeaderboardPage/LeaderboardPage";
+import {GroupLeaderboardPage} from "@/pages/LeaderboardPage/GroupLeaderboardPage";
+import {questionPreload} from "@/pages/questionPreload/questionPreload";
+import {LocalBoard} from "@/pages/LocalBoard/LocalBoard";
 import {ErrorPage} from "@/pages/ErrorPage/Error";
 import {PrivatePage} from "@/pages/PrivatePage/PrivatePage";
 import {TestPage} from "@/pages/TestPage/TestPage";
 import {TestsPage} from "@/pages/TestsPage/TestsPage";
+
 
 
 export const publicRoutes = [
@@ -46,6 +49,34 @@ export const publicRoutes = [
     {
         path: routePath.DETAIL,
         component: DetailPage,
+    },
+    // {
+    //     path: routePath.GAME,
+    //     component: GamePage
+    // },
+    {
+        path: routePath.LEADERBOARD,
+        component: LeaderboardPage
+    },
+    {
+        path: routePath.GROUP_PAGE,
+        component: GroupLeaderboardPage
+    },
+    {
+        path: routePath.QUESTION_PRELOAD, 
+        component: questionPreload,
+    },
+    {path: routePath.QUESTION_PRELOAD, 
+        component: questionPreload,
+      
+    },
+    {
+        path: routePath.LOCALBOARD, 
+        component: LocalBoard
+    },
+    {
+        path: routePath.YOUR_IN, 
+        component: YourIn
     },
     {
         path: routePath.GAME,

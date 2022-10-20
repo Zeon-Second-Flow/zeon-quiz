@@ -55,6 +55,8 @@ export const GamePage = () => {
         });
 
         socket.on("starting", () => {
+            console.log("START");
+            
             const test = search.slice(1, search.length);
             navigate(`/game?${test}`);
         });

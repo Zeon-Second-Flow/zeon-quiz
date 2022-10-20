@@ -5,7 +5,7 @@ import {ReactComponent as UserLogo} from "@/assets/userLogo.svg";
 import {ReactComponent as ChangePasswordLogo} from "@/assets/key-solid.svg";
 import {ReactComponent as LogoutLogo} from "@/assets/logout.svg";
 import {MyLoader} from "@/components/Loader/MyLoader";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useParams, useNavigate} from "react-router-dom";
 import {useLogoutUserMutation} from "@/store/auth/signupSlice";
 
 
@@ -14,6 +14,8 @@ export const Profile = () => {
     localStorage.getItem("token") &&
     JSON.parse(localStorage.getItem("token") || "");
 
+    const {name} = useParams();
+
     const [getUser, {data, isLoading}] = useLazyGetUserQuery();
     const [logoutUser] = useLogoutUserMutation();
     const navigate = useNavigate();
@@ -21,7 +23,7 @@ export const Profile = () => {
     console.log(data, "data");
 
     useEffect(() => {
-        getUser(token.email);
+        getUser(name);
     }, []);
 
     if (isLoading) {
@@ -41,7 +43,7 @@ export const Profile = () => {
                 {data &&
           data.map((user: IUser) => (
               <div className={styles.login}>
-                  <div className={styles.logo_block}>
+                  {name === token.email && <div className={styles.logo_block}>
                       <div className={styles.logo_block_info}>
                           <h3>
                               <UserLogo className={styles.logo} />
@@ -51,13 +53,14 @@ export const Profile = () => {
                               <ChangePasswordLogo className={styles.logo} />
                               <span>Change password</span>
                           </NavLink>
-
-                          <div onClick={fetchLogoutUser}>
-                              <LogoutLogo className={styles.logo} />
-                              <span>Logout</span>
+                          <div>
+                              <NavLink to="/logout">
+                                  <LogoutLogo className={styles.logo} />
+                                  <span onClick={fetchLogoutUser}>Logout</span>
+                              </NavLink>
                           </div>
                       </div>
-                  </div>
+                  </div>}
                   <div className={styles.info}>
                       <div className={styles.card}>
                           <div className={styles.content}>

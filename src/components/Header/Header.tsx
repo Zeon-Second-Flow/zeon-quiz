@@ -12,6 +12,7 @@ import {useAuth} from "@/hooks";
 export const Header = () => {
     const [open, setOpen] = useState(false);
     const {user} = useAuth();
+    console.log(user);
     return (
         <div className={styles.header}>
             <div className="container">
@@ -27,15 +28,19 @@ export const Header = () => {
                             <li className={styles.menuItem}>
                                 <Link to={"/rules"}>Rules</Link>
                             </li>
-                            <li className={styles.menuItem}>Leaderboards</li>
-                            <li className={styles.menuItem}>Groups</li>
+                            <li className={styles.menuItem}>
+                                <Link to={"/leaderboard"}>Leaderboards</Link>
+                            </li>
+                            <li className={styles.menuItem}>
+                                <Link to={"/group-page"}>Groups</Link>
+                            </li>
                         </ul>
                     </nav>
                     {open ? <Burger setOpen={setOpen} /> : ""}
                     {user && <Search />}
                     <Link
                         className={styles.userLogo}
-                        to={user ? "/profile-page" : "/auth"}
+                        to={user ? `/profile-page/${user.email}` : "/auth"}
                     >
                         <User />
                     </Link>
