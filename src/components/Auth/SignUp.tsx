@@ -61,14 +61,13 @@ const SignupSchema = Yup.object().shape({
         .required("Required!"),
 });
 
-
-
 export const SignUp = () => {
     const [addUser, {isLoading}] = useAddUserMutation();
-    const [loginUser] = useLoginUserMutation();
+    const [loginUser, {data}] = useLoginUserMutation();
     const navigate = useNavigate();
     const [err, setErr] = useState("");
-    
+
+    console.log("data", data);
 
     const login = async (data: IData) => {
         try {
@@ -107,7 +106,6 @@ export const SignUp = () => {
         }
     };
 
-    
     const initialValues = {
         email: "",
         group: "zeon",
@@ -144,13 +142,14 @@ export const SignUp = () => {
                             type="submit"
                             className={isLoading ? "buttonLoading" : "button"}
                         >
-                            Submit
-                        </button> 
-                        <div className="linkTo" >
+              Submit
+                        </button>
+                        <div className="linkTo">
                             <p>Already have an account?</p>
-                            <NavLink to="/login"><span> Login</span>
-                            </NavLink> 
-                        </div> 
+                            <NavLink to="/login">
+                                <span> Login</span>
+                            </NavLink>
+                        </div>
                     </Form>
                 </Formik>
             </div>

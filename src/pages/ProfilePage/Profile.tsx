@@ -5,7 +5,7 @@ import {ReactComponent as UserLogo} from "@/assets/userLogo.svg";
 import {ReactComponent as ChangePasswordLogo} from "@/assets/key-solid.svg";
 import {ReactComponent as LogoutLogo} from "@/assets/logout.svg";
 import {MyLoader} from "@/components/Loader/MyLoader";
-import {NavLink, useParams} from "react-router-dom";
+import {NavLink, useParams, useNavigate} from "react-router-dom";
 import {useLogoutUserMutation} from "@/store/auth/signupSlice";
 
 
@@ -14,12 +14,13 @@ export const Profile = () => {
     localStorage.getItem("token") &&
     JSON.parse(localStorage.getItem("token") || "");
 
-    const [getUser, {data, isLoading}] = useLazyGetUserQuery();
-
-    const [logoutUser] = useLogoutUserMutation();
     const {name} = useParams();
 
-    console.log(name, token.email);
+    const [getUser, {data, isLoading}] = useLazyGetUserQuery();
+    const [logoutUser] = useLogoutUserMutation();
+    const navigate = useNavigate();
+
+    console.log(data, "data");
 
     useEffect(() => {
         getUser(name);
@@ -29,8 +30,11 @@ export const Profile = () => {
         return <MyLoader />;
     }
 
-    const fetchLogoutUser = () => {
+    const fetchLogoutUser = (e: any) => {
+        e.preventDefault();
         logoutUser(token.refresh);
+        localStorage.removeItem("token");
+        navigate("/");
     };
 
     return (
@@ -91,7 +95,6 @@ export const Profile = () => {
                                       <p>{test.title}</p>
                                   </div>
                                   <div className={styles.info_content}>
-                                      {" "}
                                       <b>Score: </b>
                                       <p>{test.score}</p>
                                   </div>
