@@ -2,14 +2,23 @@ import {IUser, useLazyGetUserQuery} from "@/store/profile/profile.api";
 import {useEffect} from "react";
 import styles from "./Profile.module.scss";
 import {ReactComponent as UserLogo} from "@/assets/userLogo.svg";
+import {ReactComponent as ChangePasswordLogo} from "@/assets/key-solid.svg";
+import {ReactComponent as LogoutLogo} from "@/assets/logout.svg";
 import {MyLoader} from "@/components/Loader/MyLoader";
+import {NavLink, useNavigate} from "react-router-dom";
+import {useLogoutUserMutation} from "@/store/auth/signupSlice";
 
 
 export const Profile = () => {
     const token =
     localStorage.getItem("token") &&
     JSON.parse(localStorage.getItem("token") || "");
+
     const [getUser, {data, isLoading}] = useLazyGetUserQuery();
+    const [logoutUser] = useLogoutUserMutation();
+    const navigate = useNavigate();
+
+    console.log(data, "data");
 
     useEffect(() => {
         getUser(token.email);
@@ -19,6 +28,13 @@ export const Profile = () => {
         return <MyLoader />;
     }
 
+    const fetchLogoutUser = (e: any) => {
+        e.preventDefault();
+        logoutUser(token.refresh);
+        localStorage.removeItem("token");
+        navigate("/");
+    };
+
     return (
         <div className={styles.profile}>
             <div className="container">
@@ -26,8 +42,21 @@ export const Profile = () => {
           data.map((user: IUser) => (
               <div className={styles.login}>
                   <div className={styles.logo_block}>
-                      <UserLogo className={styles.logo} />
-                      <h3> Login: {user.login}</h3>
+                      <div className={styles.logo_block_info}>
+                          <h3>
+                              <UserLogo className={styles.logo} />
+                              {user.login}
+                          </h3>
+                          <NavLink to="/change-password">
+                              <ChangePasswordLogo className={styles.logo} />
+                              <span>Change password</span>
+                          </NavLink>
+
+                          <div onClick={fetchLogoutUser}>
+                              <LogoutLogo className={styles.logo} />
+                              <span>Logout</span>
+                          </div>
+                      </div>
                   </div>
                   <div className={styles.info}>
                       <div className={styles.card}>
@@ -55,7 +84,7 @@ export const Profile = () => {
                           </div>
                       </div>
                       {user.tests.map((test) => (
-                          <div className={styles.card}>
+                          <div className={styles.card} key={test.score}>
                               <div className={styles.content}>
                                   <h4>Last game</h4>
                                   <div className={styles.info_content}>
@@ -63,7 +92,6 @@ export const Profile = () => {
                                       <p>{test.title}</p>
                                   </div>
                                   <div className={styles.info_content}>
-                                      {" "}
                                       <b>Score: </b>
                                       <p>{test.score}</p>
                                   </div>

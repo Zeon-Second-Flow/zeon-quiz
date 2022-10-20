@@ -63,9 +63,11 @@ const SignupSchema = Yup.object().shape({
 
 export const SignUp = () => {
     const [addUser, {isLoading}] = useAddUserMutation();
-    const [loginUser] = useLoginUserMutation();
+    const [loginUser, {data}] = useLoginUserMutation();
     const navigate = useNavigate();
     const [err, setErr] = useState("");
+
+    console.log("data", data);
 
     const login = async (data: IData) => {
         try {
@@ -73,15 +75,12 @@ export const SignUp = () => {
                 login: data.email,
                 password: data.password,
             }).unwrap();
-            console.log(res);
-
             localStorage.setItem(
                 "token",
                 JSON.stringify({
                     token: res.access,
                     refresh: res.refresh,
-                    email: data.email,
-                    isStaff: false,
+                    email: res.login,
                 })
             );
             navigate("/");

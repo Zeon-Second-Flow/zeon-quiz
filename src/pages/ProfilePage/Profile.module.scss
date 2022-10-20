@@ -5,22 +5,37 @@
     font-family: "Inter", sans-serif;
     gap: 40px;
     padding: 0 15px;
+    font-family: "Ubuntu", sans-serif;
 
     & h3 {
         color: white;
     }
 
     & .logo_block {
-        padding-bottom: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.13);
+        height: 180px;
+
+        &_info {
+            padding-top: 30px;
+            max-width: 300px;
+            margin: 0 auto;
+            text-align: start;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-decoration: underline;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            cursor: pointer;
+        }
     }
 
     & .logo {
-        width: 100px;
+        width: 20px;
         fill: #ffffff;
+        margin: 0 10px;
     }
 
     & .user_Logo {
@@ -42,9 +57,7 @@
 
 .profile {
     padding: 55px 0;
-    background: linear-gradient(
-        to right, #2d2dc5, #fcb045
-    );
+    background: linear-gradient(to right, #2d2dc5, #fcb045);
     background-size: 400% 400%;
     animation: body 10s infinite ease-in-out;
 }
@@ -68,8 +81,8 @@
     display: grid;
     place-items: center;
     position: relative;
-    height: 350px;
-    width: 300px;
+    height: 370px;
+    width: 325px;
     background: #333;
     border-radius: 8px;
     overflow: hidden;
@@ -78,8 +91,8 @@
 
 .card::before {
     content: "";
-    width: 250px;
-    height: 450px;
+    width: 235px;
+    height: 513px;
     left: 10px;
     top: -70px;
     position: absolute;

@@ -20,10 +20,10 @@ const loginInputData = [
 ];
 
 export interface IValue {
-    login: string;
-    password: string;
-    refresh?: string;
-    access?: string;
+  login: string;
+  password: string;
+  refresh?: string;
+  access?: string;
 }
 
 const SignupSchema = Yup.object().shape({
@@ -37,7 +37,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 export const Login = () => {
-    const [loginUser] = useLoginUserMutation();
+    const [loginUser, {isLoading}] = useLoginUserMutation();
     const navigate = useNavigate();
     const [err, setErr] = useState("");
 
@@ -66,14 +66,13 @@ export const Login = () => {
         password: "",
     };
 
-
     return (
         <div className="signup">
             <div className="background">
                 <div className="shape"></div>
                 <div className="shape"></div>
             </div>
-            <div className="container">             
+            <div className="container">
                 <h1>Login</h1>
                 <Formik
                     initialValues={initialValues}
@@ -94,18 +93,21 @@ export const Login = () => {
                                 />
                             ))}
                         </div>
-                        <button type="submit" className="button">
-                            Submit
+                        <button
+                            type="submit"
+                            className={isLoading ? "buttonLoading" : "button"}
+                        >
+              Submit
                         </button>
                         <div className="linkTo">
                             <p>Forgotten password?</p>
-                            <NavLink to="/restore-password"><span>Restore password</span>
-                            </NavLink> 
-                        </div> 
+                            <NavLink to="/restore-password">
+                                <span>Restore password</span>
+                            </NavLink>
+                        </div>
                     </Form>
                 </Formik>
             </div>
         </div>
     );
 };
-

@@ -7,9 +7,9 @@ import * as Yup from "yup";
 
 
 export interface IPassword {
-    old_password: string;
-    new_password: string;
-    password_confirm: string;
+  old_password: string;
+  new_password: string;
+  password_confirm: string;
 }
 
 const PasswordSchema = Yup.object().shape({
@@ -45,10 +45,9 @@ const changePasswordData = [
 ];
 
 export const ChangePassword = () => {
-    const [changePassword] = useChangePasswordMutation();
+    const [changePassword, {isLoading}] = useChangePasswordMutation();
     const [err, setErr] = useState("");
     const navigate = useNavigate();
-
 
     const fetchPasswordData = async (values: IPassword) => {
         try {
@@ -88,8 +87,11 @@ export const ChangePassword = () => {
                                 />
                             ))}
                         </div>
-                        <button type="submit" className="button">
-                            Submit
+                        <button
+                            type="submit"
+                            className={isLoading ? "buttonLoading" : "button"}
+                        >
+              Submit
                         </button>
                     </Form>
                 </Formik>
