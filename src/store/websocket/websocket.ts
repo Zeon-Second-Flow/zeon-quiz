@@ -1,11 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {io} from "socket.io-client";
-// io("http://localhost:3333", {
-//     transports: ["websocket", "polling"],
-// }),
+
 
 const initialState = {
-    socket: null,
+    socket: io("http://localhost:3333", {
+        transports: ["websocket", "polling"],
+    }),
     room: 0,
     users: [],
 };
