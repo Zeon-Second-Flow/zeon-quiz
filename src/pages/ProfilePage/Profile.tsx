@@ -5,7 +5,7 @@ import { ReactComponent as UserLogo } from "@/assets/userLogo.svg";
 import { ReactComponent as ChangePasswordLogo } from "@/assets/key-solid.svg";
 import { ReactComponent as LogoutLogo } from "@/assets/logout.svg";
 import { MyLoader } from "@/components/Loader/MyLoader";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useLogoutUserMutation } from "@/store/auth/signupSlice";
 
 export const Profile = () => {
@@ -14,8 +14,10 @@ export const Profile = () => {
     JSON.parse(localStorage.getItem("token") || "");
 
   const [getUser, { data, isLoading }] = useLazyGetUserQuery();
-
   const [logoutUser] = useLogoutUserMutation();
+  const navigate = useNavigate();
+
+  console.log(data, "data");
 
   useEffect(() => {
     getUser(token.email);
@@ -25,8 +27,11 @@ export const Profile = () => {
     return <MyLoader />;
   }
 
-  const fetchLogoutUser = () => {
+  const fetchLogoutUser = (e: any) => {
+    e.preventDefault();
     logoutUser(token.refresh);
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
@@ -45,11 +50,10 @@ export const Profile = () => {
                     <ChangePasswordLogo className={styles.logo} />
                     <span>Change password</span>
                   </NavLink>
-                  <div>
-                    <NavLink to="/logout">
-                      <LogoutLogo className={styles.logo} />
-                      <span onClick={fetchLogoutUser}>Logout</span>
-                    </NavLink>
+
+                  <div onClick={fetchLogoutUser}>
+                    <LogoutLogo className={styles.logo} />
+                    <span>Logout</span>
                   </div>
                 </div>
               </div>
@@ -87,7 +91,6 @@ export const Profile = () => {
                         <p>{test.title}</p>
                       </div>
                       <div className={styles.info_content}>
-                        {" "}
                         <b>Score: </b>
                         <p>{test.score}</p>
                       </div>
