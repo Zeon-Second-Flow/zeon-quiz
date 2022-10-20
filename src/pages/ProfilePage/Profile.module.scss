@@ -15,6 +15,7 @@
     width: 100%;
     background-color: rgba(255, 255, 255, 0.13);
     height: 180px;
+
     &_info {
       padding-top: 30px;
       max-width: 300px;
@@ -27,6 +28,7 @@
       font-size: 20px;
       font-weight: 600;
       color: #ffffff;
+      cursor: pointer;
     }
   }
 

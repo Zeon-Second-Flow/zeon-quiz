@@ -73,9 +73,10 @@ export const signupSlice = createApi({
             }),
         }),
         logoutUser: builder.mutation<any, object>({
-            query: () => ({
+            query: (data) => ({
                 url: "/account/logout/",
                 method: "POST",
+                body: {refresh_token: data},
                 headers: {
                     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
                     Authorization: "Bearer " + token.token,
