@@ -4,6 +4,9 @@ import "./Leaderboard.scss";
 import {LeaderboardLoader} from "@/pages/LeaderboardPage/leaderboardLoader";
 
 
+type IGroupsItem = {
+    [key: string]: number | string;
+}
 interface IGroups {
     name: string;
     users: number;
@@ -28,7 +31,7 @@ export const GroupLeaderboardPage = () => {
 
     const hendleSort = (sort:string) => {
         setSortBy(sort);
-        setGroups(groups.sort((a, b) => b[sort] - a[sort]));
+        setGroups(groups.sort((a: IGroupsItem, b: IGroupsItem) => Number(b[sort]) - Number(a[sort])));
     };
 
     return (

@@ -8,6 +8,7 @@ import {circleSVG, squareSVG, triangleSVG, rhombusSVG, deleteIcon} from "@/compo
 import {CreateTestPreviewComponent} from "@/components/CreateTestPreviewComponent/CreateTestPreviewComponent";
 import {useCreateTestMutation, useSentImgMutation} from "@/store/slice/CreateTestSlice";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 
 export const CreateTestsPage = () => {
@@ -22,12 +23,12 @@ export const CreateTestsPage = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [img, setImg] = useState(Object);
-    const [toggleForm, setToggleForm] = useState(false);
+    const [toggleForm, setToggleForm] = useState(true);
     const [createTest] = useCreateTestMutation();
-    const [sentPhoto] = useSentImgMutation();
     const inpImgRef = useRef<HTMLInputElement | any>(null);
-    const [data, setDate]= useState<object >({});
-    const [respons, setRespons] = useState("");
+    const [data, setDate] = useState<object>({});
+    const [dis, setDis] = useState(null);
+    const nav = useNavigate();
     const questionModel = {
         question: "",
         id: Math.random().toString(16).slice(5),
@@ -44,7 +45,6 @@ export const CreateTestsPage = () => {
     const [quizArr, setQuizArr] = useState([{...questionModel}]);
     const [currentTest, setCurrenTest] = useState<string>(quizArr[0].id);
     const [testError, setTestError] = useState<null | any>(null);
-    const dataImg = new FormData();
     const tes = {
         question,
         points,
@@ -75,33 +75,36 @@ export const CreateTestsPage = () => {
     ];
 
     useEffect(() => {
-        const  editData = async () => {
+        const editData = async () => {
             await setData(currentTest);
         };
         editData();
         setDate({
             title: title,
-            // image: img,
             description: description,
             questions: quizArr
         });
+        setDis((!!quizArr[quizArr.length - 1].question &&
+                !!quizArr.at(-1).answers.A && !!quizArr.at(-1).answers.B &&
+                !!quizArr[quizArr.length - 1].answers.C && !!quizArr[quizArr.length - 1].answers.D) &&
+            !!quizArr[quizArr.length - 1].answers.correct_answer);
 
-    }, [question, points, ans4, ans3, time, quizArr.length, currentTest, rightAns]);
+    }, [question, points, ans4, ans3, time, quizArr.length, currentTest, rightAns, title]);
 
     const addQuiz = () => {
         const newTest = {...questionModel};
-        newTest.id =Math.random().toString(16).slice(5);
+        newTest.id = Math.random().toString(16).slice(5);
         setQuizArr(prevState => [...prevState, newTest]);
     };
-
-    const setChoosedQuestion = (idx : string) => {
+    console.log(dis);
+    const setChoosedQuestion = (idx: string) => {
         setCurrenTest(idx);
         const currentQuestion = quizArr.find((it) => it.id === idx);
         if (currentQuestion) {
-            setAns1( currentQuestion.answers.A);
-            setAns2( currentQuestion.answers.B);
-            setAns3( currentQuestion.answers.C);
-            setAns4( currentQuestion.answers.D);
+            setAns1(currentQuestion.answers.A);
+            setAns2(currentQuestion.answers.B);
+            setAns3(currentQuestion.answers.C);
+            setAns4(currentQuestion.answers.D);
             setQuestion(currentQuestion.question);
             setTime(currentQuestion.timer);
             setPoints(currentQuestion.score);
@@ -110,10 +113,10 @@ export const CreateTestsPage = () => {
         return currentQuestion;
     };
 
-    const setData = (idx : string) => {
+    const setData = (idx: string) => {
         const currentQuestion = quizArr.find((it) => it.id === idx);
         const currentQuestionIndex = quizArr.findIndex((it) => it.id === idx);
-        if (currentQuestion){
+        if (currentQuestion) {
             currentQuestion.answers.A = tes.ans1;
             currentQuestion.answers.B = tes.ans2;
             currentQuestion.answers.C = tes.ans3;
@@ -130,7 +133,7 @@ export const CreateTestsPage = () => {
 
     const quizDelete = (id: string) => {
         if (quizArr.length !== 1) {
-            setQuizArr(quizArr.filter((it, idx) => it.id !== id ));
+            setQuizArr(quizArr.filter((it, idx) => it.id !== id));
             setCurrenTest(quizArr[0].id);
         }
     };
@@ -138,27 +141,21 @@ export const CreateTestsPage = () => {
 
     const postTest = async () => {
         const dataImg = new FormData();
-        dataImg.append("image", img, img.name );
-        console.log(dataImg.get("image"));
-        console.log(dataImg);
-        const token =
-            localStorage.getItem("token") &&
-            JSON.parse(localStorage.getItem("token") || "");
+        dataImg.append("image", img);
         try {
-            const response =  await createTest(data).unwrap();
+            const response = await createTest(data).unwrap();
             console.log(response);
-            if (!!response){
+            if (!!response) {
+
                 try {
-                    console.log(response);
-                    // const resp = await sentPhoto({dataImg, response}).unwrap()
-                    const resp = axios.patch(`https://safe-atoll-40972.herokuapp.com/tests/${response}/`, img, {
+                    const resp = axios.patch(`https://safe-atoll-40972.herokuapp.com/tests/update/${response}`, dataImg, {
                         // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-                        Authorization: "Bearer " + token.token,
                         "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>"
-                    }).then(data => console.log(data, "reeeeeeeeeeeeeeeeeeee"));
-                    // console.log(resp, )
-                }
-                catch (err: typeof err) {
+                    }).then(data => {
+                        nav("/success", {state: {title: "Successfully created test!"}});
+                    });
+
+                } catch (err: typeof err) {
                     console.log(err, "aaaaaaaaaaaaaaaaaaaaaaa");
                 }
             }
@@ -185,10 +182,12 @@ export const CreateTestsPage = () => {
             <section className={style.createTestsPage}>
                 <div className={style.creatorSlideBar}>
                     <div className={style.blockSlider}>
-                        {quizArr?.map((it, idx) => {return (<QuizSliderBlock quizDelete={quizDelete}
-                            deleteIcon={deleteIcon} key={idx}
-                            choosedQuestion={setChoosedQuestion}
-                            it={it} idx={idx}/>);})}
+                        {quizArr?.map((it, idx) => {
+                            return (<QuizSliderBlock quizDelete={quizDelete}
+                                deleteIcon={deleteIcon} key={idx}
+                                choosedQuestion={setChoosedQuestion}
+                                it={it} idx={idx}/>);
+                        })}
                     </div>
                     <div className={style.sliderBarBtnBox}>
                         <button onClick={addQuiz}>Add question</button>
@@ -199,15 +198,10 @@ export const CreateTestsPage = () => {
                         <Cat/>
                     </div>
 
-                    <form  className={style.createTestForm} action="">
-                        <button type={"button"} onClick={postTest} disabled={!(!!quizArr[0].question &&
-                            !!quizArr[0].answers.A && !!quizArr[0].answers.B &&
-                            !!quizArr[0].answers.C && !!quizArr[0].answers.D) &&
-                            !!quizArr[0].answers.correct_answer }
-                        style={!!quizArr[0].question && !!quizArr[0].answers.A && !!quizArr[0].answers.B &&
-                               !!quizArr[0].answers.C && !!quizArr[0].answers.D &&
-                               !!quizArr[0].answers.correct_answer ? {} : {background: "gray"}}
-                        className={style.finishBtn}>
+                    <form className={style.createTestForm} action="">
+                        <button type={"button"} onClick={postTest} disabled={!dis}
+                            style={dis ? {} : {background: "gray"}}
+                            className={style.finishBtn}>
                             Done
                         </button>
                         <div className={style.questionInpBox}>
@@ -216,12 +210,12 @@ export const CreateTestsPage = () => {
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuestion(e.target.value)}
                                 placeholder={"Start typing your question"}
                                 className={style.createTestInputQuestion} type="text"/>
-                            <p style={question.length === 0 ? {color: "white"} : {}} >{100 - question.length}</p>
+                            <p style={question.length === 0 ? {color: "white"} : {}}>{100 - question.length}</p>
                         </div>
                         <div className={style.counterBox}>
                             <div>
                                 Points
-                                <CustomSelect setState={setPoints}  options={pointsOption}/>
+                                <CustomSelect setState={setPoints} options={pointsOption}/>
                             </div>
                             <div>
                                 Time limit
@@ -229,16 +223,20 @@ export const CreateTestsPage = () => {
                             </div>
                         </div>
                         <div className={style.questionBox}>
-                            <AnswerItem key={66} rightAns={rightAns} setRightAns={setRightAns} svg={triangleSVG} ans={ans1}
+                            <AnswerItem key={66} rightAns={rightAns} setRightAns={setRightAns} svg={triangleSVG}
+                                ans={ans1}
                                 color={"rgb(226, 27, 60)"} setAns={setAns1}
                                 placeholder={"Add answer 1"} name={"right_answer"} value={"A"}/>
-                            <AnswerItem key={77} rightAns={rightAns} setRightAns={setRightAns} svg={rhombusSVG} ans={ans2}
+                            <AnswerItem key={77} rightAns={rightAns} setRightAns={setRightAns} svg={rhombusSVG}
+                                ans={ans2}
                                 color={"rgb(19, 104, 206)"} setAns={setAns2}
                                 placeholder={"Add answer 2"} name={"right_answer"} value={"B"}/>
-                            <AnswerItem key={88} rightAns={rightAns} setRightAns={setRightAns} svg={circleSVG} ans={ans3}
+                            <AnswerItem key={88} rightAns={rightAns} setRightAns={setRightAns} svg={circleSVG}
+                                ans={ans3}
                                 color={"rgb(216, 158, 0)"} setAns={setAns3}
                                 placeholder={"Add answer 3"} name={"right_answer"} value={"C"}/>
-                            <AnswerItem key={99} rightAns={rightAns} setRightAns={setRightAns} svg={squareSVG} ans={ans4}
+                            <AnswerItem key={99} rightAns={rightAns} setRightAns={setRightAns} svg={squareSVG}
+                                ans={ans4}
                                 color={"rgb(38, 137, 12)"} setAns={setAns4}
                                 placeholder={"Add answer 4"} name={"right_answer"} value={"D"}/>
                         </div>

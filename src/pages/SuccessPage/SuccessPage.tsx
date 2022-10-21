@@ -1,11 +1,11 @@
 import styles from "./SuccessPage.module.scss";
 import {ReactComponent as Success} from "@/assets/auth/success.svg";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 
 export const SuccessPage = () => {
     const navigate = useNavigate();
-
+    const location = useLocation();
     const navigateHandler = () => {
         navigate("/");
     };
@@ -15,7 +15,7 @@ export const SuccessPage = () => {
             <div className="container">
                 <div className={styles.wrapper}>
                     <Success />
-                    <h3>Successfully changed password!</h3>
+                    <h3>{location?.state?.title}</h3>
                     <p className={styles.p} onClick={navigateHandler}>
                         <button className={styles.btn} type="submit">
                             <p>Go home</p>

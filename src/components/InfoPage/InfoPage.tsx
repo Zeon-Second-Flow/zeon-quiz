@@ -75,7 +75,7 @@ export const InfoPage = () => {
                                 muted
                                 preload="true"
                                 playsInline
-                            ></video>
+                            />
                         </div>
                         <div className={styles.workText}>
                             <h5>Create</h5>

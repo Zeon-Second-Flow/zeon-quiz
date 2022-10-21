@@ -19,7 +19,7 @@ export const Burger = ({setOpen}: IProps) => {
     return (
         <div className={styles.burger}>
             <div className={styles.wrapper}>
-                <Link to={"/"} onClick={close}>
+                <Link to="/" onClick={close}>
                     <div className={styles.logo}>
                         <img width={120} src={Logo} alt="logo" />
                     </div>

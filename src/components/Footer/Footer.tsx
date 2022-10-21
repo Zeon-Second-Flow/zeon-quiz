@@ -49,7 +49,7 @@ export const Footer = () => {
                                 <h4>Contacts us</h4>
                                 <div className={styles.footerInnerBlock}>
                                     <EmailIcon className={styles.contactsIcon}/>
-                                    <a href="owner@zeon.ltd">owner@zeon.ltd</a>
+                                    <a href="mailto:owner@zeon.ltd">owner@zeon.ltd</a>
                                 </div>
                                 <div className={styles.footerInnerBlock}>
                                     <PhoneIcone className={styles.contactsIcon}/>

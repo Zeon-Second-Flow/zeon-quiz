@@ -36,7 +36,7 @@ export const Header = () => {
                             </li>
                         </ul>
                     </nav>
-                    {open ? <Burger setOpen={setOpen} /> : ""}
+                    {open && <Burger setOpen={setOpen} /> }
                     {user && <Search />}
                     <Link
                         className={styles.userLogo}

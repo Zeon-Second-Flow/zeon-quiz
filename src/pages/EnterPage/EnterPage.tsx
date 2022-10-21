@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import styles from "./EnterPage.module.scss";
 import {useAppDispatch, useAppSelector, useAuth} from "@/hooks";
@@ -7,7 +7,7 @@ import logo from "@/assets/logo.png";
 
 
 export const EnterPage = () => {
-    const [value, setValue] = useState();
+    const [value, setValue] = useState<string>();
     const navigate = useNavigate();
     const {users, socket} = useAppSelector((state) => state.websocket);
     const {isStaff} = useAuth();
@@ -63,7 +63,7 @@ export const EnterPage = () => {
                                 className={styles.input}
                                 type="text"
                                 placeholder="Game PIN"
-                                onChange={(e) => setValue(e.currentTarget.value)}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value)}
                                 value={value}
                             />
                             <div>

@@ -46,7 +46,8 @@ export const DetailPage = () => {
                             <h3>Questions </h3>
                             {
                                 questions?.map((item, i: number) => {
-                                    const index = data?.questions?.findIndex((it) => it.id === item.id) || 0;
+
+                                    const index = data?.questions?.findIndex((it: IQuestionsData) => it.id === item.id) || 0;
                                     return <Questions
                                         key={item.id} item={item} index={index}/>;
                                 }

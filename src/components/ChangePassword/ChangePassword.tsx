@@ -52,7 +52,7 @@ export const ChangePassword = () => {
     const fetchPasswordData = async (values: IPassword) => {
         try {
             await changePassword(values).unwrap();
-            navigate("/success");
+            navigate("/success", {state: {title: "Successfully changed password!"}});
         } catch (error: typeof error) {
             for (const key in error.data) {
                 setErr(error.data[key]);

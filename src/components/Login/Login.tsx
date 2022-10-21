@@ -69,7 +69,7 @@ export const Login = () => {
     return (
         <div className="signup">
             <div className="background">
-                <div className="shape"></div>
+                <div className="shape"/>
                 <div className="shape"></div>
             </div>
             <div className="container">

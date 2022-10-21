@@ -43,10 +43,11 @@ export const CreateTestPreviewComponent = ({testError,
                 </h3>
                 <p>Title:</p>
                 <div className={style.previewTitleInp}>
-                    <span>{testError}</span>
+                    <span className={style.error}>{testError}</span>
                     <input style={err ? {border: "1px solid red"} : {}} maxLength={100} onChange={(e) => setTitle(e.target.value)}
                         required={true} placeholder="Name of quiz" type="text"/>
                     <span style={title.length === 0 ? {color: "white"} : {}}>{100 - title.length}</span>
+                    {/*!title.length && {color: "white"}*/}
                 </div>
                 <span>A descriptive title will give players an indication of what the Quiz is about.</span>
                 <img src={!img?.name?.length ? no_image : URL?.createObjectURL(img)} alt=""/>
