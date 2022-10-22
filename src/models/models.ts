@@ -76,6 +76,11 @@ export interface IResponse {
     questions: Questions[];
 }
 
+export interface IItem {
+  name: string;
+  points: number;
+}
+
 export interface IAnswerWrapper {
     0: {[key: string]: string};
 }

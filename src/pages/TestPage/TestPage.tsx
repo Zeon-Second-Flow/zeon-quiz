@@ -1,4 +1,4 @@
-import {Questions} from "@/models/models";
+import {Questions, IItem} from "@/models/models";
 import {useGetTestsQuery} from "@/store/test/testSlice";
 import {useEffect, useState} from "react";
 import styles from "./TestPage.module.scss";
@@ -15,7 +15,7 @@ export const TestPage = () => {
     const {search} = useLocation();
     const test = search.slice(1, search.length);
 
-    const {data, isLoading, isSuccess, isError, error} = useGetTestsQuery(test);
+    const {data, isLoading, isSuccess, isError, error} = useGetTestsQuery("cities");
     const [counter, setCounter] = useState(0);
     const [currInfo, setCurrInfo] = useState<Questions>();
     const [timer, setTimer] = useState(0);
@@ -25,7 +25,7 @@ export const TestPage = () => {
     const [seconds, setSeconds] = useState(0);
     const [results, setResults] = useState(false);
     const [disabled, setDisabled] = useState(false);
-    // const [stats, setStats] = useState([])
+    const [fakeId, setFakeId] = useState(0);
     const navigate = useNavigate();
 
     const length = data ? data.questions.length - 1 : 0;
@@ -33,14 +33,15 @@ export const TestPage = () => {
     const {user, isStaff} = useAuth();
     const {users, socket} = useAppSelector((state) => state.websocket);
 
-    const leaders = [
-        ...users.slice(1, users.length).sort((a, b) => b.points - a.points),
+    const leaders: IItem[] = [
+        ...users
+            .slice(1, users.length)
+            .sort((a: IItem, b: IItem) => b.points - a.points),
     ].slice(0, 3);
 
-    console.log(leaders, " LEADERS");
-    console.log(users, "what i need");
-
-    const isAdmin = users.some((item) => item.name === user.email && isStaff);
+    const isAdmin = users.some(
+        (item: IItem) => item.name === user.email && isStaff
+    );
     const points =
     data &&
     data.questions &&
@@ -107,6 +108,7 @@ export const TestPage = () => {
         setBoard(false);
         setCounter(counter + 1);
         setPreload(true);
+        setFakeId(0);
     };
 
     const afterPreload = () => {
@@ -164,33 +166,32 @@ export const TestPage = () => {
                             <div className={styles.middle}>
                                 <div className={styles.timer}>{timer}</div>
                                 <div className={styles.imageWrapper}>
-                                    {/* can work if you make a real server,otherwise image is being deleted every day */}
-                                    {/* {data.test.image ? (
-                  <img
-                    src={
-                      "https://safe-atoll-40972.herokuapp.com" + data.test.image
-                    }
-                    alt="the image"
-                  />
-                ) : ( */}
-                                    <img src={logo} alt="default image" />
+                                    {data.test.image ? (
+                                        <img
+                                            src={
+                                                "https://safe-atoll-40972.herokuapp.com" +
+                        data.test.image
+                                            }
+                                            alt="the image"
+                                        />
+                                    ) : (
+                                        <img src={logo} alt="default image" />
+                                    )}
                                 </div>
-                                {/* <div className={styles.points}>
-                                    <span>0</span>
-                                    <h3>Answers</h3>
-                                </div> */}
                             </div>
                         </div>
                     )}
                     {!isAdmin && (
                         <div className={styles.bottom}>
-                            {disabled &&  <div className={styles.loader}>Loading...</div>}
-                            <div className={styles.answerBlock}>
+                            {disabled && <div className={styles.loader}>Loading...</div>}
+                            <div
+                                className={styles.answerBlock}
+                            >
                                 <div
-                                    className={`${styles.answerBlockRed} ${styles.block}`}
+                                    className={fakeId !== 1 ? `${styles.answerBlockRed} ${styles.block}` : styles.answerBlockShadow}
                                     onClick={() => {
                                         if (!disabled) {
-                                            console.log("A");
+                                            setFakeId(1);
                                             setDisabled(true);
                                             socket.emit("answer", [
                                                 user,
@@ -261,10 +262,10 @@ export const TestPage = () => {
                                     )}
                                 </div>
                                 <div
-                                    className={`${styles.answerBlockBlue} ${styles.block}`}
+                                    className={fakeId !== 2  ? `${styles.answerBlockBlue} ${styles.block}`: styles.answerBlockShadow}
                                     onClick={() => {
                                         if (!disabled) {
-                                            console.log("B");
+                                            setFakeId(2);
                                             setDisabled(true);
                                             socket.emit("answer", [
                                                 user,
@@ -337,10 +338,10 @@ export const TestPage = () => {
                             </div>
                             <div className={styles.answerBlock}>
                                 <div
-                                    className={`${styles.answerBlockYellow} ${styles.block}`}
+                                    className={fakeId !== 3 ? `${styles.answerBlockYellow} ${styles.block}`: styles.answerBlockShadow}
                                     onClick={() => {
                                         if (!disabled) {
-                                            console.log("C");
+                                            setFakeId(3);
                                             setDisabled(true);
                                             socket.emit("answer", [
                                                 user,
@@ -413,11 +414,10 @@ export const TestPage = () => {
                                     )}
                                 </div>
                                 <div
-                                    className={`${styles.answerBlockGreen} ${styles.block}`}
+                                    className={fakeId !== 4 ? `${styles.answerBlockGreen} ${styles.block}`: styles.answerBlockShadow}
                                     onClick={() => {
                                         if (!disabled) {
-                                            console.log("D");
-
+                                            setFakeId(4);
                                             setDisabled(true);
                                             socket.emit("answer", [
                                                 user,
@@ -528,8 +528,8 @@ export const TestPage = () => {
                     <div className={styles.boardInner}>
                         {users
                             .slice(1, users.length)
-                            .sort((a, b) => a.points - b.points)
-                            .map((item) => {
+                            .sort((a: IItem, b: IItem) => b.points - a.points)
+                            .map((item: IItem) => {
                                 return (
                                     <div className={styles.boardInfo}>
                                         <p>{item.name}</p>
@@ -600,7 +600,7 @@ export const TestPage = () => {
                                     <div className={styles.placeWrapper}>
                                         <img src={third} alt="the third place" />
                                     </div>
-                                    <p>{leaders[2]?.score || 0}</p>
+                                    <p>{leaders[2].points || 0}</p>
                                 </div>
                             </div>
                         </div>

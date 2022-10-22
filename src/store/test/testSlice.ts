@@ -13,7 +13,7 @@ export const testApi = createApi({
     endpoints: (builder) => ({
         getTests: builder.query<IResponse, string>({
             query: (test: string) => ({
-                url: `tests/${test}`, 
+                url: `tests/${test}`,
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token.token}`,
@@ -21,6 +21,16 @@ export const testApi = createApi({
                 },
             }),
         }),
+        // sendScores: builder.mutation<any, object>({
+        //     query: (data) => ({
+        //         url: "account/login/",
+        //         method: "POST",
+        //         body: JSON.stringify(data),
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //     }),
+        // }),
     }),
 });
 
