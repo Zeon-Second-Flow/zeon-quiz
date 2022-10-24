@@ -20,8 +20,6 @@ export const Profile = () => {
     const [logoutUser] = useLogoutUserMutation();
     const navigate = useNavigate();
 
-    console.log(data, "data");
-
     useEffect(() => {
         getUser(name);
     }, []);
@@ -95,25 +93,26 @@ export const Profile = () => {
                               </div>
                           </div>
                       </div>
-                      {user.tests.map((test) => (
-                          <div className={styles.card} key={test.score}>
-                              <div className={styles.content}>
-                                  <h4>Last game</h4>
-                                  <div className={styles.info_content}>
-                                      <b>Title: </b>
-                                      <p>{test.title}</p>
-                                  </div>
-                                  <div className={styles.info_content}>
-                                      <b>Score: </b>
-                                      <p>{test.score}</p>
-                                  </div>
-                                  <div className={styles.info_content}>
-                                      <b>Rate: </b>
-                                      <p>{test.rating}</p>
-                                  </div>
+                      <div
+                          className={styles.card}
+                          key={user.tests[user.tests.length - 1].score}
+                      >
+                          <div className={styles.content}>
+                              <h4>Last game</h4>
+                              <div className={styles.info_content}>
+                                  <b>Title: </b>
+                                  <p>{user.tests[user.tests.length - 1].title}</p>
+                              </div>
+                              <div className={styles.info_content}>
+                                  <b>Score: </b>
+                                  <p>{user.tests[user.tests.length - 1].score}</p>
+                              </div>
+                              <div className={styles.info_content}>
+                                  <b>Rate: </b>
+                                  <p>{user.tests[user.tests.length - 1].rating}</p>
                               </div>
                           </div>
-                      ))}
+                      </div>
                   </div>
               </div>
           ))}

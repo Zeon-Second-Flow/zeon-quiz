@@ -13,17 +13,11 @@ interface IMessage {
 }
 
 export const GamePage = () => {
-    //   const [users, setUsers] = useState<any[]>([]);
-    //   const [userId, setUserId] = useState();
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState<IMessage[]>([]);
     const [isAdmin, setIsAdmin] = useState(true);
-    //   const [room, setRoom] = useState();
-    //   const [existedRoom, setExistedRoom] = useState();
-    //   const [typeSocket, setTypeSocket] = useState();
     const navigate = useNavigate();
     const {search} = useLocation();
-
 
     const {room, users} = useAppSelector((state) => state.websocket);
     console.log(users);
@@ -56,23 +50,11 @@ export const GamePage = () => {
 
         socket.on("starting", () => {
             console.log("START");
-            
+
             const test = search.slice(1, search.length);
             navigate(`/game?${test}`);
         });
-
-        // return () => {
-        //     dispatch(resetWebsocket());
-        // };
     }, []);
-
-    const submit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if (username) {
-            socket.emit("send", message);
-            setMessage("");
-        }
-    };
 
     const startGame = () => {
         const test = search.slice(1, search.length);
@@ -99,38 +81,15 @@ export const GamePage = () => {
                         <div className="title-code">{room}</div>
                     </div>
 
-                    {/* <form onSubmit={submit} id="form">
-          <div className="input-group">
-           <input
-                        type="text"
-                        className="form-control"
-                        onChange={(e) => setMessage(e.currentTarget.value)}
-                        value={message}
-                        id="text"
-                        /> 
-            <button id="submit" type="submit" className={styles.start}>
-              Ready
-            </button>
-          </div>
-        </form> */}
-
-                    {/* {messages.map(({ text, user }, index) => (
-          <div key={index} className="row mb-2">
-            <div className="col-md-2">{user}</div>
-            <div className="col-md-2">{text}</div>
-          </div>
-        ))} */}
-
                     {users.length > 1 ? (
-                        <button className={styles.start} onClick={startGame}>Start</button>
+                        <button className={styles.start} onClick={startGame}>
+              Start
+                        </button>
                     ) : (
                         <button className={styles.startDisabled}>Start</button>
                     )}
                 </div>
 
-                {/* {users.length <= 1 ? (
-          <span className={styles.waiting}>Waiting for players…</span>
-        ) : ( */}
                 <ul className={styles.usersList}>
                     {users.map((item) => (
                         <li className={styles.user}>
@@ -138,7 +97,6 @@ export const GamePage = () => {
                         </li>
                     ))}
                 </ul>
-                {/* )} */}
             </div>
         </div>
     );
