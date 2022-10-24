@@ -152,8 +152,10 @@ export const CreateTestsPage = () => {
                         // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
                         "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>"
                     }).then(data => {
+                        console.log(data);
                         nav("/success", {state: {title: "Successfully created test!"}});
                     });
+                    console.log(resp);
 
                 } catch (err: typeof err) {
                     console.log(err, "aaaaaaaaaaaaaaaaaaaaaaa");

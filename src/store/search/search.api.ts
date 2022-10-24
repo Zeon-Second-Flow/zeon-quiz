@@ -7,6 +7,8 @@ const token =
   localStorage.getItem("token") &&
   JSON.parse(localStorage.getItem("token") || "");
 
+
+// @ts-ignore
 export const getTests = createApi({
     reducerPath: "tests",
     baseQuery: customFetchBase,

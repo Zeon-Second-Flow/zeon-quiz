@@ -13,7 +13,6 @@ import {useLocation, useNavigate} from "react-router-dom";
 export const TestPage = () => {
     const {search} = useLocation();
     const test = search.slice(1, search.length);
-
     const {data, isLoading, isSuccess, isError, error} = useGetTestsQuery(test);
     const [counter, setCounter] = useState(0);
     const [currInfo, setCurrInfo] = useState<Questions>();
