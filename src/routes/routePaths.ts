@@ -9,7 +9,6 @@ export const routePath = {
     CREATE_TEST: "create-test",
     CHANGE_PASSWORD: "change-password",
     SUCCESS_PAGE: "success",
-    PAGE_NOT_FOUND: "*",
     QUESTION_PRELOAD: "question-preload",
     GAME: "game",
     ROOM: "room",
@@ -24,6 +23,7 @@ export const routePath = {
     GROUP_PAGE: "group-page",
     PROFILE_PAGE: "profile-page/:name",
     PRIVATE_PAGE: "private",
+    PAGE_NOT_FOUND: "*",
 }; 
 
 

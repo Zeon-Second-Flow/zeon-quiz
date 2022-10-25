@@ -16,13 +16,11 @@ import {YourIn} from "@/pages/YourIn/YourIn";
 import {Profile} from "@/pages/ProfilePage/Profile";
 import {LeaderboardPage} from "@/pages/LeaderboardPage/LeaderboardPage";
 import {GroupLeaderboardPage} from "@/pages/LeaderboardPage/GroupLeaderboardPage";
-import {questionPreload} from "@/pages/questionPreload/questionPreload";
-import {LocalBoard} from "@/pages/LocalBoard/LocalBoard";
 import {ErrorPage} from "@/pages/ErrorPage/Error";
 import {PrivatePage} from "@/pages/PrivatePage/PrivatePage";
 import {TestPage} from "@/pages/TestPage/TestPage";
 import {TestsPage} from "@/pages/TestsPage/TestsPage";
-
+import {NamePage} from "@/pages/NamePage/NamePage";
 
 
 export const publicRoutes = [
@@ -47,44 +45,12 @@ export const publicRoutes = [
         component: SearchPage,
     },
     {
-        path: routePath.DETAIL,
-        component: DetailPage,
-    },
-    // {
-    //     path: routePath.GAME,
-    //     component: GamePage
-    // },
-    {
         path: routePath.LEADERBOARD,
-        component: LeaderboardPage
+        component: LeaderboardPage,
     },
     {
         path: routePath.GROUP_PAGE,
-        component: GroupLeaderboardPage
-    },
-    {
-        path: routePath.QUESTION_PRELOAD, 
-        component: questionPreload,
-    },
-    {path: routePath.QUESTION_PRELOAD, 
-        component: questionPreload,
-      
-    },
-    {
-        path: routePath.LOCALBOARD, 
-        component: LocalBoard
-    },
-    {
-        path: routePath.YOUR_IN, 
-        component: YourIn
-    },
-    {
-        path: routePath.GAME,
-        component: TestPage
-    },
-    {
-        path: routePath.ROOM,
-        component: GamePage,
+        component: GroupLeaderboardPage,
     },
     {
         path: routePath.PRIVATE_PAGE,
@@ -124,15 +90,11 @@ export const privateRoutes = [
     },
     {
         path: routePath.GAME,
+        component: TestPage,
+    },
+    {
+        path: routePath.ROOM,
         component: GamePage,
-    },
-    {
-        path: routePath.QUESTION_PRELOAD,
-        component: questionPreload,
-    },
-    {
-        path: routePath.LOCALBOARD,
-        component: LocalBoard,
     },
     {
         path: routePath.YOUR_IN,
@@ -141,6 +103,10 @@ export const privateRoutes = [
     {
         path: routePath.ENTER_PAGE,
         component: EnterPage,
+    },
+    {
+        path: routePath.NAME_PAGE,
+        component: NamePage,
     },
 ];
 

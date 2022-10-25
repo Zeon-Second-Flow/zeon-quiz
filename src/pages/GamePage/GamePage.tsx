@@ -15,7 +15,6 @@ interface IMessage {
 export const GamePage = () => {
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState<IMessage[]>([]);
-    const [isAdmin, setIsAdmin] = useState(true);
     const navigate = useNavigate();
     const {search} = useLocation();
 
@@ -70,7 +69,7 @@ export const GamePage = () => {
                 <div className={styles.body}>
                     <div className={styles.user}>
                         <img src={userLogo} alt="User" />
-                        {users.length}
+                        {users.length - 1}
                     </div>
 
                     <div className="box-room">
@@ -91,11 +90,13 @@ export const GamePage = () => {
                 </div>
 
                 <ul className={styles.usersList}>
-                    {users.map((item) => (
-                        <li className={styles.user}>
-                            <small>{item.name}</small>
-                        </li>
-                    ))}
+                    {users
+                        .filter((item) => !item.isAdmin)
+                        .map((item) => (
+                            <li className={styles.user}>
+                                <small>{item.nickname}</small>
+                            </li>
+                        ))}
                 </ul>
             </div>
         </div>

@@ -25,13 +25,18 @@ export const EnterPage = () => {
 
         socket.emit("join", [user.email, value]);
 
-        socket.on("users", (users) => {
-            dispatch(setSocketUsers(users));
-        });
+        // socket.on("users", (users) => {
+        //   dispatch(setSocketUsers(users));
+        // });
 
-        socket.on("connected", (user) => {
-            dispatch(setSocketRoom(user.room));
-            dispatch(setSocketUsers([...users, user]));
+        // socket.on("connected", (user) => {
+        //   dispatch(setSocketRoom(user.room));
+        //   dispatch(setSocketUsers([...users, user]));
+        //   navigateToGame();
+        // });
+
+        socket.on("enterNickname", ([username, room]) => {
+            dispatch(setSocketRoom(room));
             navigateToGame();
         });
 
@@ -46,8 +51,8 @@ export const EnterPage = () => {
 
     const navigateToGame = () => {
         setTimeout(() => {
-            navigate("/in");
-        }, 500);
+            navigate("/name-page");
+        }, 200);
     };
 
     return (

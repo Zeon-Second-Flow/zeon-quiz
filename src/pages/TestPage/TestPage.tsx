@@ -74,7 +74,7 @@ export const TestPage = () => {
     console.log(counter, "counter");
 
     useEffect(() => {
-        if (results) {
+        if (results && isAdmin) {
             sendScores([
                 {
                     score: 50,
@@ -558,7 +558,7 @@ export const TestPage = () => {
                             .map((item: IItem) => {
                                 return (
                                     <div className={styles.boardInfo}>
-                                        <p>{item.name}</p>
+                                        <p>{item.nickname}</p>
                                         <p>{item.points}</p>
                                     </div>
                                 );
@@ -598,7 +598,7 @@ export const TestPage = () => {
                         <div className={styles.podiums}>
                             <div className={styles.podium}>
                                 <div className={styles.userWrapper}>
-                                    <p className={styles.user}>{leaders[1]?.name || ""}</p>
+                                    <p className={styles.user}>{leaders[1]?.nickname || ""}</p>
                                 </div>
                                 <div className={`${styles.block}  ${styles.placeTwo}`}>
                                     <div className={styles.placeWrapper}>
@@ -609,7 +609,7 @@ export const TestPage = () => {
                             </div>
                             <div className={styles.podium}>
                                 <div className={styles.userWrapper}>
-                                    <p className={styles.user}>{leaders[0]?.name}</p>
+                                    <p className={styles.user}>{leaders[0]?.nickname}</p>
                                 </div>
                                 <div className={`${styles.block}  ${styles.placeOne}`}>
                                     <div className={styles.placeWrapper}>
@@ -620,7 +620,7 @@ export const TestPage = () => {
                             </div>
                             <div className={styles.podium}>
                                 <div className={styles.userWrapper}>
-                                    <p className={styles.user}>{leaders[2]?.name || ""}</p>
+                                    <p className={styles.user}>{leaders[2]?.nickname || ""}</p>
                                 </div>
                                 <div className={`${styles.block}  ${styles.placeThree}`}>
                                     <div className={styles.placeWrapper}>

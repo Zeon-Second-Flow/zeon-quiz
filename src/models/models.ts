@@ -79,6 +79,7 @@ export interface IResponse {
 export interface IItem {
   name: string;
   points: number;
+  nickname: string;
 }
 
 export interface IAnswerWrapper {

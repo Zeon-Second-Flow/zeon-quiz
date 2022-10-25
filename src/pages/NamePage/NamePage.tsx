@@ -1,7 +1,36 @@
 import styles from "./NamePage.module.scss";
+import {useAppSelector} from "@/hooks";
+import {setSocketUsers} from "@/store/websocket/websocket";
+import {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 
 export const NamePage = () => {
+    const {socket, room} = useAppSelector((state) => state.websocket);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [value, setValue] = useState("");
+
+    const user =
+    localStorage.getItem("token") &&
+    JSON.parse(localStorage.getItem("token") || "");
+
+    useEffect(() => {
+        socket.on("users", (users) => {
+            dispatch(setSocketUsers(users));
+        });
+    }, []);
+
+    const navigateToGame = () => {
+        if (value.length > 0) {
+            socket.emit("nickname", [user.email, room, value]);
+            setTimeout(() => {
+                navigate("/in");
+            }, 200);
+        }
+    };
+
     return (
         <div className={styles.wrapper}>
             <div className="container">
@@ -15,9 +44,13 @@ export const NamePage = () => {
                                 className={styles.common}
                                 type="text"
                                 placeholder="Nickname"
+                                value={value}
+                                onChange={(e) => setValue(e.currentTarget.value)}
                             />
                             <div>
-                                <button className={styles.common}>OK, go!</button>
+                                <button onClick={navigateToGame} className={styles.common}>
+                  OK, go!
+                                </button>
                             </div>
                         </div>
                     </div>
