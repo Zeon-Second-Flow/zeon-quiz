@@ -51,6 +51,7 @@ export const Login = () => {
 				JSON.stringify({
 					isStaff: data.is_staff,
 					refresh: data.refresh,
+					group: data.group,
 					token: data.access,
 					email: values.login,
 					id: data.user_id,

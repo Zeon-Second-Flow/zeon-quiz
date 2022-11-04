@@ -25,7 +25,7 @@ export const EnterPage = () => {
 
 		console.log(user);
 
-		socket.emit('join', [user.email, value]);
+		socket.emit('join', [user.email, value, user.group]);
 
 		// socket.on("users", (users) => {
 		//   dispatch(setSocketUsers(users));
