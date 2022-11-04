@@ -9,7 +9,7 @@ import styles from './EnterPage.module.scss';
 import { useAppDispatch, useAppSelector, useAuth } from '@/hooks';
 
 export const EnterPage = () => {
-	const [value, setValue] = useState();
+	const [value, setValue] = useState('');
 	const navigate = useNavigate();
 	const { users, socket } = useAppSelector((state) => state.websocket);
 	const { isStaff } = useAuth();
