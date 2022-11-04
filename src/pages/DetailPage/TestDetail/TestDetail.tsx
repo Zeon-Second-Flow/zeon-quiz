@@ -20,7 +20,7 @@ export const TestDetail = ({item}: IProps) => {
       localStorage.getItem("token") &&
       JSON.parse(localStorage.getItem("token") || "");
 
-        socket.emit("username", [username.email]);
+        socket.emit("username", [username.email, username.group]);
 
         socket.on("users", (users) => {
             dispatch(setSocketUsers(users));
