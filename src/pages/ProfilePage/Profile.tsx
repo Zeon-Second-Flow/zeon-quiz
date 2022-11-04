@@ -2,7 +2,11 @@ import { useEffect } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
 import { useLogoutUserMutation } from '@/store/auth/signupSlice';
-import { IUser, useLazyGetUserQuery } from '@/store/profile/profile.api';
+import {
+	IUser,
+	IUserTokenAndId,
+	useLazyGetUserQuery,
+} from '@/store/profile/profile.api';
 
 import { MyLoader } from '@/components/Loader/MyLoader';
 
@@ -17,14 +21,16 @@ export const Profile = () => {
 		localStorage.getItem('token') &&
 		JSON.parse(localStorage.getItem('token') || '');
 
+	const [getUser, { data, isLoading }] = useLazyGetUserQuery();
+
 	const { user_id } = useParams();
 
-	const [getUser, { data, isLoading }] = useLazyGetUserQuery();
 	const [logoutUser] = useLogoutUserMutation();
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		getUser(user_id);
+		const data = { user_id, token } as IUserTokenAndId<string>;
+		getUser(data);
 	}, []);
 	console.log(data);
 
