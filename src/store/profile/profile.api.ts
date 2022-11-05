@@ -23,20 +23,23 @@ export interface ITest {
 	rating: number;
 }
 
-const token =
-	localStorage.getItem('token') &&
-	JSON.parse(localStorage.getItem('token') || '');
+export interface IUserTokenAndId<T> {
+	user_id: string;
+	token: {
+		token: T;
+	};
+}
 
 export const profileSlice = createApi({
 	reducerPath: 'userProfile',
 	baseQuery: customFetchBase,
 	endpoints: (builder) => ({
-		getUser: builder.query<IUser, string | undefined>({
-			query: (user_id) => ({
-				url: `/account/users/${user_id}`,
+		getUser: builder.query({
+			query: (data: IUserTokenAndId<string>) => ({
+				url: `/account/users/${data.user_id}`,
 				headers: {
 					// eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-					Authorization: 'Bearer ' + token.token,
+					Authorization: 'Bearer ' + data.token.token,
 					'Content-Type': 'application/json',
 				},
 			}),
