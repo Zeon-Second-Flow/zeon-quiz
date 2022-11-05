@@ -1,4 +1,7 @@
-import { CreateTestsPage } from '@/pages/CreateTestsPage/CreateTestsPage';
+import {
+	CreateTestsPage,
+	EditTestsPage,
+} from '@/pages/CreateTestsPage/CreateTestsPage';
 import { DetailPage } from '@/pages/DetailPage/DetailPage';
 import { EnterPage } from '@/pages/EnterPage/EnterPage';
 import { ErrorPage } from '@/pages/ErrorPage/Error';
@@ -128,5 +131,9 @@ export const stuffRoutes = [
 	{
 		path: routePath.TESTS,
 		component: TestsPage,
+	},
+	{
+		path: 'editTests/:test',
+		component: EditTestsPage,
 	},
 ];
