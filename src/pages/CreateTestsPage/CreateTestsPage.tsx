@@ -107,12 +107,12 @@ export const CreateTestsPage = () => {
 			questions: quizArr,
 		});
 		setDis(
-			!!quizArr[quizArr.length - 1].question &&
+			!!quizArr.at(-1).question &&
 				!!quizArr.at(-1).answers.A &&
 				!!quizArr.at(-1).answers.B &&
-				!!quizArr[quizArr.length - 1].answers.C &&
-				!!quizArr[quizArr.length - 1].answers.D &&
-				!!quizArr[quizArr.length - 1].answers.correct_answer
+				!!quizArr.at(-1).answers.C &&
+				!!quizArr.at(-1).answers.D &&
+				!!quizArr.at(-1).answers.correct_answer
 		);
 	}, [
 		question,
@@ -131,8 +131,8 @@ export const CreateTestsPage = () => {
 		newTest.id = Math.random().toString(16).slice(5);
 		setQuizArr((prevState) => [...prevState, newTest]);
 	};
+	console.log(data);
 
-	console.log(dis);
 	const setChoosedQuestion = (idx: string) => {
 		setCurrenTest(idx);
 		const currentQuestion = quizArr.find((it) => it.id === idx);
@@ -182,7 +182,6 @@ export const CreateTestsPage = () => {
 		dataImg.append('image', img);
 		try {
 			const response = await createTest(data).unwrap();
-			console.log(response);
 			if (!!response) {
 				try {
 					const resp = axios
@@ -196,16 +195,17 @@ export const CreateTestsPage = () => {
 							}
 						)
 						.then((data) => {
-							console.log(data);
 							nav('/success', {
 								state: { title: 'Successfully created test!' },
 							});
 						});
-					console.log(resp);
 				} catch (err: typeof err) {
 					console.log(err, 'aaaaaaaaaaaaaaaaaaaaaaa');
 				}
 			}
+			nav('/success', {
+				state: { title: 'Successfully created test!' },
+			});
 		} catch (error: typeof error) {
 			setToggleForm(true);
 			for (const key in error.data) {
@@ -484,11 +484,8 @@ export const EditTestsPage = () => {
 
 	const setChoosedQuestion = (idx: string) => {
 		setCurrenTest(idx);
-		console.log(idx);
-		console.log(quizArr);
 
 		const currentQuestion = quizArr.find((it) => it.id === idx);
-		console.log(currentQuestion);
 
 		if (currentQuestion) {
 			setAns1(currentQuestion.answers.A);
@@ -523,8 +520,6 @@ export const EditTestsPage = () => {
 		const currentQuestion = quizArr.find((it) => it.id === idx);
 		const currentQuestionIndex = quizArr.findIndex((it) => it.id === idx);
 
-		console.log(currentQuestion);
-
 		if (currentQuestion) {
 			currentQuestion.answers.A = tes.ans1;
 			currentQuestion.answers.B = tes.ans2;
@@ -555,7 +550,6 @@ export const EditTestsPage = () => {
 		dataImg.append('image', img);
 		try {
 			const response = await createTest(data).unwrap();
-			console.log(response);
 			if (!!response) {
 				try {
 					const resp = axios
@@ -569,12 +563,10 @@ export const EditTestsPage = () => {
 							}
 						)
 						.then((data) => {
-							console.log(data);
 							nav('/success', {
 								state: { title: 'Successfully created test!' },
 							});
 						});
-					console.log(resp);
 				} catch (err: typeof err) {
 					console.log(err, 'aaaaaaaaaaaaaaaaaaaaaaa');
 				}
@@ -590,7 +582,6 @@ export const EditTestsPage = () => {
 	if (result.isSuccess) {
 		nav('/');
 	}
-	console.log(transformedArray());
 
 	return (
 		<>

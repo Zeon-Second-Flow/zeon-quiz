@@ -23,9 +23,6 @@ export const EnterPage = () => {
 			localStorage.getItem('token') &&
 			JSON.parse(localStorage.getItem('token') || '');
 
-		console.log(user);
-
-		// socket.emit('join', [user.email, value]);
 		socket.emit('join', [user.email, value, user.group]);
 
 		// socket.on("users", (users) => {
@@ -44,7 +41,7 @@ export const EnterPage = () => {
 		});
 
 		socket.on('disconnected', (id) => {
-			dispatch(setSocketUsers(users.filter((user) => user.id !== id)));
+			dispatch(setSocketUsers(users.filter((user: any) => user.id !== id)));
 		});
 
 		socket.on('error', (error) => {
