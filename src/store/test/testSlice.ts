@@ -23,6 +23,16 @@ export const testApi = createApi({
 				},
 			}),
 		}),
+		getUsersTests: builder.query<IResponse, string>({
+			query: (test: string) => ({
+				url: `tests/${test}/users`,
+				method: 'GET',
+				headers: {
+					Authorization: `Bearer ${token.token}`,
+					'Content-Type': 'application/json',
+				},
+			}),
+		}),
 		postScores: builder.mutation<any, object>({
 			query: (data) => ({
 				url: '/tests/',
@@ -66,4 +76,5 @@ export const {
 	usePostScoresMutation,
 	useLazyGetQuestionsQuery,
 	useUpdateQuestionMutation,
+	useLazyGetUsersTestsQuery,
 } = testApi;
