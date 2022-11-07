@@ -18,7 +18,9 @@ export const TestsPage = () => {
 	useEffect(() => {
 		getTests('tima');
 	}, []);
+
 	console.log(payload);
+	console.log(data);
 
 	const searchItem = data?.results.map((item) => {
 		return (

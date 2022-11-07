@@ -57,6 +57,14 @@ export const Login = () => {
 					id: data.user_id,
 				})
 			);
+
+			localStorage.setItem(
+				'currentUser',
+				JSON.stringify({
+					email: data.login,
+					group: data.group,
+				})
+			);
 			navigate('/');
 		} catch (error: typeof error) {
 			for (const key in error.data) {

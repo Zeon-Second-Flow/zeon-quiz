@@ -160,7 +160,10 @@ export const TestPage = () => {
 	});
 
 	const postUsersResult = async () => {
-		await sendScores(modifiedUsersResult);
+		if (isAdmin) {
+			await sendScores(modifiedUsersResult);
+		}
+
 		navigate('/');
 	};
 
