@@ -106,14 +106,20 @@ export const CreateTestsPage = () => {
 			description: description,
 			questions: quizArr,
 		});
-		setDis(
-			!!quizArr[quizArr.length - 1].question &&
-				!!quizArr.at(-1).answers.A &&
-				!!quizArr.at(-1).answers.B &&
-				!!quizArr[quizArr.length - 1].answers.C &&
-				!!quizArr[quizArr.length - 1].answers.D &&
-				!!quizArr[quizArr.length - 1].answers.correct_answer
-		);
+		const isDataFilledArray = [];
+
+		quizArr.forEach(item => {
+			if(item.question === '' || item.answers.A === '' || item.answers.B === ''
+				&& item.answers.C === '' || item.answers.D === '' || item.answers.correct_answer === '') {
+				isDataFilledArray.push(item);
+			}
+		});
+
+		if(isDataFilledArray.length === 0) {
+			setDis(false);
+		} else {
+			setDis(true);
+		}
 	}, [
 		question,
 		points,
@@ -132,7 +138,6 @@ export const CreateTestsPage = () => {
 		setQuizArr((prevState) => [...prevState, newTest]);
 	};
 
-	console.log(dis);
 	const setChoosedQuestion = (idx: string) => {
 		setCurrenTest(idx);
 		const currentQuestion = quizArr.find((it) => it.id === idx);
