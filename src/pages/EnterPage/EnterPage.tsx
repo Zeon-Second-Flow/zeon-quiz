@@ -21,7 +21,7 @@ export const EnterPage = () => {
 		setError('');
 		const user =
 			localStorage.getItem('token') &&
-			JSON.parse(localStorage.getItem('token') || '');
+			JSON.parse(localStorage.getItem('currentUser') || '');
 
 		socket.emit('join', [user.email, value, user.group]);
 
