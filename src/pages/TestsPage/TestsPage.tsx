@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { useGetAllTestsQuery } from '@/store/search/search.api';
-import { useLazyGetUsersTestsQuery } from '@/store/test/testSlice';
 
 import { SearchLoader } from '@/components/Loader/SearchLoader';
 
@@ -12,15 +10,7 @@ import styles from './TestsPage.module.scss';
 
 export const TestsPage = () => {
 	const { data, isLoading } = useGetAllTestsQuery();
-	const [getTests, payload] = useLazyGetUsersTestsQuery();
 	const { value } = useParams();
-
-	useEffect(() => {
-		getTests('tima');
-	}, []);
-
-	console.log(payload);
-	console.log(data);
 
 	const searchItem = data?.results.map((item) => {
 		return (

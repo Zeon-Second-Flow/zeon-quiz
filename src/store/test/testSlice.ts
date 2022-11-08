@@ -27,10 +27,6 @@ export const testApi = createApi({
 			query: (test: string) => ({
 				url: `tests/${test}/users`,
 				method: 'GET',
-				headers: {
-					Authorization: `Bearer ${token.token}`,
-					'Content-Type': 'application/json',
-				},
 			}),
 		}),
 		postScores: builder.mutation<any, object>({
