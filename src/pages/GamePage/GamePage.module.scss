@@ -127,8 +127,13 @@
     box-shadow: rgb(0 0 0 / 15%) 0px -0.25rem 0px 0px inset, rgb(0 0 0 / 15%) 0px 2px 4px;
     font-size: 1.2rem;
 
-    background-color: rgb(204, 204, 204);
-    color: rgb(0, 0, 0);
+    background-color: rgb(0, 179, 192);
+    color: rgb(255, 255, 255);
+    border: none;
+
+    &:active {
+        transform: scale(0.9);
+    }
 }
 
 .startDisabled {
