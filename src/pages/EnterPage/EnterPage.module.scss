@@ -7,7 +7,7 @@
 
     .error {
         margin-top: 10px;
-        color: white
+        color: white;
     }
 
     .circle {
@@ -72,6 +72,11 @@
             text-align: center;
             color: white;
             cursor: pointer;
+            transition: all 0.5s ease;
+
+            &:active {
+                transform: scale(0.9);
+            }
         }
 
         .input {
@@ -94,11 +99,11 @@
         }
 
         button {
-            background-color: rgb(51, 51, 51);
             min-height: 33px;
             width: 100%;
             box-shadow: rgb(0 0 0 / 25%) 0px -4px inset;
             border: none;
+            background-color: rgb(0, 125, 134);
         }
     }
 
