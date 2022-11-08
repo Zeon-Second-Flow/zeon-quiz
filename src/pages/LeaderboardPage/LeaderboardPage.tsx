@@ -23,7 +23,6 @@ export const LeaderboardPage = () => {
 	const [users, setUsers] = useState<IUsers[]>([]);
 	const [sortBy, setSortBy] = useState('Points');
 	const [isLoading, setIsLoading] = useState(true);
-	console.log(users);
 
 	useEffect(() => {
 		axios('https://safe-atoll-40972.herokuapp.com/account/users/?limit=10')
