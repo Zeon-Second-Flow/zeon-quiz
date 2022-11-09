@@ -76,14 +76,19 @@ export const SignUp = () => {
 				login: data.email,
 				password: data.password,
 			}).unwrap();
+
 			localStorage.setItem(
 				'token',
 				JSON.stringify({
+					isStaff: res.is_staff,
+					refresh: res.refresh,
 					token: res.access,
 					refresh: res.refresh,
 					email: res.login,
+					id: res.user_id,
 				})
 			);
+
 			navigate('/');
 		} catch (error: typeof error) {
 			throw new Error(error);

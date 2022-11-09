@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { customFetchBase } from '../auth/customFetchBase';
 
-import { IQuestions, IResponse } from '@/models/models';
+import { IQuestions, IResponse, ITestData } from '@/models/models';
 
 const token =
 	localStorage.getItem('token') &&
@@ -13,19 +13,19 @@ export const testApi = createApi({
 	baseQuery: customFetchBase,
 	tagTypes: ['test'],
 	endpoints: (builder) => ({
-		getTests: builder.query<IResponse, string>({
-			query: (test: string) => ({
-				url: `tests/${test}`,
+		getTests: builder.query({
+			query: (data: ITestData) => ({
+				url: `tests/${data.test}`,
 				method: 'GET',
 				headers: {
-					Authorization: `Bearer ${token.token}`,
+					Authorization: `Bearer ${data.token}`,
 					'Content-Type': 'application/json',
 				},
 			}),
 		}),
 		getUsersTests: builder.query<IResponse, string>({
 			query: (test: string) => ({
-				url: `tests/${test}/users`,
+				url: `tests/${test}/users/`,
 				method: 'GET',
 			}),
 		}),
@@ -51,7 +51,7 @@ export const testApi = createApi({
 		}),
 		updateQuestion: builder.mutation<IQuestions, string>({
 			query: ({ name, questions }: any) => ({
-				url: `tests/create/${name}`,
+				url: `tests/create/${name}/`,
 				method: 'PATCH',
 				body: JSON.stringify({
 					description: 'asdf',

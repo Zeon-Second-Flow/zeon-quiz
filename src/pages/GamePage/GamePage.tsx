@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { resetWebsocket, setSocketUsers } from '@/store/websocket/websocket';
 
@@ -14,10 +14,10 @@ interface IMessage {
 }
 
 export const GamePage = () => {
-	const [message, setMessage] = useState('');
+	const [isStart, setIsStart] = useState(false);
 	const [messages, setMessages] = useState<IMessage[]>([]);
 	const navigate = useNavigate();
-	const { search } = useLocation();
+	const { search, pathname } = useLocation();
 
 	const { room, users } = useAppSelector((state) => state.websocket);
 	console.log(users);
@@ -62,6 +62,48 @@ export const GamePage = () => {
 		socket.emit('start-game', test);
 	};
 
+	// useEffect(() => {
+	// 	let func = () => {
+	// 		let bool = confirm('Do you wanna leave game?');
+
+	// 		if (!bool) {
+	// 			navigate(pathname + search);
+	// 		}
+	// 	};
+	// 	if (isStart) {
+	// 		startGame();
+	// 	}
+	// 	return () => {
+	// 		if (!isStart) {
+	// 			func();
+	// 		}
+	// 	};
+	// }, [isStart]);
+
+	// const beforeUnloadListener = (event: any) => {
+	// 	event.preventDefault();
+	// 	event.returnValue = 'Are you sure you want to reload the page?';
+	// };
+	// addEventListener('beforeunload', beforeUnloadListener, { capture: true });
+
+	// function goodbye(e: any) {
+	// 	if (!e) e = window.event;
+	// 	//e.cancelBubble is supported by IE - this will kill the bubbling process.
+	// 	e.cancelBubble = true;
+	// 	e.returnValue = 'You sure you want to leave?'; //This is displayed on the dialog
+
+	// 	//e.stopPropagation works in Firefox.
+	// 	if (e.stopPropagation) {
+	// 		e.stopPropagation();
+	// 		e.preventDefault();
+	// 	}
+	// }
+	// window.onbeforeunload = goodbye;
+
+	// useEffect(() => {
+	// 	return () => {};
+	// }, []);
+
 	return (
 		<div className={styles.game}>
 			<div className={styles.square}></div>
@@ -81,13 +123,9 @@ export const GamePage = () => {
 						<div className="title-code">{room}</div>
 					</div>
 
-					{users.length > 1 ? (
-						<button className={styles.start} onClick={startGame}>
-							Start
-						</button>
-					) : (
-						<button className={styles.startDisabled}>Start</button>
-					)}
+					<button className={styles.start} onClick={startGame}>
+						Start
+					</button>
 				</div>
 
 				<ul className={styles.usersList}>
