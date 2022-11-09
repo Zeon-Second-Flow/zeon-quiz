@@ -14,22 +14,29 @@ import third from '@/assets/podium/3.svg';
 
 import styles from './TestPage.module.scss';
 import { useAppSelector, useAuth } from '@/hooks';
-import { IItem, ITestData, Questions } from '@/models/models';
+import { IItem, IResponse, ITestData, Questions } from '@/models/models';
 
 export const TestPage = () => {
-	const { search } = useLocation();
-	const test = search.slice(1, search.length);
+	// const { search } = useLocation();
+	// const test = search.slice(1, search.length);
 
-	const token =
-		localStorage.getItem('token') &&
-		JSON.parse(localStorage.getItem('token') || '');
+	// const token =
+	// 	localStorage.getItem('token') &&
+	// 	JSON.parse(localStorage.getItem('token') || '');
 
-	const obj = {
-		test: test,
-		token: token.token,
-	} as ITestData;
+	// const obj = {
+	// 	test: test,
+	// 	token: token.token,
+	// } as ITestData;
 
-	const { data, isLoading, isSuccess, isError, error } = useGetTestsQuery(obj);
+	// const { data, isLoading, isSuccess, isError, error } = useGetTestsQuery(obj);
+
+	// console.log('ASDASDAS', error);
+
+	const data = useAppSelector((state) => state.websocket.test) as IResponse;
+	const test = useAppSelector((state) => state.websocket.title);
+
+	console.log('hui', test, data);
 
 	const [counter, setCounter] = useState(0);
 	const [currInfo, setCurrInfo] = useState<Questions>();
@@ -115,15 +122,15 @@ export const TestPage = () => {
 	}, [preload]);
 
 	useEffect(() => {
-		if (data && isSuccess) {
+		if (data) {
 			setCurrInfo(data.questions[counter]);
 			setTimer((data.questions[counter].timer as number) + 4);
 			setCorrectAnswer(data.questions[counter].correct_answer);
 		}
-	}, [isSuccess]);
+	}, []);
 
 	useEffect(() => {
-		if (data && isSuccess) {
+		if (data) {
 			setCurrInfo(data.questions[counter]);
 			setCorrectAnswer(data.questions[counter].correct_answer);
 			setTimer((data.questions[counter].timer as number) + 6);
@@ -180,12 +187,12 @@ export const TestPage = () => {
 
 	return (
 		<>
-			{isLoading && (
+			{/* {isLoading && (
 				<div className={styles.loaderWrapper}>
 					<div className={styles.loader}></div>
 				</div>
-			)}
-			{isSuccess && currInfo && (
+			)} */}
+			{currInfo && (
 				<div className={styles.wrapper}>
 					<div className={styles.top}>
 						<div className={styles.question}>
@@ -552,13 +559,13 @@ export const TestPage = () => {
 					)}
 				</div>
 			)}
-			{isError && (
+			{/* {isError && (
 				<div className={styles.loaderWrapper}>
 					<div className={styles.error}>
 						Sorry, there is an error! Try again later!
 					</div>
 				</div>
-			)}
+			)} */}
 			<div className={board ? styles.wrapperDisplay : styles.wrappers}>
 				<div className={styles.board}>
 					<div className={styles.boardTitle}>
