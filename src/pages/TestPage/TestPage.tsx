@@ -168,12 +168,13 @@ export const TestPage = () => {
 	}, [preload]);
 
 	const modifiedUsersResult = usersResult.map((elem: IItem) => {
-		const newObj = {
+		if (elem.name === 'anonym') return;
+
+		return {
 			score: elem.points,
 			login: elem.name,
 			test: test,
 		};
-		return newObj;
 	});
 
 	const postUsersResult = async () => {
