@@ -14,13 +14,23 @@ import third from '@/assets/podium/3.svg';
 
 import styles from './TestPage.module.scss';
 import { useAppSelector, useAuth } from '@/hooks';
-import { IItem, Questions } from '@/models/models';
+import { IItem, ITestData, Questions } from '@/models/models';
 
 export const TestPage = () => {
 	const { search } = useLocation();
 	const test = search.slice(1, search.length);
 
-	const { data, isLoading, isSuccess, isError, error } = useGetTestsQuery(test);
+	const token =
+		localStorage.getItem('token') &&
+		JSON.parse(localStorage.getItem('token') || '');
+
+	const obj = {
+		test: test,
+		token: token.token,
+	} as ITestData;
+
+	const { data, isLoading, isSuccess, isError, error } = useGetTestsQuery(obj);
+
 	const [counter, setCounter] = useState(0);
 	const [currInfo, setCurrInfo] = useState<Questions>();
 	const [timer, setTimer] = useState(0);
@@ -107,7 +117,7 @@ export const TestPage = () => {
 	useEffect(() => {
 		if (data && isSuccess) {
 			setCurrInfo(data.questions[counter]);
-			setTimer(data.questions[counter].timer + 4);
+			setTimer((data.questions[counter].timer as number) + 4);
 			setCorrectAnswer(data.questions[counter].correct_answer);
 		}
 	}, [isSuccess]);
@@ -116,7 +126,7 @@ export const TestPage = () => {
 		if (data && isSuccess) {
 			setCurrInfo(data.questions[counter]);
 			setCorrectAnswer(data.questions[counter].correct_answer);
-			setTimer(data.questions[counter].timer + 6);
+			setTimer((data.questions[counter].timer as number) + 6);
 		}
 	}, [counter]);
 
@@ -160,11 +170,12 @@ export const TestPage = () => {
 	});
 
 	const postUsersResult = async () => {
+		socket.emit('finish');
+		setResults(true);
+
 		if (isAdmin) {
 			await sendScores(modifiedUsersResult);
 		}
-
-		navigate('/');
 	};
 
 	return (
@@ -556,14 +567,7 @@ export const TestPage = () => {
 					{isAdmin && (
 						<div className={styles.buttonWrapper}>
 							{counter === length ? (
-								<button
-									onClick={() => {
-										socket.emit('finish');
-										setResults(true);
-									}}
-								>
-									End
-								</button>
+								<button onClick={postUsersResult}>End</button>
 							) : (
 								<button
 									onClick={() => {
@@ -616,8 +620,8 @@ export const TestPage = () => {
 					<div className={styles.titleWrapper}>
 						<h2 className={styles.podiumTitle}>{data?.test.title}</h2>
 					</div>
-					<div className={styles.homeBtn}>
-						<button onClick={postUsersResult}>Home</button>
+					<div className={styles.homeBtn} onClick={() => navigate('/')}>
+						<button>Home</button>
 					</div>
 					<div className="container">
 						<div className={styles.podiums}>
