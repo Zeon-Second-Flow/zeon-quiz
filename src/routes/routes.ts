@@ -84,14 +84,6 @@ export const publicRoutes = [
 		path: routePath.PAGE_NOT_FOUND,
 		component: ErrorPage,
 	},
-];
-
-export const privateRoutes = [
-	...publicRoutes,
-	{
-		path: routePath.CREATE_TEST,
-		component: CreateTestsPage,
-	},
 	{
 		path: routePath.CHANGE_PASSWORD,
 		component: ChangePassword,
@@ -103,6 +95,14 @@ export const privateRoutes = [
 	{
 		path: routePath.RESTORE_PASSWORD,
 		component: RestorePassword,
+	},
+];
+
+export const privateRoutes = [
+	...publicRoutes,
+	{
+		path: routePath.CREATE_TEST,
+		component: CreateTestsPage,
 	},
 	{
 		path: routePath.RESTORE_COMPLETE,
