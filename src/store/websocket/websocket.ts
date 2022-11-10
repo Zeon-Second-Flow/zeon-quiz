@@ -8,6 +8,8 @@ const initialState = {
 	}),
 	room: 0,
 	users: [],
+	test: {},
+	title: '',
 };
 
 const websocketSlice = createSlice({
@@ -20,6 +22,12 @@ const websocketSlice = createSlice({
 		setSocketUsers(state, payload) {
 			state.users = payload.payload;
 		},
+		setSocketTest(state, payload) {
+			state.test = payload.payload;
+		},
+		setSocketTitle(state, payload) {
+			state.title = payload.payload;
+		},
 		resetWebsocket(state) {
 			state.socket.emit('leave');
 			state.socket.disconnect();
@@ -29,6 +37,11 @@ const websocketSlice = createSlice({
 	},
 });
 
-export const { setSocketRoom, setSocketUsers, resetWebsocket } =
-	websocketSlice.actions;
+export const {
+	setSocketRoom,
+	setSocketUsers,
+	setSocketTest,
+	setSocketTitle,
+	resetWebsocket,
+} = websocketSlice.actions;
 export const { reducer } = websocketSlice;
