@@ -15,7 +15,7 @@ export const testApi = createApi({
 	endpoints: (builder) => ({
 		getTests: builder.query<IResponse, string>({
 			query: (test: string) => ({
-				url: `tests/${test}`,
+				url: `tests/${test}/`,
 				method: 'GET',
 				headers: {
 					Authorization: `Bearer ${token.token}`,
@@ -25,7 +25,7 @@ export const testApi = createApi({
 		}),
 		getUsersTests: builder.query<IResponse, string>({
 			query: (test: string) => ({
-				url: `tests/${test}/users`,
+				url: `tests/${test}/users/`,
 				method: 'GET',
 			}),
 		}),
@@ -42,7 +42,7 @@ export const testApi = createApi({
 		}),
 		getQuestions: builder.query<IQuestions, string>({
 			query: (name) => ({
-				url: `tests/${name}`,
+				url: `tests/${name}/`,
 				headers: {
 					Authorization: `Bearer ${token?.token}`,
 				},
@@ -51,7 +51,7 @@ export const testApi = createApi({
 		}),
 		updateQuestion: builder.mutation<IQuestions, string>({
 			query: ({ name, questions }: any) => ({
-				url: `tests/create/${name}`,
+				url: `tests/create/${name}/`,
 				method: 'PATCH',
 				body: JSON.stringify({
 					description: 'asdf',
