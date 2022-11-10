@@ -82,6 +82,12 @@ export interface IItem {
 	nickname: string;
 }
 
+export interface IResults {
+	score: number;
+	login: string;
+	test: string;
+}
+
 export interface ITestData {
 	test: string;
 	token: string;
