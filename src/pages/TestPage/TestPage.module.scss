@@ -1,7 +1,8 @@
 .wrapper {
 	background-color: rgb(242, 242, 242);
 	color: black;
-	min-height: 100vh;
+	height: 100vh;
+	max-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
