@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { io } from 'socket.io-client';
 
 const initialState = {
-	// socket: io("https://obscure-eyrie-08815.herokuapp.com/", {
-	socket: io('http://localhost:3333', {
+	socket: io('https://lit-sea-75298.herokuapp.com/', {
+		// socket: io('http://localhost:3333', {
 		transports: ['websocket', 'polling'],
 	}),
 	room: 0,
