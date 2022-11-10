@@ -48,7 +48,11 @@ export const Header = () => {
 					{user && <Search />}
 					<Link
 						className={styles.userLogo}
-						to={user ? `/profile-page/${user.id}` : '/auth'}
+						to={
+							user && user.email !== 'anonym'
+								? `/profile-page/${user.id}`
+								: '/auth'
+						}
 					>
 						{/* <User /> */}
 						<img src={User} alt="Icon" />
