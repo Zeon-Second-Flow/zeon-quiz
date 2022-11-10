@@ -29,7 +29,7 @@ export const GamePage = () => {
 		localStorage.getItem('token') &&
 		JSON.parse(localStorage.getItem('token') || '');
 
-	const { search } = useLocation();
+	const { search, pathname } = useLocation();
 	const test = search.slice(1, search.length);
 
 	const obj = {
@@ -82,47 +82,32 @@ export const GamePage = () => {
 		navigate('/game');
 	};
 
-	// useEffect(() => {
-	// 	let func = () => {
-	// 		let bool = confirm('Do you wanna leave game?');
+	useEffect(() => {
+		const beforeUnloadListener = (event: any) => {
+			event.preventDefault();
+			event.returnValue = 'Are you sure you want to reload the page?';
+		};
 
-	// 		if (!bool) {
-	// 			navigate(pathname + search);
-	// 		}
-	// 	};
-	// 	if (isStart) {
-	// 		startGame();
-	// 	}
-	// 	return () => {
-	// 		if (!isStart) {
-	// 			func();
-	// 		}
-	// 	};
-	// }, [isStart]);
+		const preventBack = (event: any) => {
+			const r = confirm('You pressed a Back button! Are you sure?!');
 
-	// const beforeUnloadListener = (event: any) => {
-	// 	event.preventDefault();
-	// 	event.returnValue = 'Are you sure you want to reload the page?';
-	// };
-	// addEventListener('beforeunload', beforeUnloadListener, { capture: true });
+			if (r == true) {
+				history.back();
+			} else {
+				history.pushState(null, '', pathname);
+			}
 
-	// function goodbye(e: any) {
-	// 	if (!e) e = window.event;
-	// 	//e.cancelBubble is supported by IE - this will kill the bubbling process.
-	// 	e.cancelBubble = true;
-	// 	e.returnValue = 'You sure you want to leave?'; //This is displayed on the dialog
+			// history.pushState(null, '', pathname);
+		};
 
-	// 	//e.stopPropagation works in Firefox.
-	// 	if (e.stopPropagation) {
-	// 		e.stopPropagation();
-	// 		e.preventDefault();
-	// 	}
-	// }
-	// window.onbeforeunload = goodbye;
+		window.addEventListener('popstate', preventBack, false);
+		window.addEventListener('beforeunload', beforeUnloadListener);
 
-	// useEffect(() => {
-	// 	return () => {};
-	// }, []);
+		return () => {
+			window.removeEventListener('beforeunload', beforeUnloadListener);
+			window.removeEventListener('popstate', preventBack);
+		};
+	}, []);
 
 	return (
 		<div className={styles.game}>
@@ -142,10 +127,13 @@ export const GamePage = () => {
 						<div className="title-room">Room code: </div>
 						<div className="title-code">{room}</div>
 					</div>
-
-					<button className={styles.start} onClick={startGame}>
-						Start
-					</button>
+					{isStart ? (
+						<button className={styles.start} onClick={startGame}>
+							Start
+						</button>
+					) : (
+						<button className={styles.startDisabled}>Start</button>
+					)}
 				</div>
 
 				<ul className={styles.usersList}>
