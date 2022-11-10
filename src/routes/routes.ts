@@ -29,6 +29,26 @@ import { routePath } from './routePaths';
 
 export const publicRoutes = [
 	{
+		path: routePath.GAME,
+		component: TestPage,
+	},
+	{
+		path: routePath.ROOM,
+		component: GamePage,
+	},
+	{
+		path: routePath.YOUR_IN,
+		component: YourIn,
+	},
+	{
+		path: routePath.ENTER_PAGE,
+		component: EnterPage,
+	},
+	{
+		path: routePath.NAME_PAGE,
+		component: NamePage,
+	},
+	{
 		path: routePath.HOME,
 		component: MainPage,
 	},
@@ -64,14 +84,6 @@ export const publicRoutes = [
 		path: routePath.PAGE_NOT_FOUND,
 		component: ErrorPage,
 	},
-];
-
-export const privateRoutes = [
-	...publicRoutes,
-	{
-		path: routePath.CREATE_TEST,
-		component: CreateTestsPage,
-	},
 	{
 		path: routePath.CHANGE_PASSWORD,
 		component: ChangePassword,
@@ -84,6 +96,14 @@ export const privateRoutes = [
 		path: routePath.RESTORE_PASSWORD,
 		component: RestorePassword,
 	},
+];
+
+export const privateRoutes = [
+	...publicRoutes,
+	{
+		path: routePath.CREATE_TEST,
+		component: CreateTestsPage,
+	},
 	{
 		path: routePath.RESTORE_COMPLETE,
 		component: RestoreComplete,
@@ -91,26 +111,6 @@ export const privateRoutes = [
 	{
 		path: routePath.PROFILE_PAGE,
 		component: Profile,
-	},
-	{
-		path: routePath.GAME,
-		component: TestPage,
-	},
-	{
-		path: routePath.ROOM,
-		component: GamePage,
-	},
-	{
-		path: routePath.YOUR_IN,
-		component: YourIn,
-	},
-	{
-		path: routePath.ENTER_PAGE,
-		component: EnterPage,
-	},
-	{
-		path: routePath.NAME_PAGE,
-		component: NamePage,
 	},
 ];
 

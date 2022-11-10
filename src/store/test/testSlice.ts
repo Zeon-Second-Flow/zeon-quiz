@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { customFetchBase } from '../auth/customFetchBase';
 
-import { IQuestions, IResponse } from '@/models/models';
+import { IQuestions, IResponse, ITestData } from '@/models/models';
 
 const token =
 	localStorage.getItem('token') &&
@@ -13,12 +13,12 @@ export const testApi = createApi({
 	baseQuery: customFetchBase,
 	tagTypes: ['test'],
 	endpoints: (builder) => ({
-		getTests: builder.query<IResponse, string>({
-			query: (test: string) => ({
-				url: `tests/${test}/`,
+		getTests: builder.query({
+			query: (data: ITestData) => ({
+				url: `tests/${data.test}/`,
 				method: 'GET',
 				headers: {
-					Authorization: `Bearer ${token.token}`,
+					Authorization: `Bearer ${data.token}`,
 					'Content-Type': 'application/json',
 				},
 			}),

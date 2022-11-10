@@ -45,10 +45,7 @@ export const Burger = ({ setOpen }: IProps) => {
 					width={24}
 					onClick={close}
 				/>
-				<Link
-					to={user ? `/profile-page/${user.id}` : '/auth'}
-					onClick={close}
-				>
+				<Link to={user ? `/profile-page/${user.id}` : '/auth'} onClick={close}>
 					<img src={User} alt="User" />
 					{/* <User /> */}
 				</Link>
