@@ -15,7 +15,7 @@ export const testApi = createApi({
 	endpoints: (builder) => ({
 		getTests: builder.query({
 			query: (data: ITestData) => ({
-				url: `tests/${data.test}`,
+				url: `tests/${data.test}/`,
 				method: 'GET',
 				headers: {
 					Authorization: `Bearer ${data.token}`,
@@ -42,7 +42,7 @@ export const testApi = createApi({
 		}),
 		getQuestions: builder.query<IQuestions, string>({
 			query: (name) => ({
-				url: `tests/${name}`,
+				url: `tests/${name}/`,
 				headers: {
 					Authorization: `Bearer ${token?.token}`,
 				},

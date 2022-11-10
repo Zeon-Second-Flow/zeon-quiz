@@ -49,14 +49,17 @@
 
 .middle {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
 
 	.timer {
+		order: 2;
 		background-color: rgb(134, 76, 191);
 		border-radius: 50%;
 		width: 160px;
 		height: 160px;
+		margin-bottom: 20px;
 		color: white;
 		font-size: 50px;
 		display: flex;
@@ -65,8 +68,10 @@
 	}
 
 	.imageWrapper {
+		order: 1;
 		max-height: 100%;
 		max-width: 40%;
+		margin-bottom: 10%;
 	}
 
 	img {
