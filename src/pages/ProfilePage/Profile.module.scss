@@ -53,6 +53,11 @@
     display: flex;
     gap: 40px;
     justify-content: center;
+
+		@media screen and (max-width: 576px) {
+			flex-direction: column;
+			align-items: center;
+		}
 }
 
 .profile {
@@ -82,7 +87,8 @@
     place-items: center;
     position: relative;
     height: 370px;
-    width: 325px;
+    max-width: 325px;
+		width: 100%;
     background: #333;
     border-radius: 8px;
     overflow: hidden;

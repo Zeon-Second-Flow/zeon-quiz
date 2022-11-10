@@ -63,7 +63,7 @@ export const TestDetail = ({ item, name }: IProps) => {
 					onClick={() => navigate(`/editTests/${name}`)}
 					className={styles.btn_edit}
 				>
-					edit
+					Edit test
 				</button>
 			</div>
 		</div>
