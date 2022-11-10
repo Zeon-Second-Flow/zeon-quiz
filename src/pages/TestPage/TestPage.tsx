@@ -14,13 +14,30 @@ import third from '@/assets/podium/3.svg';
 
 import styles from './TestPage.module.scss';
 import { useAppSelector, useAuth } from '@/hooks';
-import { IItem, Questions } from '@/models/models';
+import { IItem, IResponse, ITestData, Questions } from '@/models/models';
 
 export const TestPage = () => {
-	const { search } = useLocation();
-	const test = search.slice(1, search.length);
+	// const { search } = useLocation();
+	// const test = search.slice(1, search.length);
 
-	const { data, isLoading, isSuccess, isError, error } = useGetTestsQuery(test);
+	// const token =
+	// 	localStorage.getItem('token') &&
+	// 	JSON.parse(localStorage.getItem('token') || '');
+
+	// const obj = {
+	// 	test: test,
+	// 	token: token.token,
+	// } as ITestData;
+
+	// const { data, isLoading, isSuccess, isError, error } = useGetTestsQuery(obj);
+
+	// console.log('ASDASDAS', error);
+
+	const data = useAppSelector((state) => state.websocket.test) as IResponse;
+	const test = useAppSelector((state) => state.websocket.title);
+
+	console.log('hui', test, data);
+
 	const [counter, setCounter] = useState(0);
 	const [currInfo, setCurrInfo] = useState<Questions>();
 	const [timer, setTimer] = useState(0);
@@ -105,18 +122,18 @@ export const TestPage = () => {
 	}, [preload]);
 
 	useEffect(() => {
-		if (data && isSuccess) {
+		if (data) {
 			setCurrInfo(data.questions[counter]);
-			setTimer(data.questions[counter].timer + 4);
+			setTimer((data.questions[counter].timer as number) + 4);
 			setCorrectAnswer(data.questions[counter].correct_answer);
 		}
-	}, [isSuccess]);
+	}, []);
 
 	useEffect(() => {
-		if (data && isSuccess) {
+		if (data) {
 			setCurrInfo(data.questions[counter]);
 			setCorrectAnswer(data.questions[counter].correct_answer);
-			setTimer(data.questions[counter].timer + 6);
+			setTimer((data.questions[counter].timer as number) + 6);
 		}
 	}, [counter]);
 
@@ -151,30 +168,32 @@ export const TestPage = () => {
 	}, [preload]);
 
 	const modifiedUsersResult = usersResult.map((elem: IItem) => {
-		const newObj = {
+		if (elem.name === 'anonym') return;
+
+		return {
 			score: elem.points,
 			login: elem.name,
 			test: test,
 		};
-		return newObj;
 	});
 
 	const postUsersResult = async () => {
+		socket.emit('finish');
+		setResults(true);
+
 		if (isAdmin) {
 			await sendScores(modifiedUsersResult);
 		}
-
-		navigate('/');
 	};
 
 	return (
 		<>
-			{isLoading && (
+			{/* {isLoading && (
 				<div className={styles.loaderWrapper}>
 					<div className={styles.loader}></div>
 				</div>
-			)}
-			{isSuccess && currInfo && (
+			)} */}
+			{currInfo && (
 				<div className={styles.wrapper}>
 					<div className={styles.top}>
 						<div className={styles.question}>
@@ -541,13 +560,13 @@ export const TestPage = () => {
 					)}
 				</div>
 			)}
-			{isError && (
+			{/* {isError && (
 				<div className={styles.loaderWrapper}>
 					<div className={styles.error}>
 						Sorry, there is an error! Try again later!
 					</div>
 				</div>
-			)}
+			)} */}
 			<div className={board ? styles.wrapperDisplay : styles.wrappers}>
 				<div className={styles.board}>
 					<div className={styles.boardTitle}>
@@ -556,14 +575,7 @@ export const TestPage = () => {
 					{isAdmin && (
 						<div className={styles.buttonWrapper}>
 							{counter === length ? (
-								<button
-									onClick={() => {
-										socket.emit('finish');
-										setResults(true);
-									}}
-								>
-									End
-								</button>
+								<button onClick={postUsersResult}>End</button>
 							) : (
 								<button
 									onClick={() => {
@@ -616,8 +628,8 @@ export const TestPage = () => {
 					<div className={styles.titleWrapper}>
 						<h2 className={styles.podiumTitle}>{data?.test.title}</h2>
 					</div>
-					<div className={styles.homeBtn}>
-						<button onClick={postUsersResult}>Home</button>
+					<div className={styles.homeBtn} onClick={() => navigate('/')}>
+						<button>Home</button>
 					</div>
 					<div className="container">
 						<div className={styles.podiums}>
