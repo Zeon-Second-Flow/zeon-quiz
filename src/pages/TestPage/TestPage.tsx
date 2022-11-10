@@ -14,7 +14,7 @@ import third from '@/assets/podium/3.svg';
 
 import styles from './TestPage.module.scss';
 import { useAppSelector, useAuth } from '@/hooks';
-import { IItem, IResponse, ITestData, Questions } from '@/models/models';
+import { IItem, IResponse, IResults, ITestData, Questions } from '@/models/models';
 
 export const TestPage = () => {
 	// const { search } = useLocation();
@@ -167,22 +167,26 @@ export const TestPage = () => {
 		}
 	}, [preload]);
 
-	const modifiedUsersResult = usersResult.map((elem: IItem) => {
-		if (elem.name === 'anonym') return;
-
-		return {
-			score: elem.points,
-			login: elem.name,
-			test: test,
-		};
-	});
+	
 
 	const postUsersResult = async () => {
+		const results = [] as IResults[];
+
+		usersResult.forEach((elem: IItem) => {
+			if (elem.name !== 'anonym') {
+			results.push({
+				score: elem.points,
+				login: elem.name,
+				test: test,
+				});
+			}
+		});
+
 		socket.emit('finish');
 		setResults(true);
 
 		if (isAdmin) {
-			await sendScores(modifiedUsersResult);
+			await sendScores(results);
 		}
 	};
 
