@@ -16,6 +16,7 @@ interface IUsers {
 	overall_rating: number;
 	group_rating: number;
 	passed_tests: number;
+	user_id?: string;
 }
 
 export const LeaderboardPage = () => {
@@ -81,7 +82,7 @@ export const LeaderboardPage = () => {
 											{' '}
 										</span>
 										<span className="name">
-											<Link to={`/profile-page/${it.login}`}>{it.login}</Link>
+											<Link to={`/profile-page/${it.user_id}`}>{it.login}</Link>
 											<span>Group: {it.group}</span>{' '}
 										</span>
 										<span className="stat">

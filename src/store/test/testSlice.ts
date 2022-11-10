@@ -51,7 +51,7 @@ export const testApi = createApi({
 		}),
 		updateQuestion: builder.mutation<IQuestions, string>({
 			query: ({ name, questions }: any) => ({
-				url: `tests/create/${name}/`,
+				url: `tests/create/${name}`,
 				method: 'PATCH',
 				body: JSON.stringify({
 					description: 'asdf',
