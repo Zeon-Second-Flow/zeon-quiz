@@ -25,7 +25,7 @@ export const NamePage = () => {
 
 	const navigateToGame = () => {
 		if (value.length > 0) {
-			socket.emit('nickname', [user.email, room, value, user.group]);
+			socket.emit('nickname', [user.email, room, value, user.id]);
 			setTimeout(() => {
 				navigate('/in');
 			}, 200);

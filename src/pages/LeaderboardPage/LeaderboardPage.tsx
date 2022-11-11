@@ -17,6 +17,7 @@ interface IUsers {
 	user_id: string;
 	group_rating: number;
 	passed_tests: number;
+	user_id?: string;
 }
 
 export const LeaderboardPage = () => {
