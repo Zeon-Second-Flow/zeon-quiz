@@ -138,10 +138,10 @@ export const CreateTestsPage = () => {
 			}
 		});
 
-		if (isDataFilledArray.length === 0) {
-			setDis(false);
-		} else {
+		if(isDataFilledArray.length === 0) {
 			setDis(true);
+		} else {
+			setDis(false);
 		}
 	}, [
 		question,
