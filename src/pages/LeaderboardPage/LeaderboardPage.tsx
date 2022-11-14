@@ -14,6 +14,7 @@ interface IUsers {
 	phone_number: string;
 	overall_score: number;
 	overall_rating: number;
+	user_id: string;
 	group_rating: number;
 	passed_tests: number;
 	user_id?: string;

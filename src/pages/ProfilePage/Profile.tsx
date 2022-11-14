@@ -50,7 +50,7 @@ export const Profile = () => {
 			<div className="container">
 				{data &&
 					data.map((user: IUser) => (
-						<div className={styles.login}>
+						<div key={user.user_id} className={styles.login}>
 							{user_id === token.id && (
 								<div className={styles.logo_block}>
 									<div className={styles.logo_block_info}>
