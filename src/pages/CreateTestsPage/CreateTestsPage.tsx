@@ -108,8 +108,10 @@ export const CreateTestsPage = () => {
 	const isFirstRender = useFirstRender();
 	if (isFirstRender) {
 		const temp = JSON.parse(localStorage.getItem('test'));
-		setDataState(temp);
-		setQuizArr(temp.questions);
+		if (temp) {
+			setDataState(temp);
+			setQuizArr(temp.questions);
+		}
 	}
 
 	useEffect(() => {
@@ -138,7 +140,7 @@ export const CreateTestsPage = () => {
 			}
 		});
 
-		if(isDataFilledArray.length === 0) {
+		if (isDataFilledArray.length === 0) {
 			setDis(true);
 		} else {
 			setDis(false);
