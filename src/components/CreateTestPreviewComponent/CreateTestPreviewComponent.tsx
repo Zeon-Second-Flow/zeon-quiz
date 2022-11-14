@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, ChangeEventHandler, useState } from 'react';
 
 import no_image from '@/assets/no-image-icon-6.webp';
 
@@ -7,8 +7,9 @@ import style from './CreateTestPreviewComponent.module.scss';
 interface IProps {
 	setImg: (e?: File) => void;
 	img?: File;
-	setTitle: (e: string) => void;
-	setDescription: (e: string) => void;
+	handleDataChange: (
+		e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+	) => void;
 	title: string;
 	setToggleForm: (e: boolean) => void;
 	inpImgRef: any;
@@ -19,9 +20,8 @@ interface IProps {
 export const CreateTestPreviewComponent = ({
 	testError,
 	description,
-	setTitle,
+	handleDataChange,
 	inpImgRef,
-	setDescription,
 	img,
 	setImg,
 	title,
@@ -44,8 +44,10 @@ export const CreateTestPreviewComponent = ({
 					<input
 						style={err ? { border: '1px solid red' } : {}}
 						maxLength={100}
-						onChange={(e) => setTitle(e.target.value)}
+						onChange={handleDataChange}
 						required={true}
+						name="title"
+						value={title}
 						placeholder="Name of quiz"
 						type="text"
 					/>
@@ -73,8 +75,9 @@ export const CreateTestPreviewComponent = ({
 
 				<p>Description:</p>
 				<textarea
+					onChange={handleDataChange}
+					name="description"
 					value={description}
-					onChange={(e) => setDescription(e.target.value)}
 					className={style.previewDescInp}
 				></textarea>
 

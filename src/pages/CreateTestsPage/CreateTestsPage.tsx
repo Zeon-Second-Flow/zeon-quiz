@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import {
+	ChangeEvent,
+	ChangeEventHandler,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { string } from 'yup';
 
@@ -27,8 +33,27 @@ import {
 } from '@/components/SVG/svg';
 
 import style from './CreateTestPage.module.scss';
+import { useFirstRender } from './useFirstRender';
 
 export const testsPage = ({ Case }) => {};
+
+const pointsOption = [
+	{ value: 80, label: '80 points' },
+	{ value: 90, label: '90 points' },
+	{ value: 100, label: '100 points' },
+	{ value: 110, label: '110 points' },
+	{ value: 120, label: '120 points' },
+];
+
+const timeOption = [
+	{ value: 5, label: '5 seconds' },
+	{ value: 10, label: '10 seconds' },
+	{ value: 20, label: '20 seconds' },
+	{ value: 30, label: '30 seconds' },
+	{ value: 60, label: '1 minute' },
+	{ value: 90, label: '1 minute 30 seconds' },
+	{ value: 120, label: '2 minute' },
+];
 
 export const CreateTestsPage = () => {
 	// const { name } = useParams();
@@ -42,13 +67,10 @@ export const CreateTestsPage = () => {
 	const [points, setPoints] = useState<number>(100);
 	const [time, setTime] = useState<number>(20);
 	const [rightAns, setRightAns] = useState('');
-	const [title, setTitle] = useState('');
-	const [description, setDescription] = useState('');
 	const [img, setImg] = useState(Object);
 	const [toggleForm, setToggleForm] = useState(true);
 	const [createTest] = useCreateTestMutation();
 	const inpImgRef = useRef<HTMLInputElement | any>(null);
-	const [data, setDate] = useState<object>({});
 	const [dis, setDis] = useState(null);
 	const nav = useNavigate();
 	const questionModel = {
@@ -77,38 +99,33 @@ export const CreateTestsPage = () => {
 		ans4,
 		rightAns,
 	};
+	const [dataState, setDataState] = useState({
+		title: '',
+		description: '',
+		questions: quizArr,
+	});
 
-	const pointsOption = [
-		{ value: 80, label: '80 points' },
-		{ value: 90, label: '90 points' },
-		{ value: 100, label: '100 points' },
-		{ value: 110, label: '110 points' },
-		{ value: 120, label: '120 points' },
-	];
+	const isFirstRender = useFirstRender();
+	if (isFirstRender) {
+		const temp = JSON.parse(localStorage.getItem('test'));
+		setDataState(temp);
+		setQuizArr(temp.questions);
+	}
 
-	const timeOption = [
-		{ value: 5, label: '5 seconds' },
-		{ value: 10, label: '10 seconds' },
-		{ value: 20, label: '20 seconds' },
-		{ value: 30, label: '30 seconds' },
-		{ value: 60, label: '1 minute' },
-		{ value: 90, label: '1 minute 30 seconds' },
-		{ value: 120, label: '2 minute' },
-	];
+	useEffect(() => {
+		localStorage.setItem('test', JSON.stringify(dataState));
+	}, [dataState]);
 
 	useEffect(() => {
 		const editData = async () => {
 			await setData(currentTest);
 		};
 		editData();
-		setDate({
-			title: title,
-			description: description,
+		setDataState((prev) => ({
+			...prev,
 			questions: quizArr,
-		});
+		}));
 		const isDataFilledArray = [];
-		console.log(isDataFilledArray);
-
 		quizArr.forEach((item) => {
 			if (
 				item.question === '' ||
@@ -135,7 +152,6 @@ export const CreateTestsPage = () => {
 		quizArr.length,
 		currentTest,
 		rightAns,
-		title,
 	]);
 
 	const addQuiz = () => {
@@ -187,12 +203,19 @@ export const CreateTestsPage = () => {
 			setCurrenTest(quizArr[0].id);
 		}
 	};
+	const handleDataChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setDataState((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
 
 	const postTest = async () => {
 		const dataImg = new FormData();
 		dataImg.append('image', img);
 		try {
-			const response = await createTest(data).unwrap();
+			const response = await createTest(dataState).unwrap();
 			if (!!response) {
 				try {
 					const resp = axios
@@ -229,12 +252,11 @@ export const CreateTestsPage = () => {
 		<>
 			{toggleForm && (
 				<CreateTestPreviewComponent
-					description={description}
+					description={dataState.description}
 					testError={testError}
 					inpImgRef={inpImgRef}
-					title={title}
-					setTitle={setTitle}
-					setDescription={setDescription}
+					title={dataState.title}
+					handleDataChange={handleDataChange}
 					img={img}
 					setImg={setImg}
 					setToggleForm={setToggleForm}
