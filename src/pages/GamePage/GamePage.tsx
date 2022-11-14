@@ -69,7 +69,7 @@ export const GamePage = () => {
 				history.pushState(null, '', window.location.href);
 			}
 		};
-
+    
 		if(window.location.pathname === '/room') {
 			window.addEventListener('popstate', preventBack);
 		}
