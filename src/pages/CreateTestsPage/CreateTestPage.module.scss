@@ -22,9 +22,9 @@
     -webkit-box-align: center;
     align-items: center;
     bottom: unset;
-    width: 265px;
+    width: 220px;
     height: 100%;
-    //background: rgb(255, 255, 255);
+    background: rgb(255, 255, 255);
     box-shadow: rgb(0 0 0 / 15%) 0 2px 4px 0;
     padding-top: 0;
 }
@@ -42,31 +42,36 @@
 
     &::-webkit-scrollbar {
         width: 7px;
-        background: #bbb;
+        background: white;
     }
 
     &::-webkit-scrollbar-thumb {
         width: 7px;
-        background: white;
+        background: #bbb;
         border-radius: 12px;
     }
 }
 
 .createTestsPage {
-    height: 85vh;
+    height: 84.1vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 1em;
+    background-color: rgb(242, 242, 241);
 }
 
 .sliderBlockItem {
-    width: 215px;
-    height: 140px;
+    width: 200px;
+    // height: 140px;
     //background: white;
     text-align: start;
-    padding: 12px 10px 12px 20px;
+    // padding: 12px 10px 12px 20px;
+    padding: 15px;
     font-size: 0.75rem;
+    background-color: white;
+    margin: 0px 0 0px 7px;
+    border-radius: 10px;
     font-weight: 700;
     line-height: 24px;
     color: rgb(110, 110, 110);
@@ -74,7 +79,7 @@
     & h3 {
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
         text-align: center;
 
         & span {
@@ -89,6 +94,10 @@
     line-height: 24px;
     color: rgb(110, 110, 110);
     margin: 0;
+
+    svg {
+        height: 20px;
+    }
 }
 
 .blockContentBox {
@@ -100,6 +109,7 @@
     box-shadow: transparent 0 0 0 3px;
     margin: 0;
     cursor: pointer;
+    padding: 5px 10px;
 }
 
 .itemTitle {
@@ -158,8 +168,12 @@
     bottom: 110px;
     z-index: 150;
     padding: 30px 20px 0;
-}
+    transition: all 0.5s ease;
 
+    &:active {
+        transform: scale(0.9);
+    }
+}
 
 .sliderBarBtnBox button {
     width: 100%;
@@ -180,7 +194,7 @@
     min-height: 42px;
     padding: 0px 16px 4px;
     position: relative;
-    font-family: Montserrat, "Noto Sans Arabic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Montserrat, 'Noto Sans Arabic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .finishBtn {
@@ -203,12 +217,13 @@
     min-width: 42px;
     min-height: 42px;
     padding: 0px 16px 4px;
-    font-family: Montserrat, "Noto Sans Arabic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Montserrat, 'Noto Sans Arabic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    // display: none;
 }
 
 .createTestFormBox {
     height: 100%;
-    padding-left: 265px;
+    padding-left: 220px;
     position: relative;
 
     .createTestForm {
@@ -222,18 +237,25 @@
 
 .questionInpBox {
     position: relative;
+    width: 90%;
 
     & p {
         position: absolute;
-        top: 5%;
-        right: 12%;
+        top: -1%;
+        right: 2%;
+        height: 100%;
+        width: 50px;
+        display: flex;
+        border-radius: 5px;
+        justify-content: center;
+        align-items: center;
     }
 }
 
 .createTestInputQuestion {
     display: block;
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
+    // margin: 0 auto;
     color: rgb(51, 51, 51);
     caret-color: rgb(51, 51, 51);
     font-size: clamp(1rem, 3.2vmin, 3rem);
@@ -241,7 +263,9 @@
     padding: clamp(0.5rem, 1.2vmin, 1rem) 2rem;
     overflow: auto;
     min-height: calc(clamp(1rem, 3.2vmin, 3rem) * 1);
-    max-height: calc(clamp(1rem, 3.2vmin, 3rem) * 4 + clamp(0.5rem, 1.2vmin, 1rem) * 2);
+    max-height: calc(
+        clamp(1rem, 3.2vmin, 3rem) * 4 + clamp(0.5rem, 1.2vmin, 1rem) * 2
+    );
     border: none;
     height: auto;
     background: rgb(255, 255, 255);
@@ -250,11 +274,11 @@
 }
 
 .counterBox {
-    padding: 30px 0;
+    // padding: 30px 0;
     display: flex;
-    width: 100%;
+    width: 300px;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .questionBox {
@@ -267,12 +291,13 @@
     position: relative;
     display: flex;
     width: calc(50% - 3rem);
-    padding: clamp(8px, 1.2vmin, 16px);;
+    padding: clamp(8px, 1.2vmin, 16px);
     background: white;
     justify-content: center;
     align-items: center;
     color: #1a171e;
     box-shadow: rgb(0 0 0 / 15%) 0px -0.25rem 0px 0px inset;
+    border-radius: 5px;
 
     & p {
         position: absolute;
@@ -294,7 +319,7 @@
     transition: box-shadow 0.2s ease 0s, background 0.2s ease 0s, opacity 0.2s ease 0s;
 
     & svg {
-        width: 40px ;
+        width: 40px;
     }
 }
 
@@ -323,21 +348,37 @@
 }
 @media (max-width: 1050px) {
     .questionInputText {
-        max-width: 70%  ;
+        max-width: 70%;
     }
 }
 @media (max-width: 997px) {
+    .itemAnswers {
+        height: 17px;
+        padding-top: 0px;
+    }
+
+    .itemCounter {
+        padding-top: 0px;
+    }
+
+    .blockContentBox {
+        height: 80px;
+    }
+
     .creatorSlideBar {
         position: absolute;
-        //left: 0;
-        //right: 0;
         bottom: 0;
-        height: 9.5rem;
+        height: 8.5rem;
         width: 100%;
     }
 
+    .sliderBlockItem {
+        margin: 0;
+    }
+
     .questionInpBox {
-        margin-top: 20px;
+        // margin-top: 20px;
+        width: 100%;
     }
 
     .blockSlider {
@@ -346,7 +387,7 @@
         overflow-y: hidden;
         overflow-x: auto;
         padding-right: 220px;
-        padding-bottom: 170px;
+        padding-bottom: 134px;
 
         &::-webkit-scrollbar {
             height: 7px;
@@ -367,8 +408,8 @@
     }
 
     .sliderBarBtnBox {
-        bottom: 0;
-        right: 10px;
+        bottom: -12px;
+        right: -8px;
         width: 200px;
         min-width: 200px;
     }
@@ -382,7 +423,7 @@
         margin: 0 auto;
         display: flex;
         align-items: center;
-        justify-content: center;
+        // justify-content: center;
     }
 
     .questionSvgBox {
@@ -390,7 +431,7 @@
     }
 
     .questionInputText {
-        max-width: 100%  ;
+        max-width: 100%;
     }
 
     .catBox {
@@ -403,7 +444,7 @@
 }
 @media (max-width: 780px) {
     .questionInputText {
-        max-width: 70%  ;
+        max-width: 70%;
     }
 
     .questionSvgBox {
@@ -421,19 +462,20 @@
     }
 
     .createTestFormBox .createTestForm {
-        padding: 0 0 150px 0;
-        display: block;
+        padding: 0 10px 130px 10px;
+        display: flex;
         margin-bottom: 30px;
         height: 500px;
         overflow: auto;
     }
 
     .questionBox {
-        display: flex;
-        flex-direction: column;
+        // display: flex;
+        // flex-direction: column;
+        // width: 40%;
     }
 
     .questionInputBox {
-        width: 80%;
+        width: 48%;
     }
 }
