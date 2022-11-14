@@ -36,8 +36,6 @@ export const TestPage = () => {
 	const data = useAppSelector((state) => state.websocket.test) as IResponse;
 	const test = useAppSelector((state) => state.websocket.title);
 
-	console.log('hui', test, data);
-
 	const [counter, setCounter] = useState(0);
 	const [currInfo, setCurrInfo] = useState<Questions>();
 	const [timer, setTimer] = useState(0);
@@ -96,8 +94,6 @@ export const TestPage = () => {
 		});
 	}, []);
 
-	console.log(counter, 'counter');
-
 	// useEffect(() => {
 	// 	if (results && isAdmin) {
 	// 		sendScores([
@@ -127,6 +123,30 @@ export const TestPage = () => {
 			setTimer((data.questions[counter].timer as number) + 4);
 			setCorrectAnswer(data.questions[counter].correct_answer);
 		}
+
+		history.pushState(null, '', window.location.href);
+		const preventBack = () => {
+			const warningMessage = confirm('Are you sure you want to leave the game?!');
+
+			if (warningMessage) {
+				if(isAdmin) {
+					socket.emit('finish');
+					history.back();
+				} else {
+					navigate('/');
+				}
+			} else {
+				history.pushState(null, '', window.location.href);
+			}
+		};
+
+		if(window.location.pathname === '/game') {
+			window.addEventListener('popstate', preventBack);
+		}
+
+		return () => {
+			window.removeEventListener('popstate', preventBack);
+		};
 	}, []);
 
 	useEffect(() => {
