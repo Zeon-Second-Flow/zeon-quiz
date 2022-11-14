@@ -71,6 +71,25 @@ export const GamePage = () => {
 		// 	const test = search.slice(1, search.length);
 		// 	navigate(`/game?${test}`);
 		// });
+
+		history.pushState(null, '', window.location.href);
+		const preventBack = () => {
+			const warningMessage = confirm('Are you sure you want to leave this page?');
+
+			if (warningMessage) {
+				history.back();
+			} else {
+				history.pushState(null, '', window.location.href);
+			}
+		};
+
+		if(window.location.pathname === '/room') {
+			window.addEventListener('popstate', preventBack);
+		}
+
+		return () => {
+			window.removeEventListener('popstate', preventBack);
+		};
 	}, []);
 
 	const startGame = () => {
@@ -81,48 +100,6 @@ export const GamePage = () => {
 		socket.emit('start-game', [data, test]);
 		navigate('/game');
 	};
-
-	// useEffect(() => {
-	// 	let func = () => {
-	// 		let bool = confirm('Do you wanna leave game?');
-
-	// 		if (!bool) {
-	// 			navigate(pathname + search);
-	// 		}
-	// 	};
-	// 	if (isStart) {
-	// 		startGame();
-	// 	}
-	// 	return () => {
-	// 		if (!isStart) {
-	// 			func();
-	// 		}
-	// 	};
-	// }, [isStart]);
-
-	// const beforeUnloadListener = (event: any) => {
-	// 	event.preventDefault();
-	// 	event.returnValue = 'Are you sure you want to reload the page?';
-	// };
-	// addEventListener('beforeunload', beforeUnloadListener, { capture: true });
-
-	// function goodbye(e: any) {
-	// 	if (!e) e = window.event;
-	// 	//e.cancelBubble is supported by IE - this will kill the bubbling process.
-	// 	e.cancelBubble = true;
-	// 	e.returnValue = 'You sure you want to leave?'; //This is displayed on the dialog
-
-	// 	//e.stopPropagation works in Firefox.
-	// 	if (e.stopPropagation) {
-	// 		e.stopPropagation();
-	// 		e.preventDefault();
-	// 	}
-	// }
-	// window.onbeforeunload = goodbye;
-
-	// useEffect(() => {
-	// 	return () => {};
-	// }, []);
 
 	return (
 		<div className={styles.game}>
