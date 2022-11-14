@@ -32,7 +32,6 @@ export const Profile = () => {
 		const data = { user_id, token } as IUserTokenAndId<string>;
 		getUser(data);
 	}, []);
-	console.log(data);
 
 	if (isLoading) {
 		return <MyLoader />;
@@ -55,12 +54,10 @@ export const Profile = () => {
 								<div className={styles.logo_block}>
 									<div className={styles.logo_block_info}>
 										<h3>
-											{/* <UserLogo className={styles.logo} /> */}
 											<img className={styles.logo} src={UserLogo} alt="" />
 											{user.login}
 										</h3>
 										<NavLink to="/change-password">
-											{/* <ChangePasswordLogo className={styles.logo} /> */}
 											<img
 												src={ChangePasswordLogo}
 												className={styles.logo}
@@ -70,7 +67,6 @@ export const Profile = () => {
 										</NavLink>
 										<div>
 											<NavLink to="/logout">
-												{/* <LogoutLogo className={styles.logo} /> */}
 												<img src={LogoutLogo} className={styles.logo} alt="" />
 												<span onClick={fetchLogoutUser}>Logout</span>
 											</NavLink>

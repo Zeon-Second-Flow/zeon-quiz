@@ -37,7 +37,6 @@ export const Burger = ({ setOpen }: IProps) => {
 						</li>
 					</ul>
 				</nav>
-				{/* <Close className={styles.closeIcon} width={24} onClick={close} /> */}
 				<img
 					src={Close}
 					alt="User"

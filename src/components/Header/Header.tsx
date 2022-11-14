@@ -18,7 +18,6 @@ export const Header = () => {
 		<div className={styles.header}>
 			<div className="container">
 				<div className={styles.wrapper}>
-					{/* <BurgerMenu className={styles.burger} onClick={() => setOpen(true)} /> */}
 					<img
 						className={styles.burger}
 						onClick={() => setOpen(true)}
@@ -53,7 +52,6 @@ export const Header = () => {
 								: '/auth'
 						}
 					>
-						{/* <User /> */}
 						<img src={User} alt="Icon" />
 					</Link>
 				</div>

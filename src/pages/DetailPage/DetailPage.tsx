@@ -45,8 +45,6 @@ export const DetailPage = () => {
 
 	const testDetail = data?.test;
 
-	console.log(questions);
-
 	return (
 		<div className={styles.detailPage}>
 			<div className="container">

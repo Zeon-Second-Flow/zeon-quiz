@@ -3,7 +3,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { useGetTestsQuery } from '@/store/test/testSlice';
 import {
-	resetWebsocket,
 	setSocketTest,
 	setSocketTitle,
 	setSocketUsers,
@@ -40,7 +39,6 @@ export const GamePage = () => {
 	const { data, isLoading, isSuccess, isError, error } = useGetTestsQuery(obj);
 
 	const { room, users } = useAppSelector((state) => state.websocket);
-	console.log(users);
 	const dispatch = useAppDispatch();
 	const socket = useAppSelector((state) => state.websocket.socket);
 
@@ -57,20 +55,9 @@ export const GamePage = () => {
 			console.log('username: ', data);
 		});
 
-		// socket.on('message', (message) => {
-		// 	setMessages((messages) => [...messages, message]);
-		// });
-
 		socket.on('connected', (user) => {
 			console.log(user, 'CONNECTED');
 		});
-
-		// socket.on('starting', () => {
-		// 	console.log('START');
-
-		// 	const test = search.slice(1, search.length);
-		// 	navigate(`/game?${test}`);
-		// });
 
 		history.pushState(null, '', window.location.href);
 		const preventBack = () => {

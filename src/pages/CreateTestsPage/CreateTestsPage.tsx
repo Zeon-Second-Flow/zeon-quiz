@@ -56,8 +56,6 @@ const timeOption = [
 ];
 
 export const CreateTestsPage = () => {
-	// const { name } = useParams();
-	// const { data, isLoading } = useGetQuestionsQuery(name ?? '');
 
 	const [ans1, setAns1] = useState<string>('');
 	const [ans2, setAns2] = useState<string>('');
@@ -236,7 +234,7 @@ export const CreateTestsPage = () => {
 							});
 						});
 				} catch (err: typeof err) {
-					console.log(err, 'aaaaaaaaaaaaaaaaaaaaaaa');
+					console.log(err);
 				}
 			}
 			nav('/success', {
@@ -603,7 +601,7 @@ export const EditTestsPage = () => {
 							});
 						});
 				} catch (err: typeof err) {
-					console.log(err, 'aaaaaaaaaaaaaaaaaaaaaaa');
+					console.log(err);
 				}
 			}
 		} catch (error: typeof error) {
@@ -652,15 +650,6 @@ export const EditTestsPage = () => {
 					</div>
 
 					<form className={style.createTestForm} action="">
-						{/* <button
-							type={'button'}
-							onClick={postTest}
-							disabled={!dis}
-							style={dis ? {} : { background: 'gray' }}
-							className={style.finishBtn}
-						>
-							Done
-						</button> */}
 						<div className={style.questionInpBox}>
 							<input
 								value={question}
@@ -735,13 +724,6 @@ export const EditTestsPage = () => {
 								name={'right_answer'}
 								value={'D'}
 							/>
-							{/* <div
-								onClick={() =>
-									updateQuestion({ name: 'tech', questions: quizArr })
-								}
-							>
-								save
-							</div> */}
 						</div>
 					</form>
 				</div>

@@ -1,9 +1,3 @@
-//input {
-//    &:focus {
-//        outline: none;
-//    }
-//}
-
 .catBox {
     position: fixed;
     z-index: -1;
@@ -37,7 +31,6 @@
     height: auto;
     width: 100%;
     overflow-x: auto;
-    //margin: 3.5rem 0 0;
     padding-bottom: 215px;
 
     &::-webkit-scrollbar {
@@ -63,10 +56,7 @@
 
 .sliderBlockItem {
     width: 200px;
-    // height: 140px;
-    //background: white;
     text-align: start;
-    // padding: 12px 10px 12px 20px;
     padding: 15px;
     font-size: 0.75rem;
     background-color: white;
@@ -154,7 +144,6 @@
 
 .sliderBarBtnBox {
     width: 100%;
-    //background: white;
     height: 108px;
     display: flex;
     flex: 1 0 auto;
@@ -218,7 +207,6 @@
     min-height: 42px;
     padding: 0px 16px 4px;
     font-family: Montserrat, 'Noto Sans Arabic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    // display: none;
 }
 
 .createTestFormBox {
@@ -255,7 +243,6 @@
 .createTestInputQuestion {
     display: block;
     width: 100%;
-    // margin: 0 auto;
     color: rgb(51, 51, 51);
     caret-color: rgb(51, 51, 51);
     font-size: clamp(1rem, 3.2vmin, 3rem);
@@ -274,7 +261,6 @@
 }
 
 .counterBox {
-    // padding: 30px 0;
     display: flex;
     width: 300px;
     align-items: center;
@@ -377,7 +363,6 @@
     }
 
     .questionInpBox {
-        // margin-top: 20px;
         width: 100%;
     }
 
@@ -423,7 +408,6 @@
         margin: 0 auto;
         display: flex;
         align-items: center;
-        // justify-content: center;
     }
 
     .questionSvgBox {
@@ -467,12 +451,6 @@
         margin-bottom: 30px;
         height: 500px;
         overflow: auto;
-    }
-
-    .questionBox {
-        // display: flex;
-        // flex-direction: column;
-        // width: 40%;
     }
 
     .questionInputBox {

@@ -9,9 +9,6 @@ import Logo from "@/assets/logo.png";
 
 
 export const Footer = () => {
-    // const scroll = () => {
-    //     window.scrollTo({top: 0, behavior: "smooth"});
-    // };
     return (
         <div className={styles.footer}>
             <div className="container">
@@ -27,14 +24,12 @@ export const Footer = () => {
                                 <h4>We are in social networks</h4>
                                 <a target="_blank" href="vk.com">
                                     <div className={styles.footerInnerBlock}>
-                                        {/* <VK className={styles.contactsIcon} /> */}
                                         <img src={VK} className={styles.contactsIcon} alt="Icon" />
                                         <span>Вконтакте</span>
                                     </div>
                                 </a>
                                 <a target="_blank" href="www.facebook.com">
                                     <div className={styles.footerInnerBlock}>
-                                        {/* <FaceBook className={styles.contactsIcon} /> */}
                                         <img
                                             src={FaceBook}
                                             className={styles.contactsIcon}
@@ -45,7 +40,6 @@ export const Footer = () => {
                                 </a>
                                 <a target="_blank" href="www.instagram.com">
                                     <div className={styles.footerInnerBlock}>
-                                        {/* <Instagram className={styles.contactsIcon} /> */}
                                         <img
                                             src={Instagram}
                                             className={styles.contactsIcon}
@@ -58,7 +52,6 @@ export const Footer = () => {
                             <div className={styles.footerBlock}>
                                 <h4>Contacts us</h4>
                                 <div className={styles.footerInnerBlock}>
-                                    {/* <EmailIcon className={styles.contactsIcon} /> */}
                                     <img
                                         src={EmailIcon}
                                         className={styles.contactsIcon}
@@ -67,7 +60,6 @@ export const Footer = () => {
                                     <a href="owner@zeon.ltd">owner@zeon.ltd</a>
                                 </div>
                                 <div className={styles.footerInnerBlock}>
-                                    {/* <PhoneIcone className={styles.contactsIcon} /> */}
                                     <img
                                         src={PhoneIcone}
                                         className={styles.contactsIcon}

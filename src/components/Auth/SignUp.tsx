@@ -68,8 +68,6 @@ export const SignUp = () => {
 	const navigate = useNavigate();
 	const [err, setErr] = useState('');
 
-	console.log('data', data);
-
 	const login = async (data: IData) => {
 		try {
 			const res = await loginUser({

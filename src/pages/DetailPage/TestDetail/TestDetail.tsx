@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import styles from '@/pages/DetailPage/DetailPage.module.scss';
 
@@ -24,7 +24,6 @@ export const TestDetail = ({ item, name }: IProps) => {
 			localStorage.getItem('token') &&
 			JSON.parse(localStorage.getItem('token') || '');
 
-		// socket.emit('username', [username.email]);
 		socket.emit('username', [username.email, username.group]);
 
 		socket.on('users', (users) => {

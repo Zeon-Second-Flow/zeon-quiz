@@ -26,7 +26,6 @@ export const SuccessPage = () => {
 		<div className={styles.successPage}>
 			<div className="container">
 				<div className={styles.wrapper}>
-					{/* <Success /> */}
 					<img src={Success} alt="" />
 					<h3>{message}</h3>
 					<p className={styles.p} onClick={navigateHandler}>
