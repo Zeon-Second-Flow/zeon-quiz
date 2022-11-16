@@ -1,144 +1,205 @@
 .previewBox {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: 1000;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .previewContentBox {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: start;
-	background: white;
-	padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: start;
+    background: white;
+    border-radius: 5px;
+    padding: 20px 50px;
+    margin: 15px;
 
-	& h3 {
-		color: #504e44;
-		margin: 0 auto 15px;
-	}
+    & h3 {
+        color: #504e44;
+        margin: 0 auto 15px;
+    }
 
-	& p {
-		display: flex;
-		-webkit-box-align: start;
-		align-items: start;
-		margin: 0px 0px 0.25rem;
-		line-height: 1.5rem;
-		font-size: 0.875rem;
-		font-weight: 700;
-		letter-spacing: 0.2px;
-		text-align: start;
-	}
+    & p {
+        display: flex;
+        -webkit-box-align: start;
+        align-items: start;
+        margin: 0px 0px 0.25rem;
+        line-height: 1.5rem;
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        text-align: start;
+    }
 
-	& input {
-		height: 50px;
-		font-size: 20px;
-		padding: 10px 25px 10px 10px;
-		margin-bottom: 15px;
-		width: 100%;
-	}
+    & input {
+        height: 50px;
+        font-size: 20px;
+        padding: 10px 25px 10px 10px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
 
-	& span {
-		margin-bottom: 15px;
-	}
+    & span {
+        margin-bottom: 15px;
+    }
 
-	& img {
-		width: 200px;
-		height: 200px;
-		margin: 0 auto;
-		border: 1px solid black;
-		padding: 10px;
-	}
+    .addImageBox {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
 
-	.customFileInput {
-		color: transparent;
-		width: 200px;
-		cursor: pointer;
-	}
+    .tapToViewImage {
+        background: rgb(184, 221, 194);
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: all 0.5s ease;
 
-	.customFileInput::-webkit-file-upload-button {
-		visibility: hidden;
-	}
+        &:active {
+            transform: scale(0.9);
+        }
+    }
 
-	.customFileInput::before {
-		content: 'Select image';
-		color: black;
-		display: inline-block;
-		background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-		border: 1px solid #999;
-		border-radius: 3px;
-		padding: 5px 8px;
-		outline: none;
-		white-space: nowrap;
-		-webkit-user-select: none;
-		cursor: pointer;
-		text-shadow: 1px 1px #fff;
-		font-weight: 700;
-		font-size: 10pt;
-	}
+    .noImage {
+        border-radius: 5px;
+        padding: 5px;
+        cursor: pointer;
+        transition: all 0.5s ease;
 
-	.customFileInput:hover::before {
-		border-color: black;
-	}
+        &:active {
+            transform: scale(0.9);
+        }
+    }
 
-	.customFileInput:active {
-		outline: 0;
-	}
+    .imageMainBox {
+        position: fixed;
+        left: 0;
+        right: 0;
+        max-width: 900px;
+        border-radius: 10px;
+        margin: 0 auto;
+        background-color: white;
 
-	.customFileInput:active::before {
-		background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-	}
+        .exitImage {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background-color: rgb(5, 5, 5);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.5s ease;
 
-	.previewDescInp {
-		height: 150px;
-		text-align: start;
-		display: flex;
-		align-items: start;
-		justify-content: start;
-		font-size: 20px;
-		padding: 10px;
-		margin-bottom: 15px;
-	}
+            &:hover {
+                background-color: rgb(190, 4, 4);
+            }
 
-	& button {
-		width: 250px;
-		margin: 0 auto;
-		border: 0px;
-		cursor: pointer;
-		display: inline-block;
-		vertical-align: bottom;
-		box-shadow: rgb(0 0 0 / 25%) 0px -4px inset;
-		background: rgb(19, 104, 206);
-		color: rgb(255, 255, 255);
-		border-radius: 4px;
-		font-size: 0.875rem;
-		font-weight: bold;
-		text-align: center;
-		text-decoration: none;
-		min-width: 42px;
-		min-height: 42px;
-		padding: 0px 16px 4px;
-		position: relative;
-		font-family: Montserrat, 'Noto Sans Arabic', 'Helvetica Neue', Helvetica,
-			Arial, sans-serif;
-	}
+            &:active {
+                transform: scale(0.9);
+            }
+        }
 
-	.previewTitleInp {
-		position: relative;
-		margin-bottom: 10px;
+        .image {
+            margin: 0 auto;
+            padding: 10px;
+            width: 100%;
+        }
+    }
 
-		& .err_msg {
-			position: absolute;
-			bottom: -15px;
-			left: 25px;
-			color: red;
-		}
-	}
+    .customFileInput {
+        color: transparent;
+        width: 120px;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        height: auto;
+    }
+
+    .customFileInput::-webkit-file-upload-button {
+        visibility: hidden;
+    }
+
+    .customFileInput::before {
+        content: 'Select image';
+        color: black;
+        display: inline-block;
+        background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+        border: 1px solid #999;
+        border-radius: 3px;
+        padding: 5px 8px;
+        outline: none;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        cursor: pointer;
+        text-shadow: 1px 1px #fff;
+        font-weight: 700;
+        font-size: 10pt;
+    }
+
+    .customFileInput:hover::before {
+        border-color: black;
+    }
+
+    .customFileInput:active {
+        outline: 0;
+    }
+
+    .customFileInput:active::before {
+        background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+    }
+
+    .previewDescInp {
+        height: 150px;
+        text-align: start;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        font-size: 20px;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    & button {
+        width: 250px;
+        margin: 0 auto;
+        border: 0px;
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: bottom;
+        box-shadow: rgb(0 0 0 / 25%) 0px -4px inset;
+        background: rgb(19, 104, 206);
+        color: rgb(255, 255, 255);
+        border-radius: 4px;
+        font-size: 0.875rem;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        min-width: 42px;
+        min-height: 42px;
+        padding: 0px 16px 4px;
+        position: relative;
+        font-family: Montserrat, 'Noto Sans Arabic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    .previewTitleInp {
+        position: relative;
+        margin-bottom: 10px;
+
+        & .err_msg {
+            position: absolute;
+            bottom: -15px;
+            left: 25px;
+            color: red;
+        }
+    }
 }

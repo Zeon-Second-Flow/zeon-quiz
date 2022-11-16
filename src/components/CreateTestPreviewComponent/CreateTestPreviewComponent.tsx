@@ -28,6 +28,8 @@ export const CreateTestPreviewComponent = ({
 	setToggleForm,
 }: IProps) => {
 	const [err, setErr] = useState(false);
+	const [isImageOpened, setIsImageOpened] = useState(false);
+
 	const handleClick = () => {
 		if (title.length <= 2) {
 			setErr(true);
@@ -59,19 +61,39 @@ export const CreateTestPreviewComponent = ({
 					A descriptive title will give players an indication of what the Quiz
 					is about.
 				</span>
-				<img
-					src={!img?.name?.length ? no_image : URL?.createObjectURL(img)}
-					alt=""
-				/>
+				{isImageOpened && (
+					<div className={style.imageMainBox}>
+						<div
+							className={style.exitImage}
+							onClick={() => setIsImageOpened(false)}
+						>
+							close
+						</div>
 
-				<input
-					onChange={(e) => {
-						setImg(e.target.files?.[0]);
-					}}
-					className={style.customFileInput}
-					ref={inpImgRef}
-					type="file"
-				/>
+						<img
+							className={style.image}
+							src={!img?.name?.length ? no_image : URL?.createObjectURL(img)}
+							alt=""
+						/>
+					</div>
+				)}
+
+				<div className={style.addImageBox}>
+					<input
+						onChange={(e) => {
+							setImg(e.target.files?.[0]);
+						}}
+						className={style.customFileInput}
+						ref={inpImgRef}
+						type="file"
+					/>
+					<div
+						onClick={() => setIsImageOpened(true)}
+						className={img?.name?.length ? style.tapToViewImage : style.noImage}
+					>
+						{!img?.name?.length ? 'no_image' : 'added: tap to view'}
+					</div>
+				</div>
 
 				<p>Description:</p>
 				<textarea
