@@ -21,7 +21,6 @@ interface IMessage {
 }
 
 export const GamePage = () => {
-	const [isStart, setIsStart] = useState(false);
 	const [messages, setMessages] = useState<IMessage[]>([]);
 	const navigate = useNavigate();
 
@@ -40,7 +39,6 @@ export const GamePage = () => {
 	const { data, isLoading, isSuccess, isError, error } = useGetTestsQuery(obj);
 
 	const { room, users } = useAppSelector((state) => state.websocket);
-	console.log(users);
 	const dispatch = useAppDispatch();
 	const socket = useAppSelector((state) => state.websocket.socket);
 
@@ -82,33 +80,6 @@ export const GamePage = () => {
 		navigate('/game');
 	};
 
-	useEffect(() => {
-		const beforeUnloadListener = (event: any) => {
-			event.preventDefault();
-			event.returnValue = 'Are you sure you want to reload the page?';
-		};
-
-		const preventBack = (event: any) => {
-			const r = confirm('You pressed a Back button! Are you sure?!');
-
-			if (r == true) {
-				history.back();
-			} else {
-				history.pushState(null, '', pathname);
-			}
-
-			// history.pushState(null, '', pathname);
-		};
-
-		window.addEventListener('popstate', preventBack, false);
-		window.addEventListener('beforeunload', beforeUnloadListener);
-
-		return () => {
-			window.removeEventListener('beforeunload', beforeUnloadListener);
-			window.removeEventListener('popstate', preventBack);
-		};
-	}, []);
-
 	return (
 		<div className={styles.game}>
 			<div className={styles.square}></div>
@@ -127,7 +98,7 @@ export const GamePage = () => {
 						<div className="title-room">Room code: </div>
 						<div className="title-code">{room}</div>
 					</div>
-					{isStart ? (
+					{users?.length > 1 ? (
 						<button className={styles.start} onClick={startGame}>
 							Start
 						</button>

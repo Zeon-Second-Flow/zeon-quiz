@@ -43,29 +43,29 @@ export const useAuth = () => {
 	return { user, isStaff };
 };
 
-export const detectUserLeavingPage = () => {
-	const beforeUnloadListener = (event: any) => {
-		event.preventDefault();
-		event.returnValue = 'Are you sure you want to reload the page?';
-	};
+// export const detectUserLeavingPage = () => {
+// 	history.pushState(null, '', window.location.pathname);
 
-	window.addEventListener('beforeunload', beforeUnloadListener);
+// 	const beforeUnloadListener = (event: any) => {
+// 		event.preventDefault();
+// 		event.returnValue = 'Are you sure you want to reload the page?';
+// 	};
 
-	const preventBack = (event: any) => {
-		const r = confirm('You pressed a Back button! Are you sure?!');
+// 	const preventBack = (event: any) => {
+// 		const r = confirm('You pressed a Back button! Are you sure?!');
 
-		if (r == true) {
-			history.back();
-		} else {
-			history.pushState(null, '', window.location.pathname);
-		}
+// 		if (r == true) {
+// 			history.back();
+// 		} else {
+// 			history.pushState(null, '', window.location.pathname);
+// 		}
+// 	};
 
-		history.pushState(null, '', window.location.pathname);
-	};
+// 	window.addEventListener('popstate', preventBack, false);
+// 	window.addEventListener('beforeunload', beforeUnloadListener);
 
-	window.addEventListener('popstate', preventBack, false);
-	return () => {
-		window.removeEventListener('beforeunload', beforeUnloadListener);
-		window.removeEventListener('popstate', preventBack);
-	};
-};
+// 	return () => {
+// 		window.removeEventListener('beforeunload', beforeUnloadListener);
+// 		window.removeEventListener('popstate', preventBack);
+// 	};
+// };
