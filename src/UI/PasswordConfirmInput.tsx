@@ -28,10 +28,6 @@ export const PasswordConfirmField = (props: IProps) => {
                 autoComplete="off"
             />
             {isEyeOpen && props.name === "password_confirm" ? (
-            // <PasswordShowIcon
-            //   onClick={() => setIsEyeOpen(!isEyeOpen)}
-            //   className={styles.showPassword}
-            // />
                 <img
                     src={PasswordShowIcon}
                     onClick={() => setIsEyeOpen(!isEyeOpen)}
@@ -39,10 +35,6 @@ export const PasswordConfirmField = (props: IProps) => {
                     alt=""
                 />
             ) : (
-            // <PasswordIcon
-            //   className={styles.hidePassword}
-            //   onClick={() => setIsEyeOpen(!isEyeOpen)}
-            // />
                 <img
                     src={PasswordIcon}
                     className={styles.hidePassword}

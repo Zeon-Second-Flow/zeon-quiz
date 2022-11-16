@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import ReactConfetti from 'react-confetti';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
-	useGetTestsQuery,
 	usePostScoresMutation,
 } from '@/store/test/testSlice';
 
@@ -17,26 +16,9 @@ import { useAppSelector, useAuth } from '@/hooks';
 import { IItem, IResponse, ITestData, Questions } from '@/models/models';
 
 export const TestPage = () => {
-	// const { search } = useLocation();
-	// const test = search.slice(1, search.length);
-
-	// const token =
-	// 	localStorage.getItem('token') &&
-	// 	JSON.parse(localStorage.getItem('token') || '');
-
-	// const obj = {
-	// 	test: test,
-	// 	token: token.token,
-	// } as ITestData;
-
-	// const { data, isLoading, isSuccess, isError, error } = useGetTestsQuery(obj);
-
-	// console.log('ASDASDAS', error);
 
 	const data = useAppSelector((state) => state.websocket.test) as IResponse;
 	const test = useAppSelector((state) => state.websocket.title);
-
-	console.log('hui', test, data);
 
 	const [counter, setCounter] = useState(0);
 	const [currInfo, setCurrInfo] = useState<Questions>();
@@ -96,20 +78,6 @@ export const TestPage = () => {
 		});
 	}, []);
 
-	console.log(counter, 'counter');
-
-	// useEffect(() => {
-	// 	if (results && isAdmin) {
-	// 		sendScores([
-	// 			{
-	// 				score: 50,
-	// 				login: 'admin@admin.com',
-	// 				test: 'Localhost 3000',
-	// 			},
-	// 		]);
-	// 	}
-	// }, [results]);
-
 	useEffect(() => {
 		if (preload) {
 			const interval = setInterval(() => {
@@ -127,6 +95,30 @@ export const TestPage = () => {
 			setTimer((data.questions[counter].timer as number) + 4);
 			setCorrectAnswer(data.questions[counter].correct_answer);
 		}
+
+		history.pushState(null, '', window.location.href);
+		const preventBack = () => {
+			const warningMessage = confirm('Are you sure you want to leave the game?!');
+
+			if (warningMessage) {
+				if(isAdmin) {
+					socket.emit('finish');
+					history.back();
+				} else {
+					navigate('/');
+				}
+			} else {
+				history.pushState(null, '', window.location.href);
+			}
+		};
+
+		if(window.location.pathname === '/game') {
+			window.addEventListener('popstate', preventBack);
+		}
+
+		return () => {
+			window.removeEventListener('popstate', preventBack);
+		};
 	}, []);
 
 	useEffect(() => {
@@ -187,11 +179,6 @@ export const TestPage = () => {
 
 	return (
 		<>
-			{/* {isLoading && (
-				<div className={styles.loaderWrapper}>
-					<div className={styles.loader}></div>
-				</div>
-			)} */}
 			{currInfo && (
 				<div className={styles.wrapper}>
 					<div className={styles.top}>
@@ -559,13 +546,6 @@ export const TestPage = () => {
 					)}
 				</div>
 			)}
-			{/* {isError && (
-				<div className={styles.loaderWrapper}>
-					<div className={styles.error}>
-						Sorry, there is an error! Try again later!
-					</div>
-				</div>
-			)} */}
 			<div className={board ? styles.wrapperDisplay : styles.wrappers}>
 				<div className={styles.board}>
 					<div className={styles.boardTitle}>

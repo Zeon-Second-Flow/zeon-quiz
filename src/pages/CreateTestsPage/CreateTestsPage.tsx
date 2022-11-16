@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import {
+	ChangeEvent,
+	ChangeEventHandler,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { string } from 'yup';
 
@@ -27,12 +33,29 @@ import {
 } from '@/components/SVG/svg';
 
 import style from './CreateTestPage.module.scss';
+import { useFirstRender } from './useFirstRender';
 
 export const testsPage = ({ Case }) => {};
 
+const pointsOption = [
+	{ value: 80, label: '80 points' },
+	{ value: 90, label: '90 points' },
+	{ value: 100, label: '100 points' },
+	{ value: 110, label: '110 points' },
+	{ value: 120, label: '120 points' },
+];
+
+const timeOption = [
+	{ value: 5, label: '5 seconds' },
+	{ value: 10, label: '10 seconds' },
+	{ value: 20, label: '20 seconds' },
+	{ value: 30, label: '30 seconds' },
+	{ value: 60, label: '1 minute' },
+	{ value: 90, label: '1 minute 30 seconds' },
+	{ value: 120, label: '2 minute' },
+];
+
 export const CreateTestsPage = () => {
-	// const { name } = useParams();
-	// const { data, isLoading } = useGetQuestionsQuery(name ?? '');
 
 	const [ans1, setAns1] = useState<string>('');
 	const [ans2, setAns2] = useState<string>('');
@@ -42,13 +65,10 @@ export const CreateTestsPage = () => {
 	const [points, setPoints] = useState<number>(100);
 	const [time, setTime] = useState<number>(20);
 	const [rightAns, setRightAns] = useState('');
-	const [title, setTitle] = useState('');
-	const [description, setDescription] = useState('');
 	const [img, setImg] = useState(Object);
 	const [toggleForm, setToggleForm] = useState(true);
 	const [createTest] = useCreateTestMutation();
 	const inpImgRef = useRef<HTMLInputElement | any>(null);
-	const [data, setDate] = useState<object>({});
 	const [dis, setDis] = useState(null);
 	const nav = useNavigate();
 	const questionModel = {
@@ -77,48 +97,51 @@ export const CreateTestsPage = () => {
 		ans4,
 		rightAns,
 	};
+	const [dataState, setDataState] = useState({
+		title: '',
+		description: '',
+		questions: quizArr,
+	});
 
-	const pointsOption = [
-		{ value: 80, label: '80 points' },
-		{ value: 90, label: '90 points' },
-		{ value: 100, label: '100 points' },
-		{ value: 110, label: '110 points' },
-		{ value: 120, label: '120 points' },
-	];
+	const isFirstRender = useFirstRender();
+	if (isFirstRender) {
+		const temp = JSON.parse(localStorage.getItem('test'));
+		if (temp) {
+			setDataState(temp);
+			setQuizArr(temp.questions);
+		}
+	}
 
-	const timeOption = [
-		{ value: 5, label: '5 seconds' },
-		{ value: 10, label: '10 seconds' },
-		{ value: 20, label: '20 seconds' },
-		{ value: 30, label: '30 seconds' },
-		{ value: 60, label: '1 minute' },
-		{ value: 90, label: '1 minute 30 seconds' },
-		{ value: 120, label: '2 minute' },
-	];
+	useEffect(() => {
+		localStorage.setItem('test', JSON.stringify(dataState));
+	}, [dataState]);
 
 	useEffect(() => {
 		const editData = async () => {
 			await setData(currentTest);
 		};
 		editData();
-		setDate({
-			title: title,
-			description: description,
+		setDataState((prev) => ({
+			...prev,
 			questions: quizArr,
-		});
+		}));
 		const isDataFilledArray = [];
-
-		quizArr.forEach(item => {
-			if(item.question === '' || item.answers.A === '' || item.answers.B === ''
-				&& item.answers.C === '' || item.answers.D === '' || item.answers.correct_answer === '') {
+		quizArr.forEach((item) => {
+			if (
+				item.question === '' ||
+				item.answers.A === '' ||
+				(item.answers.B === '' && item.answers.C === '') ||
+				item.answers.D === '' ||
+				item.answers.correct_answer === ''
+			) {
 				isDataFilledArray.push(item);
 			}
 		});
 
-		if(isDataFilledArray.length === 0) {
-			setDis(false);
-		} else {
+		if (isDataFilledArray.length === 0) {
 			setDis(true);
+		} else {
+			setDis(false);
 		}
 	}, [
 		question,
@@ -129,7 +152,6 @@ export const CreateTestsPage = () => {
 		quizArr.length,
 		currentTest,
 		rightAns,
-		title,
 	]);
 
 	const addQuiz = () => {
@@ -181,13 +203,19 @@ export const CreateTestsPage = () => {
 			setCurrenTest(quizArr[0].id);
 		}
 	};
+	const handleDataChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setDataState((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
 
 	const postTest = async () => {
 		const dataImg = new FormData();
 		dataImg.append('image', img);
 		try {
-			const response = await createTest(data).unwrap();
-			console.log(response);
+			const response = await createTest(dataState).unwrap();
 			if (!!response) {
 				try {
 					const resp = axios
@@ -201,16 +229,17 @@ export const CreateTestsPage = () => {
 							}
 						)
 						.then((data) => {
-							console.log(data);
 							nav('/success', {
 								state: { title: 'Successfully created test!' },
 							});
 						});
-					console.log(resp);
 				} catch (err: typeof err) {
-					console.log(err, 'aaaaaaaaaaaaaaaaaaaaaaa');
+					console.log(err);
 				}
 			}
+			nav('/success', {
+				state: { title: 'Successfully created test!' },
+			});
 		} catch (error: typeof error) {
 			setToggleForm(true);
 			for (const key in error.data) {
@@ -223,12 +252,11 @@ export const CreateTestsPage = () => {
 		<>
 			{toggleForm && (
 				<CreateTestPreviewComponent
-					description={description}
+					description={dataState.description}
 					testError={testError}
 					inpImgRef={inpImgRef}
-					title={title}
-					setTitle={setTitle}
-					setDescription={setDescription}
+					title={dataState.title}
+					handleDataChange={handleDataChange}
 					img={img}
 					setImg={setImg}
 					setToggleForm={setToggleForm}
@@ -489,11 +517,8 @@ export const EditTestsPage = () => {
 
 	const setChoosedQuestion = (idx: string) => {
 		setCurrenTest(idx);
-		console.log(idx);
-		console.log(quizArr);
 
 		const currentQuestion = quizArr.find((it) => it.id === idx);
-		console.log(currentQuestion);
 
 		if (currentQuestion) {
 			setAns1(currentQuestion.answers.A);
@@ -528,8 +553,6 @@ export const EditTestsPage = () => {
 		const currentQuestion = quizArr.find((it) => it.id === idx);
 		const currentQuestionIndex = quizArr.findIndex((it) => it.id === idx);
 
-		console.log(currentQuestion);
-
 		if (currentQuestion) {
 			currentQuestion.answers.A = tes.ans1;
 			currentQuestion.answers.B = tes.ans2;
@@ -560,7 +583,6 @@ export const EditTestsPage = () => {
 		dataImg.append('image', img);
 		try {
 			const response = await createTest(data).unwrap();
-			console.log(response);
 			if (!!response) {
 				try {
 					const resp = axios
@@ -574,14 +596,12 @@ export const EditTestsPage = () => {
 							}
 						)
 						.then((data) => {
-							console.log(data);
 							nav('/success', {
 								state: { title: 'Successfully created test!' },
 							});
 						});
-					console.log(resp);
 				} catch (err: typeof err) {
-					console.log(err, 'aaaaaaaaaaaaaaaaaaaaaaa');
+					console.log(err);
 				}
 			}
 		} catch (error: typeof error) {
@@ -595,7 +615,6 @@ export const EditTestsPage = () => {
 	if (result.isSuccess) {
 		nav('/');
 	}
-	console.log(transformedArray());
 
 	return (
 		<>
@@ -631,15 +650,6 @@ export const EditTestsPage = () => {
 					</div>
 
 					<form className={style.createTestForm} action="">
-						{/* <button
-							type={'button'}
-							onClick={postTest}
-							disabled={!dis}
-							style={dis ? {} : { background: 'gray' }}
-							className={style.finishBtn}
-						>
-							Done
-						</button> */}
 						<div className={style.questionInpBox}>
 							<input
 								value={question}
@@ -714,13 +724,6 @@ export const EditTestsPage = () => {
 								name={'right_answer'}
 								value={'D'}
 							/>
-							{/* <div
-								onClick={() =>
-									updateQuestion({ name: 'tech', questions: quizArr })
-								}
-							>
-								save
-							</div> */}
 						</div>
 					</form>
 				</div>

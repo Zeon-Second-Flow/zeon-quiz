@@ -3,7 +3,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { useGetTestsQuery } from '@/store/test/testSlice';
 import {
-	resetWebsocket,
 	setSocketTest,
 	setSocketTitle,
 	setSocketUsers,
@@ -55,20 +54,28 @@ export const GamePage = () => {
 			console.log('username: ', data);
 		});
 
-		// socket.on('message', (message) => {
-		// 	setMessages((messages) => [...messages, message]);
-		// });
-
 		socket.on('connected', (user) => {
 			console.log(user, 'CONNECTED');
 		});
 
-		// socket.on('starting', () => {
-		// 	console.log('START');
+		history.pushState(null, '', window.location.href);
+		const preventBack = () => {
+			const warningMessage = confirm('Are you sure you want to leave this page?');
 
-		// 	const test = search.slice(1, search.length);
-		// 	navigate(`/game?${test}`);
-		// });
+			if (warningMessage) {
+				history.back();
+			} else {
+				history.pushState(null, '', window.location.href);
+			}
+		};
+    
+		if(window.location.pathname === '/room') {
+			window.addEventListener('popstate', preventBack);
+		}
+
+		return () => {
+			window.removeEventListener('popstate', preventBack);
+		};
 	}, []);
 
 	const startGame = () => {

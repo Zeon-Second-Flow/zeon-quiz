@@ -56,20 +56,7 @@ export const EnterPage = () => {
 
 		const { user, isStaff } = useAuth();
 
-		console.log(user);
-
-		// socket.emit('join', [user.email, value]);
 		socket.emit('join', [user.email, value, user.group]);
-
-		// socket.on("users", (users) => {
-		//   dispatch(setSocketUsers(users));
-		// });
-
-		// socket.on("connected", (user) => {
-		//   dispatch(setSocketRoom(user.room));
-		//   dispatch(setSocketUsers([...users, user]));
-		//   navigateToGame();
-		// });
 
 		socket.on('enterNickname', ([username, room]) => {
 			dispatch(setSocketRoom(room));
@@ -77,7 +64,7 @@ export const EnterPage = () => {
 		});
 
 		socket.on('disconnected', (id) => {
-			dispatch(setSocketUsers(users.filter((user) => user.id !== id)));
+			dispatch(setSocketUsers(users.filter((user: any) => user.id !== id)));
 		});
 
 		socket.on('error', (error) => {

@@ -12,6 +12,7 @@ export interface IUser {
 	overall_rating: number;
 	group_rating: number;
 	group: string;
+	user_id: string;
 	passed_tests: number;
 	tests: ITest[];
 }

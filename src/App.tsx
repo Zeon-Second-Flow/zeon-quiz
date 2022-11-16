@@ -9,7 +9,6 @@ import { AppRoutes } from './routes';
 
 export const App = () => {
 	const { pathname } = useLocation();
-	console.log(pathname.split('/')[1]);
 	return (
 		<div className="wrapper">
 			<ScrollToTop />

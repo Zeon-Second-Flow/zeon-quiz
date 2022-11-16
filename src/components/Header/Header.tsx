@@ -14,12 +14,10 @@ import { useAuth } from '@/hooks';
 export const Header = () => {
 	const [open, setOpen] = useState(false);
 	const { user } = useAuth();
-	console.log(user);
 	return (
 		<div className={styles.header}>
 			<div className="container">
 				<div className={styles.wrapper}>
-					{/* <BurgerMenu className={styles.burger} onClick={() => setOpen(true)} /> */}
 					<img
 						className={styles.burger}
 						onClick={() => setOpen(true)}
@@ -54,7 +52,6 @@ export const Header = () => {
 								: '/auth'
 						}
 					>
-						{/* <User /> */}
 						<img src={User} alt="Icon" />
 					</Link>
 				</div>

@@ -78,10 +78,6 @@ export const Search = () => {
                         type="text"
                     />
                     <div className={styles.searchIcon}>
-                        {/* <SearchIcon
-              className={styles.searchIcon}
-              onClick={handleNavigate}
-            /> */}
                         <img
                             src={SearchIcon}
                             className={styles.searchIcon}
@@ -94,15 +90,10 @@ export const Search = () => {
             <div className={styles.smallSearch}>
                 {showInput ? (
                     <div onClick={closeInput}>
-                        {/* <CloseIcon
-              // onClick={() => data?.results = }
-              className={styles.searchIcon}
-            /> */}
                         <img src={CloseIcon} className={styles.searchIcon} alt="Icon" />
                     </div>
                 ) : (
                     <div onClick={openInput}>
-                        {/* <SearchIcon className={styles.searchIcon} /> */}
                         <img src={SearchIcon} className={styles.searchIcon} alt="Icon" />
                     </div>
                 )}
@@ -118,7 +109,6 @@ export const Search = () => {
                                 type="text"
                             />
                             <div className={styles.smallSearchIcon}>
-                                {/* <SearchIcon onClick={handleNavigate} /> */}
                                 <img src={SearchIcon} onClick={handleNavigate} alt="Icon" />
                             </div>
                         </div>

@@ -6,22 +6,6 @@ import type { AppDispatch, RootState } from '@/store/store';
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-// export const useClickOutside = (
-//     ref: any,
-//     setSortModal: (boolean: boolean) => void
-// ) => {
-//     useEffect(() => {
-//         const handler = (event: MouseEvent) => {
-//             if (!ref.current?.contains(event.target as Element)) {
-//                 setTimeout(() => setSortModal(false), 0);
-//             }
-//         };
-//
-//         window.addEventListener("click", handler);
-//         return () => window.removeEventListener("click", handler);
-//     }, []);
-// };
-
 export const useDebounce = (value: string, delay = 300): string => {
 	const [debounced, setDebounced] = useState(value);
 

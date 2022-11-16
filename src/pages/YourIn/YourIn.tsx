@@ -27,6 +27,25 @@ export const YourIn = () => {
 			dispatch(setSocketTitle(title));
 			navigate(`/game`);
 		});
+
+		history.pushState(null, '', window.location.href);
+		const preventBack = () => {
+			const warningMessage = confirm('Are you sure you want to leave this page?!');
+
+			if (warningMessage) {
+				history.back();
+			} else {
+				history.pushState(null, '', window.location.href);
+			}
+		};
+
+		if(window.location.pathname === '/in') {
+			window.addEventListener('popstate', preventBack);
+		}
+
+		return () => {
+			window.removeEventListener('popstate', preventBack);
+		};
 	}, []);
 
 	return (

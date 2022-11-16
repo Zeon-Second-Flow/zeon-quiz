@@ -29,10 +29,6 @@ export const PasswordField = (props: IProps) => {
             />
 
             {isShowPassword && props.name === "password" ? (
-            // <PasswordShowIcon
-            //   onClick={() => setIsShowPassword(!isShowPassword)}
-            //   className={styles.showPassword}
-            // />
                 <img
                     src={PasswordShowIcon}
                     onClick={() => setIsShowPassword(!isShowPassword)}
@@ -40,10 +36,6 @@ export const PasswordField = (props: IProps) => {
                     alt=""
                 />
             ) : (
-            // <PasswordIcon
-            //   className={styles.hidePassword}
-            //   onClick={() => setIsShowPassword(!isShowPassword)}
-            // />
                 <img
                     src={PasswordIcon}
                     className={styles.hidePassword}
