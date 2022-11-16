@@ -56,6 +56,9 @@ const timeOption = [
 ];
 
 export const CreateTestsPage = () => {
+	const token =
+		localStorage.getItem('token') &&
+		JSON.parse(localStorage.getItem('token') || '');
 
 	const [ans1, setAns1] = useState<string>('');
 	const [ans2, setAns2] = useState<string>('');
@@ -67,7 +70,7 @@ export const CreateTestsPage = () => {
 	const [rightAns, setRightAns] = useState('');
 	const [img, setImg] = useState(Object);
 	const [toggleForm, setToggleForm] = useState(true);
-	const [createTest] = useCreateTestMutation();
+	const [createTest, { isLoading }] = useCreateTestMutation();
 	const inpImgRef = useRef<HTMLInputElement | any>(null);
 	const [dis, setDis] = useState(null);
 	const nav = useNavigate();
@@ -215,7 +218,7 @@ export const CreateTestsPage = () => {
 		const dataImg = new FormData();
 		dataImg.append('image', img);
 		try {
-			const response = await createTest(dataState).unwrap();
+			const response = await createTest({ data: dataState, token }).unwrap();
 			if (!!response) {
 				try {
 					const resp = axios
@@ -292,10 +295,14 @@ export const CreateTestsPage = () => {
 							type={'button'}
 							onClick={postTest}
 							disabled={!dis}
-							style={dis ? {} : { background: 'gray' }}
+							style={
+								dis
+									? { background: 'rgb(19, 104, 206)' }
+									: { background: 'gray' }
+							}
 							className={style.finishBtn}
 						>
-							Done
+							{isLoading ? 'Loading...' : 'Done'}
 						</button>
 						<div className={style.questionInpBox}>
 							<input

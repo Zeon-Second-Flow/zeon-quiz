@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
 	setSocketTest,
@@ -13,6 +13,7 @@ import { useAppSelector } from '@/hooks';
 
 export const YourIn = () => {
 	const { users, socket } = useAppSelector((state) => state.websocket);
+	const { pathname } = useLocation();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 

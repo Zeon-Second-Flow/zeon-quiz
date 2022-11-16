@@ -12,8 +12,8 @@ export const createTestSlice = createApi({
 	reducerPath: 'createTest',
 	baseQuery: customFetchBase,
 	endpoints: (builder) => ({
-		createTest: builder.mutation<IQuiz, object>({
-			query: (data) => ({
+		createTest: builder.mutation({
+			query: ({ data, token }) => ({
 				url: 'tests/create',
 				method: 'POST',
 				body: JSON.stringify(data),

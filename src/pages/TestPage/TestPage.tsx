@@ -13,7 +13,7 @@ import third from '@/assets/podium/3.svg';
 
 import styles from './TestPage.module.scss';
 import { useAppSelector, useAuth } from '@/hooks';
-import { IItem, IResponse, IResults, ITestData, Questions } from '@/models/models';
+import { IItem, IResponse, ITestData, Questions } from '@/models/models';
 
 export const TestPage = () => {
 
@@ -159,26 +159,21 @@ export const TestPage = () => {
 		}
 	}, [preload]);
 
-	
+	const modifiedUsersResult = usersResult.map((elem: IItem) => {
+		const newObj = {
+			score: elem.points,
+			login: elem.name,
+			test: test,
+		};
+		return newObj;
+	});
 
 	const postUsersResult = async () => {
-		const results = [] as IResults[];
-
-		usersResult.forEach((elem: IItem) => {
-			if (elem.name !== 'anonym') {
-			results.push({
-				score: elem.points,
-				login: elem.name,
-				test: test,
-				});
-			}
-		});
-
 		socket.emit('finish');
 		setResults(true);
 
 		if (isAdmin) {
-			await sendScores(results);
+			await sendScores(modifiedUsersResult);
 		}
 	};
 

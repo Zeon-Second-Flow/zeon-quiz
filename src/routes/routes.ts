@@ -100,10 +100,10 @@ export const publicRoutes = [
 
 export const privateRoutes = [
 	...publicRoutes,
-	{
-		path: routePath.CREATE_TEST,
-		component: CreateTestsPage,
-	},
+	// {
+	// 	path: routePath.CREATE_TEST,
+	// 	component: CreateTestsPage,
+	// },
 	{
 		path: routePath.RESTORE_COMPLETE,
 		component: RestoreComplete,

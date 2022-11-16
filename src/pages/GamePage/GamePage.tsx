@@ -20,7 +20,6 @@ interface IMessage {
 }
 
 export const GamePage = () => {
-	const [isStart, setIsStart] = useState(false);
 	const [messages, setMessages] = useState<IMessage[]>([]);
 	const navigate = useNavigate();
 
@@ -28,7 +27,7 @@ export const GamePage = () => {
 		localStorage.getItem('token') &&
 		JSON.parse(localStorage.getItem('token') || '');
 
-	const { search } = useLocation();
+	const { search, pathname } = useLocation();
 	const test = search.slice(1, search.length);
 
 	const obj = {
@@ -106,10 +105,13 @@ export const GamePage = () => {
 						<div className="title-room">Room code: </div>
 						<div className="title-code">{room}</div>
 					</div>
-
-					<button className={styles.start} onClick={startGame}>
-						Start
-					</button>
+					{users?.length > 1 ? (
+						<button className={styles.start} onClick={startGame}>
+							Start
+						</button>
+					) : (
+						<button className={styles.startDisabled}>Start</button>
+					)}
 				</div>
 
 				<ul className={styles.usersList}>

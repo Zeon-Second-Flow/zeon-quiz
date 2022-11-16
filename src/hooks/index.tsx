@@ -27,16 +27,29 @@ export const useAuth = () => {
 	return { user, isStaff };
 };
 
-export const useUnsavedChangesWarning = (message: string) => {
-	const [isDirty, setDirty] = useState(false);
+// export const detectUserLeavingPage = () => {
+// 	history.pushState(null, '', window.location.pathname);
 
-	useEffect(() => {
-		//Detecting browser closing
-		window.onbeforeunload = isDirty && (() => message);
-		return () => {
-			window.onbeforeunload = null;
-		};
-	}, [isDirty]);
+// 	const beforeUnloadListener = (event: any) => {
+// 		event.preventDefault();
+// 		event.returnValue = 'Are you sure you want to reload the page?';
+// 	};
 
-	return [() => setDirty(true), () => setDirty(false)];
-};
+// 	const preventBack = (event: any) => {
+// 		const r = confirm('You pressed a Back button! Are you sure?!');
+
+// 		if (r == true) {
+// 			history.back();
+// 		} else {
+// 			history.pushState(null, '', window.location.pathname);
+// 		}
+// 	};
+
+// 	window.addEventListener('popstate', preventBack, false);
+// 	window.addEventListener('beforeunload', beforeUnloadListener);
+
+// 	return () => {
+// 		window.removeEventListener('beforeunload', beforeUnloadListener);
+// 		window.removeEventListener('popstate', preventBack);
+// 	};
+// };
