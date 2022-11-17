@@ -11,7 +11,7 @@ import third from '@/assets/podium/3.svg';
 
 import styles from './TestPage.module.scss';
 import { useAppSelector, useAuth } from '@/hooks';
-import { IItem, IResponse, ITestData, Questions } from '@/models/models';
+import { IItem, IResponse, IResults, ITestData, Questions } from '@/models/models';
 
 export const TestPage = () => {
 	const data = useAppSelector((state) => state.websocket.test) as IResponse;
@@ -159,13 +159,15 @@ export const TestPage = () => {
 	}, [preload]);
 
 	const modifiedUsersResult = usersResult.map((elem: IItem) => {
-		const newObj = {
-			score: elem.points,
-			login: elem.name,
-			test: test,
-		};
-		return newObj;
-	});
+		if (elem.name !== 'anonym') {
+			const newObj = {
+				score: elem.points,
+				login: elem.name,
+				test: test,
+			};
+			return newObj;
+		}
+	}).filter((elem: IResults | undefined) => elem !== undefined);
 
 	const postUsersResult = async () => {
 		socket.emit('finish');
