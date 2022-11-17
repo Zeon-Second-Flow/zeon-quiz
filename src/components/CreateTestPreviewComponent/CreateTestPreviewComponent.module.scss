@@ -19,6 +19,7 @@
     text-align: start;
     background: white;
     padding: 10px 30px;
+    border-radius: 10px;
 
     & h3 {
         color: #504e44;
@@ -51,7 +52,7 @@
 
     .addImageBox {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         margin-bottom: 10px;
     }
 
@@ -61,6 +62,7 @@
         padding: 5px 10px;
         cursor: pointer;
         transition: all 0.5s ease;
+        margin-top: 2.5px;
 
         &:active {
             transform: scale(0.9);
@@ -82,21 +84,22 @@
         position: fixed;
         left: 0;
         right: 0;
-        max-width: 900px;
+        max-width: 1200px;
         border-radius: 10px;
         margin: 0 auto;
-        background-color: white;
+        background-color: rgb(0, 0, 0);
 
         .exitImage {
             position: absolute;
-            right: 10px;
-            top: 10px;
+            right: 20px;
+            top: 20px;
             background-color: rgb(5, 5, 5);
             color: white;
             padding: 10px;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.5s ease;
+            z-index: 100;
 
             &:hover {
                 background-color: rgb(190, 4, 4);
@@ -111,13 +114,17 @@
             margin: 0 auto;
             padding: 10px;
             width: 100%;
+            position: relative;
+            z-index: 99;
         }
     }
 
     .customFileInput {
         color: transparent;
-        width: 200px;
+        width: 120px;
         cursor: pointer;
+        margin: 0;
+        padding: 0;
     }
 
     .customFileInput::-webkit-file-upload-button {
@@ -184,6 +191,8 @@
         padding: 0px 16px 4px;
         position: relative;
         font-family: Montserrat, 'Noto Sans Arabic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        position: relative;
+        z-index: -1;
     }
 
     .previewTitleInp {
