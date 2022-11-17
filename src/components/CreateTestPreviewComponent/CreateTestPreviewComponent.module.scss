@@ -19,7 +19,6 @@
     text-align: start;
     background: white;
     padding: 10px 30px;
-    border-radius: 10px;
 
     & h3 {
         color: #504e44;
@@ -50,81 +49,18 @@
         margin-bottom: 15px;
     }
 
-    .addImageBox {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 10px;
-    }
-
-    .tapToViewImage {
-        background: rgb(184, 221, 194);
-        border-radius: 5px;
-        padding: 5px 10px;
-        cursor: pointer;
-        transition: all 0.5s ease;
-        margin-top: 2.5px;
-
-        &:active {
-            transform: scale(0.9);
-        }
-    }
-
-    .noImage {
-        border-radius: 5px;
-        padding: 5px;
-        cursor: pointer;
-        transition: all 0.5s ease;
-
-        &:active {
-            transform: scale(0.9);
-        }
-    }
-
-    .imageMainBox {
-        position: fixed;
-        left: 0;
-        right: 0;
-        max-width: 1200px;
-        border-radius: 10px;
+    & img {
+        width: 200px;
+        height: 200px;
         margin: 0 auto;
-        background-color: rgb(0, 0, 0);
-
-        .exitImage {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            background-color: rgb(5, 5, 5);
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.5s ease;
-            z-index: 100;
-
-            &:hover {
-                background-color: rgb(190, 4, 4);
-            }
-
-            &:active {
-                transform: scale(0.9);
-            }
-        }
-
-        .image {
-            margin: 0 auto;
-            padding: 10px;
-            width: 100%;
-            position: relative;
-            z-index: 99;
-        }
+        border: 1px solid black;
+        padding: 10px;
     }
 
     .customFileInput {
         color: transparent;
-        width: 120px;
+        width: 200px;
         cursor: pointer;
-        margin: 0;
-        padding: 0;
     }
 
     .customFileInput::-webkit-file-upload-button {
@@ -191,8 +127,6 @@
         padding: 0px 16px 4px;
         position: relative;
         font-family: Montserrat, 'Noto Sans Arabic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        position: relative;
-        z-index: -1;
     }
 
     .previewTitleInp {
