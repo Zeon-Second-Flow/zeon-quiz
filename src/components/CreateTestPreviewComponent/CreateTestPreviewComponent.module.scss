@@ -49,69 +49,12 @@
         margin-bottom: 15px;
     }
 
-    .addImageBox {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-
-    .tapToViewImage {
-        background: rgb(184, 221, 194);
-        border-radius: 5px;
-        padding: 5px 10px;
-        cursor: pointer;
-        transition: all 0.5s ease;
-
-        &:active {
-            transform: scale(0.9);
-        }
-    }
-
-    .noImage {
-        border-radius: 5px;
-        padding: 5px;
-        cursor: pointer;
-        transition: all 0.5s ease;
-
-        &:active {
-            transform: scale(0.9);
-        }
-    }
-
-    .imageMainBox {
-        position: fixed;
-        left: 0;
-        right: 0;
-        max-width: 900px;
-        border-radius: 10px;
+    & img {
+        width: 200px;
+        height: 200px;
         margin: 0 auto;
-        background-color: white;
-
-        .exitImage {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            background-color: rgb(5, 5, 5);
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.5s ease;
-
-            &:hover {
-                background-color: rgb(190, 4, 4);
-            }
-
-            &:active {
-                transform: scale(0.9);
-            }
-        }
-
-        .image {
-            margin: 0 auto;
-            padding: 10px;
-            width: 100%;
-        }
+        border: 1px solid black;
+        padding: 10px;
     }
 
     .customFileInput {

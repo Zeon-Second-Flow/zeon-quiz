@@ -43,9 +43,6 @@ export const CreateTestPreviewComponent = ({
 				<p>Title:</p>
 				<div className={style.previewTitleInp}>
 					<span className={style.err_msg}>{testError}</span>
-					<span className={style.titleCount} style={title.length === 0 ? { color: 'white' } : {}}>
-						{100 - title.length}
-					</span>
 					<input
 						style={err ? { border: '1px solid red' } : {}}
 						maxLength={100}
@@ -56,44 +53,27 @@ export const CreateTestPreviewComponent = ({
 						placeholder="Name of quiz"
 						type="text"
 					/>
+					<span style={title.length === 0 ? { color: 'white' } : {}}>
+						{100 - title.length}
+					</span>
 				</div>
 				<span>
 					A descriptive title will give players an indication of what the Quiz
 					is about.
 				</span>
-				{isImageOpened && (
-					<div className={style.imageMainBox}>
-						<div
-							className={style.exitImage}
-							onClick={() => setIsImageOpened(false)}
-						>
-							close
-						</div>
+				<img
+					src={!img?.name?.length ? no_image : URL?.createObjectURL(img)}
+					alt=""
+				/>
 
-						<img
-							className={style.image}
-							src={!img?.name?.length ? no_image : URL?.createObjectURL(img)}
-							alt=""
-						/>
-					</div>
-				)}
-
-				<div className={style.addImageBox}>
-					<input
-						onChange={(e) => {
-							setImg(e.target.files?.[0]);
-						}}
-						className={style.customFileInput}
-						ref={inpImgRef}
-						type="file"
-					/>
-					<div
-						onClick={() => setIsImageOpened(true)}
-						className={img?.name?.length ? style.tapToViewImage : style.noImage}
-					>
-						{!img?.name?.length ? 'no_image' : 'added: tap to view'}
-					</div>
-				</div>
+				<input
+					onChange={(e) => {
+						setImg(e.target.files?.[0]);
+					}}
+					className={style.customFileInput}
+					ref={inpImgRef}
+					type="file"
+				/>
 
 				<p>Description:</p>
 				<textarea
