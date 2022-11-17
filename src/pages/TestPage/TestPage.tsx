@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react';
 import ReactConfetti from 'react-confetti';
 import { useNavigate } from 'react-router-dom';
 
-import {
-	usePostScoresMutation,
-} from '@/store/test/testSlice';
+import { usePostScoresMutation } from '@/store/test/testSlice';
 
 import logo from '@/assets/logo.png';
 import first from '@/assets/podium/1.svg';
@@ -16,7 +14,6 @@ import { useAppSelector, useAuth } from '@/hooks';
 import { IItem, IResponse, ITestData, Questions } from '@/models/models';
 
 export const TestPage = () => {
-
 	const data = useAppSelector((state) => state.websocket.test) as IResponse;
 	const test = useAppSelector((state) => state.websocket.title);
 
@@ -98,10 +95,12 @@ export const TestPage = () => {
 
 		history.pushState(null, '', window.location.href);
 		const preventBack = () => {
-			const warningMessage = confirm('Are you sure you want to leave the game?!');
+			const warningMessage = confirm(
+				'Are you sure you want to leave the game?!'
+			);
 
 			if (warningMessage) {
-				if(isAdmin) {
+				if (isAdmin) {
 					socket.emit('finish');
 					history.back();
 				} else {
@@ -112,7 +111,7 @@ export const TestPage = () => {
 			}
 		};
 
-		if(window.location.pathname === '/game') {
+		if (window.location.pathname === '/game') {
 			window.addEventListener('popstate', preventBack);
 		}
 
@@ -171,9 +170,12 @@ export const TestPage = () => {
 	const postUsersResult = async () => {
 		socket.emit('finish');
 		setResults(true);
+		const token =
+			localStorage.getItem('token') &&
+			JSON.parse(localStorage.getItem('token') || '');
 
 		if (isAdmin) {
-			await sendScores(modifiedUsersResult);
+			await sendScores({ data: modifiedUsersResult, token });
 		}
 	};
 

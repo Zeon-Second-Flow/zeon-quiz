@@ -29,13 +29,13 @@ export const testApi = createApi({
 				method: 'GET',
 			}),
 		}),
-		postScores: builder.mutation<any, object>({
-			query: (data) => ({
-				url: '/tests/',
+		postScores: builder.mutation({
+			query: ({ data, token }) => ({
+				url: 'tests/',
 				method: 'POST',
 				body: data,
 				headers: {
-					Authorization: `Bearer ${token.token}`,
+					Authorization: `Bearer ${token?.token}`,
 					'Content-Type': 'application/json',
 				},
 			}),
