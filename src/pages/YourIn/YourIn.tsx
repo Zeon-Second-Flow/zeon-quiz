@@ -10,9 +10,10 @@ import {
 
 import styles from './YourIn.module.scss';
 import { useAppSelector } from '@/hooks';
+import {unloadCallback} from "@/utils/beforeunload";
 
 export const YourIn = () => {
-	const { users, socket } = useAppSelector((state) => state.websocket);
+	const { users, socket, room } = useAppSelector((state) => state.websocket);
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -29,6 +30,9 @@ export const YourIn = () => {
 		});
 
 		history.pushState(null, '', window.location.href);
+		console.log(room)
+		if(room === 0) navigate('/enter-page');
+
 		const preventBack = () => {
 			const warningMessage = confirm('Are you sure you want to leave this page?!');
 
@@ -41,10 +45,12 @@ export const YourIn = () => {
 
 		if(window.location.pathname === '/in') {
 			window.addEventListener('popstate', preventBack);
+			window.addEventListener("beforeunload", unloadCallback);
 		}
 
 		return () => {
 			window.removeEventListener('popstate', preventBack);
+			window.removeEventListener("beforeunload", unloadCallback);
 		};
 	}, []);
 

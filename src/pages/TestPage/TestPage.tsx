@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import ReactConfetti from 'react-confetti';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
-import { usePostScoresMutation } from '@/store/test/testSlice';
+import {usePostScoresMutation} from '@/store/test/testSlice';
 
 import logo from '@/assets/logo.png';
 import first from '@/assets/podium/1.svg';
@@ -10,8 +10,8 @@ import second from '@/assets/podium/2.svg';
 import third from '@/assets/podium/3.svg';
 
 import styles from './TestPage.module.scss';
-import { useAppSelector, useAuth } from '@/hooks';
-import { IItem, IResponse, IResults, ITestData, Questions } from '@/models/models';
+import {useAppSelector, useAuth} from '@/hooks';
+import {IItem, IResponse, IResults, Questions} from '@/models/models';
 
 export const TestPage = () => {
 	const data = useAppSelector((state) => state.websocket.test) as IResponse;
@@ -33,7 +33,7 @@ export const TestPage = () => {
 	const length = data ? data.questions.length - 1 : 0;
 
 	const { user, isStaff } = useAuth();
-	const { users, socket } = useAppSelector((state) => state.websocket);
+	const { users, socket, room } = useAppSelector((state) => state.websocket);
 
 	const leaders: IItem[] = [
 		...users
@@ -102,7 +102,7 @@ export const TestPage = () => {
 			if (warningMessage) {
 				if (isAdmin) {
 					socket.emit('finish');
-					history.back();
+					navigate(`/detail/${test}`);
 				} else {
 					navigate('/');
 				}

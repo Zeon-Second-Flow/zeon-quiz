@@ -1,18 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 
-import { useGetTestsQuery } from '@/store/test/testSlice';
-import {
-	setSocketTest,
-	setSocketTitle,
-	setSocketUsers,
-} from '@/store/websocket/websocket';
+import {useGetTestsQuery} from '@/store/test/testSlice';
+import {setSocketTest, setSocketTitle, setSocketUsers,} from '@/store/websocket/websocket';
 
 import userLogo from '@/assets/game/account.png';
 
 import styles from './GamePage.module.scss';
-import { useAppDispatch, useAppSelector } from '@/hooks';
-import { ITestData } from '@/models/models';
+import {useAppDispatch, useAppSelector} from '@/hooks';
+import {ITestData} from '@/models/models';
+import {unloadCallback} from "@/utils/beforeunload";
 
 interface IMessage {
 	text: string;
@@ -42,6 +39,8 @@ export const GamePage = () => {
 	const socket = useAppSelector((state) => state.websocket.socket);
 
 	useEffect(() => {
+		if(room === 0) navigate('/');
+
 		socket.on('users', (users) => {
 			dispatch(setSocketUsers(users));
 		});
@@ -71,10 +70,12 @@ export const GamePage = () => {
     
 		if(window.location.pathname === '/room') {
 			window.addEventListener('popstate', preventBack);
+			window.addEventListener("beforeunload", unloadCallback);
 		}
 
 		return () => {
 			window.removeEventListener('popstate', preventBack);
+			window.removeEventListener("beforeunload", unloadCallback);
 		};
 	}, []);
 
