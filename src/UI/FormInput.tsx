@@ -46,24 +46,3 @@ export const FormInput = (props: IProps) => {
         </>
     );
 };
-
-
-
-
-
-// export const Select = ({options, name}) => {
-//     const {
-//         register,
-//         formState: {errors},
-//     } = useFormikContext();
-
-//     return (
-//         <select className={styles.select} {...register(name)}>
-//             {options.map((value:any) => (
-//                 <option key={value} value={value}>
-//                     {value}
-//                 </option>
-//             ))}
-//         </select>
-//     );
-// };
